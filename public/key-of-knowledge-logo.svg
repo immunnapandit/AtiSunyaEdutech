@@ -1,0 +1,26 @@
+﻿<svg width="420" height="142" viewBox="0 0 420 142" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Key of Knowledge</title>
+  <desc id="desc">A geometric mandala emblem with Key of Knowledge wordmark.</desc>
+  <rect width="420" height="142" fill="white"/>
+  <rect x="0" y="0" width="116" height="142" fill="#ff1908"/>
+  <g transform="translate(58 71)">
+    <circle r="48" fill="#090909"/>
+    <circle r="39" fill="#f0d300"/>
+    <path d="M0 -52L13 -18L48 -34L32 0L48 34L13 18L0 52L-13 18L-48 34L-32 0L-48 -34L-13 -18Z" fill="#ead800"/>
+    <path d="M0 -42L36 21H-36L0 -42Z" fill="#c9f5ff" stroke="#3154a3" stroke-width="4"/>
+    <path d="M0 42L-36 -21H36L0 42Z" fill="#c9f5ff" stroke="#3154a3" stroke-width="4"/>
+    <circle r="25" fill="#16a34a"/>
+    <path d="M0 -31L27 16H-27L0 -31Z" fill="#e11d48" opacity=".86"/>
+    <path d="M0 31L-27 -16H27L0 31Z" fill="#7c3aed" opacity=".86"/>
+    <path d="M0 -19L16 10H-16L0 -19Z" fill="#f8ff7a"/>
+    <path d="M0 19L-16 -10H16L0 19Z" fill="#fb542f"/>
+    <circle r="7" fill="#1439d5"/>
+  </g>
+  <path d="M132 45H404" stroke="#080808" stroke-width="18" stroke-linecap="square"/>
+  <path d="M132 77H404" stroke="#080808" stroke-width="18" stroke-linecap="square"/>
+  <path d="M148 109H306" stroke="#080808" stroke-width="24" stroke-linecap="square"/>
+  <path d="M132 95H404" stroke="#ff1908" stroke-width="4"/>
+  <text x="133" y="52" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing=".5">KEY OF</text>
+  <text x="133" y="84" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" letter-spacing="1">KNOWLEDGE</text>
+  <text x="153" y="116" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing=".8">Beyond Knowledge</text>
+</svg>
