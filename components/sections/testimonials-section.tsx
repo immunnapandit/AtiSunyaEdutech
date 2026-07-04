@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Star, TrendingUp } from "lucide-react";
@@ -12,7 +12,7 @@ export function TestimonialsSection() {
         <SectionHeading
           eyebrow="Student outcomes"
           title="Told in their own words"
-          description="Every quote here is from a learner who finished the program — not a marketing focus group."
+          description="Every quote here is from a learner who finished the program â€” not a marketing focus group."
           align="center"
           className="mx-auto"
         />
@@ -38,7 +38,7 @@ export function TestimonialsSection() {
                 ))}
               </div>
               <p className="mt-4 flex-1 text-sm leading-relaxed text-navy-600">
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </p>
 
               {t.outcome && (
@@ -55,7 +55,7 @@ export function TestimonialsSection() {
                 <div>
                   <p className="text-sm font-semibold text-navy">{t.name}</p>
                   <p className="text-xs text-navy-400">
-                    {t.role} · {t.company}
+                    {t.role} Â· {t.company}
                   </p>
                 </div>
               </div>
@@ -66,3 +66,4 @@ export function TestimonialsSection() {
     </section>
   );
 }
+

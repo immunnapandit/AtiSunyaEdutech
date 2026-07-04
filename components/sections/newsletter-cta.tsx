@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
@@ -24,7 +24,7 @@ export function NewsletterCta() {
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-white/60">
             New course drops, live cohort openings, and career notes from our
-            instructors — nothing you'll want to unsubscribe from.
+            instructors â€” nothing you&apos;ll want to unsubscribe from.
           </p>
           <form className="relative mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
             <input
@@ -45,3 +45,4 @@ export function NewsletterCta() {
     </section>
   );
 }
+

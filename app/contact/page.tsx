@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
@@ -15,10 +15,10 @@ export default function ContactPage() {
         <div>
           <Eyebrow>Contact us</Eyebrow>
           <h1 className="mt-3 text-display-md font-extrabold text-navy text-balance">
-            Let's talk about what you're trying to build.
+            Let&apos;s talk about what you&apos;re trying to build.
           </h1>
           <p className="mt-4 text-navy-400">
-            Questions about a course, a corporate program, or a partnership —
+            Questions about a course, a corporate program, or a partnership â€”
             our team typically replies within one business day.
           </p>
 
@@ -95,3 +95,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play, Star, UsersRound } from "lucide-react";
-import { Container } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
 const heroSlides = [
@@ -62,11 +61,10 @@ export function Hero() {
   const slide = heroSlides[activeSlide];
 
   return (
-    <section className="relative overflow-hidden bg-white pt-44 pb-12 md:pt-52 lg:pt-56">
-      <Container>
-        <div className="relative overflow-hidden rounded-[28px] bg-[#eefcf9] px-6 pt-12 pb-8 sm:px-10 md:px-14 lg:min-h-[720px] lg:px-16 lg:py-0">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="relative z-10 max-w-2xl py-4 lg:py-20 xl:py-24">
+    <section className="relative overflow-hidden bg-white pt-[152px]">
+      <div className="relative mx-auto w-full overflow-hidden bg-[#eefcf9] px-5 py-10 sm:px-8 md:px-12 lg:px-16 lg:py-12 2xl:max-w-[1768px] 2xl:rounded-[28px]">
+          <div className="mx-auto grid max-w-[1420px] grid-cols-1 items-center gap-8 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] xl:min-h-[660px]">
+            <div className="relative z-10 max-w-[620px] py-2 lg:py-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${slide.eyebrow}-${activeSlide}`}
@@ -75,16 +73,16 @@ export function Hero() {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-base font-extrabold text-[#0aa789] sm:text-lg">
+                  <p className="text-sm font-extrabold text-[#0aa789] sm:text-base">
                     {slide.eyebrow}
                   </p>
 
-                  <h1 className="mt-8 max-w-2xl text-[3rem] font-extrabold leading-[1.18] text-[#17162d] sm:text-[4.25rem] lg:text-[4.6rem] xl:text-[5.15rem]">
+                  <h1 className="mt-5 max-w-2xl text-[2.55rem] font-extrabold leading-[1.14] text-[#17162d] sm:text-[3.35rem] lg:text-[3.9rem] xl:text-[4.35rem]">
                     <span>Let&apos;s Learn About</span>
-                    <span className="relative mt-3 block w-fit">
+                    <span className="relative mt-2 block w-fit">
                       New Knowledge
                       <svg
-                        className="pointer-events-none absolute -left-4 -right-5 top-1/2 -z-0 h-[88px] w-[calc(100%+42px)] -translate-y-1/2 text-[#f5b800]"
+                        className="pointer-events-none absolute -left-3 -right-4 top-1/2 -z-0 h-[64px] w-[calc(100%+32px)] -translate-y-1/2 text-[#f5b800]"
                         viewBox="0 0 520 110"
                         fill="none"
                         aria-hidden="true"
@@ -95,35 +93,35 @@ export function Hero() {
                           rx="250"
                           ry="40"
                           stroke="currentColor"
-                          strokeWidth="8"
+                          strokeWidth="7"
                         />
                       </svg>
                     </span>
-                    <span className="mt-3 block">And Abilities</span>
+                    <span className="mt-2 block">And Abilities</span>
                   </h1>
 
-                  <p className="mt-8 max-w-xl text-lg leading-9 text-[#5f6278] sm:text-xl">
+                  <p className="mt-6 max-w-xl text-base leading-8 text-[#5f6278] sm:text-lg">
                     {slide.description}
                   </p>
                 </motion.div>
               </AnimatePresence>
 
-              <div className="mt-9 flex flex-wrap items-center gap-5">
+              <div className="mt-7 flex flex-wrap items-center gap-4">
                 <Link
                   href="/courses"
-                  className="inline-flex h-16 items-center justify-center rounded-full bg-[#f8bb00] px-9 text-base font-extrabold text-black transition-transform hover:-translate-y-0.5 hover:bg-[#ffc928]"
+                  className="inline-flex h-[52px] items-center justify-center rounded-full bg-[#f8bb00] px-8 py-4 text-sm font-extrabold text-black transition-transform hover:-translate-y-0.5 hover:bg-[#ffc928] sm:text-base"
                 >
                   Get Started
                 </Link>
-                <button className="inline-flex items-center gap-4 text-base font-semibold text-[#55576d] transition-colors hover:text-[#0aa789]">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-[#0aa789] text-[#0aa789]">
-                    <Play className="h-6 w-6 fill-current" />
+                <button className="inline-flex items-center gap-3 text-sm font-semibold text-[#55576d] transition-colors hover:text-[#0aa789] sm:text-base">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0aa789] text-[#0aa789] sm:h-14 sm:w-14">
+                    <Play className="h-5 w-5 fill-current" />
                   </span>
                   Watch Our Video
                 </button>
               </div>
 
-              <div className="mt-8 flex items-center gap-2">
+              <div className="mt-6 flex items-center gap-2">
                 {heroSlides.map((item, index) => (
                   <button
                     key={item.title}
@@ -139,10 +137,10 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="relative min-h-[480px] lg:min-h-[680px]">
-              <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[7px] border-[#f2b900] sm:h-[560px] sm:w-[560px] lg:h-[650px] lg:w-[650px]" />
-              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[7px] border-[#f2b900] sm:h-[460px] sm:w-[460px] lg:h-[535px] lg:w-[535px]" />
-              <div className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[7px] border-[#f2b900] sm:h-[360px] sm:w-[360px] lg:h-[420px] lg:w-[420px]" />
+            <div className="relative min-h-[430px] sm:min-h-[500px] lg:min-h-[600px] xl:min-h-[640px]">
+              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[440px] sm:w-[440px] lg:h-[560px] lg:w-[560px] xl:h-[620px] xl:w-[620px]" />
+              <div className="absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[360px] sm:w-[360px] lg:h-[460px] lg:w-[460px] xl:h-[510px] xl:w-[510px]" />
+              <div className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[280px] sm:w-[280px] lg:h-[360px] lg:w-[360px] xl:h-[400px] xl:w-[400px]" />
 
               <div className="absolute left-[8%] top-[16%] hidden text-[#f2b900] sm:block">
                 <svg width="92" height="34" viewBox="0 0 92 34" fill="none" aria-hidden="true">
@@ -163,7 +161,7 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="absolute inset-x-8 bottom-0 top-8 mx-auto max-w-[520px] overflow-hidden rounded-t-full lg:inset-x-10">
+              <div className="absolute inset-x-8 bottom-0 top-8 mx-auto max-w-[500px] overflow-hidden rounded-t-full lg:inset-x-10 xl:max-w-[540px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={slide.image}
@@ -178,7 +176,7 @@ export function Hero() {
                       alt={slide.title}
                       fill
                       priority={activeSlide === 0}
-                      sizes="(min-width: 1280px) 520px, (min-width: 1024px) 45vw, 86vw"
+                      sizes="(min-width: 1280px) 540px, (min-width: 1024px) 44vw, 86vw"
                       className="object-cover object-top"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,252,249,0)_40%,#eefcf9_100%)]" />
@@ -189,27 +187,27 @@ export function Hero() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute right-0 top-12 z-20 flex w-[250px] items-center gap-4 rounded-lg bg-white p-5 shadow-lifted sm:right-2 sm:top-20 sm:w-[310px] sm:p-6 lg:right-4"
+                className="absolute right-0 top-8 z-20 flex w-[220px] items-center gap-3 rounded-lg bg-white p-4 shadow-lifted sm:right-2 sm:top-14 sm:w-[270px] sm:p-5 lg:right-4"
               >
-                <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#15a98c] text-white">
-                  <UsersRound className="h-8 w-8" />
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#15a98c] text-white sm:h-14 sm:w-14">
+                  <UsersRound className="h-6 w-6 sm:h-7 sm:w-7" />
                 </span>
                 <span>
-                  <strong className="block text-3xl font-extrabold text-[#17162d]">{slide.stat}</strong>
-                  <span className="text-sm font-semibold text-[#66697d] sm:text-base">{slide.statLabel}</span>
+                  <strong className="block text-2xl font-extrabold text-[#17162d] sm:text-3xl">{slide.stat}</strong>
+                  <span className="text-xs font-semibold text-[#66697d] sm:text-sm">{slide.statLabel}</span>
                 </span>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                className="absolute bottom-4 left-1/2 z-20 w-[270px] -translate-x-1/2 rounded-lg bg-white p-5 text-center shadow-lifted sm:bottom-8 sm:w-[330px] sm:p-7 lg:left-[30%] lg:translate-x-0"
+                className="absolute bottom-4 left-1/2 z-20 w-[240px] -translate-x-1/2 rounded-lg bg-white p-4 text-center shadow-lifted sm:bottom-6 sm:w-[290px] sm:p-5 lg:left-[28%] lg:translate-x-0"
               >
-                <strong className="block text-4xl font-extrabold text-[#17162d] sm:text-5xl">200+</strong>
-                <span className="mt-2 block text-base font-semibold text-[#66697d] sm:text-lg">Top Expert Mentors</span>
-                <div className="mt-5 flex justify-center -space-x-3">
+                <strong className="block text-3xl font-extrabold text-[#17162d] sm:text-4xl">200+</strong>
+                <span className="mt-1 block text-sm font-semibold text-[#66697d] sm:text-base">Top Expert Mentors</span>
+                <div className="mt-4 flex justify-center -space-x-3">
                   {mentorAvatars.map((avatar, index) => (
-                    <span key={avatar} className="relative h-12 w-12 overflow-hidden rounded-full border-4 border-white bg-mist-100 shadow-soft">
+                    <span key={avatar} className="relative h-10 w-10 overflow-hidden rounded-full border-4 border-white bg-mist-100 shadow-soft sm:h-11 sm:w-11">
                       <Image
                         src={avatar}
                         alt={`Mentor ${index + 1}`}
@@ -223,15 +221,17 @@ export function Hero() {
               </motion.div>
 
               <div className="absolute bottom-10 right-0 hidden items-center gap-2 text-[#f2b900] sm:flex">
-                <Star className="h-6 w-6 fill-current" />
+                <Star className="h-5 w-5 fill-current" />
                 <span className="h-0 w-0 border-y-[14px] border-l-[24px] border-y-transparent border-l-current" />
                 <span className="h-0 w-0 border-y-[7px] border-l-[12px] border-y-transparent border-l-current" />
               </div>
             </div>
           </div>
         </div>
-      </Container>
     </section>
   );
 }
+
+
+
 

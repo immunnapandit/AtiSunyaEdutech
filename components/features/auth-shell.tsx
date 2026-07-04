@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -38,14 +38,15 @@ export function AuthShell({
         <div className="absolute -left-16 bottom-10 h-64 w-64 rounded-full bg-cyan/15 blur-3xl" />
         <div className="relative flex h-full flex-col items-center justify-center px-16 text-center text-white">
           <p className="text-2xl font-bold text-balance">
-            "The capstone review was more thorough than any code review I've
-            had at work."
+            &quot;The capstone review was more thorough than any code review I&apos;ve
+            had at work.&quot;
           </p>
           <p className="mt-4 text-sm text-white/50">
-            Daniel Okafor · Full-Stack Developer, Hearth Analytics
+            Daniel Okafor Â· Full-Stack Developer, Hearth Analytics
           </p>
         </div>
       </div>
     </div>
   );
 }
+

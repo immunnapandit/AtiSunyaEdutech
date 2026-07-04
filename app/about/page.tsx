@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Container, SectionHeading, Eyebrow } from "@/components/ui/primitives";
 import { Stats } from "@/components/sections/stats";
 import { InstructorsPreview } from "@/components/sections/instructors-preview";
@@ -18,8 +18,8 @@ export default function AboutPage() {
         </h1>
         <p className="mt-6 text-lg text-navy-400 text-balance">
           Atisunya Edutech started in 2019 with a simple observation: the gap
-          between "completed a course" and "ready for the job" was almost
-          never about content. It was about who was teaching, what they'd
+          between &quot;completed a course&quot; and &quot;ready for the job&quot; was almost
+          never about content. It was about who was teaching, what they&apos;d
           actually built, and whether anyone was going to look closely at
           your work and tell you the truth about it.
         </p>
@@ -27,7 +27,7 @@ export default function AboutPage() {
           So we built a platform where every instructor is a practitioner
           first, every course ends in a real project, and every certificate
           means something to the hiring managers who see it. Today, over
-          48,000 learners have gone through our programs — many of them now
+          48,000 learners have gone through our programs â€” many of them now
           teaching, hiring, or mentoring the next cohort themselves.
         </p>
       </Container>
@@ -72,3 +72,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

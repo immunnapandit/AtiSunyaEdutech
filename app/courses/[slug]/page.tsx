@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Star, Clock, Users, BarChart3, CheckCircle2, PlayCircle } from "lucide-react";
 import { Container, Badge } from "@/components/ui/primitives";
@@ -83,7 +83,7 @@ export default async function CourseDetailsPage({
           </div>
 
           <div className="mt-12">
-            <h2 className="text-xl font-bold text-navy">What you'll cover</h2>
+            <h2 className="text-xl font-bold text-navy">What you&apos;ll cover</h2>
             <div className="mt-5 space-y-3">
               {curriculum.map((item, i) => (
                 <div
@@ -144,3 +144,4 @@ export default async function CourseDetailsPage({
     </div>
   );
 }
+

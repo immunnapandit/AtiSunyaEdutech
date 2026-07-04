@@ -1,4 +1,4 @@
-import { Compass } from "lucide-react";
+﻿import { Compass } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 
@@ -16,7 +16,7 @@ export default function NotFound() {
           This page took a different learning path.
         </h1>
         <p className="mx-auto mt-4 max-w-md text-navy-400">
-          The page you're looking for doesn't exist or may have moved. Let's
+          The page you&apos;re looking for doesn&apos;t exist or may have moved. Let&apos;s
           get you back on track.
         </p>
         <LinkButton href="/" size="lg" className="mt-8">
@@ -26,3 +26,4 @@ export default function NotFound() {
     </div>
   );
 }
+
