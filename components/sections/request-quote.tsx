@@ -1,0 +1,79 @@
+import Link from "next/link";
+import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Container } from "@/components/ui/primitives";
+
+const contactItems = [
+  { icon: MapPin, title: "Our Address", lines: ["PSD Building, 2 AlBahr", "St, Loskia Sripur"] },
+  { icon: Phone, title: "Our Phone", lines: ["+0029129102320", "+000 2324 39493"] },
+  { icon: Mail, title: "Our Email", lines: ["name@website.com", "info@orex.com"] },
+];
+
+const inputClass =
+  "h-14 w-full rounded-md border border-navy-100 bg-white px-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand";
+
+export function RequestQuote() {
+  return (
+    <section className="relative bg-white py-16 md:py-20">
+      <div className="absolute inset-x-0 bottom-0 top-[190px] bg-cover bg-center" style={{ backgroundImage: "url('/images/contactbanner.png')" }} aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 top-[190px] bg-navy/90" aria-hidden="true" />
+
+      <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">
+        <form className="border-t-[5px] border-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10">
+          <h2 className="text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+            Request A Quote
+          </h2>
+          <p className="mt-3 text-base font-medium text-navy-400">
+            We will be happy to answer your questions.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <input className={inputClass} type="text" name="name" placeholder="Full name" aria-label="Full name" />
+            <input className={inputClass} type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number" />
+            <input className={inputClass} type="email" name="email" placeholder="Email Address" aria-label="Email Address" />
+            <input className={inputClass} type="text" name="subject" placeholder="Subject" aria-label="Subject" />
+          </div>
+
+          <textarea
+            className="mt-4 min-h-[132px] w-full rounded-md border border-navy-100 bg-white px-4 py-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand"
+            name="message"
+            placeholder="Your Message"
+            aria-label="Your Message"
+          />
+
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <label className="flex items-center gap-3 text-sm font-semibold text-navy">
+              <input type="checkbox" name="subscribe" className="h-5 w-5 rounded border-navy-400 text-brand focus:ring-brand" />
+              Also subscribe us
+            </label>
+            <button type="submit" className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-brand px-7 text-sm font-extrabold text-white transition-colors hover:bg-brand-600 sm:min-w-[180px]">
+              Send Message
+              <Send className="h-4 w-4" />
+            </button>
+          </div>
+        </form>
+
+        <div className="space-y-6 py-8 text-white lg:pb-10">
+          {contactItems.map((item) => (
+            <div key={item.title} className="flex items-center gap-4">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
+                <item.icon className="h-8 w-8" strokeWidth={1.8} />
+              </span>
+              <span>
+                <strong className="block text-xl font-extrabold">{item.title}</strong>
+                {item.lines.map((line) => (
+                  <span key={line} className="mt-1 block text-sm font-bold leading-snug text-white/85">
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
+        </div>
+      </Container>
+
+      <Link href="#top" aria-label="Back to top" className="absolute bottom-6 right-6 hidden h-11 w-11 items-center justify-center bg-brand text-white transition-colors hover:bg-brand-600 md:flex xl:right-10">
+        <ArrowUp className="h-5 w-5" />
+      </Link>
+    </section>
+  );
+}

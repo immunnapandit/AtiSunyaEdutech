@@ -60,7 +60,7 @@ export function Navbar() {
           : "border-b border-transparent"
       )}
     >
-      <div className="bg-[#4730ff] text-white">
+      <div className="bg-brand text-white">
         <div className="container-edge flex min-h-[60px] items-center justify-between gap-4 text-sm font-semibold md:text-base">
           <div className="flex items-center">
             <Link
@@ -125,7 +125,7 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="flex items-center gap-2 text-base font-bold text-black transition-colors hover:text-[#4730ff]"
+              className="flex items-center gap-2 text-base font-bold text-black transition-colors hover:text-brand"
             >
               <span>{link.label}</span>
               {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
@@ -137,24 +137,24 @@ export function Navbar() {
           <button
             type="button"
             aria-label="Search"
-            className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-[#4730ff] hover:text-white"
+            className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
           >
             <Search className="h-7 w-7" />
           </button>
           <Link
             href="/courses"
             aria-label="Cart"
-            className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-[#4730ff] hover:text-white"
+            className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
           >
             <ShoppingCart className="h-7 w-7" />
-            <span className="absolute -right-1 top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#4730ff] px-1 text-xs font-bold text-white">
+            <span className="absolute -right-1 top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-brand px-1 text-xs font-bold text-white">
               4
             </span>
           </Link>
           <LinkButton
             href="/signup"
             size="lg"
-            className="rounded-[28px] bg-[#4730ff] px-10 text-base shadow-none hover:bg-[#3520e6] hover:shadow-none"
+            className="rounded-[28px] bg-brand px-10 text-base shadow-none hover:bg-brand-600 hover:shadow-none"
           >
             Enroll Now
           </LinkButton>
@@ -222,7 +222,7 @@ export function Navbar() {
                 <LinkButton
                   href="/signup"
                   size="md"
-                  className="rounded-[24px] bg-[#4730ff] shadow-none hover:bg-[#3520e6] hover:shadow-none"
+                  className="rounded-[24px] bg-brand shadow-none hover:bg-brand-600 hover:shadow-none"
                 >
                   Enroll Now
                 </LinkButton>

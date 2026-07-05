@@ -16,12 +16,12 @@ interface BaseProps {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-navy text-white hover:bg-navy-600 shadow-glow hover:shadow-lifted",
+    "bg-brand text-white hover:bg-brand-600 shadow-glow hover:shadow-lifted",
   secondary:
     "bg-royal text-white hover:bg-royal-600 shadow-glow hover:shadow-lifted",
   outline:
-    "border border-navy-100 text-navy bg-white hover:border-navy/30 hover:bg-mist-50",
-  ghost: "text-navy hover:bg-mist-100",
+    "border border-brand/20 text-brand bg-white hover:border-brand/40 hover:bg-brand-50",
+  ghost: "text-navy hover:bg-brand-50",
 };
 
 const sizeStyles: Record<Size, string> = {

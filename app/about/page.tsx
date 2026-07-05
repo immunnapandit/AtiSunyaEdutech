@@ -1,7 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Container, SectionHeading, Eyebrow } from "@/components/ui/primitives";
 import { Stats } from "@/components/sections/stats";
-import { InstructorsPreview } from "@/components/sections/instructors-preview";
 
 export const metadata: Metadata = {
   title: "About",
@@ -67,8 +66,6 @@ export default function AboutPage() {
           </div>
         </Container>
       </div>
-
-      <InstructorsPreview />
     </div>
   );
 }

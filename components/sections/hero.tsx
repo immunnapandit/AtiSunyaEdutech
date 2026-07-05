@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -61,8 +61,8 @@ export function Hero() {
   const slide = heroSlides[activeSlide];
 
   return (
-    <section className="relative overflow-hidden bg-white pt-[152px]">
-      <div className="relative mx-auto w-full overflow-hidden bg-[#eefcf9] px-5 py-10 sm:px-8 md:px-12 lg:px-16 lg:py-12 2xl:max-w-[1768px] 2xl:rounded-[28px]">
+    <section id="top" className="relative overflow-hidden bg-white pt-[152px]">
+      <div className="relative mx-auto w-full overflow-hidden bg-brand-50 px-5 py-10 sm:px-8 md:px-12 lg:px-16 lg:py-12 2xl:max-w-[1768px] 2xl:rounded-[28px]">
           <div className="mx-auto grid max-w-[1420px] grid-cols-1 items-center gap-8 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] xl:min-h-[660px]">
             <div className="relative z-10 max-w-[620px] py-2 lg:py-8">
               <AnimatePresence mode="wait">
@@ -73,7 +73,7 @@ export function Hero() {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-sm font-extrabold text-[#0aa789] sm:text-base">
+                  <p className="text-sm font-extrabold text-brand-600 sm:text-base">
                     {slide.eyebrow}
                   </p>
 
@@ -82,7 +82,7 @@ export function Hero() {
                     <span className="relative mt-2 block w-fit">
                       New Knowledge
                       <svg
-                        className="pointer-events-none absolute -left-3 -right-4 top-1/2 -z-0 h-[64px] w-[calc(100%+32px)] -translate-y-1/2 text-[#f5b800]"
+                        className="pointer-events-none absolute -left-3 -right-4 top-1/2 -z-0 h-[64px] w-[calc(100%+32px)] -translate-y-1/2 text-brand"
                         viewBox="0 0 520 110"
                         fill="none"
                         aria-hidden="true"
@@ -109,12 +109,12 @@ export function Hero() {
               <div className="mt-7 flex flex-wrap items-center gap-4">
                 <Link
                   href="/courses"
-                  className="inline-flex h-[52px] items-center justify-center rounded-full bg-[#f8bb00] px-8 py-4 text-sm font-extrabold text-black transition-transform hover:-translate-y-0.5 hover:bg-[#ffc928] sm:text-base"
+                  className="inline-flex h-[52px] items-center justify-center rounded-full bg-brand px-8 py-4 text-sm font-extrabold text-white transition-transform hover:-translate-y-0.5 hover:bg-brand-600 sm:text-base"
                 >
                   Get Started
                 </Link>
-                <button className="inline-flex items-center gap-3 text-sm font-semibold text-[#55576d] transition-colors hover:text-[#0aa789] sm:text-base">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0aa789] text-[#0aa789] sm:h-14 sm:w-14">
+                <button className="inline-flex items-center gap-3 text-sm font-semibold text-[#55576d] transition-colors hover:text-brand sm:text-base">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-brand text-brand sm:h-14 sm:w-14">
                     <Play className="h-5 w-5 fill-current" />
                   </span>
                   Watch Our Video
@@ -130,7 +130,7 @@ export function Hero() {
                     onClick={() => setActiveSlide(index)}
                     className={cn(
                       "h-2.5 rounded-full transition-all",
-                      index === activeSlide ? "w-10 bg-[#f8bb00]" : "w-2.5 bg-[#0aa789]/25 hover:bg-[#0aa789]"
+                      index === activeSlide ? "w-10 bg-brand" : "w-2.5 bg-brand/20 hover:bg-brand"
                     )}
                   />
                 ))}
@@ -138,11 +138,11 @@ export function Hero() {
             </div>
 
             <div className="relative min-h-[430px] sm:min-h-[500px] lg:min-h-[600px] xl:min-h-[640px]">
-              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[440px] sm:w-[440px] lg:h-[560px] lg:w-[560px] xl:h-[620px] xl:w-[620px]" />
-              <div className="absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[360px] sm:w-[360px] lg:h-[460px] lg:w-[460px] xl:h-[510px] xl:w-[510px]" />
-              <div className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-[#f2b900] sm:h-[280px] sm:w-[280px] lg:h-[360px] lg:w-[360px] xl:h-[400px] xl:w-[400px]" />
+              <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-brand sm:h-[440px] sm:w-[440px] lg:h-[560px] lg:w-[560px] xl:h-[620px] xl:w-[620px]" />
+              <div className="absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-brand sm:h-[360px] sm:w-[360px] lg:h-[460px] lg:w-[460px] xl:h-[510px] xl:w-[510px]" />
+              <div className="absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[6px] border-brand sm:h-[280px] sm:w-[280px] lg:h-[360px] lg:w-[360px] xl:h-[400px] xl:w-[400px]" />
 
-              <div className="absolute left-[8%] top-[16%] hidden text-[#f2b900] sm:block">
+              <div className="absolute left-[8%] top-[16%] hidden text-brand sm:block">
                 <svg width="92" height="34" viewBox="0 0 92 34" fill="none" aria-hidden="true">
                   <path d="M2 23L11 13L20 23L29 13L38 23L47 13L56 23L65 13L74 23L83 13L90 20" stroke="currentColor" strokeWidth="7" />
                   <path d="M21 10L30 2L39 10L48 2L57 10L66 2L75 10" stroke="currentColor" strokeWidth="7" />
@@ -155,7 +155,7 @@ export function Hero() {
                   ))}
                 </div>
               </div>
-              <div className="absolute left-[2%] top-[47%] hidden grid-cols-5 gap-3 text-[#0aa789] lg:grid">
+              <div className="absolute left-[2%] top-[47%] hidden grid-cols-5 gap-3 text-brand lg:grid">
                 {Array.from({ length: 25 }).map((_, index) => (
                   <span key={index} className="h-1.5 w-1.5 rounded-full bg-current" />
                 ))}
@@ -179,7 +179,7 @@ export function Hero() {
                       sizes="(min-width: 1280px) 540px, (min-width: 1024px) 44vw, 86vw"
                       className="object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,252,249,0)_40%,#eefcf9_100%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,252,249,0)_40%,#eef6ff_100%)]" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -189,7 +189,7 @@ export function Hero() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute right-0 top-8 z-20 flex w-[220px] items-center gap-3 rounded-lg bg-white p-4 shadow-lifted sm:right-2 sm:top-14 sm:w-[270px] sm:p-5 lg:right-4"
               >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#15a98c] text-white sm:h-14 sm:w-14">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-white sm:h-14 sm:w-14">
                   <UsersRound className="h-6 w-6 sm:h-7 sm:w-7" />
                 </span>
                 <span>
@@ -220,7 +220,7 @@ export function Hero() {
                 </div>
               </motion.div>
 
-              <div className="absolute bottom-10 right-0 hidden items-center gap-2 text-[#f2b900] sm:flex">
+              <div className="absolute bottom-10 right-0 hidden items-center gap-2 text-brand sm:flex">
                 <Star className="h-5 w-5 fill-current" />
                 <span className="h-0 w-0 border-y-[14px] border-l-[24px] border-y-transparent border-l-current" />
                 <span className="h-0 w-0 border-y-[7px] border-l-[12px] border-y-transparent border-l-current" />
@@ -231,6 +231,7 @@ export function Hero() {
     </section>
   );
 }
+
 
 
 

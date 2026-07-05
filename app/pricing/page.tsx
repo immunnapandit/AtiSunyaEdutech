@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
-import { FaqSection } from "@/components/sections/faq-section";
 import { cn } from "@/lib/utils";
 import { PricingPlan } from "@/types";
 
@@ -124,9 +123,6 @@ export default function PricingPage() {
         </div>
       </Container>
 
-      <div className="mt-12">
-        <FaqSection />
-      </div>
     </div>
   );
 }

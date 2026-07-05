@@ -1,69 +1,95 @@
-﻿"use client";
+"use client";
 
-import { motion } from "framer-motion";
-import { Star, TrendingUp } from "lucide-react";
-import { Container, SectionHeading } from "@/components/ui/primitives";
-import { testimonials } from "@/data/testimonials";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Container } from "@/components/ui/primitives";
+
+const testimonials = [
+  {
+    name: "Alex Feroundo",
+    role: "Founder",
+    quote: "Atisunya helped me move from scattered lessons to a clear learning path. The mentor feedback made every project stronger.",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=180&q=80",
+    tone: "bg-royal-50",
+  },
+  {
+    name: "Kallu Mastan",
+    role: "Mastan group",
+    quote: "The course structure was practical, focused, and easy to follow. I could apply the concepts directly at work.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80",
+    tone: "bg-cyan-100/50",
+  },
+  {
+    name: "Devid Max",
+    role: "Max iNC",
+    quote: "Live sessions and assignments gave me confidence. The certificate felt earned because the projects were real.",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=180&q=80",
+    tone: "bg-signal-100/60",
+  },
+];
+
+function RatingStars() {
+  return (
+    <div className="flex items-center gap-1 text-signal">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Star key={index} className="h-5 w-5 fill-current" />
+      ))}
+    </div>
+  );
+}
 
 export function TestimonialsSection() {
   return (
-    <section className="py-24 md:py-32 bg-mist-50">
-      <Container>
-        <SectionHeading
-          eyebrow="Student outcomes"
-          title="Told in their own words"
-          description="Every quote here is from a learner who finished the program â€” not a marketing focus group."
-          align="center"
-          className="mx-auto"
-        />
+    <section className="relative overflow-hidden bg-white py-16 md:py-20">
+      <div className="pointer-events-none absolute -left-28 top-16 h-[520px] w-[520px] rounded-full bg-royal-50/50" />
+      <div className="pointer-events-none absolute -right-16 top-36 h-[320px] w-[320px] rounded-full bg-mist-100" />
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-              className="flex h-full flex-col rounded-2xl border border-navy-100 bg-white p-6 shadow-soft"
-            >
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <Star
-                    key={idx}
-                    className={`h-3.5 w-3.5 ${
-                      idx < t.rating ? "fill-signal text-signal" : "text-navy-100"
-                    }`}
-                  />
-                ))}
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-navy-600">
-                &quot;{t.quote}&quot;
-              </p>
+      <Container className="relative">
+        <div className="text-center">
+          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Testimonial</p>
+          <h2 className="mt-3 text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+            What Says <span className="text-royal-700 underline decoration-signal underline-offset-8">Our Students</span>
+          </h2>
+        </div>
 
-              {t.outcome && (
-                <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-cyan-600">
-                  <TrendingUp className="h-3.5 w-3.5" />
-                  {t.outcome}
+        <div className="mt-2 hidden justify-end gap-4 pr-8 lg:flex">
+          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Previous testimonial">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Next testimonial">
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch">
+          {testimonials.map((item, index) => (
+            <article key={item.name} className="overflow-hidden rounded-lg bg-white shadow-lifted">
+              {index !== 1 && (
+                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
+                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
+                  <div>
+                    <h3 className="text-xl font-extrabold text-navy">{item.name}</h3>
+                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
+                  </div>
                 </div>
               )}
-
-              <div className="mt-5 flex items-center gap-3 border-t border-navy-100 pt-4">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
-                  {t.avatar}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-navy">{t.name}</p>
-                  <p className="text-xs text-navy-400">
-                    {t.role} Â· {t.company}
-                  </p>
-                </div>
+              <div className="p-6">
+                <RatingStars />
+                <p className="mt-5 text-base font-medium leading-7 text-navy-400">{item.quote}</p>
               </div>
-            </motion.div>
+              {index === 1 && (
+                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
+                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
+                  <div>
+                    <h3 className="text-xl font-extrabold text-navy">{item.name}</h3>
+                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
+                  </div>
+                </div>
+              )}
+            </article>
           ))}
         </div>
       </Container>
     </section>
   );
 }
-

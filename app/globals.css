@@ -24,11 +24,11 @@
   }
 
   ::selection {
-    @apply bg-royal/20 text-navy;
+    @apply bg-brand/20 text-navy;
   }
 
   :focus-visible {
-    outline: 2px solid #2563EB;
+    outline: 2px solid #0466C8;
     outline-offset: 3px;
     border-radius: 4px;
   }

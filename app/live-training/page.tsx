@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Container, SectionHeading } from "@/components/ui/primitives";
-import { LiveTraining } from "@/components/sections/live-training";
 import { LinkButton } from "@/components/ui/button";
 import { Users, Video, Award } from "lucide-react";
 
@@ -43,10 +42,6 @@ export default function LiveTrainingPage() {
           </LinkButton>
         </div>
       </Container>
-
-      <div className="mt-20">
-        <LiveTraining />
-      </div>
     </div>
   );
 }
