@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/primitives";
 
 const stats = [
-  { value: "48,000+", label: "Learners graduated" },
-  { value: "96%", label: "Completion rate" },
+  { value: "48,000+", label: "Learners trained" },
+  { value: "96%", label: "Course completion" },
   { value: "140+", label: "Hiring partners" },
-  { value: "4.8/5", label: "Average course rating" },
+  { value: "4.8/5", label: "Learner rating" },
 ];
 
 export function Stats() {
