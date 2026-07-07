@@ -3,9 +3,9 @@ import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 
 const contactItems = [
-  { icon: MapPin, title: "Our Address", lines: ["PSD Building, 2 AlBahr", "St, Loskia Sripur"] },
-  { icon: Phone, title: "Our Phone", lines: ["+0029129102320", "+000 2324 39493"] },
-  { icon: Mail, title: "Our Email", lines: ["name@website.com", "info@orex.com"] },
+  { icon: MapPin, title: "Training Office", lines: ["Corporate Microsoft Training", "Online & On-site Delivery"] },
+  { icon: Phone, title: "Training Support", lines: ["+0029129102320", "+000 2324 39493"] },
+  { icon: Mail, title: "Business Email", lines: ["training@atisunya.com", "corporate@atisunya.com"] },
 ];
 
 const inputClass =
@@ -20,33 +20,33 @@ export function RequestQuote() {
       <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">
         <form className="border-t-[5px] border-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10">
           <h2 className="text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            Request A Quote
+            Request Corporate Training
           </h2>
           <p className="mt-3 text-base font-medium text-navy-400">
-            We will be happy to answer your questions.
+            Tell us which Microsoft services your team wants to learn, and we will suggest the right training plan.
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
             <input className={inputClass} type="text" name="name" placeholder="Full name" aria-label="Full name" />
             <input className={inputClass} type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number" />
-            <input className={inputClass} type="email" name="email" placeholder="Email Address" aria-label="Email Address" />
-            <input className={inputClass} type="text" name="subject" placeholder="Subject" aria-label="Subject" />
+            <input className={inputClass} type="email" name="email" placeholder="Business Email" aria-label="Business Email" />
+            <input className={inputClass} type="text" name="subject" placeholder="Training Requirement" aria-label="Training Requirement" />
           </div>
 
           <textarea
             className="mt-4 min-h-[132px] w-full rounded-md border border-navy-100 bg-white px-4 py-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand"
             name="message"
-            placeholder="Your Message"
-            aria-label="Your Message"
+            placeholder="Tell us about your team size, preferred Microsoft services, and training timeline"
+            aria-label="Tell us about your team size, preferred Microsoft services, and training timeline"
           />
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <label className="flex items-center gap-3 text-sm font-semibold text-navy">
               <input type="checkbox" name="subscribe" className="h-5 w-5 rounded border-navy-400 text-brand focus:ring-brand" />
-              Also subscribe us
+              Send me Microsoft training updates
             </label>
             <button type="submit" className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-brand px-7 text-sm font-extrabold text-white transition-colors hover:bg-brand-600 sm:min-w-[180px]">
-              Send Message
+              Send Inquiry
               <Send className="h-4 w-4" />
             </button>
           </div>
@@ -77,3 +77,4 @@ export function RequestQuote() {
     </section>
   );
 }
+
