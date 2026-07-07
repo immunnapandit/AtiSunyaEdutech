@@ -7,22 +7,22 @@ import { Container } from "@/components/ui/primitives";
 const testimonials = [
   {
     name: "Alex Feroundo",
-    role: "Founder",
-    quote: "Atisunya helped me move from scattered lessons to a clear learning path. The mentor feedback made every project stronger.",
+    role: "IT Operations Lead",
+    quote: "Atisunya helped our team understand Dynamics 365 workflows clearly. The hands-on demos made configuration and adoption much easier.",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=180&q=80",
     tone: "bg-royal-50",
   },
   {
     name: "Kallu Mastan",
-    role: "Mastan group",
-    quote: "The course structure was practical, focused, and easy to follow. I could apply the concepts directly at work.",
+    role: "Dynamics 365 Practice",
+    quote: "The Azure and Power Platform sessions were practical, focused, and directly useful for our internal projects.",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80",
     tone: "bg-cyan-100/50",
   },
   {
     name: "Devid Max",
-    role: "Max iNC",
-    quote: "Live sessions and assignments gave me confidence. The certificate felt earned because the projects were real.",
+    role: "Enterprise Learning Team",
+    quote: "The Copilot and AI workshops gave our team confidence to evaluate use cases, governance, and implementation steps.",
     avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=180&q=80",
     tone: "bg-signal-100/60",
   },
@@ -46,17 +46,17 @@ export function TestimonialsSection() {
 
       <Container className="relative">
         <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Testimonial</p>
+          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Client Feedback</p>
           <h2 className="mt-3 text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            What Says <span className="text-royal-700 underline decoration-signal underline-offset-8">Our Students</span>
+            What <span className="text-royal-700 underline decoration-signal underline-offset-8">Teams Say</span>
           </h2>
         </div>
 
         <div className="mt-2 hidden justify-end gap-4 pr-8 lg:flex">
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Previous testimonial">
+          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Previous client feedback">
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Next testimonial">
+          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Next client feedback">
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
@@ -93,3 +93,5 @@ export function TestimonialsSection() {
     </section>
   );
 }
+
+

@@ -3,16 +3,16 @@ import { BookOpenCheck, ChevronRight, GraduationCap, MonitorPlay, ShieldCheck, T
 import { Container } from "@/components/ui/primitives";
 
 const numberCards = [
-  { icon: GraduationCap, value: "1200+", label: "Learners & counting" },
-  { icon: ShieldCheck, value: "320+", label: "Total courses" },
-  { icon: Trophy, value: "1340+", label: "Successful students" },
+  { icon: GraduationCap, value: "1200+", label: "Professionals trained" },
+  { icon: ShieldCheck, value: "320+", label: "Microsoft modules" },
+  { icon: Trophy, value: "1340+", label: "Corporate batches" },
 ];
 
 const workSteps = [
-  { icon: UserPlus, title: "Sign up", description: "Create your learner profile and set your learning goal." },
-  { icon: ShieldCheck, title: "Select course", description: "Choose a focused path guided by expert mentors." },
-  { icon: BookOpenCheck, title: "Start Learning", description: "Learn through lessons, live support, and projects." },
-  { icon: MonitorPlay, title: "Get Certificate", description: "Complete your work and earn a verified certificate." },
+  { icon: UserPlus, title: "Sign up", description: "Share your team role, Microsoft stack, and training goals." },
+  { icon: ShieldCheck, title: "Choose service track", description: "Select Dynamics 365, Azure, Power Platform, Copilot, or security tracks." },
+  { icon: BookOpenCheck, title: "Attend workshops", description: "Learn through instructor-led sessions, labs, demos, and business use cases." },
+  { icon: MonitorPlay, title: "Enable your team", description: "Close the program with practical readiness, assessments, and adoption guidance." },
 ];
 
 function SectionKicker({ children }: { children: string }) {
@@ -34,17 +34,17 @@ export function StrengthNumbers() {
 
       <Container className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_390px] lg:items-center">
         <div>
-          <SectionKicker>Funfact</SectionKicker>
+          <SectionKicker>Impact</SectionKicker>
           <h2 className="mt-4 text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            Strength in Numbers
+            Microsoft Training Outcomes
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-7 text-navy-400">
-            Atisunya Edutech helps learners move from curiosity to capability with practical courses, guided support, and measurable outcomes.
+            Atisunya Edutech helps teams adopt Microsoft services with structured corporate training, hands-on labs, and role-based enablement.
           </p>
 
           <div className="mt-9 inline-flex items-center gap-4 rounded-md bg-signal px-6 py-4 text-navy shadow-soft">
             <strong className="text-3xl font-extrabold sm:text-4xl">2.4k+</strong>
-            <span className="max-w-[120px] text-base font-extrabold leading-tight">Successful students</span>
+            <span className="max-w-[140px] text-base font-extrabold leading-tight">Corporate batches</span>
           </div>
         </div>
 
@@ -72,13 +72,13 @@ export function HowItWorks() {
       <Container>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1fr] lg:items-start">
           <div>
-            <SectionKicker>What we do</SectionKicker>
+            <SectionKicker>Training flow</SectionKicker>
             <h2 className="mt-4 text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-              How it works?
+              How corporate training works
             </h2>
           </div>
           <p className="max-w-2xl text-base leading-7 text-navy-400 lg:pt-2">
-            Start with a clear goal, follow a focused course path, practice with guided projects, and finish with proof of skill.
+            We align training with your business roles, deliver practical Microsoft workshops, and support teams with real adoption use cases.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export function HowItWorks() {
               <h3 className="mt-6 text-xl font-extrabold text-navy">{step.title}</h3>
               <p className="mt-3 text-sm leading-6 text-navy-400">{step.description}</p>
               <Link href="/courses" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-navy transition-colors hover:text-royal-700">
-                Read More
+                View Track
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </article>
@@ -104,3 +104,4 @@ export function HowItWorks() {
     </section>
   );
 }
+

@@ -36,6 +36,9 @@ const socialLinks = [
   { label: "YouTube", href: "#", icon: Youtube },
 ];
 
+const headerContainer =
+  "mx-auto w-full max-w-[1400px] px-5 md:px-8 lg:px-10";
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,13 +64,18 @@ export function Navbar() {
       )}
     >
       <div className="bg-brand text-white">
-        <div className="container-edge flex min-h-[60px] items-center justify-between gap-4 text-sm font-semibold md:text-base">
+        <div
+          className={cn(
+            headerContainer,
+            "flex min-h-11 items-center justify-between gap-4 text-sm font-semibold"
+          )}
+        >
           <div className="flex items-center">
             <Link
               href="/login"
-              className="flex h-[60px] items-center gap-2 border-x border-white/15 px-4 transition-colors hover:bg-white/10 sm:px-5"
+              className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/10 sm:px-4"
             >
-              <UserRound className="h-5 w-5" />
+              <UserRound className="h-4 w-4" />
               <span>Register / Login</span>
             </Link>
             <div className="hidden items-center sm:flex">
@@ -78,12 +86,12 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     aria-label={link.label}
-                    className="flex h-[60px] w-14 items-center justify-center border-r border-white/15 transition-colors hover:bg-white/10"
+                    className="flex h-11 w-11 items-center justify-center border-r border-white/15 transition-colors hover:bg-white/10"
                   >
                     {Icon ? (
                       <Icon className="h-4 w-4" />
                     ) : (
-                      <span className="text-base font-bold">{link.text}</span>
+                      <span className="text-sm font-bold">{link.text}</span>
                     )}
                   </Link>
                 );
@@ -91,24 +99,29 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             <Link href="tel:+99925476854" className="flex items-center gap-2">
-              <Headphones className="h-5 w-5" />
-              <span>Call Us:+99925476854</span>
+              <Headphones className="h-4 w-4" />
+              <span>Call Us:+(+91) 80-8181-0673, (+91) 82-9915-6511</span>
             </Link>
-            <span className="h-9 w-px bg-white/25" />
+            <span className="h-6 w-px bg-white/25" />
             <Link
               href="mailto:example@eduplus.com"
               className="flex items-center gap-2"
             >
-              <Mail className="h-5 w-5" />
-              <span>Email Address:example@eduplus.com</span>
+              <Mail className="h-4 w-4" />
+              <span>Email Address: info@atisunya.co</span>
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="container-edge flex min-h-[92px] items-center justify-between gap-6 py-4">
+      <div
+        className={cn(
+          headerContainer,
+          "flex min-h-[78px] items-center justify-between gap-5 py-3"
+        )}
+      >
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/images/atisunyaedutechlogo.png"
@@ -116,16 +129,16 @@ export function Navbar() {
             width={220}
             height={80}
             priority
-            className="h-14 w-auto object-contain sm:h-16"
+            className="h-12 w-auto object-contain sm:h-14"
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 xl:flex">
+        <nav className="hidden items-center gap-6 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="flex items-center gap-2 text-base font-bold text-black transition-colors hover:text-brand"
+              className="flex items-center gap-1.5 text-[15px] font-bold text-black transition-colors hover:text-brand"
             >
               <span>{link.label}</span>
               {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
@@ -133,28 +146,28 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 xl:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <button
             type="button"
             aria-label="Search"
-            className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
           >
-            <Search className="h-7 w-7" />
+            <Search className="h-6 w-6" />
           </button>
           <Link
             href="/courses"
             aria-label="Cart"
-            className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
+            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
           >
-            <ShoppingCart className="h-7 w-7" />
-            <span className="absolute -right-1 top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-brand px-1 text-xs font-bold text-white">
+            <ShoppingCart className="h-6 w-6" />
+            <span className="absolute -right-1 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[11px] font-bold text-white">
               4
             </span>
           </Link>
           <LinkButton
             href="/signup"
-            size="lg"
-            className="rounded-[28px] bg-brand px-10 text-base shadow-none hover:bg-brand-600 hover:shadow-none"
+            size="md"
+            className="rounded-[24px] bg-brand px-8 text-[15px] shadow-none hover:bg-brand-600 hover:shadow-none"
           >
             Enroll Now
           </LinkButton>
@@ -234,4 +247,3 @@ export function Navbar() {
     </header>
   );
 }
-

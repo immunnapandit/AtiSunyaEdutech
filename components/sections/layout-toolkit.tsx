@@ -9,20 +9,20 @@ import { cn } from "@/lib/utils";
 
 const features = [
   {
-    label: "Courses Layout.",
+    label: "Dynamics 365.",
     icon: MonitorCog,
   },
   {
-    label: "Header layout.",
+    label: "Azure Cloud.",
     icon: LayoutTemplate,
   },
   {
-    label: "Complete Design Toolkit.",
+    label: "Power Platform.",
     icon: PenTool,
     active: true,
   },
   {
-    label: "Infinitely Flexible",
+    label: "Copilot & AI",
     icon: Braces,
   },
 ];
@@ -50,10 +50,10 @@ function MiniButtonTile() {
   return (
     <div className="space-y-3 p-5">
       <div className="flex h-11 items-center justify-center rounded bg-gradient-to-r from-[#3867ff] to-[#b658f0] text-[11px] font-extrabold text-white">
-        Histudy Button
+        Book Workshop
       </div>
       <div className="flex h-11 items-center justify-center rounded border-2 border-[#9367ef] bg-white text-[11px] font-extrabold text-navy">
-        Histudy Button
+        Book Workshop
       </div>
     </div>
   );
@@ -69,7 +69,7 @@ function PriceTile() {
         <div className="mt-2 h-1.5 w-2/3 rounded bg-mist-200" />
       </div>
       <div className="rounded bg-white p-3 shadow-soft">
-        <div className="text-[9px] font-bold text-navy">Active Plan Mode.</div>
+        <div className="text-[9px] font-bold text-navy">Team Plan</div>
         <div className="mt-3 text-lg font-extrabold text-navy">$129</div>
         <div className="mt-2 h-3 rounded bg-[#9b5cf2]" />
         <div className="mt-4 flex gap-0.5 text-[#ffb22e]">
@@ -82,14 +82,14 @@ function PriceTile() {
   );
 }
 
-function ElementsTile() {
+function ModulesTile() {
   return (
     <div className="relative flex h-full items-center justify-center p-5">
       <div className="absolute left-5 top-7 h-9 w-14 rounded-full border border-dashed border-[#9ce8d4]" />
       <p className="font-display text-3xl font-extrabold leading-tight text-[#a9ffe3]">
-        100+
-        <span className="block">Elements</span>
-        <span className="block">Included.</span>
+        50+
+        <span className="block">Modules</span>
+        <span className="block">Available.</span>
       </p>
     </div>
   );
@@ -99,7 +99,7 @@ function NewsTile() {
   return (
     <div className="p-4">
       <div className="rounded bg-[#315eff] p-4 text-white">
-        <div className="text-[9px] font-extrabold">Latest News</div>
+        <div className="text-[9px] font-extrabold">Microsoft Updates</div>
         <div className="mt-3 grid grid-cols-3 gap-2">
           {Array.from({ length: 3 }).map((_, index) => (
             <div key={index} className="h-9 rounded bg-white" />
@@ -136,7 +136,7 @@ function StatsTile() {
       <div className="rounded bg-white p-4 text-center shadow-lifted">
         <div className="mx-auto h-6 w-6 rounded bg-[#f5e9ff]" />
         <div className="mt-2 text-base font-extrabold text-navy">800+</div>
-        <div className="text-[8px] font-bold text-navy-400">Courses & Video</div>
+        <div className="text-[8px] font-bold text-navy-400">Workshops & Labs</div>
       </div>
     </div>
   );
@@ -197,7 +197,7 @@ function VideoTile() {
       <div className="rounded bg-white p-3 text-navy shadow-soft">
         <div className="grid grid-cols-[1fr_0.9fr] gap-3">
           <div>
-            <div className="text-[9px] font-extrabold">Online Courses from Histudy</div>
+            <div className="text-[9px] font-extrabold">Corporate Microsoft Training</div>
             <div className="mt-3 h-2 rounded bg-mist-200" />
             <div className="mt-2 h-2 w-2/3 rounded bg-mist-200" />
             <div className="mt-3 h-4 w-12 rounded bg-[#315eff]" />
@@ -253,7 +253,7 @@ function FaqTile() {
   return (
     <div className="grid grid-cols-[1fr_0.45fr] gap-3 p-4">
       <div className="rounded bg-white p-3 shadow-soft">
-        <div className="text-[9px] font-extrabold text-navy">Have a Question with Histudy University?</div>
+        <div className="text-[9px] font-extrabold text-navy">Need Microsoft training for your team?</div>
         <div className="mt-3 space-y-2">
           {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="h-2 rounded bg-mist-200" />
@@ -271,7 +271,7 @@ function MedicalTile() {
       <div className="rounded bg-white p-3 shadow-soft">
         <div className="flex justify-between gap-3">
           <div>
-            <div className="text-[9px] font-extrabold text-navy">Medical Exam</div>
+            <div className="text-[9px] font-extrabold text-navy">Skill Review</div>
             <div className="mt-3 h-2 w-20 rounded bg-mist-200" />
             <div className="mt-2 h-2 w-14 rounded bg-mist-200" />
           </div>
@@ -314,7 +314,7 @@ function JoinTile() {
 const tileContent = [
   <MiniButtonTile key="buttons" />,
   <PriceTile key="price" />,
-  <ElementsTile key="elements" />,
+  <ModulesTile key="elements" />,
   <NewsTile key="news" />,
   <PersonTile key="person" />,
   <StatsTile key="stats" />,
@@ -338,11 +338,11 @@ export function LayoutToolkit() {
           <div className="mx-auto grid max-w-[1420px] gap-12 lg:grid-cols-[0.46fr_0.54fr] lg:items-center xl:gap-16">
             <div>
               <span className="inline-flex min-h-11 items-center rounded-full bg-[#d6ddff] px-7 text-sm font-extrabold uppercase text-[#315eff] sm:text-base">
-                All In One For Education
+                Microsoft Services Training
               </span>
 
               <h2 className="mt-7 max-w-[480px] text-[2.25rem] font-extrabold leading-[1.18] tracking-normal text-navy sm:text-[2.7rem] md:text-[3rem]">
-                Layout Ready, Build Everything.
+                Train Teams Across Microsoft Cloud.
               </h2>
 
               <div className="mt-10 space-y-5">
@@ -396,3 +396,4 @@ export function LayoutToolkit() {
     </section>
   );
 }
+
