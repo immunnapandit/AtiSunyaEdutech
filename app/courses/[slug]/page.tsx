@@ -100,7 +100,7 @@ export default async function CourseDetailsPage({
           </div>
         </div>
 
-        <aside className="h-fit rounded-2xl border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
+        <aside className="h-fit rounded-[24px] border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold text-navy">${course.price}</span>
             {course.originalPrice && (
@@ -109,9 +109,14 @@ export default async function CourseDetailsPage({
               </span>
             )}
           </div>
-          <LinkButton href="/signup" size="lg" className="mt-5 w-full justify-center">
-            Enroll now
-          </LinkButton>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <LinkButton href="/contact" variant="outline" size="lg" className="w-full justify-center">
+              Enquiry now
+            </LinkButton>
+            <LinkButton href="/signup" size="lg" className="w-full justify-center">
+              Enroll now
+            </LinkButton>
+          </div>
           <p className="mt-3 text-center text-xs text-navy-400">
             14-day money-back guarantee
           </p>
