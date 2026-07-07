@@ -24,14 +24,14 @@ const courseImages: Record<string, string> = {
 };
 
 const tabs = [
-  "Product Design",
-  "Software Engineering",
-  "Data & AI",
-  "Product Management",
+  "Dynamics 365",
+  "Azure Cloud",
+  "Power Platform",
+  "Microsoft AI",
 ] as const;
 
 export function FeaturedCourses() {
-  const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>("Product Design");
+  const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>("Dynamics 365");
   const featured = useMemo(() => {
     const matching = courses.filter((course) => course.category === activeTab);
     const fallback = courses.filter((course) => course.featured);
@@ -46,7 +46,7 @@ export function FeaturedCourses() {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            Top Featured Courses
+            Microsoft Training Programs
           </h2>
         </div>
 
@@ -105,7 +105,7 @@ export function FeaturedCourses() {
                   <span className="text-navy-400">({course.reviewCount})</span>
                 </span>
                 <span className="text-base font-bold text-navy-400">
-                  Price: <strong className="text-xl text-navy">${course.price}.00</strong>
+                  Program Fee: <strong className="text-xl text-navy">${course.price}.00</strong>
                 </span>
               </div>
             </Link>
@@ -115,4 +115,6 @@ export function FeaturedCourses() {
     </section>
   );
 }
+
+
 
