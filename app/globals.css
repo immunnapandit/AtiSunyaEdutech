@@ -19,7 +19,12 @@
     @apply bg-white text-navy-600 font-body antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display text-navy tracking-tight;
   }
 
@@ -28,7 +33,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #0466C8;
+    outline: 2px solid #0466c8;
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -37,6 +42,10 @@
 @layer utilities {
   .container-edge {
     @apply mx-auto w-full max-w-content px-6 md:px-10 lg:px-12;
+  }
+
+  .partner-marquee {
+    animation: partner-marquee 28s linear infinite;
   }
 
   .text-balance {
@@ -56,8 +65,19 @@
   }
 }
 
+@keyframes partner-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
