@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -23,7 +23,23 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { label: "Home", href: "/", hasDropdown: true },
   { label: "About", href: "/about" },
-  { label: "Courses", href: "/courses", hasDropdown: true },
+  {
+    label: "Training and Courses",
+    href: "/courses",
+    hasDropdown: true,
+    children: [
+      {
+        label: "Corporate Training",
+        href: "/training",
+        description: "Team enablement programs for Microsoft cloud and AI.",
+      },
+      {
+        label: "Microsoft Courses",
+        href: "/courses",
+        description: "Browse Microsoft modules and learning paths.",
+      },
+    ],
+  },
   { label: "Pages", href: "/faq", hasDropdown: true },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -106,7 +122,7 @@ export function Navbar() {
             </Link>
             <span className="h-6 w-px bg-white/25" />
             <Link
-              href="mailto:example@eduplus.com"
+              href="mailto:info@atisunya.co"
               className="flex items-center gap-2"
             >
               <Mail className="h-4 w-4" />
@@ -133,16 +149,35 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 xl:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex items-center gap-1.5 text-[15px] font-bold text-black transition-colors hover:text-brand"
-            >
-              <span>{link.label}</span>
-              {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
-            </Link>
+            <div key={link.href} className="group relative">
+              <Link
+                href={link.href}
+                className="flex items-center gap-1.5 py-4 text-[15px] font-bold text-black transition-colors hover:text-brand"
+              >
+                <span>{link.label}</span>
+                {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
+              </Link>
+              {link.children && (
+                <div className="invisible absolute left-0 top-full w-72 translate-y-2 rounded-lg border border-navy-100 bg-white p-2 opacity-0 shadow-lifted transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className="block rounded-md px-4 py-3 transition-colors hover:bg-brand-50"
+                    >
+                      <span className="block text-sm font-bold text-navy">
+                        {child.label}
+                      </span>
+                      <span className="mt-1 block text-xs font-medium leading-5 text-navy-400">
+                        {child.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 
@@ -193,27 +228,39 @@ export function Navbar() {
           >
             <div className="container-edge flex flex-col gap-1 py-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-bold text-navy-600 hover:bg-mist-100"
-                >
-                  <span>{link.label}</span>
-                  {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
-                </Link>
+                <div key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-bold text-navy-600 hover:bg-mist-100"
+                  >
+                    <span>{link.label}</span>
+                    {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
+                  </Link>
+                  {link.children && (
+                    <div className="ml-3 grid gap-1 border-l border-navy-100 pl-3">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="rounded-lg px-3 py-2 text-sm font-semibold text-navy-400 hover:bg-mist-100 hover:text-navy"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
               <div className="mt-2 grid gap-3 border-t border-navy-100 pt-4 text-sm font-semibold text-navy-400 lg:hidden">
                 <Link href="tel:+99925476854" className="flex items-center gap-2">
                   <Headphones className="h-4 w-4" />
                   <span>Call Us:+99925476854</span>
                 </Link>
-                <Link
-                  href="mailto:example@eduplus.com"
-                  className="flex items-center gap-2"
-                >
+                <Link href="mailto:info@atisunya.co" className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>Email Address:example@eduplus.com</span>
+                  <span>Email Address: info@atisunya.co</span>
                 </Link>
               </div>
               <div className="mt-4 grid grid-cols-[1fr_1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
@@ -247,3 +294,4 @@ export function Navbar() {
     </header>
   );
 }
+

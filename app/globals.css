@@ -7,8 +7,10 @@
 }
 
 @layer base {
-  * {
-    @apply border-navy-100;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
   html {
