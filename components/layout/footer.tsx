@@ -10,7 +10,7 @@ const socials = [Facebook, Twitter, Instagram, Youtube];
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-navy-100 bg-mist-100 text-navy">
+    <footer className="relative mt-20 border-t border-navy-100 bg-mist-100 text-navy">
       <Container className="pt-16">
         <form className="rounded-lg bg-white p-6 shadow-soft md:p-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr_170px] lg:items-end">
