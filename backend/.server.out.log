@@ -1,0 +1,23 @@
+Atisunya backend running on http://localhost:5000
+[0mPOST /api/contact [32m201[0m 833.468 ms - 428[0m
+[0mGET /api/health [32m200[0m 0.583 ms - 52[0m
+[0mPOST /api/auth/login [33m401[0m 2.937 ms - 40[0m
+[0mPOST /api/auth/signup [32m201[0m 159.237 ms - 338[0m
+[0mGET /api/dashboard [32m200[0m 5.265 ms - 2585[0m
+[0mGET /api/dashboard [36m304[0m 3.724 ms - -[0m
+[0mPOST /api/auth/login [33m401[0m 2.936 ms - 40[0m
+[0mPOST /api/auth/login [33m401[0m 137.798 ms - 40[0m
+[0mPOST /api/auth/login [33m401[0m 127.172 ms - 40[0m
+[0mPOST /api/auth/forgot-password [32m200[0m 393.695 ms - 162[0m
+[0mPOST /api/auth/signup [32m201[0m 121.759 ms - 361[0m
+[0mGET /api/dashboard [32m200[0m 2.391 ms - 2595[0m
+[0mGET /api/dashboard [36m304[0m 3.407 ms - -[0m
+[0mPOST /api/auth/login [32m200[0m 146.712 ms - 361[0m
+[0mGET /api/dashboard [36m304[0m 2.536 ms - -[0m
+[0mGET /api/dashboard [36m304[0m 2.286 ms - -[0m
+[0mPOST /api/auth/login [32m200[0m 119.441 ms - 361[0m
+[0mGET /api/dashboard [36m304[0m 2.727 ms - -[0m
+[0mGET /api/dashboard [36m304[0m 2.623 ms - -[0m
+[0mPOST /api/auth/login [32m200[0m 123.906 ms - 361[0m
+[0mGET /api/dashboard [36m304[0m 3.483 ms - -[0m
+[0mGET /api/dashboard [36m304[0m 2.827 ms - -[0m

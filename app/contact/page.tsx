@@ -12,8 +12,8 @@ import {
   Navigation,
   PhoneCall,
 } from "lucide-react";
+import { ContactForm } from "@/components/features/contact-form";
 import { Container } from "@/components/ui/primitives";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -43,9 +43,6 @@ const quickSignals = [
   { icon: CheckCircle2, label: "Course, career, and partnership guidance" },
   { icon: MessageCircle, label: "Clear next steps after every enquiry" },
 ];
-
-const fieldStyles =
-  "w-full border-0 border-b border-navy-100 bg-transparent px-0 py-2.5 text-sm font-medium text-navy placeholder:text-navy-400 transition-colors duration-300 hover:border-brand focus:border-brand focus:outline-none md:text-base";
 
 export default function ContactPage() {
   return (
@@ -146,68 +143,7 @@ export default function ContactPage() {
 
               <div className="relative">
                 <div className="absolute -left-5 -top-5 h-20 w-20 rounded-full bg-brand/10 blur-2xl" />
-                <form className="relative flex h-full flex-col rounded-[22px] border border-brand/10 bg-mist-50/90 p-5 shadow-soft md:p-7">
-                  <div className="absolute inset-0 -z-10 rounded-[22px] bg-[radial-gradient(circle_at_top_right,rgba(4,102,200,0.13),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(238,243,250,0.9))]" />
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h2 className="text-2xl font-extrabold text-navy md:text-3xl">
-                        Get in Touch
-                      </h2>
-                      <p className="mt-2 text-sm leading-6 text-navy-400 md:text-base">
-                        Share your enquiry. We respect your time and never spam.
-                      </p>
-                    </div>
-                    <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold text-brand shadow-soft">
-                      <Clock3 className="h-3.5 w-3.5" />
-                      24h response
-                    </span>
-                  </div>
-
-                  <div className="mt-5 grid gap-4 md:grid-cols-2">
-                    <div className="origin-left transition duration-300 hover:scale-[1.01]">
-                      <input
-                        id="name"
-                        type="text"
-                        required
-                        placeholder="Full Name*"
-                        className={fieldStyles}
-                      />
-                    </div>
-                    <div className="origin-left transition duration-300 hover:scale-[1.01]">
-                      <input
-                        id="email"
-                        type="email"
-                        required
-                        placeholder="Email Address*"
-                        className={fieldStyles}
-                      />
-                    </div>
-                    <div className="origin-left transition duration-300 hover:scale-[1.01] md:col-span-2">
-                      <input
-                        id="subject"
-                        type="text"
-                        required
-                        placeholder="Subject *"
-                        className={fieldStyles}
-                      />
-                    </div>
-                    <div className="origin-left transition duration-300 hover:scale-[1.005] md:col-span-2">
-                      <textarea
-                        id="message"
-                        rows={5}
-                        required
-                        placeholder="Your Message*"
-                        className={`${fieldStyles} min-h-36 resize-y`}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-auto pt-6">
-                    <Button type="submit" size="md" withArrow className="rounded-full px-8">
-                      Send Message
-                    </Button>
-                  </div>
-                </form>
+                <ContactForm />
                 </div>
             </div>
           </div>

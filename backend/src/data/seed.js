@@ -1,0 +1,153 @@
+export const courses = [
+  {
+    slug: "product-design-systems",
+    title: "Microsoft Dynamics 365 Functional Training",
+    category: "Dynamics 365",
+    difficulty: "Intermediate",
+    duration: "6 weeks",
+    studentsCount: 3420,
+    instructor: "Microsoft Training Team",
+    instructorAvatar: "MS",
+    rating: 4.9,
+    reviewCount: 612,
+    price: 249,
+    originalPrice: 349,
+    thumbnail: "design-systems",
+    thumbnailGradient: "from-royal-100 via-royal/20 to-cyan-100",
+    description:
+      "Learn Dynamics 365 Sales, Customer Service, Finance, and business workflows through practical enterprise scenarios.",
+    featured: true
+  },
+  {
+    slug: "full-stack-react-nextjs",
+    title: "Azure Cloud Administration & Architecture",
+    category: "Azure Cloud",
+    difficulty: "Intermediate",
+    duration: "10 weeks",
+    studentsCount: 8210,
+    instructor: "Azure Enablement Team",
+    instructorAvatar: "AZ",
+    rating: 4.8,
+    reviewCount: 1904,
+    price: 329,
+    originalPrice: 449,
+    thumbnail: "fullstack",
+    thumbnailGradient: "from-navy-100 via-royal-50 to-cyan-100",
+    description:
+      "Build confidence in Azure compute, networking, identity, storage, monitoring, and enterprise cloud architecture.",
+    featured: true
+  },
+  {
+    slug: "applied-machine-learning",
+    title: "Microsoft Copilot & AI Services Training",
+    category: "Microsoft AI",
+    difficulty: "Advanced",
+    duration: "8 weeks",
+    studentsCount: 5130,
+    instructor: "AI Solutions Team",
+    instructorAvatar: "AI",
+    rating: 4.9,
+    reviewCount: 887,
+    price: 399,
+    thumbnail: "ml",
+    thumbnailGradient: "from-cyan-100 via-royal-50 to-navy-100",
+    description:
+      "Train teams on Copilot Studio, Azure AI services, prompt workflows, and secure AI adoption for business users.",
+    featured: true
+  },
+  {
+    slug: "product-management-foundations",
+    title: "Power Platform App Maker Program",
+    category: "Power Platform",
+    difficulty: "Beginner",
+    duration: "5 weeks",
+    studentsCount: 6720,
+    instructor: "Power Platform Team",
+    instructorAvatar: "PP",
+    rating: 4.7,
+    reviewCount: 1120,
+    price: 199,
+    thumbnail: "pm",
+    thumbnailGradient: "from-royal-50 via-mist-100 to-royal-100",
+    description:
+      "Create business apps and automated workflows with Power Apps, Power Automate, Dataverse, and Power BI."
+  },
+  {
+    slug: "cloud-architecture-aws",
+    title: "Azure DevOps & Cloud Deployment",
+    category: "Azure Cloud",
+    difficulty: "Advanced",
+    duration: "9 weeks",
+    studentsCount: 4310,
+    instructor: "Cloud Delivery Team",
+    instructorAvatar: "CD",
+    rating: 4.8,
+    reviewCount: 703,
+    price: 379,
+    thumbnail: "cloud",
+    thumbnailGradient: "from-navy-100 via-cyan-100 to-royal-50",
+    description:
+      "Upskill teams on CI/CD, Azure DevOps, GitHub workflows, IaC basics, monitoring, and release governance."
+  },
+  {
+    slug: "brand-and-visual-identity",
+    title: "Dynamics 365 CRM Customization",
+    category: "Dynamics 365",
+    difficulty: "Beginner",
+    duration: "4 weeks",
+    studentsCount: 2980,
+    instructor: "Microsoft Training Team",
+    instructorAvatar: "MS",
+    rating: 4.9,
+    reviewCount: 540,
+    price: 179,
+    thumbnail: "brand",
+    thumbnailGradient: "from-cyan-100 via-mist-100 to-royal-100",
+    description:
+      "Configure model-driven apps, forms, views, business rules, security roles, and CRM process automation."
+  },
+  {
+    slug: "cybersecurity-fundamentals",
+    title: "Microsoft Security & Compliance Essentials",
+    category: "Security",
+    difficulty: "Beginner",
+    duration: "6 weeks",
+    studentsCount: 3860,
+    instructor: "Security Training Team",
+    instructorAvatar: "SC",
+    rating: 4.7,
+    reviewCount: 511,
+    price: 229,
+    thumbnail: "security",
+    thumbnailGradient: "from-navy-100 via-royal-50 to-mist-100",
+    description:
+      "Understand Microsoft Entra ID, access control, compliance basics, security posture, and governance practices."
+  },
+  {
+    slug: "data-analytics-with-python",
+    title: "Power BI & Microsoft Fabric Analytics",
+    category: "Power Platform",
+    difficulty: "Intermediate",
+    duration: "7 weeks",
+    studentsCount: 7040,
+    instructor: "AI Solutions Team",
+    instructorAvatar: "AI",
+    rating: 4.8,
+    reviewCount: 1330,
+    price: 259,
+    originalPrice: 319,
+    thumbnail: "data",
+    thumbnailGradient: "from-royal-100 via-cyan-100 to-mist-100",
+    description:
+      "Build dashboards, semantic models, reporting workflows, and analytics skills across Power BI and Fabric."
+  }
+];
+
+export const categories = [
+  { name: "Dynamics 365", count: 18, icon: "target" },
+  { name: "Azure Cloud", count: 34, icon: "cloud" },
+  { name: "Microsoft AI", count: 22, icon: "brain" },
+  { name: "Power Platform", count: 12, icon: "code" },
+  { name: "Corporate Training", count: 16, icon: "briefcase" },
+  { name: "Security", count: 9, icon: "shield" }
+];
