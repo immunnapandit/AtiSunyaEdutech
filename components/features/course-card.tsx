@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, Users, Clock, ArrowUpRight, MessageCircleMore } from "lucide-react";
 import { Course } from "@/types";
@@ -33,38 +34,47 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
           </div>
         )}
         <Link href={`/courses/${course.slug}`} className="block">
-          <div
-            className={cn(
-              "relative flex h-28 items-end overflow-hidden rounded-t-[24px] bg-gradient-to-br p-3",
-              course.thumbnailGradient
-            )}
-          >
-            <div className="absolute inset-0 opacity-25 mix-blend-overlay grain-noise" />
-            <div className="relative flex w-full items-start justify-between gap-2">
-              <Badge
-                tone={difficultyTone[course.difficulty]}
-                className={cn(
-                  "shadow-sm text-[10px] uppercase tracking-[0.24em]",
-                  course.featured ? "bg-white/95 text-navy" : "bg-white/90"
-                )}
-              >
-                {course.difficulty}
-              </Badge>
-            </div>
-            <div className={cn(
-              "absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/80 bg-white/90 text-navy transition-all duration-300",
-              course.featured ? "text-brand" : "text-navy"
-            )}>
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </div>
-          </div>
-        </Link>
+  <div className="relative h-56 overflow-hidden rounded-t-[24px]">
+
+  <Image
+  src={course.image}
+  alt={course.title}
+  fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  priority={index < 3}
+  className="object-cover transition-transform duration-500 group-hover:scale-105"
+/>
+    {/* Dark Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+    {/* Difficulty Badge */}
+    <div className="absolute top-4 left-4">
+      <Badge
+        tone={difficultyTone[course.difficulty]}
+        className="bg-white/90"
+      >
+        {course.difficulty}
+      </Badge>
+    </div>
+
+    {/* Arrow */}
+    <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90">
+      <ArrowUpRight className="h-4 w-4 text-navy" />
+    </div>
+
+    {/* Course Title */}
+   <div className="absolute bottom-5 left-5">
+  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white">
+    {course.category}
+  </p>
+</div>
+
+  </div>
+</Link>
 
         <div className="flex flex-1 flex-col gap-3 p-4">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-royal">
-              {course.category}
-            </p>
+            
             <Link href={`/courses/${course.slug}`} className="mt-2 block">
               <h3 className="text-base font-semibold leading-tight text-navy transition-colors group-hover:text-royal">
                 {course.title}
@@ -101,9 +111,9 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs text-navy-500">Starting at</p>
-              <p className="text-lg font-bold text-navy">${course.price}</p>
+              <p className="text-lg font-bold text-navy">₹{course.price.toLocaleString("en-IN")}</p>
               {course.originalPrice && (
-                <p className="text-[11px] text-navy-400 line-through">${course.originalPrice}</p>
+                <p className="text-[11px] text-navy-400 line-through">₹{course.originalPrice?.toLocaleString("en-IN")}</p>
               )}
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2">
