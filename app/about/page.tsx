@@ -6,7 +6,6 @@ import {
   Award,
   BookOpenText,
   GraduationCap,
-  Play,
   Target,
   Users,
 } from "lucide-react";
@@ -244,43 +243,6 @@ export default function AboutPage() {
       </section>
 
       <Stats />
-
-      <section className="bg-white py-20 sm:py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Working process"
-            title="How It Works"
-            align="center"
-            className="mx-auto"
-          />
-
-          <div className="mt-12 overflow-hidden rounded-[2rem] bg-navy shadow-[0_30px_80px_rgba(15,23,42,0.16)]">
-            <div className="relative min-h-[420px]">
-              <Image
-                src="/images/contactbanner.png"
-                alt="Learning session preview"
-                fill
-                className="object-cover object-center opacity-70"
-                priority={false}
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.18),rgba(15,23,42,0.58))]" />
-              <div className="absolute inset-0 flex items-center justify-between p-8 sm:p-12">
-                <h3 className="max-w-sm text-[3.25rem] font-extrabold leading-[0.92] text-white/20 sm:text-[4.5rem]">
-                  Intro Video
-                </h3>
-                <Link
-                  href="https://www.youtube.com/watch?v=qmqjJLzoxks"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-white/90 text-brand shadow-soft transition-transform hover:scale-105"
-                >
-                  <Play className="h-8 w-8 fill-current" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
 
       <AboutTestimonialsSlider testimonials={testimonials} />
 

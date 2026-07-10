@@ -11,7 +11,7 @@ const socials = [Facebook, Twitter, Instagram, Youtube];
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-navy-100 bg-mist-100 text-navy">
+    <footer className="relative mt-20 border-t border-navy-100 bg-mist-100 text-navy">
       <Container className="pt-16">
         <NewsletterForm variant="footer" />
 
