@@ -154,7 +154,7 @@ export default function AboutPage() {
                     <GraduationCap className="mx-auto h-10 w-10 text-brand" />
                     <p className="mt-3 text-lg font-bold text-navy">
                       Experience Advisor
-                    </p>
+                    </p> 
                   </div>
                 </div>
                 <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
@@ -171,7 +171,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <Eyebrow>About {SITE.name}</Eyebrow>
+              <Eyebrow>About  {SITE.name}</Eyebrow>
               <h2 className="mt-4 max-w-2xl text-display-md font-extrabold text-navy text-balance sm:text-display-lg">
                 We create industry-focused learning experiences.
               </h2>
@@ -184,7 +184,7 @@ export default function AboutPage() {
                 and building a community where skills turn into real career
                 progress.
               </p>
-
+              
               <div className="mt-10 grid gap-6 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
