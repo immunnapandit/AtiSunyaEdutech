@@ -46,10 +46,9 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "#", icon: Facebook },
-  { label: "X", href: "#", text: "X" },
-  { label: "LinkedIn", href: "#", icon: Linkedin },
-  { label: "YouTube", href: "#", icon: Youtube },
+  { label: "Facebook", href: "https://www.facebook.com", icon: Facebook },
+  { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
+  { label: "YouTube", href: "https://www.youtube.com", icon: Youtube },
 ];
 
 const headerContainer =
@@ -104,11 +103,7 @@ export function Navbar() {
                     aria-label={link.label}
                     className="flex h-11 w-11 items-center justify-center border-r border-white/15 transition-colors hover:bg-white/10"
                   >
-                    {Icon ? (
-                      <Icon className="h-4 w-4" />
-                    ) : (
-                      <span className="text-sm font-bold">{link.text}</span>
-                    )}
+                    <Icon className="h-4 w-4" />
                   </Link>
                 );
               })}
@@ -116,9 +111,9 @@ export function Navbar() {
           </div>
 
           <div className="hidden items-center gap-5 lg:flex">
-            <Link href="tel:+99925476854" className="flex items-center gap-2">
+            <Link href="tel:+918081810673" className="flex items-center gap-2">
               <Headphones className="h-4 w-4" />
-              <span>Call Us:+(+91) 80-8181-0673, (+91) 82-9915-6511</span>
+              <span>Call Us: +91 80-8181-0673</span>
             </Link>
             <span className="h-6 w-px bg-white/25" />
             <Link
@@ -154,7 +149,7 @@ export function Navbar() {
             <div key={link.href} className="group relative">
               <Link
                 href={link.href}
-                className="flex items-center gap-1.5 py-4 text-[15px] font-bold text-black transition-colors hover:text-brand"
+                className="flex items-center gap-1.5 py-4 text-sm font-semibold text-navy transition-colors hover:text-brand"
               >
                 <span>{link.label}</span>
                 {link.hasDropdown && <ChevronDown className="h-4 w-4" />}
@@ -182,27 +177,24 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 xl:flex">
-          <button
-            type="button"
-            aria-label="Search"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
-          >
-            <Search className="h-6 w-6" />
-          </button>
           <Link
             href="/courses"
-            aria-label="Cart"
-            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
+            aria-label="Search courses"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
+          >
+            <Search className="h-6 w-6" />
+          </Link>
+          <Link
+            href="/dashboard"
+            aria-label="Open dashboard"
+            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
           >
             <ShoppingCart className="h-6 w-6" />
-            <span className="absolute -right-1 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[11px] font-bold text-white">
-              4
-            </span>
           </Link>
           <LinkButton
             href="/signup"
             size="md"
-            className="rounded-[24px] bg-brand px-8 text-[15px] shadow-none hover:bg-brand-600 hover:shadow-none"
+            className="rounded-lg bg-brand px-8 text-sm shadow-none hover:bg-brand-600 hover:shadow-none"
           >
             Enroll Now
           </LinkButton>
@@ -254,9 +246,9 @@ export function Navbar() {
                 </div>
               ))}
               <div className="mt-2 grid gap-3 border-t border-navy-100 pt-4 text-sm font-semibold text-navy-400 lg:hidden">
-                <Link href="tel:+99925476854" className="flex items-center gap-2">
+                <Link href="tel:+918081810673" className="flex items-center gap-2">
                   <Headphones className="h-4 w-4" />
-                  <span>Call Us:+99925476854</span>
+                  <span>Call Us: +91 80-8181-0673</span>
                 </Link>
                 <Link href="mailto:info@atisunya.co" className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
@@ -264,16 +256,17 @@ export function Navbar() {
                 </Link>
               </div>
               <div className="mt-4 grid grid-cols-[1fr_1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
-                <button
-                  type="button"
-                  aria-label="Search"
+                <Link
+                  href="/courses"
+                  aria-label="Search courses"
+                  onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
                   <Search className="h-5 w-5" />
-                </button>
+                </Link>
                 <Link
-                  href="/courses"
-                  aria-label="Cart"
+                  href="/dashboard"
+                  aria-label="Open dashboard"
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
@@ -282,7 +275,7 @@ export function Navbar() {
                 <LinkButton
                   href="/signup"
                   size="md"
-                  className="rounded-[24px] bg-brand shadow-none hover:bg-brand-600 hover:shadow-none"
+                  className="rounded-lg bg-brand shadow-none hover:bg-brand-600 hover:shadow-none"
                 >
                   Enroll Now
                 </LinkButton>

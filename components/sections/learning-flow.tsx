@@ -35,7 +35,7 @@ export function StrengthNumbers() {
       <Container className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_390px] lg:items-center">
         <div>
           <SectionKicker>Impact</SectionKicker>
-          <h2 className="mt-4 text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="mt-4 text-[2.1rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
             Microsoft Training Outcomes
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-7 text-navy-400">
@@ -73,7 +73,7 @@ export function HowItWorks() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1fr] lg:items-start">
           <div>
             <SectionKicker>Training flow</SectionKicker>
-            <h2 className="mt-4 text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+            <h2 className="mt-4 text-[2.1rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
               How corporate training works
             </h2>
           </div>
@@ -91,7 +91,7 @@ export function HowItWorks() {
               <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-lg bg-signal text-navy">
                 <step.icon className="h-10 w-10" strokeWidth={1.8} />
               </span>
-              <h3 className="mt-6 text-xl font-extrabold text-navy">{step.title}</h3>
+              <h3 className="mt-6 text-xl font-bold text-navy">{step.title}</h3>
               <p className="mt-3 text-sm leading-6 text-navy-400">{step.description}</p>
               <Link href="/courses" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-navy transition-colors hover:text-royal-700">
                 View Track

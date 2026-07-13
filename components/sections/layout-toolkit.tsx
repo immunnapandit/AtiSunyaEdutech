@@ -64,13 +64,13 @@ function PriceTile() {
     <div className="grid grid-cols-2 gap-3 p-4">
       <div className="rounded bg-white p-3 shadow-soft">
         <div className="h-2 w-10 rounded bg-[#cbbdff]" />
-        <div className="mt-4 text-sm font-extrabold text-[#3867ff]">$20.00</div>
+        <div className="mt-4 text-sm font-extrabold text-[#3867ff]">INR 24k</div>
         <div className="mt-2 h-1.5 rounded bg-mist-200" />
         <div className="mt-2 h-1.5 w-2/3 rounded bg-mist-200" />
       </div>
       <div className="rounded bg-white p-3 shadow-soft">
         <div className="text-[9px] font-bold text-navy">Team Plan</div>
-        <div className="mt-3 text-lg font-extrabold text-navy">$129</div>
+        <div className="mt-3 text-lg font-extrabold text-navy">Team</div>
         <div className="mt-2 h-3 rounded bg-[#9b5cf2]" />
         <div className="mt-4 flex gap-0.5 text-[#ffb22e]">
           {Array.from({ length: 5 }).map((_, index) => (
@@ -119,7 +119,7 @@ function PersonTile() {
         <div className="h-3 w-20 rounded bg-white/70" />
         <div className="mt-4 h-2 rounded bg-white/70" />
         <div className="mt-2 h-2 w-2/3 rounded bg-white/70" />
-        <div className="mt-4 h-5 w-20 rounded bg-white text-[8px] font-bold text-[#315eff]" />
+        <div className="mt-4 h-5 w-20 rounded bg-white text-[8px] font-bold text-brand" />
       </div>
     </div>
   );
@@ -146,7 +146,7 @@ function TestimonialTile() {
   return (
     <div className="p-4">
       <div className="ml-auto rounded bg-[#8f51ea] p-4 text-white shadow-lifted">
-        <div className="text-[9px] font-extrabold">yelps</div>
+        <div className="text-[9px] font-extrabold">Reviews</div>
         <div className="mt-2 h-2 rounded bg-white/50" />
         <div className="mt-2 h-2 w-3/4 rounded bg-white/50" />
       </div>
@@ -334,14 +334,14 @@ export function LayoutToolkit() {
   return (
     <section className="bg-white py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1768px] px-4 sm:px-6">
-        <div className="overflow-hidden rounded-lg bg-[#f0f3ff] px-5 py-12 sm:px-8 md:px-12 lg:px-16 lg:py-20">
+        <div className="overflow-hidden rounded-lg bg-mist-50 px-5 py-12 sm:px-8 md:px-12 lg:px-16 lg:py-20">
           <div className="mx-auto grid max-w-[1420px] gap-12 lg:grid-cols-[0.46fr_0.54fr] lg:items-center xl:gap-16">
             <div>
-              <span className="inline-flex min-h-11 items-center rounded-full bg-[#d6ddff] px-7 text-sm font-extrabold uppercase text-[#315eff] sm:text-base">
+              <span className="inline-flex min-h-11 items-center rounded-full bg-brand-50 px-7 text-sm font-extrabold uppercase text-brand sm:text-base">
                 Microsoft Services Training
               </span>
 
-              <h2 className="mt-7 max-w-[480px] text-[2.25rem] font-extrabold leading-[1.18] tracking-normal text-navy sm:text-[2.7rem] md:text-[3rem]">
+              <h2 className="mt-7 max-w-[480px] heading-section text-navy">
                 Train Teams Across Microsoft Cloud.
               </h2>
 
@@ -357,11 +357,11 @@ export function LayoutToolkit() {
                       <div
                         className={cn(
                           "flex min-h-[88px] w-full items-center gap-5 rounded-lg px-7 transition-colors sm:gap-6",
-                          feature.active && "max-w-[260px] bg-[#d8def6]"
+                          feature.active && "max-w-[260px] bg-brand-50"
                         )}
                       >
                         <Icon className="h-8 w-8 shrink-0 stroke-[1.7]" />
-                        <span className="text-lg font-extrabold leading-tight sm:text-xl">
+                        <span className="text-lg font-bold leading-tight sm:text-xl">
                           {feature.label}
                         </span>
                       </div>

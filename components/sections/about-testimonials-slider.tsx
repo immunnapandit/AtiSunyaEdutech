@@ -64,7 +64,7 @@ export function AboutTestimonialsSlider({
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand">
               Testimonials
             </p>
-            <h2 className="mt-3 max-w-[520px] text-[2.15rem] font-extrabold leading-[1.08] text-navy sm:text-[2.8rem]">
+            <h2 className="mt-3 max-w-[520px] text-[2.15rem] font-bold leading-[1.08] text-navy sm:text-[2.8rem]">
               People&apos;s Say About Our Atisunya Edutech
             </h2>
             <div className="mt-5 h-[3px] w-40 rounded-full bg-brand/60" />
@@ -127,7 +127,7 @@ export function AboutTestimonialsSlider({
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-extrabold leading-none text-navy sm:text-3xl">
+                    <h3 className="text-2xl font-bold leading-none text-navy sm:text-3xl">
                       {testimonial.name}
                     </h3>
                     <p className="mt-2 text-base font-semibold text-brand">

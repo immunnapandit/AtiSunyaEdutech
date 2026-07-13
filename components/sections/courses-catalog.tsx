@@ -59,7 +59,7 @@ function FilterGroup({
 
   return (
     <section className="border-b border-navy-100 pb-6">
-      <h2 className="text-xl font-bold text-black">{title}</h2>
+      <h2 className="text-xl font-bold text-navy">{title}</h2>
       {searchLabel && (
         <input
           type="search"
@@ -142,8 +142,8 @@ export function CoursesCatalog() {
   };
 
     return (
-  <div className="bg-white pt-[135px] pb-20 text-black">
-      <section className="relative overflow-hidden bg-[#eeece6]">
+  <div className="bg-white pt-site-header-loose pb-20 text-navy">
+      <section className="section-band relative overflow-hidden border-b border-navy-100">
         <div className="mx-auto grid min-h-[220px] max-w-7xl items-center gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8 xl:px-10">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3">
@@ -154,10 +154,10 @@ export function CoursesCatalog() {
                 Microsoft Learn inspired catalog
               </span>
             </div>
-            <h1 className="text-3xl font-bold leading-tight text-black md:text-5xl">
+            <h1 className="heading-hero text-navy">
               Browse all training
             </h1>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-black">
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-navy-400">
               Learn new skills and discover the power of Microsoft products with
               step-by-step guidance. Start your journey today by exploring our
               learning paths and modules.
@@ -170,22 +170,22 @@ export function CoursesCatalog() {
               {Array.from({ length: 48 }).map((_, index) => (
                 <span
                   key={index}
-                  className="h-7 w-7 rounded bg-blue-300/55 shadow-sm"
+                  className="h-7 w-7 rounded bg-brand-100 shadow-sm"
                 />
               ))}
             </div>
-            <div className="absolute left-44 top-8 h-32 w-24 rounded-lg bg-gradient-to-br from-rose-300 via-pink-400 to-violet-500 shadow-lifted" />
-            <div className="absolute right-20 top-8 h-20 w-28 rounded-lg bg-violet-400 shadow-lifted" />
-            <div className="absolute right-44 top-32 h-16 w-20 rounded-lg bg-purple-300 shadow-soft" />
+            <div className="absolute left-44 top-8 h-32 w-24 rounded-lg bg-brand shadow-lifted" />
+            <div className="absolute right-20 top-8 h-20 w-28 rounded-lg bg-brand-400 shadow-lifted" />
+            <div className="absolute right-44 top-32 h-16 w-20 rounded-lg bg-brand-100 shadow-soft" />
             <div className="absolute right-6 top-32 h-28 w-40 rounded-lg border-4 border-white/80" />
-            <div className="absolute right-64 top-4 h-16 w-20 rounded-lg bg-blue-300 shadow-soft" />
+            <div className="absolute right-64 top-4 h-16 w-20 rounded-lg bg-brand-50 shadow-soft" />
             <div className="absolute left-72 top-28 h-32 w-2 rounded-full bg-white shadow-glow" />
           </div>
         </div>
       </section>
 
    <section className="mt-10 grid w-full max-w-full gap-8 px-4 py-4 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8 xl:px-10">
-        <aside className="space-y-6 rounded-[32px] border border-navy-100 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:self-start">
+        <aside className="space-y-6 rounded-lg border border-navy-100 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:self-start">
           <div className="flex flex-col gap-3 border-b border-navy-100 pb-5">
           <div className="flex items-start justify-between gap-4">
   <div>
@@ -232,8 +232,8 @@ export function CoursesCatalog() {
           </div>
 
           <div className="space-y-6">
-            <section className="rounded-[24px] border border-navy-100 bg-slate-50/80 p-5">
-              <h2 className="text-xl font-bold text-black">Levels</h2>
+            <section className="rounded-lg border border-navy-100 bg-slate-50/80 p-5">
+              <h2 className="text-xl font-bold text-navy">Levels</h2>
               <div className="mt-5 space-y-3">
                 {levelOptions.map((level) => (
                   <CheckboxRow
@@ -263,7 +263,7 @@ export function CoursesCatalog() {
 
         <div>
           <form
-            className="flex flex-col gap-3 rounded-[24px] border border-navy-100 bg-white p-4 shadow-soft sm:flex-row sm:items-center"
+            className="flex flex-col gap-3 rounded-lg border border-navy-100 bg-white p-4 shadow-soft sm:flex-row sm:items-center"
             onSubmit={(event) => event.preventDefault()}
           >
             <input
@@ -271,22 +271,22 @@ export function CoursesCatalog() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search courses"
-              className="h-12 min-w-0 flex-1 rounded-xl border border-navy-100 bg-slate-50 px-4 text-lg outline-none transition focus:border-brand focus:bg-white"
+              className="h-12 min-w-0 flex-1 rounded-xl border border-navy-100 bg-slate-50 px-4 text-base outline-none transition focus:border-brand focus:bg-white"
             />
             <button
               type="submit"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-brand px-5 text-base font-bold text-white transition hover:bg-brand-600"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-brand px-5 text-base font-bold text-white transition hover:bg-brand-600"
             >
               <Search className="h-5 w-5" />
               Search
             </button>
           </form>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-navy-100 bg-navy-50/70 px-4 py-4 shadow-sm">
-            <p className="text-2xl font-bold text-black">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-navy-100 bg-navy-50/70 px-4 py-4 shadow-sm">
+            <p className="text-2xl font-bold text-navy">
               {filteredCourses.length.toLocaleString()} results
             </p>
-            <div className="flex items-center gap-3 text-lg text-black">
+            <div className="flex items-center gap-3 text-lg text-navy">
               <span>Sort by:</span>
               <select
                 value={sortBy}
@@ -302,7 +302,7 @@ export function CoursesCatalog() {
           </div>
 
           {filteredCourses.length === 0 ? (
-            <div className="mt-10 rounded-[24px] border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
+            <div className="mt-10 rounded-lg border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
               No courses match the current filters. Try broadening your search or clearing the selections.
             </div>
           ) : (

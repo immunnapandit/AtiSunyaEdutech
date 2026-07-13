@@ -1,27 +1,20 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 
-const jakarta = Plus_Jakarta_Sans({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-jakarta",
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atisunyaedutech.com"),
   title: {
-    default: "Atisunya Edutech — Learn. Build. Transform.",
+    default: "Atisunya Edutech - Learn. Build. Transform.",
     template: "%s | Atisunya Edutech",
   },
   description:
@@ -35,7 +28,7 @@ export const metadata: Metadata = {
     "career mentorship",
   ],
   openGraph: {
-    title: "Atisunya Edutech — Learn. Build. Transform.",
+    title: "Atisunya Edutech - Learn. Build. Transform.",
     description:
       "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
     url: "https://atisunyaedutech.com",
@@ -44,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atisunya Edutech — Learn. Build. Transform.",
+    title: "Atisunya Edutech - Learn. Build. Transform.",
     description:
       "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
   },
@@ -56,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
+    <html lang="en" className={poppins.variable}>
       <body>
         <Navbar />
         <main>{children}</main>

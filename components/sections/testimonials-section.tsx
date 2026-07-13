@@ -47,7 +47,7 @@ export function TestimonialsSection() {
       <Container className="relative">
         <div className="text-center">
           <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Client Feedback</p>
-          <h2 className="mt-3 text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="mt-3 text-[2rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
             What <span className="text-royal-700 underline decoration-signal underline-offset-8">Teams Say</span>
           </h2>
         </div>
@@ -68,7 +68,7 @@ export function TestimonialsSection() {
                 <div className={`flex items-center gap-4 ${item.tone} p-5`}>
                   <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
                   <div>
-                    <h3 className="text-xl font-extrabold text-navy">{item.name}</h3>
+                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
                     <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export function TestimonialsSection() {
                 <div className={`flex items-center gap-4 ${item.tone} p-5`}>
                   <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
                   <div>
-                    <h3 className="text-xl font-extrabold text-navy">{item.name}</h3>
+                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
                     <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
                   </div>
                 </div>

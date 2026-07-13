@@ -41,7 +41,7 @@ export function ContactForm() {
       <div className="absolute inset-0 -z-10 rounded-[22px] bg-[radial-gradient(circle_at_top_right,rgba(4,102,200,0.13),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(238,243,250,0.9))]" />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-2xl font-extrabold text-navy md:text-3xl">Get in Touch</h2>
+          <h2 className="text-2xl font-bold text-navy md:text-3xl">Get in Touch</h2>
           <p className="mt-2 text-sm leading-6 text-navy-400 md:text-base">
             Share your enquiry. We respect your time and never spam.
           </p>

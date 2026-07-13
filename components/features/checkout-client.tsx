@@ -189,10 +189,10 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
   }
 
   return (
-    <div className="bg-mist-50 pt-36 pb-20">
+    <div className="bg-mist-50 pt-site-header-loose pb-20">
       <form onSubmit={handleSubmit}>
         <Container className="grid grid-cols-1 gap-6 xl:grid-cols-[1.55fr_0.85fr]">
-          <div className="rounded-[32px] border border-navy-100 bg-white p-8 shadow-soft">
+          <div className="rounded-lg border border-navy-100 bg-white p-8 shadow-soft">
             <div className="flex items-center gap-3 text-sm font-semibold text-royal-700">
               <ShieldCheck className="h-4 w-4" />
               <span>Secure checkout</span>
@@ -205,7 +205,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
               </p>
             </div>
 
-            <section className="mt-10 rounded-[28px] border border-navy-100 bg-mist-50 p-6">
+            <section className="mt-10 rounded-lg border border-navy-100 bg-mist-50 p-6">
               <h2 className="text-xl font-semibold text-navy">Billing Details</h2>
               <div className="mt-8 grid gap-6 md:grid-cols-2">
                 <div>
@@ -333,7 +333,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
           </div>
 
           <div className="space-y-6 lg:sticky lg:top-28">
-            <div className="rounded-[32px] border border-navy-100 bg-white p-8 shadow-soft">
+            <div className="rounded-lg border border-navy-100 bg-white p-8 shadow-soft">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.24em] text-royal-700">Order summary</p>
@@ -344,34 +344,34 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
                 </span>
               </div>
               <div className="mt-8 space-y-6">
-                <div className="rounded-[24px] border border-navy-100 bg-white p-5">
+                <div className="rounded-lg border border-navy-100 bg-white p-5">
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <p className="text-sm font-semibold text-navy">{title}</p>
                       <p className="mt-1 text-sm text-navy-400">1 seat</p>
                     </div>
-                    <p className="text-sm font-semibold text-navy">${price.toFixed(2)}</p>
+                    <p className="text-sm font-semibold text-navy">INR {price.toLocaleString("en-IN")}</p>
                   </div>
                 </div>
 
-                <div className="rounded-[24px] border border-navy-100 bg-mist-50 p-5 text-sm text-navy-400">
+                <div className="rounded-lg border border-navy-100 bg-mist-50 p-5 text-sm text-navy-400">
                   <div className="flex items-center justify-between">
                     <span>Sub Total</span>
-                    <span className="text-navy">${price.toFixed(2)}</span>
+                    <span className="text-navy">INR {price.toLocaleString("en-IN")}</span>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-navy-500">Shipping</span>
+                    <span className="text-navy-500">Delivery</span>
                     <span className="text-navy">Free</span>
                   </div>
                   <div className="mt-4 border-t border-navy-100 pt-4 text-base font-semibold text-navy">
                     <div className="flex items-center justify-between">
                       <span>Total</span>
-                      <span>${price.toFixed(2)}</span>
+                      <span>INR {price.toLocaleString("en-IN")}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-[24px] border border-navy-100 bg-mist-50 p-5">
+                <div className="rounded-lg border border-navy-100 bg-mist-50 p-5">
                   <h3 className="text-sm font-semibold text-navy">Payment method</h3>
                   <div className="mt-4 space-y-3">
                     {[

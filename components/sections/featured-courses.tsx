@@ -45,7 +45,7 @@ export function FeaturedCourses() {
     <section className="bg-white py-16 md:py-20">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="text-[2.1rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
             Microsoft Training Programs
           </h2>
         </div>
@@ -93,7 +93,7 @@ export function FeaturedCourses() {
                   <span className="text-sm font-extrabold text-navy">{course.instructor}</span>
                 </div>
 
-                <h3 className="mt-4 min-h-[3.25rem] text-lg font-extrabold leading-snug text-navy transition-colors group-hover:text-royal-700">
+                <h3 className="mt-4 min-h-[3.25rem] text-lg font-bold leading-snug text-navy transition-colors group-hover:text-royal-700">
                   {course.title}
                 </h3>
               </div>

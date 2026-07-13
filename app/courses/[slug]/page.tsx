@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Star, Clock, Users, BarChart3, CheckCircle2, PlayCircle } from "lucide-react";
 import { Container, Badge } from "@/components/ui/primitives";
@@ -44,14 +44,14 @@ export default async function CourseDetailsPage({
   if (!course) notFound();
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-site-header-loose pb-24">
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <Badge tone="royal">{course.category}</Badge>
             <Badge tone="cyan">{course.difficulty}</Badge>
           </div>
-          <h1 className="mt-4 text-display-md md:text-display-lg font-extrabold text-navy text-balance">
+          <h1 className="mt-4 heading-hero text-navy">
             {course.title}
           </h1>
           <p className="mt-4 max-w-xl text-lg text-navy-400">{course.description}</p>
@@ -101,12 +101,12 @@ export default async function CourseDetailsPage({
           </div>
         </div>
 
-        <aside className="h-fit rounded-[24px] border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
+        <aside className="h-fit rounded-lg border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-navy">${course.price}</span>
+            <span className="text-3xl font-bold text-navy">INR {course.price.toLocaleString("en-IN")}</span>
             {course.originalPrice && (
               <span className="text-base text-navy-400 line-through">
-                ${course.originalPrice}
+                INR {course.originalPrice.toLocaleString("en-IN")}
               </span>
             )}
           </div>

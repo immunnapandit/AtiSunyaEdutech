@@ -25,7 +25,7 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
       className="h-full"
     >
       <div className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-[24px] border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md",
+        "group relative flex h-full flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md",
         course.featured ? "border-brand/20 ring-1 ring-brand/5" : "border-navy-100"
       )}>
         {course.featured && (
@@ -34,7 +34,7 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
           </div>
         )}
         <Link href={`/courses/${course.slug}`} className="block">
-  <div className="relative h-56 overflow-hidden rounded-t-[24px]">
+  <div className="relative h-56 overflow-hidden rounded-t-lg">
 
   <Image
   src={course.image}
@@ -92,7 +92,7 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] border border-navy-100 bg-slate-50 p-3 text-sm text-navy-500 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-navy-100 bg-slate-50 p-3 text-sm text-navy-500 shadow-sm">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-royal-50 text-[11px] font-semibold text-royal-700">
                 {course.instructorAvatar}
@@ -111,9 +111,9 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs text-navy-500">Starting at</p>
-              <p className="text-lg font-bold text-navy">₹{course.price.toLocaleString("en-IN")}</p>
+              <p className="text-lg font-bold text-navy">INR {course.price.toLocaleString("en-IN")}</p>
               {course.originalPrice && (
-                <p className="text-[11px] text-navy-400 line-through">₹{course.originalPrice?.toLocaleString("en-IN")}</p>
+                <p className="text-[11px] text-navy-400 line-through">INR {course.originalPrice?.toLocaleString("en-IN")}</p>
               )}
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2">
