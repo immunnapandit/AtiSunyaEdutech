@@ -12,7 +12,6 @@ import {
   Mail,
   Menu,
   Search,
-  ShoppingCart,
   UserRound,
   X,
   Youtube,
@@ -21,7 +20,7 @@ import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Home", href: "/", hasDropdown: true },
+  { label: "Home", href: "/", hasDropdown:  false},
   { label: "About", href: "/about" },
   {
     label: "Training and Courses",
@@ -40,7 +39,7 @@ const navLinks = [
       },
     ],
   },
-  { label: "Pages", href: "/faq", hasDropdown: true },
+  //{ label: "Pages", href: "/faq", hasDropdown: true },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -189,16 +188,6 @@ export function Navbar() {
           >
             <Search className="h-6 w-6" />
           </button>
-          <Link
-            href="/courses"
-            aria-label="Cart"
-            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
-          >
-            <ShoppingCart className="h-6 w-6" />
-            <span className="absolute -right-1 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[11px] font-bold text-white">
-              4
-            </span>
-          </Link>
           <LinkButton
             href="/signup"
             size="md"
@@ -263,7 +252,7 @@ export function Navbar() {
                   <span>Email Address: info@atisunya.co</span>
                 </Link>
               </div>
-              <div className="mt-4 grid grid-cols-[1fr_1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
+              <div className="mt-4 grid grid-cols-[1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
                 <button
                   type="button"
                   aria-label="Search"
@@ -271,14 +260,6 @@ export function Navbar() {
                 >
                   <Search className="h-5 w-5" />
                 </button>
-                <Link
-                  href="/courses"
-                  aria-label="Cart"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                </Link>
                 <LinkButton
                   href="/signup"
                   size="md"

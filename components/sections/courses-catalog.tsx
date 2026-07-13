@@ -109,16 +109,14 @@ export function CoursesCatalog() {
 
   const levelOptions: Difficulty[] = ["Beginner", "Intermediate", "Advanced"];
 
-  const filteredCourses = useMemo<Course[]>(() => {
-    return filterCourses(courses, {
-      search,
-      selectedProducts,
-      selectedRoles,
-      selectedLevels,
-      selectedSubjects,
-      sortBy,
-    });
-  }, [search, selectedProducts, selectedRoles, selectedLevels, selectedSubjects, sortBy]);
+  const filteredCourses = filterCourses(courses, {
+    search,
+    selectedProducts,
+    selectedRoles,
+    selectedLevels,
+    selectedSubjects,
+    sortBy,
+  }) as Course[];
 
   const toggleValue = (
     value: string,
@@ -187,29 +185,30 @@ export function CoursesCatalog() {
    <section className="mt-10 grid w-full max-w-full gap-8 px-4 py-4 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8 xl:px-10">
         <aside className="space-y-6 rounded-[32px] border border-navy-100 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:self-start">
           <div className="flex flex-col gap-3 border-b border-navy-100 pb-5">
-          <div className="flex items-start justify-between gap-4">
-  <div>
-    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">
-      FILTERS
-    </p>
+      <div>
+  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">
+    FILTERS
+  </p>
 
-    <h2 className="mt-2 text-2xl font-bold text-navy">
-      Explore Courses
-    </h2>
+  <h2 className="mt-2 text-2xl font-bold text-navy">
+    Explore Courses
+  </h2>
 
-    <p className="mt-2 max-w-[190px] text-sm leading-6 text-navy-500">
-      Filter by product, role, level and subject.
-    </p>
+  <p className="mt-2 text-sm leading-6 text-navy-500">
+    Filter by product, role, level and subject.
+  </p>
+
+  <div className="mt-5 flex w-full">
+  
+    <button
+      type="button"
+      onClick={clearFilters}
+      className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-semibold text-brand transition hover:bg-brand/10"
+    >
+      <RotateCcw className="h-4 w-4" />
+      Clear Filters
+    </button>
   </div>
-
-  <button
-    type="button"
-    onClick={clearFilters}
-    className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-3 py-2 text-sm font-semibold text-brand transition hover:bg-brand/10"
-  >
-    <RotateCcw className="h-4 w-4" />
-    Reset
-  </button>
 </div>
           </div>
 
