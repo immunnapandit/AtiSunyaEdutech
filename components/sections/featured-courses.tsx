@@ -3,8 +3,9 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { MessageCircleMore, Star } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
+import { LinkButton } from "@/components/ui/button";
 import { courses } from "@/data/courses";
 import { cn } from "@/lib/utils";
 
@@ -70,22 +71,23 @@ export function FeaturedCourses() {
 
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {featured.map((course) => (
-            <Link
+            <div
               key={course.slug}
-              href={`/courses/${course.slug}`}
-              className="group overflow-hidden rounded-lg border border-navy-100 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-royal/30 hover:shadow-lifted"
+              className="group flex h-full flex-col overflow-hidden rounded-lg border border-navy-100 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-royal/30 hover:shadow-lifted"
             >
-              <div className="relative h-48 overflow-hidden bg-mist-100">
-                <Image
-                  src={courseImages[course.slug] ?? courseImages["product-design-systems"]}
-                  alt={course.title}
-                  fill
-                  sizes="(min-width: 1280px) 31vw, (min-width: 768px) 45vw, 92vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <Link href={`/courses/${course.slug}`} className="block">
+                <div className="relative h-48 overflow-hidden bg-mist-100">
+                  <Image
+                    src={courseImages[course.slug] ?? courseImages["product-design-systems"]}
+                    alt={course.title}
+                    fill
+                    sizes="(min-width: 1280px) 31vw, (min-width: 768px) 45vw, 92vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              </Link>
 
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center gap-3">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-royal-50 text-xs font-extrabold text-royal-700 shadow-soft">
                     {course.instructorAvatar}
@@ -93,22 +95,44 @@ export function FeaturedCourses() {
                   <span className="text-sm font-extrabold text-navy">{course.instructor}</span>
                 </div>
 
-                <h3 className="mt-4 min-h-[3.25rem] text-lg font-extrabold leading-snug text-navy transition-colors group-hover:text-royal-700">
-                  {course.title}
-                </h3>
+                <Link href={`/courses/${course.slug}`} className="mt-4 block">
+                  <h3 className="min-h-[3.25rem] text-lg font-extrabold leading-snug text-navy transition-colors group-hover:text-royal-700">
+                    {course.title}
+                  </h3>
+                </Link>
               </div>
 
-              <div className="flex items-center justify-between border-t border-navy-100 px-5 py-4">
-                <span className="flex items-center gap-1.5 text-base font-extrabold text-signal">
-                  <Star className="h-5 w-5 fill-current" />
-                  {course.rating}
-                  <span className="text-navy-400">({course.reviewCount})</span>
-                </span>
-                <span className="text-base font-bold text-navy-400">
-                  Program Fee: <strong className="text-xl text-navy">${course.price}.00</strong>
-                </span>
+              <div className="border-t border-navy-100 px-5 py-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="flex items-center gap-1.5 text-base font-extrabold text-signal">
+                    <Star className="h-5 w-5 fill-current" />
+                    {course.rating}
+                    <span className="text-navy-400">({course.reviewCount})</span>
+                  </span>
+                  <span className="text-base font-bold text-navy-400">
+                    Program Fee:{" "}
+                    <strong className="text-xl text-navy">
+                      Rs. {course.price.toLocaleString("en-IN")}.00
+                    </strong>
+                  </span>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center justify-end gap-2">
+                  <LinkButton
+                    href="/contact"
+                    variant="outline"
+                    size="sm"
+                    className="!px-3 !py-2 text-xs"
+                  >
+                    <MessageCircleMore className="h-3.5 w-3.5" />
+                    Enquiry now
+                  </LinkButton>
+                  <LinkButton href={`/courses/${course.slug}`} size="sm" className="!px-3 !py-2 text-xs">
+                    Enroll now
+                  </LinkButton>
+                </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </Container>

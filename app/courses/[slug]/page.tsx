@@ -181,12 +181,11 @@ export default async function CourseDetailsPage({
         <aside className="h-fit rounded-[24px] border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold text-navy">
-              ₹{course.price.toLocaleString("en-IN")}
+              Rs. {course.price.toLocaleString("en-IN")}
             </span>
-
             {course.originalPrice && (
               <span className="text-base text-navy-400 line-through">
-                ₹{course.originalPrice.toLocaleString("en-IN")}
+                Rs. {course.originalPrice.toLocaleString("en-IN")}
               </span>
             )}
           </div>

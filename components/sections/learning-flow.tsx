@@ -1,12 +1,23 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useInView, useReducedMotion } from "framer-motion";
 import { BookOpenCheck, ChevronRight, GraduationCap, MonitorPlay, ShieldCheck, Trophy, UserPlus } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 
 const numberCards = [
-  { icon: GraduationCap, value: "1200+", label: "Professionals trained" },
-  { icon: ShieldCheck, value: "320+", label: "Microsoft modules" },
-  { icon: Trophy, value: "1340+", label: "Corporate batches" },
+  { icon: GraduationCap, value: 1200, suffix: "+", label: "Professionals trained" },
+  { icon: ShieldCheck, value: 320, suffix: "+", label: "Microsoft modules" },
+  { icon: Trophy, value: 1340, suffix: "+", label: "Corporate batches" },
 ];
+
+const highlightStat = {
+  value: 2400,
+  suffix: "+",
+  label: "Corporate batches",
+  compact: true,
+};
 
 const workSteps = [
   { icon: UserPlus, title: "Sign up", description: "Share your team role, Microsoft stack, and training goals." },
@@ -21,6 +32,76 @@ function SectionKicker({ children }: { children: string }) {
       <span>{children}</span>
       <span className="h-px w-10 bg-royal-700" />
     </div>
+  );
+}
+
+function formatCount(value: number, options: { suffix?: string; compact?: boolean }) {
+  if (options.compact) {
+    const compactValue = value / 1000;
+    const decimals = compactValue >= 1 ? 1 : 0;
+
+    return `${compactValue.toLocaleString("en-IN", {
+      maximumFractionDigits: decimals,
+      minimumFractionDigits: decimals,
+    })}k${options.suffix ?? ""}`;
+  }
+
+  return `${Math.round(value).toLocaleString("en-IN", {
+    useGrouping: false,
+  })}${options.suffix ?? ""}`;
+}
+
+function CountUpNumber({
+  value,
+  suffix,
+  compact,
+  className,
+}: {
+  value: number;
+  suffix?: string;
+  compact?: boolean;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { amount: 0.7 });
+  const prefersReducedMotion = useReducedMotion();
+  const [currentValue, setCurrentValue] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setCurrentValue(value);
+      return;
+    }
+
+    if (!isInView) {
+      setCurrentValue(0);
+      return;
+    }
+
+    let frameId = 0;
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setCurrentValue(value * easedProgress);
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [isInView, prefersReducedMotion, value]);
+
+  return (
+    <span ref={ref} className={className}>
+      {formatCount(currentValue, { suffix, compact })}
+    </span>
   );
 }
 
@@ -43,8 +124,14 @@ export function StrengthNumbers() {
           </p>
 
           <div className="mt-9 inline-flex items-center gap-4 rounded-md bg-signal px-6 py-4 text-navy shadow-soft">
-            <strong className="text-3xl font-extrabold sm:text-4xl">2.4k+</strong>
-            <span className="max-w-[140px] text-base font-extrabold leading-tight">Corporate batches</span>
+            <strong className="text-3xl font-extrabold sm:text-4xl">
+              <CountUpNumber
+                value={highlightStat.value}
+                suffix={highlightStat.suffix}
+                compact={highlightStat.compact}
+              />
+            </strong>
+            <span className="max-w-[140px] text-base font-extrabold leading-tight">{highlightStat.label}</span>
           </div>
         </div>
 
@@ -55,7 +142,9 @@ export function StrengthNumbers() {
                 <item.icon className="h-8 w-8" strokeWidth={1.8} />
               </span>
               <span>
-                <strong className="block text-2xl font-extrabold text-navy">{item.value}</strong>
+                <strong className="block text-2xl font-extrabold text-navy">
+                  <CountUpNumber value={item.value} suffix={item.suffix} />
+                </strong>
                 <span className="mt-0.5 block text-sm font-semibold text-navy-400">{item.label}</span>
               </span>
             </div>
