@@ -109,16 +109,14 @@ export function CoursesCatalog() {
 
   const levelOptions: Difficulty[] = ["Beginner", "Intermediate", "Advanced"];
 
-  const filteredCourses = useMemo<Course[]>(() => {
-    return filterCourses(courses, {
-      search,
-      selectedProducts,
-      selectedRoles,
-      selectedLevels,
-      selectedSubjects,
-      sortBy,
-    });
-  }, [search, selectedProducts, selectedRoles, selectedLevels, selectedSubjects, sortBy]);
+  const filteredCourses = filterCourses(courses, {
+    search,
+    selectedProducts,
+    selectedRoles,
+    selectedLevels,
+    selectedSubjects,
+    sortBy,
+  }) as Course[];
 
   const toggleValue = (
     value: string,
