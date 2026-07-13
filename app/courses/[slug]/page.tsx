@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Star, Clock, Users, BarChart3, CheckCircle2, PlayCircle } from "lucide-react";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
 import { courses } from "@/data/courses";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
+import {
+  Star,
+  Clock,
+  Users,
+  BarChart3,
+  CheckCircle2,
+  GraduationCap,
+  FolderOpen,
+  Globe,
+  CalendarDays,
+} from "lucide-react";
 
 export function generateStaticParams() {
   return courses.map((c) => ({ slug: c.slug }));
@@ -44,7 +54,11 @@ export default async function CourseDetailsPage({
   if (!course) notFound();
 
   return (
+<<<<<<< HEAD
     <div className="pt-site-header-loose pb-24">
+=======
+    <div className="pt-48 pb-24 md:pt-56">
+>>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -72,24 +86,92 @@ export default async function CourseDetailsPage({
             </span>
           </div>
 
-          <div
-            className={cn(
-              "relative mt-8 flex h-64 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br",
-              course.thumbnailGradient
-            )}
-          >
-            <button className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-navy shadow-lifted transition-transform hover:scale-105">
-              <PlayCircle className="h-8 w-8" />
-            </button>
+          <div className="relative mt-8 h-[380px] overflow-hidden rounded-2xl shadow-lg">
+            <Image
+              src={course.image}
+              alt={course.title}
+              fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
+              className="object-cover object-right"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
           </div>
 
-          <div className="mt-12">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <GraduationCap className="h-6 w-6 text-royal-600" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Instructor</p>
+                <p className="font-semibold text-navy">{course.instructor}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <FolderOpen className="h-6 w-6 text-royal-600" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Category</p>
+                <p className="font-semibold text-navy">{course.category}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <Star className="h-6 w-6 fill-amber-400 text-amber-400" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Rating</p>
+                <p className="font-semibold text-navy">
+                  {course.rating} ({course.reviewCount})
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <Users className="h-6 w-6 text-royal-600" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Students</p>
+                <p className="font-semibold text-navy">
+                  {course.studentsCount.toLocaleString("en-IN")}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <Globe className="h-6 w-6 text-royal-600" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Language</p>
+                <p className="font-semibold text-navy">English</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-royal-50">
+                <CalendarDays className="h-6 w-6 text-royal-600" />
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Updated</p>
+                <p className="font-semibold text-navy">July 2026</p>
+              </div>
+            </div>
+          </div>
+
+          <section className="mt-12 w-full text-left">
             <h2 className="text-xl font-bold text-navy">What you&apos;ll cover</h2>
+
             <div className="mt-5 space-y-3">
               {curriculum.map((item, i) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 rounded-xl border border-navy-100 p-4"
+                  className="flex min-h-[80px] w-full items-center gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
                 >
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
                     {i + 1}
@@ -98,18 +180,28 @@ export default async function CourseDetailsPage({
                 </div>
               ))}
             </div>
-          </div>
+          </section>
         </div>
 
         <aside className="h-fit rounded-lg border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
+<<<<<<< HEAD
             <span className="text-3xl font-bold text-navy">INR {course.price.toLocaleString("en-IN")}</span>
             {course.originalPrice && (
               <span className="text-base text-navy-400 line-through">
                 INR {course.originalPrice.toLocaleString("en-IN")}
+=======
+            <span className="text-3xl font-bold text-navy">
+              Rs. {course.price.toLocaleString("en-IN")}
+            </span>
+            {course.originalPrice && (
+              <span className="text-base text-navy-400 line-through">
+                Rs. {course.originalPrice.toLocaleString("en-IN")}
+>>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
               </span>
             )}
           </div>
+
           <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col">
             <LinkButton href="/contact" variant="outline" size="lg" className="w-full justify-center">
               Enquiry now

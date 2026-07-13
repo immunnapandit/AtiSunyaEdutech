@@ -1,47 +1,39 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
+
+const aboutImage = "/images/Edutech-img.jpg";
 
 export function AboutSection() {
   return (
     <section className="relative overflow-hidden bg-white py-20">
       <div className="mx-auto max-w-[1300px] px-5 sm:px-8 md:px-12 lg:px-16">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-          <Reveal className="relative flex items-center justify-center">
-            <div className="relative w-full max-w-[560px]">
-              <div className="absolute -left-8 -top-10 z-10 h-[420px] w-[420px] overflow-hidden rounded-full border-8 border-white bg-gray-100 shadow-lg sm:-left-14 sm:-top-16 lg:h-[520px] lg:w-[520px]">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          <Reveal className="relative">
+            <div className="relative mx-auto w-full max-w-[560px] overflow-hidden rounded-2xl bg-mist-100 shadow-lifted ring-1 ring-navy-100">
+              <div className="aspect-[4/5]">
                 <img
-                  src="/images/about1"
-                  alt="Corporate Microsoft training session"
-                  className="h-full w-full object-cover"
+                  src={aboutImage}
+                  alt="Professionals working during an Atisunya Edutech training session"
+                  className="h-full w-full object-cover object-center"
                 />
-              </div>
-
-              <div className="relative ml-auto z-20 h-[360px] w-[320px] overflow-hidden rounded-[28px] border-8 border-white bg-gray-100 shadow-xl sm:h-[420px] sm:w-[360px] lg:h-[480px] lg:w-[420px]">
-                <img
-                  src="/images/about2"
-                  alt="Microsoft training instructor"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-
-              <div className="absolute left-6 bottom-6 z-30 hidden min-w-[160px] rounded-xl bg-white p-3 shadow-md sm:block">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white">🎓</span>
-                  <div>
-                    <p className="text-sm font-semibold">Microsoft</p>
-                    <p className="text-xs text-slate-500">Training Advisor</p>
-                  </div>
-                </div>
               </div>
             </div>
           </Reveal>
 
           <Reveal className="pt-2" delay={0.08}>
+<<<<<<< HEAD
             <p className="text-sm font-extrabold text-brand-600">ABOUT ATISUNYA EDUTECH</p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-[#17162d] sm:text-4xl lg:text-5xl">
+=======
+            <p className="text-sm font-extrabold text-brand-600">
+              ABOUT ATISUNYA EDUTECH
+            </p>
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight text-[#17162d] sm:text-4xl lg:text-5xl">
+>>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
               Microsoft training built for real business teams.
             </h2>
             <p className="mt-6 text-base leading-7 text-[#5f6278]">
@@ -54,7 +46,7 @@ export function AboutSection() {
             <Stagger className="mt-8 grid gap-4 sm:grid-cols-2" delay={0.12}>
               <StaggerItem className="flex items-center gap-4">
                 <div className="rounded-md border border-slate-100 bg-white p-3 shadow-sm">
-                  <Check className="text-brand h-5 w-5" />
+                  <Check className="h-5 w-5 text-brand" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">Dynamics 365 Training</p>
@@ -63,7 +55,7 @@ export function AboutSection() {
 
               <StaggerItem className="flex items-center gap-4">
                 <div className="rounded-md border border-slate-100 bg-white p-3 shadow-sm">
-                  <Check className="text-brand h-5 w-5" />
+                  <Check className="h-5 w-5 text-brand" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">Azure Cloud Workshops</p>
@@ -72,19 +64,23 @@ export function AboutSection() {
 
               <StaggerItem className="flex items-center gap-4">
                 <div className="rounded-md border border-slate-100 bg-white p-3 shadow-sm">
-                  <Check className="text-brand h-5 w-5" />
+                  <Check className="h-5 w-5 text-brand" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold">Power Platform Programs</p>
+                  <p className="text-sm font-semibold">
+                    Power Platform Programs
+                  </p>
                 </div>
               </StaggerItem>
 
               <StaggerItem className="flex items-center gap-4">
                 <div className="rounded-md border border-slate-100 bg-white p-3 shadow-sm">
-                  <Check className="text-brand h-5 w-5" />
+                  <Check className="h-5 w-5 text-brand" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold">Corporate Team Enablement</p>
+                  <p className="text-sm font-semibold">
+                    Corporate Team Enablement
+                  </p>
                 </div>
               </StaggerItem>
             </Stagger>
@@ -103,4 +99,3 @@ export function AboutSection() {
     </section>
   );
 }
-

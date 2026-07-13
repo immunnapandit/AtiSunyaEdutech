@@ -83,10 +83,10 @@ export default function AboutPage() {
     <div className="overflow-hidden pt-28 sm:pt-32">
       <section className="relative isolate">
         <div className="absolute inset-0 -z-20 bg-[#f8faff]" />
-        <div className="absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[linear-gradient(180deg,rgba(76,60,255,0.72),rgba(76,60,255,0.72)),url('/images/contactbanner.png')] bg-cover bg-center bg-no-repeat" />
+        <div className="absolute inset-x-0 top-0 -z-10 h-[24rem] bg-[linear-gradient(180deg,rgba(76,60,255,0.72),rgba(76,60,255,0.72)),url('/images/contactbanner.png')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(31,41,55,0.35),rgba(31,41,55,0.45))]" />
 
-        <Container className="relative flex min-h-[28rem] items-center justify-center py-16 text-center text-white">
+        <Container className="relative flex min-h-[24rem] items-center justify-center py-14 text-center text-white">
           <div>
             <h1 className="text-display-md font-extrabold text-balance sm:text-display-lg lg:text-display-xl">
               About
@@ -154,7 +154,7 @@ export default function AboutPage() {
                     <GraduationCap className="mx-auto h-10 w-10 text-brand" />
                     <p className="mt-3 text-lg font-bold text-navy">
                       Experience Advisor
-                    </p>
+                    </p> 
                   </div>
                 </div>
                 <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
@@ -171,7 +171,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <Eyebrow>About {SITE.name}</Eyebrow>
+              <Eyebrow>About  {SITE.name}</Eyebrow>
               <h2 className="mt-4 max-w-2xl text-display-md font-extrabold text-navy text-balance sm:text-display-lg">
                 We create industry-focused learning experiences.
               </h2>
@@ -184,7 +184,7 @@ export default function AboutPage() {
                 and building a community where skills turn into real career
                 progress.
               </p>
-
+              
               <div className="mt-10 grid gap-6 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">

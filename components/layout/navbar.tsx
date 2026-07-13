@@ -12,7 +12,6 @@ import {
   Mail,
   Menu,
   Search,
-  ShoppingCart,
   UserRound,
   X,
   Youtube,
@@ -21,7 +20,7 @@ import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Home", href: "/", hasDropdown: true },
+  { label: "Home", href: "/", hasDropdown:  false},
   { label: "About", href: "/about" },
   {
     label: "Training and Courses",
@@ -40,7 +39,7 @@ const navLinks = [
       },
     ],
   },
-  { label: "Pages", href: "/faq", hasDropdown: true },
+  //{ label: "Pages", href: "/faq", hasDropdown: true },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -177,6 +176,7 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 xl:flex">
+<<<<<<< HEAD
           <Link
             href="/courses"
             aria-label="Search courses"
@@ -191,6 +191,15 @@ export function Navbar() {
           >
             <ShoppingCart className="h-6 w-6" />
           </Link>
+=======
+          <button
+            type="button"
+            aria-label="Search"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] text-black transition-colors hover:bg-brand hover:text-white"
+          >
+            <Search className="h-6 w-6" />
+          </button>
+>>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
           <LinkButton
             href="/signup"
             size="md"
@@ -255,6 +264,7 @@ export function Navbar() {
                   <span>Email Address: info@atisunya.co</span>
                 </Link>
               </div>
+<<<<<<< HEAD
               <div className="mt-4 grid grid-cols-[1fr_1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
                 <Link
                   href="/courses"
@@ -272,6 +282,16 @@ export function Navbar() {
                 >
                   <ShoppingCart className="h-5 w-5" />
                 </Link>
+=======
+              <div className="mt-4 grid grid-cols-[1fr_auto] items-center gap-3 border-t border-navy-100 pt-4">
+                <button
+                  type="button"
+                  aria-label="Search"
+                  className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
+>>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
                 <LinkButton
                   href="/signup"
                   size="md"
