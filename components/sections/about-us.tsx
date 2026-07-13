@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
@@ -12,17 +13,21 @@ export function AboutSection() {
           <Reveal className="relative flex items-center justify-center">
             <div className="relative w-full max-w-[560px]">
               <div className="absolute -left-8 -top-10 z-10 h-[420px] w-[420px] overflow-hidden rounded-full border-8 border-white bg-gray-100 shadow-lg sm:-left-14 sm:-top-16 lg:h-[520px] lg:w-[520px]">
-                <img
+                <Image
                   src="/images/about1"
                   alt="Corporate Microsoft training session"
+                  fill
+                  sizes="(min-width: 1024px) 520px, 420px"
                   className="h-full w-full object-cover"
                 />
               </div>
 
               <div className="relative ml-auto z-20 h-[360px] w-[320px] overflow-hidden rounded-[28px] border-8 border-white bg-gray-100 shadow-xl sm:h-[420px] sm:w-[360px] lg:h-[480px] lg:w-[420px]">
-                <img
+                <Image
                   src="/images/about2"
                   alt="Microsoft training instructor"
+                  fill
+                  sizes="(min-width: 1024px) 420px, 360px"
                   className="h-full w-full object-cover object-top"
                 />
               </div>
