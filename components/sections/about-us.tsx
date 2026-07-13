@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
