@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
+import { CourseEnrollAction } from "@/components/features/course-enroll-action";
 import { courses } from "@/data/courses";
 import Image from "next/image";
 import {
@@ -194,9 +195,7 @@ export default async function CourseDetailsPage({
             <LinkButton href="/contact" variant="outline" size="lg" className="w-full justify-center">
               Enquiry now
             </LinkButton>
-            <LinkButton href="/signup" size="lg" className="w-full justify-center">
-              Enroll now
-            </LinkButton>
+            <CourseEnrollAction slug={course.slug} title={course.title} />
           </div>
           <p className="mt-3 text-center text-xs text-navy-400">
             14-day money-back guarantee

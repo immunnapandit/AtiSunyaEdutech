@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, CalendarDays, Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { NewsletterForm } from "@/components/features/newsletter-form";
 import { Container } from "@/components/ui/primitives";
 
 const courseLinks = ["Branding design", "UI/UX designing", "Make Elements", "Business", "Graphics design"];
@@ -12,15 +13,7 @@ export function Footer() {
   return (
     <footer className="relative mt-20 border-t border-navy-100 bg-mist-100 text-navy">
       <Container className="pt-16">
-        <form className="rounded-lg bg-white p-6 shadow-soft md:p-8">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr_170px] lg:items-end">
-            <input type="text" placeholder="Your Full Name" aria-label="Your Full Name" className="h-12 w-full border-0 border-b border-navy-100 bg-transparent px-0 text-base font-medium text-navy outline-none placeholder:text-navy-400/60 focus:border-brand" />
-            <input type="email" placeholder="Your Email Address" aria-label="Your Email Address" className="h-12 w-full border-0 border-b border-navy-100 bg-transparent px-0 text-base font-medium text-navy outline-none placeholder:text-navy-400/60 focus:border-brand" />
-            <button type="submit" className="h-12 rounded-md bg-brand px-6 text-base font-extrabold text-white transition-colors hover:bg-brand-600">
-              Subscribe
-            </button>
-          </div>
-        </form>
+        <NewsletterForm variant="footer" />
 
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2 xl:grid-cols-4">
           <div>

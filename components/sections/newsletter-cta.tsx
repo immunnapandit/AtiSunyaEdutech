@@ -1,7 +1,8 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { NewsletterForm } from "@/components/features/newsletter-form";
 import { Container } from "@/components/ui/primitives";
 
 export function NewsletterCta() {
@@ -26,20 +27,7 @@ export function NewsletterCta() {
             New course drops, live cohort openings, and career notes from our
             instructors â€” nothing you&apos;ll want to unsubscribe from.
           </p>
-          <form className="relative mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
-            <input
-              type="email"
-              required
-              placeholder="you@email.com"
-              className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-cyan-400 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-navy transition-transform hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Subscribe <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
+          <NewsletterForm />
         </motion.div>
       </Container>
     </section>
