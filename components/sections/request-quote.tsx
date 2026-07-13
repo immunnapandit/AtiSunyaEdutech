@@ -9,24 +9,28 @@ const contactItems = [
 ];
 
 const inputClass =
-  "h-14 w-full rounded-md border border-navy-100 bg-white px-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand";
+  "h-12 w-full rounded-md border border-navy-100 bg-white px-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand focus:ring-2 focus:ring-brand/10";
 
 export function RequestQuote() {
   return (
-    <section className="relative bg-white py-16 md:py-20">
-      <div className="absolute inset-x-0 bottom-0 top-[190px] bg-cover bg-center" style={{ backgroundImage: "url('/images/contactbanner.png')" }} aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 top-[190px] bg-navy/90" aria-hidden="true" />
+    <section className="relative overflow-hidden bg-navy py-16 md:py-20">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/contactbanner.png')" }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-navy/88" aria-hidden="true" />
 
-      <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">
-        <form className="border-t-[5px] border-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10">
-          <h2 className="text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+      <Container className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)] xl:gap-14">
+        <form className="rounded-lg border border-white/10 border-t-[5px] border-t-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10">
+          <h2 className="text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.5rem] md:text-[2.85rem]">
             Request Corporate Training
           </h2>
-          <p className="mt-3 text-base font-medium text-navy-400">
+          <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-navy-400">
             Tell us which Microsoft services your team wants to learn, and we will suggest the right training plan.
           </p>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2">
             <input className={inputClass} type="text" name="name" placeholder="Full name" aria-label="Full name" />
             <input className={inputClass} type="tel" name="phone" placeholder="Phone Number" aria-label="Phone Number" />
             <input className={inputClass} type="email" name="email" placeholder="Business Email" aria-label="Business Email" />
@@ -34,7 +38,7 @@ export function RequestQuote() {
           </div>
 
           <textarea
-            className="mt-4 min-h-[132px] w-full rounded-md border border-navy-100 bg-white px-4 py-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand"
+            className="mt-4 min-h-[128px] w-full rounded-md border border-navy-100 bg-white px-4 py-4 text-sm font-semibold text-navy outline-none transition-colors placeholder:text-navy-400/60 focus:border-brand focus:ring-2 focus:ring-brand/10"
             name="message"
             placeholder="Tell us about your team size, preferred Microsoft services, and training timeline"
             aria-label="Tell us about your team size, preferred Microsoft services, and training timeline"
@@ -52,11 +56,11 @@ export function RequestQuote() {
           </div>
         </form>
 
-        <div className="space-y-6 py-8 text-white lg:pb-10">
+        <div className="space-y-7 text-white">
           {contactItems.map((item) => (
-            <div key={item.title} className="flex items-center gap-4">
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
-                <item.icon className="h-8 w-8" strokeWidth={1.8} />
+            <div key={item.title} className="flex items-start gap-4">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-brand text-white shadow-glow sm:h-16 sm:w-16">
+                <item.icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.8} />
               </span>
               <span>
                 <strong className="block text-xl font-extrabold">{item.title}</strong>
