@@ -73,13 +73,8 @@ export function AboutTestimonialsSlider({
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">
               Testimonials
             </p>
-<<<<<<< HEAD
-            <h2 className="mt-3 max-w-[520px] text-[2.15rem] font-bold leading-[1.08] text-navy sm:text-[2.8rem]">
-              People&apos;s Say About Our Atisunya Edutech
-=======
             <h2 className="mt-3 text-[1.875rem] font-bold leading-[1.15] tracking-normal text-navy sm:text-[2.5rem] sm:leading-[1.1] lg:text-[3.5rem] lg:leading-[1.05]">
               What learners say about Atisunya Edutech
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
             </h2>
             <p className="mt-4 max-w-xl text-base leading-7 text-navy-400 sm:text-lg">
               Career switchers, product teams, and cloud professionals use our
@@ -144,19 +139,6 @@ export function AboutTestimonialsSlider({
                 data-testimonial-card="true"
                 className="flex min-h-[360px] min-w-[300px] snap-start flex-col rounded-lg border border-navy-100 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lifted sm:min-w-[390px] sm:p-7 lg:min-w-[420px]"
               >
-<<<<<<< HEAD
-                <div className="flex items-start gap-4">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-brand-50 text-base font-extrabold text-brand">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold leading-none text-navy sm:text-3xl">
-                      {testimonial.name}
-                    </h3>
-                    <p className="mt-2 text-base font-semibold text-brand">
-                      {testimonial.company}
-                    </p>
-=======
                 <div className="flex items-start justify-between gap-5">
                   <div className="flex min-w-0 items-center gap-4">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-50 text-sm font-bold text-brand ring-1 ring-brand-100">
@@ -173,7 +155,6 @@ export function AboutTestimonialsSlider({
                         {testimonial.company}
                       </p>
                     </div>
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
                   </div>
                   <Quote className="h-8 w-8 shrink-0 text-brand/20" />
                 </div>

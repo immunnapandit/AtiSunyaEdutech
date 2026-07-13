@@ -111,15 +111,9 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs text-navy-500">Starting at</p>
-<<<<<<< HEAD
-              <p className="text-lg font-bold text-navy">INR {course.price.toLocaleString("en-IN")}</p>
-              {course.originalPrice && (
-                <p className="text-[11px] text-navy-400 line-through">INR {course.originalPrice?.toLocaleString("en-IN")}</p>
-=======
               <p className="text-lg font-bold text-navy">Rs. {course.price.toLocaleString("en-IN")}</p>
               {course.originalPrice && (
                 <p className="text-[11px] text-navy-400 line-through">Rs. {course.originalPrice?.toLocaleString("en-IN")}</p>
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
               )}
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
-//import { apiRequest, formToObject } from "@/lib/api";
+import { apiRequest, formToObject } from "@/lib/api";
  
 const contactItems = [
   { icon: MapPin, title: "Training Office", lines: ["Corporate Microsoft Training", "Online & On-site Delivery"] },

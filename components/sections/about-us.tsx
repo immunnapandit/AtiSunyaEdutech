@@ -25,15 +25,10 @@ export function AboutSection() {
           </Reveal>
 
           <Reveal className="pt-2" delay={0.08}>
-<<<<<<< HEAD
-            <p className="text-sm font-extrabold text-brand-600">ABOUT ATISUNYA EDUTECH</p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-[#17162d] sm:text-4xl lg:text-5xl">
-=======
             <p className="text-sm font-extrabold text-brand-600">
               ABOUT ATISUNYA EDUTECH
             </p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight text-[#17162d] sm:text-4xl lg:text-5xl">
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
               Microsoft training built for real business teams.
             </h2>
             <p className="mt-6 text-base leading-7 text-[#5f6278]">

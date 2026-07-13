@@ -95,26 +95,13 @@ export function FeaturedCourses() {
                   <span className="text-sm font-extrabold text-navy">{course.instructor}</span>
                 </div>
 
-<<<<<<< HEAD
-                <h3 className="mt-4 min-h-[3.25rem] text-lg font-bold leading-snug text-navy transition-colors group-hover:text-royal-700">
-                  {course.title}
-                </h3>
-=======
                 <Link href={`/courses/${course.slug}`} className="mt-4 block">
                   <h3 className="min-h-[3.25rem] text-lg font-extrabold leading-snug text-navy transition-colors group-hover:text-royal-700">
                     {course.title}
                   </h3>
                 </Link>
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
-              </div>
-
-              <div className="border-t border-navy-100 px-5 py-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="flex items-center gap-1.5 text-base font-extrabold text-signal">
-                    <Star className="h-5 w-5 fill-current" />
-                    {course.rating}
-                    <span className="text-navy-400">({course.reviewCount})</span>
-                  </span>
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <span className="text-navy-400">({course.reviewCount})</span>
                   <span className="text-base font-bold text-navy-400">
                     Program Fee:{" "}
                     <strong className="text-xl text-navy">

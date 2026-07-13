@@ -54,11 +54,7 @@ export default async function CourseDetailsPage({
   if (!course) notFound();
 
   return (
-<<<<<<< HEAD
-    <div className="pt-site-header-loose pb-24">
-=======
     <div className="pt-48 pb-24 md:pt-56">
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -185,19 +181,12 @@ export default async function CourseDetailsPage({
 
         <aside className="h-fit rounded-lg border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
-<<<<<<< HEAD
-            <span className="text-3xl font-bold text-navy">INR {course.price.toLocaleString("en-IN")}</span>
-            {course.originalPrice && (
-              <span className="text-base text-navy-400 line-through">
-                INR {course.originalPrice.toLocaleString("en-IN")}
-=======
             <span className="text-3xl font-bold text-navy">
               Rs. {course.price.toLocaleString("en-IN")}
             </span>
             {course.originalPrice && (
               <span className="text-base text-navy-400 line-through">
                 Rs. {course.originalPrice.toLocaleString("en-IN")}
->>>>>>> 2c040922ac51a8f54b8b09477fb802f9bd748103
               </span>
             )}
           </div>
