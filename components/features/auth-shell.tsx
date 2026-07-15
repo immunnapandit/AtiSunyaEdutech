@@ -1,5 +1,5 @@
 ﻿import Link from "next/link";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, ShieldCheck } from "lucide-react";
 import { ReactNode } from "react";
 
 export function AuthShell({
@@ -14,39 +14,45 @@ export function AuthShell({
   footer: ReactNode;
 }) {
   return (
-    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-      <div className="flex flex-col justify-center px-6 py-24 sm:px-12 lg:px-20">
-        <div className="mx-auto w-full max-w-sm">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-navy text-white">
-              <GraduationCap className="h-5 w-5" />
-            </span>
-            <span className="font-display text-lg font-bold text-navy">Atisunya Edutech</span>
-          </Link>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-24">
+      <div className="mx-auto flex max-w-7xl items-center justify-center px-6 py-12">
+        <div className="w-full max-w-[440px] rounded-3xl bg-white p-7 border border-slate-100 shadow-[0_-8px_30px_rgba(15,23,42,0.08),0_20px_45px_rgba(15,23,42,0.12)]">
 
-          <h1 className="mt-10 text-2xl font-bold text-navy">{title}</h1>
-          <p className="mt-2 text-sm text-navy-400">{subtitle}</p>
+          {/* Logo */}
 
-          <div className="mt-8">{children}</div>
+         
 
-          <p className="mt-8 text-center text-sm text-navy-400">{footer}</p>
-        </div>
-      </div>
+          {/* Heading */}
 
-      <div className="relative hidden overflow-hidden bg-navy-gradient lg:block">
-        <div className="absolute -right-24 top-20 h-72 w-72 rounded-full bg-royal/25 blur-3xl" />
-        <div className="absolute -left-16 bottom-10 h-64 w-64 rounded-full bg-cyan/15 blur-3xl" />
-        <div className="relative flex h-full flex-col items-center justify-center px-16 text-center text-white">
-          <p className="text-2xl font-bold text-balance">
-            &quot;The capstone review was more thorough than any code review I&apos;ve
-            had at work.&quot;
+          <h1 className="mt-8 text-center text-4xl font-bold text-navy">
+            {title}
+          </h1>
+
+          <p className="mt-3 text-center text-lg text-navy-400">
+            {subtitle}
           </p>
-          <p className="mt-4 text-sm text-white/50">
-            Daniel Okafor Â· Full-Stack Developer, Hearth Analytics
-          </p>
+
+          {/* Form */}
+
+          <div className="mt-10">
+            {children}
+          </div>
+
+          {/* Footer */}
+
+          <div className="mt-8 text-center text-sm text-navy-400">
+            {footer}
+          </div>
+
+          {/* Bottom */}
+
+          <div className="mt-10 flex items-center justify-center gap-2 text-sm text-navy-400">
+            <ShieldCheck className="h-5 w-5 text-royal-600" />
+            <span>Your data is safe with us.</span>
+          </div>
+
         </div>
       </div>
     </div>
   );
 }
-

@@ -19,11 +19,7 @@ export default function LoginPage() {
         </>
       }
     >
-      <div className="mb-3 flex justify-end">
-        <Link href="/forgot-password" className="text-xs font-semibold text-royal">
-          Forgot password?
-        </Link>
-      </div>
+    
       <AuthForm mode="login" />
     </AuthShell>
   );
