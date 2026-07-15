@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
@@ -61,7 +61,7 @@ export default async function CourseDetailsPage({
             <Badge tone="royal">{course.category}</Badge>
             <Badge tone="cyan">{course.difficulty}</Badge>
           </div>
-          <h1 className="mt-4 text-display-md md:text-display-lg font-extrabold text-navy text-balance">
+          <h1 className="mt-4 heading-hero text-navy">
             {course.title}
           </h1>
           <p className="mt-4 max-w-xl text-lg text-navy-400">{course.description}</p>
@@ -179,7 +179,7 @@ export default async function CourseDetailsPage({
           </section>
         </div>
 
-        <aside className="h-fit rounded-[24px] border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
+        <aside className="h-fit rounded-lg border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold text-navy">
               Rs. {course.price.toLocaleString("en-IN")}

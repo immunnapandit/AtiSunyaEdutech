@@ -4,7 +4,7 @@ import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
-//import { apiRequest, formToObject } from "@/lib/api";
+import { apiRequest, formToObject } from "@/lib/api";
  
 const contactItems = [
   { icon: MapPin, title: "Training Office", lines: ["Corporate Microsoft Training", "Online & On-site Delivery"] },
@@ -51,7 +51,7 @@ export function RequestQuote() {
  
       <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">
         <form className="border-t-[5px] border-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10" onSubmit={onSubmit}>
-          <h2 className="text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="text-[2rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
             Request Corporate Training
           </h2>
           <p className="mt-3 text-base font-medium text-navy-400">

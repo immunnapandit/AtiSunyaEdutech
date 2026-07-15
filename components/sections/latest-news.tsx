@@ -34,8 +34,8 @@ function Meta() {
 function DateBadge({ month, day }: { month: string; day: string }) {
   return (
     <span className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-signal text-navy">
-      <span className="text-sm font-extrabold leading-none">{month}</span>
-      <span className="text-2xl font-extrabold leading-none">{day}</span>
+      <span className="text-sm font-bold leading-none">{month}</span>
+      <span className="text-2xl font-bold leading-none">{day}</span>
     </span>
   );
 }
@@ -45,12 +45,12 @@ export function LatestNews() {
     <section className="bg-white py-16 md:py-20">
       <Container>
         <div className="text-center">
-          <div className="inline-flex items-center gap-3 text-base font-extrabold text-royal-700">
+          <div className="inline-flex items-center gap-3 text-base font-bold text-royal-700">
             <span className="h-px w-12 bg-royal-700" />
             Microsoft Insights
             <span className="h-px w-12 bg-royal-700" />
           </div>
-          <h2 className="mt-4 text-[2rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="mt-4 heading-section text-navy">
             Corporate Training Insights
           </h2>
         </div>
@@ -63,7 +63,7 @@ export function LatestNews() {
                   <DateBadge month={post.month} day={post.day} />
                   <div>
                     <Meta />
-                    <h3 className="mt-3 text-xl font-extrabold leading-snug text-navy">{post.title}</h3>
+                    <h3 className="mt-3 text-xl font-bold leading-snug text-navy">{post.title}</h3>
                   </div>
                 </div>
               </article>
@@ -74,12 +74,12 @@ export function LatestNews() {
             <article key={article.title} className="overflow-hidden rounded-lg bg-white shadow-lifted">
               <div className="relative h-56">
                 <Image src={article.image} alt={article.title} fill sizes="(min-width: 1024px) 30vw, 92vw" className="object-cover" />
-                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-extrabold text-navy">{article.date}</span>
+                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-bold text-navy">{article.date}</span>
               </div>
               <div className="p-6 pt-10">
                 <Meta />
-                <h3 className="mt-5 text-xl font-extrabold leading-snug text-navy">{article.title}</h3>
-                <Link href="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold uppercase text-navy transition-colors hover:text-royal-700">
+                <h3 className="mt-5 text-xl font-bold leading-snug text-navy">{article.title}</h3>
+                <Link href="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase text-navy transition-colors hover:text-royal-700">
                   Read Insight
                   <ChevronRight className="h-4 w-4" />
                 </Link>

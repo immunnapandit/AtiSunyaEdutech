@@ -1,4 +1,4 @@
-﻿import { Compass } from "lucide-react";
+import { Compass } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 
@@ -12,7 +12,7 @@ export default function NotFound() {
         <p className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-royal">
           404
         </p>
-        <h1 className="mt-3 text-display-md font-extrabold text-navy text-balance">
+        <h1 className="mt-3 text-display-md font-bold text-navy text-balance">
           This page took a different learning path.
         </h1>
         <p className="mx-auto mt-4 max-w-md text-navy-400">

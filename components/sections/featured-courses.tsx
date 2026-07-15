@@ -46,7 +46,7 @@ export function FeaturedCourses() {
     <section className="bg-white py-16 md:py-20">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[2.1rem] font-extrabold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <h2 className="text-[2.1rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
             Microsoft Training Programs
           </h2>
         </div>
@@ -100,15 +100,8 @@ export function FeaturedCourses() {
                     {course.title}
                   </h3>
                 </Link>
-              </div>
-
-              <div className="border-t border-navy-100 px-5 py-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <span className="flex items-center gap-1.5 text-base font-extrabold text-signal">
-                    <Star className="h-5 w-5 fill-current" />
-                    {course.rating}
-                    <span className="text-navy-400">({course.reviewCount})</span>
-                  </span>
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <span className="text-navy-400">({course.reviewCount})</span>
                   <span className="text-base font-bold text-navy-400">
                     Program Fee:{" "}
                     <strong className="text-xl text-navy">

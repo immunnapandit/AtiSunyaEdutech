@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: light;
+  --site-header-height: 122px;
 }
 
 @layer base {
@@ -27,7 +28,7 @@
   h4,
   h5,
   h6 {
-    @apply font-display text-navy tracking-tight;
+    @apply font-display text-navy tracking-normal;
   }
 
   ::selection {
@@ -42,6 +43,38 @@
 }
 
 @layer utilities {
+
+  .pt-site-header {
+    padding-top: var(--site-header-height);
+  }
+
+  .pt-site-header-loose {
+    padding-top: calc(var(--site-header-height) + 2rem);
+  }
+
+  .heading-hero {
+    @apply font-display text-display-md font-bold leading-tight text-balance sm:text-display-lg lg:text-display-xl;
+  }
+
+  .heading-section {
+    @apply font-display text-display-sm font-bold leading-tight text-balance sm:text-display-md md:text-display-lg;
+  }
+
+  .heading-card {
+    @apply font-display text-xl font-bold leading-snug text-navy;
+  }
+
+  .surface-card {
+    @apply rounded-lg border border-navy-100 bg-white shadow-soft;
+  }
+
+  .section-band {
+    @apply bg-mist-50;
+  }
+
+  .text-muted {
+    @apply text-navy-400;
+  }
   .container-edge {
     @apply mx-auto w-full max-w-content px-6 md:px-10 lg:px-12;
   }

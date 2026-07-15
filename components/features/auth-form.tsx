@@ -3,12 +3,16 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Chrome, Building2 } from "lucide-react";
 import { apiRequest, formToObject } from "@/lib/api";
+import Image from "next/image";
+
+import Link from "next/link";
 
 type Mode = "login" | "signup" | "forgot-password";
 
 const inputClass =
-  "mt-2 w-full rounded-xl border border-navy-100 px-4 py-3 text-sm focus:border-royal focus:outline-none";
+ "mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 transition-all duration-200 focus:border-royal-500 focus:ring-4 focus:ring-blue-100 focus:outline-none";
 
 export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter();
@@ -62,10 +66,23 @@ export function AuthForm({ mode }: { mode: Mode }) {
   }
 
   return (
-    <form className="space-y-4" onSubmit={onSubmit}>
+    <form className="space-y-5" onSubmit={onSubmit}>
+   
+
+<div className="relative py-2">
+  <div className="absolute inset-0 flex items-center">
+    <div className="w-full border-t border-slate-200"></div>
+  </div>
+
+  <div className="relative flex justify-center">
+    <span className="bg-white px-4 text-sm text-slate-400">
+      OR
+    </span>
+  </div>
+</div>
       {mode === "signup" && (
         <div>
-          <label className="text-sm font-semibold text-navy" htmlFor="name">
+          <label className="text-sm font-medium text-slate-700" htmlFor="name">
             Full name
           </label>
           <input id="name" name="name" type="text" required className={inputClass} />
@@ -73,15 +90,22 @@ export function AuthForm({ mode }: { mode: Mode }) {
       )}
 
       <div>
-        <label className="text-sm font-semibold text-navy" htmlFor="email">
-          Email
+        <label className="text-sm font-medium text-slate-700" htmlFor="email">
+          Email or mobile number
         </label>
-        <input id="email" name="email" type="email" required className={inputClass} />
+      <input
+  id="identifier"
+  name="identifier"
+  type="text"
+  required
+  placeholder="Enter your email or mobile number"
+  className={inputClass}
+/>
       </div>
 
       {mode !== "forgot-password" && (
         <div>
-          <label className="text-sm font-semibold text-navy" htmlFor="password">
+          <label className="text-sm font-medium text-slate-700" htmlFor="password">
             Password
           </label>
           <input
@@ -95,10 +119,34 @@ export function AuthForm({ mode }: { mode: Mode }) {
         </div>
       )}
 
-      {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">{error}</p>}
-      {message && <p className="rounded-xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">{message}</p>}
+      {mode === "login" && (
+  <div className="flex items-center justify-between text-sm">
+    <label className="flex items-center gap-2 text-slate-600">
+    <input
+  type="checkbox"
+  className="h-4 w-4 rounded-md border-slate-300 accent-blue-600 transition focus:ring-2 focus:ring-blue-200"
+/>  
+      Remember me
+    </label>
 
-      <Button type="submit" size="lg" className="w-full justify-center" disabled={loading}>
+    <Link
+      href="/forgot-password"
+     className="font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700"
+    >
+      Forgot password?
+    </Link>
+  </div>
+)}
+
+      {error && <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">{error}</p>}
+      {message && <p className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">{message}</p>}
+
+      <Button
+  type="submit"
+  size="lg"
+  disabled={loading}
+  className="h-14 w-full rounded-2xl bg-royal text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+>
         {loading
           ? "Please wait..."
           : mode === "login"
@@ -107,6 +155,47 @@ export function AuthForm({ mode }: { mode: Mode }) {
               ? "Create account"
               : "Send reset link"}
       </Button>
+      <div className="relative my-6">
+  <div className="absolute inset-0 flex items-center">
+    <div className="w-full border-t border-slate-200"></div>
+  </div>
+
+  <div className="relative flex justify-center">
+    <span className="bg-white px-4 text-sm text-slate-400">
+      OR
+    </span>
+  </div>
+</div>
+
+<div className="space-y-3">
+
+ <button
+  type="button"
+  className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md"
+>
+  <Image
+    src="/images/logos/google.svg"
+    alt="Google"
+    width={20}
+    height={20}
+  />
+  <span>Sign in with Google</span>
+</button>
+
+<button
+  type="button"
+  className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md"
+>
+  <Image
+    src="/images/logos/microsoft.svg"
+    alt="Microsoft"
+    width={20}
+    height={20}
+  />
+  <span>Sign in with Microsoft</span>
+</button>
+
+</div>
     </form>
   );
 }
