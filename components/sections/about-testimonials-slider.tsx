@@ -124,8 +124,7 @@ export function AboutTestimonialsSlider({
         </div>
 
         <div className="relative mt-12">
-          <div className="pointer-events-none absolute left-0 top-0 z-10 hidden h-full w-12 bg-gradient-to-r from-mist-50 to-transparent sm:block" />
-          <div className="pointer-events-none absolute right-0 top-0 z-10 hidden h-full w-12 bg-gradient-to-l from-mist-50 to-transparent sm:block" />
+        
 
           <div
             ref={trackRef}
