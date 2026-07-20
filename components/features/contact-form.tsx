@@ -46,10 +46,10 @@ export function ContactForm() {
             Share your enquiry. We respect your time and never spam.
           </p>
         </div>
-        <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold text-brand shadow-soft">
+       {/*  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold text-brand shadow-soft">
           <Clock3 className="h-3.5 w-3.5" />
           24h response
-        </span>
+        </span> */}
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">

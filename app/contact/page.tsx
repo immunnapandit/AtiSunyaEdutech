@@ -29,12 +29,12 @@ const contactItems = [
   {
     icon: Mail,
     title: "Email Address",
-    lines: ["hello@atisunyaedutech.com", "support@atisunyaedutech.com"],
+    lines: ["info@atisunya.co", "support@atisunyaedutech.com"],
   },
   {
     icon: PhoneCall,
     title: "Phone Number",
-    lines: ["+91 99925 476854", "+91 99021 456987"],
+    lines: ["+91 80818 18673", "+91 82991 56511"],
   },
 ];
 
@@ -197,29 +197,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="pb-16 md:pb-20">
-        <Container>
-          <div className="grid grid-cols-1 gap-4 rounded-[24px] bg-navy p-5 text-white shadow-lifted md:grid-cols-3">
-            {quickSignals.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition duration-300 hover:-translate-y-0.5 hover:scale-[1.015] hover:bg-white/[0.08]"
-                >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-brand">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <p className="text-sm font-semibold leading-6 md:text-base">
-                    {item.label}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+ 
     </main>
   );
 }

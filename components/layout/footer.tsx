@@ -25,32 +25,61 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-20 border-t border-navy-100 bg-mist-100 text-navy">
-      <Container className="pt-16">
+    <footer className="relative mt-20 border-t border-white/10 bg-[#0A165E] text-white">
+      <Container className="pt-16 xl:px-0">
         <NewsletterForm variant="footer" />
 
-        <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-16 py-16 lg:grid-cols-[2fr_1fr_1fr_0.8fr]">
           <div>
-            <FooterHeading>Contact Us</FooterHeading>
-            <ul className="mt-7 space-y-5 text-base font-medium leading-7 text-navy-400">
-              <li className="flex gap-3">
-                <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand" />
-                <span>India based Microsoft training studio<br />Online and corporate delivery</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="h-4 w-4 shrink-0 text-brand" />
-                <Link href="mailto:info@atisunya.co" className="transition-colors hover:text-brand">info@atisunya.co</Link>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 shrink-0 text-brand" />
-                <Link href="tel:+918081810673" className="transition-colors hover:text-brand">+91 80-8181-0673</Link>
-              </li>
-            </ul>
+            
+           <div className="mt-7">
+  {/* Atisunya Logo */}
+  <Image
+    src="/images/AtiSunyaLogo.png"
+    alt="Atisunya"
+    width={240}
+    height={80}
+    className="h-auto w-56 object-contain"
+  />
+
+  {/* Microsoft Partner Logo */}
+  <Image
+    src="/images/MicrosoftSilverPartner.png"
+    alt="Microsoft Silver Partner"
+    width={220}
+    height={90}
+    className="mt-5 h-auto w-52 object-contain"
+  />
+
+  {/* Company Description */}
+ <p className="mt-6 text-base leading-16 text-white/90">
+  AtiSunya Edutech is a Microsoft-focused learning platform delivering
+  hands-on training in Dynamics 365, Azure, Power Platform, AI, and modern
+  cloud technologies through expert-led programs and real-world projects.
+</p>
+
+  {/* Phone */}
+  <div className="mt-7 flex items-center gap-3">
+    <Phone className="h-5 w-5 text-white" />
+    <span className="text-lg text-white">
+      +91 80818 10673,
+      +91 82991 56511
+    </span>
+  </div>
+
+  {/* Email */}
+  <div className="mt-5 flex items-center gap-3">
+    <Mail className="h-5 w-5 text-white" />
+    <span className="text-lg text-white">
+      info@atisunya.co
+    </span>
+  </div>
+</div>
           </div>
 
           <div>
-            <FooterHeading>Courses</FooterHeading>
-            <ul className="mt-7 space-y-3 text-base font-medium text-navy-400">
+            <FooterHeading>Training Provided</FooterHeading>
+            <ul className="mt-7 space-y-3 text-base font-medium text-white/70">
               {courseLinks.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span className="h-1.5 w-1.5 rounded-full bg-brand" />
@@ -60,51 +89,95 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <FooterHeading>Insights</FooterHeading>
-            <ul className="mt-7 space-y-6">
-              {blogLinks.map((item) => (
-                <li key={item.title} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                  <div>
-                    <Link href={item.href} className="text-base font-bold leading-snug text-navy transition-colors hover:text-royal-700">{item.title}</Link>
-                    <span className="mt-2 flex items-center gap-2 text-xs font-medium text-navy-400"><CalendarDays className="h-3.5 w-3.5" /> {item.date}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+<div>
+  <FooterHeading>Quick Links</FooterHeading>
 
-          <div>
-            <FooterHeading>Corporate Training</FooterHeading>
-            <div className="mt-7 space-y-4 text-base leading-7 text-navy-400">
-              <p>Custom Microsoft training for teams adopting Azure, Dynamics 365, Power Platform, Copilot, AI, and security workflows.</p>
-              <Link href="/contact" className="inline-flex rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-600">
-                Request a training plan
-              </Link>
-            </div>
-          </div>
-        </div>
+  <ul className="mt-7 space-y-5 text-lg text-white/70">
+    <li>
+      <Link href="/about" className="transition-colors hover:text-brand">
+        About Us
+      </Link>
+    </li>
+
+    <li>
+      <Link href="/courses" className="transition-colors hover:text-brand">
+        Courses
+      </Link>
+    </li>
+
+    <li>
+      <Link href="/blog" className="transition-colors hover:text-brand">
+        Blogs
+      </Link>
+    </li>
+
+    <li>
+      <Link href="/contact" className="transition-colors hover:text-brand">
+        Contact Us
+      </Link>
+    </li>
+  </ul>
+</div>
+         <div>
+  <FooterHeading>Information</FooterHeading>
+<ul className="mt-7 space-y-5 text-lg text-white/70">
+  <li>
+    <Link href="/privacy-policy" className="transition-colors hover:text-brand">
+      Privacy Policy
+    </Link>
+  </li>
+
+  <li>
+    <Link href="/terms-and-conditions" className="transition-colors hover:text-brand">
+      Terms & Conditions
+    </Link>
+  </li>
+
+  <li>
+    <Link href="/faq" className="transition-colors hover:text-brand">
+      FAQs
+    </Link>
+  </li>
+</ul>
+</div>
+</div>
       </Container>
+    
+<div>
+   <div className="border-t border-white/10 bg-[#0A165E] py-6">
+  <Container>
+    <div className="grid grid-cols-[2fr_1fr_1fr_0.8fr] items-center">
+      
+      <p className="text-sm font-medium text-white/60">
+        © 2026 AtiSunya Edutech. All Rights Reserved.
+      </p>
 
-      <div className="border-t border-navy-100 py-6">
-        <Container className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/images/atisunyaedutechlogo.png" alt="Atisunya Edutech" width={48} height={48} className="h-10 w-10 object-contain" />
-            <span className="text-xl font-bold uppercase tracking-wide text-navy">Atisunya</span>
-          </Link>
-          <p className="text-sm font-medium text-navy-400">Copyright 2026 by atisunyaedutech.com</p>
-          <div className="flex items-center gap-2">
-            {socials.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a key={item.label} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} aria-label={item.label} className="flex h-10 w-10 items-center justify-center rounded-full border border-navy-100 text-navy-400 transition-colors hover:border-brand hover:text-brand">
-                  <Icon className="h-4 w-4" />
-                </a>
-              );
-            })}
-          </div>
-        </Container>
+      <div></div>
+      <div></div>
+
+      <div className="flex justify-end gap-2">
+        {socials.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <a
+              key={item.label}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+              aria-label={item.label}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-all hover:border-brand hover:bg-brand hover:text-white"
+            >
+              <Icon className="h-4 w-4" />
+            </a>
+          );
+        })}
+      </div>
+
+    </div>
+  </Container>
+</div>
+      
       </div>
 
       <Link href="#top" aria-label="Back to top" className="absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-white transition-colors hover:bg-brand-600 xl:right-10">
@@ -116,7 +189,7 @@ export function Footer() {
 
 function FooterHeading({ children }: { children: string }) {
   return (
-    <h2 className="flex items-center gap-3 text-xl font-bold text-navy">
+    <h2 className="flex items-center gap-3 text-xl font-bold text-white">
       <span className="h-5 w-1.5 rounded-full bg-brand" />
       {children}
     </h2>
