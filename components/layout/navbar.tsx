@@ -78,7 +78,7 @@ export function Navbar() {
           : "border-b border-transparent"
       )}
     >
-      <div className="bg-brand text-white">
+      <div className="bg-[#0A165E] text-white">
         <div
           className={cn(
             headerContainer,
@@ -88,7 +88,7 @@ export function Navbar() {
           <div className="flex items-center">
             <Link
               href="/login"
-              className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/10 sm:px-4"
+              className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/5 sm:px-4"
             >
               <UserRound className="h-4 w-4" />
               <span>Register / Login</span>
@@ -101,7 +101,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     aria-label={link.label}
-                    className="flex h-11 w-11 items-center justify-center border-r border-white/15 transition-colors hover:bg-white/10"
+                    className="flex h-11 w-11 items-center justify-center border-r border-white/10 transition-colors hover:bg-white/5"
                   >
                     <Icon className="h-4 w-4" />
                   </Link>

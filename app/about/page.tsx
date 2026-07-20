@@ -8,6 +8,7 @@ import {
   GraduationCap,
   Target,
   Users,
+  Check,
 } from "lucide-react";
 import { Container, SectionHeading, Eyebrow } from "@/components/ui/primitives";
 import { Stats } from "@/components/sections/stats";
@@ -138,37 +139,15 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute left-0 top-20 h-28 w-28 rounded-full border border-brand/15" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className="relative mx-auto w-full max-w-[560px]">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-8 h-[300px] overflow-hidden rounded-[2rem] bg-white shadow-soft sm:h-[360px]">
-                  <Image
-                    src="/images/contactbanner.png"
-                    alt="Students learning together"
-                    width={1200}
-                    height={800}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <div className="col-span-4 flex items-center justify-center rounded-[1.5rem] bg-white p-4 shadow-soft">
-                  <div className="text-center">
-                    <GraduationCap className="mx-auto h-10 w-10 text-brand" />
-                    <p className="mt-3 text-lg font-bold text-navy">
-                      Experience Advisor
-                    </p> 
-                  </div>
-                </div>
-                <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1400&q=85"
-                    alt="Students walking on campus"
-                    width={1400}
-                    height={900}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              </div>
-              <div className="absolute -bottom-5 left-0 text-[2.65rem] font-extrabold leading-none text-brand/70 sm:text-[3.5rem]"></div>
-            </div>
+           <div className="relative mx-auto w-full max-w-[600px] overflow-hidden rounded-[2rem] shadow-2xl">
+  <Image
+    src="/images/about/about-us.jpg"
+    alt="Atisunya Edutech"
+    width={900}
+    height={1100}
+    className="h-full w-full object-cover"
+  />
+</div>
 
             <div className="relative">
               <Eyebrow>About  {SITE.name}</Eyebrow>
@@ -184,50 +163,27 @@ export default function AboutPage() {
                 and building a community where skills turn into real career
                 progress.
               </p>
-              
-              <div className="mt-10 grid gap-6 sm:grid-cols-2">
-                <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
-                    <BookOpenText className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-2xl font-extrabold text-navy">
-                    Our Mission
-                  </h3>
-                  <p className="mt-3 text-base leading-7 text-navy-400">
-                    To help learners build practical skills, complete real
-                    projects, and leave with confidence that holds up in
-                    interviews, on the job, and in future growth.
-                  </p>
-                  <Link
-                    href="/courses"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
-                  >
-                    Learn More..
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
+             <div className="mt-10 grid gap-5 sm:grid-cols-2">
+  {[
+    "Microsoft Certified Training",
+    "Hands-on Live Projects",
+    "Industry Expert Mentors",
+    "Career & Placement Assistance",
+  ].map((item) => (
+    <div
+      key={item}
+      className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-soft"
+    >
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
+        <Check className="h-5 w-5 text-brand" />
+      </div>
 
-                <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-100/70 text-cyan-600">
-                    <Target className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-2xl font-extrabold text-navy">
-                    Our Vision
-                  </h3>
-                  <p className="mt-3 text-base leading-7 text-navy-400">
-                    To be the learning platform people trust when they want more
-                    than completion - they want measurable growth, stronger
-                    portfolios, and a better career path.
-                  </p>
-                  <Link
-                    href="/about"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
-                  >
-                    Learn More..
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
+      <span className="font-semibold text-navy">
+        {item}
+      </span>
+    </div>
+  ))}
+</div>
 
               <div className="mt-10">
                 <Link
@@ -246,7 +202,7 @@ export default function AboutPage() {
 
       <AboutTestimonialsSlider testimonials={testimonials} />
 
-      <section className="bg-white py-20 sm:py-24">
+       {/* //<section className="bg-white py-20 sm:py-24">
         <Container>
           <SectionHeading
             eyebrow="Instructors"
@@ -291,7 +247,7 @@ export default function AboutPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </section> */}
 
       <section className="bg-white pb-24 sm:pb-32">
         <Container>
