@@ -48,29 +48,29 @@ export function TrainingFormats() {
         </Reveal>
 
         <Stagger
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4"
           delay={0.1}
         >
           {trainingFormats.map((item) => (
             <StaggerItem
               key={item.title}
-              className="card-hover group overflow-hidden rounded-lg border border-navy-100 bg-white shadow-soft"
+              className="card-hover group rounded-lg border border-navy-100 bg-white p-7 text-center shadow-soft"
             >
-              <div className="relative h-56 overflow-hidden sm:h-64">
+              <div className="relative mx-auto h-16 w-16 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="64px"
+                  className="object-cover"
                 />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold text-navy">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-navy-400">
-                  {item.description}
-                </p>
-              </div>
+              <h3 className="mt-6 text-xl font-bold text-navy">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-navy-400">
+                {item.description}
+              </p>
             </StaggerItem>
           ))}
         </Stagger>
