@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 import { Eyebrow } from "@/components/ui/primitives";
 
-const aboutImage = "/images/Edutech-img.jpg";
+const aboutImage = "/images/Edutech-img.png";
 
 export function AboutSection() {
   return (
