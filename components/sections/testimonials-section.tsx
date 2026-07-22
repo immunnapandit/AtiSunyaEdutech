@@ -35,13 +35,13 @@ export function TestimonialsSection() {
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-sm font-bold text-brand">
                   {testimonial.avatar}
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="text-base font-bold text-navy">{testimonial.name}</p>
-                  <p className="truncate text-sm font-medium text-navy-400">
+                  <p className="text-sm font-medium text-navy-400">
                     {testimonial.role} &middot; {testimonial.company}
                   </p>
                 </div>
-                <div className="ml-auto flex shrink-0 items-center gap-1 text-brand">
+                <div className="flex shrink-0 items-center gap-1 text-brand">
                   {Array.from({ length: testimonial.rating }).map((_, index) => (
                     <Star key={index} className="h-4 w-4 fill-current" />
                   ))}
