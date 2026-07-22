@@ -41,8 +41,8 @@ export function NewsletterForm({
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr_170px] lg:items-end">
           <input name="name" type="text" placeholder="Your Full Name" aria-label="Your Full Name" className="h-12 w-full border-0 border-b border-navy-100 bg-transparent px-0 text-base font-medium text-navy outline-none placeholder:text-navy-400/60 focus:border-brand" />
           <input name="email" type="email" required placeholder="Your Email Address" aria-label="Your Email Address" className="h-12 w-full border-0 border-b border-navy-100 bg-transparent px-0 text-base font-medium text-navy outline-none placeholder:text-navy-400/60 focus:border-brand" />
-          <button type="submit" disabled={loading} className="h-12 rounded-md bg-brand px-6 text-base font-semibold text-white transition-colors hover:bg-brand-600 disabled:opacity-70">
-            {loading ? "Sending..." : "Subscribe"}
+          <button type="submit" disabled={loading} className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-brand px-6 text-base font-semibold text-white transition-colors hover:bg-brand-600 disabled:opacity-70">
+            {loading ? "Sending..." : "Subscribe"} <ArrowRight className="h-4 w-4" />
           </button>
         </div>
         {(message || error) && <p className={`mt-4 text-sm font-semibold ${message ? "text-green-700" : "text-red-700"}`}>{message || error}</p>}
