@@ -56,7 +56,7 @@ export function TrainingFormats() {
               key={item.title}
               className="card-hover group overflow-hidden rounded-lg border border-navy-100 bg-white shadow-soft"
             >
-              <div className="relative h-36 overflow-hidden">
+              <div className="relative h-40 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
