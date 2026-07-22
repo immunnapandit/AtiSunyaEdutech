@@ -56,12 +56,12 @@ export function TrainingFormats() {
               key={item.title}
               className="card-hover group rounded-lg border border-navy-100 bg-white p-7 text-center shadow-soft"
             >
-              <div className="relative mx-auto h-16 w-16 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
+              <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  sizes="64px"
+                  sizes="112px"
                   className="object-cover"
                 />
               </div>
