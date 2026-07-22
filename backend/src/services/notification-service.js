@@ -105,6 +105,59 @@ export async function sendNewsletterConfirmation(subscriber) {
   });
 }
 
+
+export async function sendPurchaseNotification({ user, course, enrollment, payment }) {
+  const billing = enrollment.billingDetails || {};
+  const recipients = uniqueRecipients([env.graph.accountsEmail, env.graph.adminEmail]);
+
+  return safeSend({
+    to: recipients,
+    subject: `New course enrollment: ${course.title}`,
+    replyTo: user.email ? [user.email] : [],
+    html: layoutHtml({
+      title: "New Course Enrollment",
+      preview: `${user.name} completed payment for ${course.title}.`,
+      rows: [
+        ["Student", user.name],
+        ["Email", user.email || billing.emailAddress || "Not provided"],
+        ["Phone", user.phone || billing.phoneNumber || "Not provided"],
+        ["Course", course.title],
+        ["Category", course.category],
+        ["Amount", formatInr(course.price)],
+        ["Payment ID", payment.paymentId || "Not provided"],
+        ["Order ID", payment.orderId || enrollment.orderId || "Not provided"],
+        ["Payment method", billing.paymentMethod || "Razorpay"],
+        ["Billing name", [billing.firstName, billing.lastName].filter(Boolean).join(" ") || "Not provided"],
+        ["Billing address", formatAddress(billing)],
+        ["Note", billing.note || "None"]
+      ]
+    })
+  });
+}
+
+export async function sendPurchaseConfirmation({ user, course, enrollment, payment }) {
+  const to = user.email || enrollment.billingDetails?.emailAddress;
+
+  if (!to) {
+    return { sent: false, skipped: true, reason: "Student email is not available." };
+  }
+
+  return safeSend({
+    to,
+    subject: `Enrollment confirmed: ${course.title}`,
+    html: layoutHtml({
+      title: "Enrollment Confirmed",
+      preview: `Your payment for ${course.title} was successful.`,
+      rows: [
+        ["Name", user.name],
+        ["Course", course.title],
+        ["Amount", formatInr(course.price)],
+        ["Payment ID", payment.paymentId || "Not provided"],
+        ["Next step", "Our team will contact you with course access and onboarding details."]
+      ]
+    })
+  });
+}
 async function safeSend(payload) {
   try {
     return await sendGraphMail(payload);
@@ -156,6 +209,26 @@ function layoutHtml({ title, preview, rows }) {
 </html>`;
 }
 
+
+function uniqueRecipients(recipients) {
+  return [...new Set(recipients.filter(Boolean))];
+}
+
+function formatInr(amount) {
+  return `INR ${Number(amount || 0).toLocaleString("en-IN")}`;
+}
+
+function formatAddress(billing) {
+  const lines = [
+    billing.addressLine1,
+    billing.addressLine2,
+    billing.state,
+    billing.country,
+    billing.postalCode
+  ].filter(Boolean);
+
+  return lines.length > 0 ? lines.join(", ") : "Not provided";
+}
 function escapeHtml(value) {
   return value
     .replaceAll("&", "&amp;")

@@ -39,11 +39,20 @@ export function Badge({
   );
 }
 
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
+export function Eyebrow({
+  children,
+  className,
+  align = "left",
+}: {
+  children: ReactNode;
+  className?: string;
+  align?: "left" | "center";
+}) {
   return (
-    <p className={cn("text-xs font-semibold uppercase tracking-[0.18em] text-royal", className)}>
+    <div className={cn("eyebrow-text", align === "center" && "justify-center", className)}>
+      <span className="h-px w-8 bg-brand-600/50" aria-hidden="true" />
       {children}
-    </p>
+    </div>
   );
 }
 
@@ -52,12 +61,14 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  tone = "light",
   className,
 }: {
   eyebrow?: string;
   title: ReactNode;
   description?: string;
   align?: "left" | "center";
+  tone?: "light" | "dark";
   className?: string;
 }) {
   return (
@@ -68,10 +79,28 @@ export function SectionHeading({
         className
       )}
     >
-      {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-      <h2 className="text-display-md md:text-display-lg font-bold text-balance">{title}</h2>
+      {eyebrow && (
+        <Eyebrow align={align} className="mb-4">
+          {eyebrow}
+        </Eyebrow>
+      )}
+      <h2
+        className={cn(
+          "text-2xl font-semibold leading-snug text-balance md:text-3xl",
+          tone === "light" ? "text-navy" : "text-white"
+        )}
+      >
+        {title}
+      </h2>
       {description && (
-        <p className="mt-4 text-base md:text-lg text-navy-400 text-balance">{description}</p>
+        <p
+          className={cn(
+            "mt-4 text-base leading-7 text-balance",
+            tone === "light" ? "text-navy-400" : "text-white/75"
+          )}
+        >
+          {description}
+        </p>
       )}
     </div>
   );

@@ -101,24 +101,8 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
       return;
     }
 
-    if (payment.mode === "demo" || !payment.key) {
-      try {
-        const verifyData = await apiRequest<{ message: string; enrolled: boolean }>(`/courses/${slug}/verify-payment`, {
-          method: "POST",
-          token,
-          body: JSON.stringify({
-            orderId: payment.orderId,
-            paymentId: `demo-payment-${Date.now()}`,
-            signature: "demo-signature",
-          }),
-        });
-
-        setMessage(verifyData.message || "Payment successful. Your course is now active.");
-        router.push("/dashboard");
-      } catch (verifyErr) {
-        setError(verifyErr instanceof Error ? verifyErr.message : "Payment verification failed.");
-      }
-      return;
+    if (!payment.key) {
+      throw new Error("Payment gateway is not configured. Please contact Atisunya support.");
     }
 
     await loadRazorpayScript();
@@ -130,11 +114,12 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
 
     const instance = new RazorpayCtor({
       key: payment.key,
-      amount: (payment.amount ?? 0) * 100,
+      amount: payment.amount ?? 0,
       currency: payment.currency ?? "INR",
       name: "Atisunya Edutech",
       description: `Enrollment for ${title}`,
       order_id: payment.orderId,
+      method: getRazorpayMethodOptions(values.paymentMethod),
       handler: async function (response: { razorpay_payment_id?: string; razorpay_order_id?: string; razorpay_signature?: string }) {
         try {
           const verifyData = await apiRequest<{ message: string; enrolled: boolean }>(`/courses/${slug}/verify-payment`, {
@@ -155,7 +140,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
       },
       prefill: {
         name: values.firstName ? `${values.firstName} ${values.lastName}`.trim() : "Student",
-        email: values.emailAddress || "student@example.com",
+        email: values.emailAddress,
       },
       theme: {
         color: "#3b82f6",
@@ -165,6 +150,17 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
     instance.open();
   }
 
+
+  function getRazorpayMethodOptions(paymentMethod: string) {
+    return {
+      card: paymentMethod === "card",
+      upi: paymentMethod === "upi",
+      wallet: paymentMethod === "wallet",
+      netbanking: false,
+      emi: false,
+      paylater: false
+    };
+  }
   async function loadRazorpayScript() {
     if (typeof window === "undefined") {
       throw new Error("Razorpay checkout is unavailable on this platform.");

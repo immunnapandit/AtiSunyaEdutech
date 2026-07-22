@@ -7,14 +7,7 @@ export function isRazorpayConfigured() {
 
 export async function createRazorpayOrder({ amount, currency = "INR", receipt, notes = {} }) {
   if (!isRazorpayConfigured()) {
-    return {
-      id: `demo-order-${Date.now()}`,
-      amount,
-      currency,
-      receipt,
-      notes,
-      mode: "demo"
-    };
+    throw new Error("Razorpay is not configured. Add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET before accepting payments.");
   }
 
   const response = await fetch("https://api.razorpay.com/v1/orders", {
@@ -49,18 +42,16 @@ export async function createRazorpayOrder({ amount, currency = "INR", receipt, n
 }
 
 export function verifyRazorpaySignature({ orderId, paymentId, signature }) {
-  if (!orderId || !paymentId || !signature) {
+  if (!orderId || !paymentId || !signature || !isRazorpayConfigured()) {
     return false;
-  }
-
-  if (!isRazorpayConfigured()) {
-    return signature === "demo-signature";
   }
 
   const expectedSignature = crypto
     .createHmac("sha256", env.razorpay.keySecret)
     .update(`${orderId}|${paymentId}`)
     .digest("hex");
+  const received = Buffer.from(signature);
+  const expected = Buffer.from(expectedSignature);
 
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
+  return received.length === expected.length && crypto.timingSafeEqual(received, expected);
 }

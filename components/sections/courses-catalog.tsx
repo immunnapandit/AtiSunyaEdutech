@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RotateCcw, Search } from "lucide-react";
 import { CourseCard } from "@/components/features/course-card";
-import { courses } from "@/data/courses";
+import { apiRequest } from "@/lib/api";
 import { filterCourses } from "@/lib/course-filters";
 import type { Course, Difficulty } from "@/types";
 
@@ -85,6 +85,8 @@ function FilterGroup({
 }
 
 export function CoursesCatalog() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
@@ -92,10 +94,17 @@ export function CoursesCatalog() {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
 
+  useEffect(() => {
+    apiRequest<{ courses: Course[] }>("/courses")
+      .then((data) => setCourses(data.courses))
+      .catch(() => setCourses([]))
+      .finally(() => setLoading(false));
+  }, []);
+
   const productOptions = useMemo(() => {
     const values = courses.map((course) => course.category);
     return Array.from(new Set(values));
-  }, []);
+  }, [courses]);
 
   const roleOptions = [
     "Administrator",
@@ -300,7 +309,11 @@ export function CoursesCatalog() {
             </div>
           </div>
 
-          {filteredCourses.length === 0 ? (
+          {loading ? (
+            <div className="mt-10 rounded-lg border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
+              Loading courses...
+            </div>
+          ) : filteredCourses.length === 0 ? (
             <div className="mt-10 rounded-lg border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
               No courses match the current filters. Try broadening your search or clearing the selections.
             </div>

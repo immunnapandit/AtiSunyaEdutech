@@ -56,13 +56,13 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-poppins)", "system-ui", "sans-serif"],
-        body: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        body: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["3.75rem", { lineHeight: "1.08", letterSpacing: "0" }],
-        "display-lg": ["3rem", { lineHeight: "1.12", letterSpacing: "0" }],
-        "display-md": ["2.125rem", { lineHeight: "1.18", letterSpacing: "0" }],
-        "display-sm": ["1.625rem", { lineHeight: "1.25", letterSpacing: "0" }],
+        "display-xl": ["3rem", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
+        "display-lg": ["2.375rem", { lineHeight: "1.16", letterSpacing: "-0.015em" }],
+        "display-md": ["1.875rem", { lineHeight: "1.22", letterSpacing: "-0.01em" }],
+        "display-sm": ["1.375rem", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
       },
       backgroundImage: {
         "grid-fade":

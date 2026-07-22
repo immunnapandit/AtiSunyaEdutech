@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, CalendarDays, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import { ArrowUp, CalendarDays, Mail, MapPin, Phone } from "lucide-react";
 import { NewsletterForm } from "@/components/features/newsletter-form";
 import { Container } from "@/components/ui/primitives";
 
@@ -18,8 +18,6 @@ const blogLinks = [
 ];
 
 const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-  { label: "YouTube", href: "https://www.youtube.com", icon: Youtube },
   { label: "Email", href: "mailto:info@atisunya.co", icon: Mail },
 ];
 

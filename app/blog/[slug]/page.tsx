@@ -1,12 +1,33 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Clock3, User } from "lucide-react";
-import { blogPosts, getBlogPost } from "@/data/blog-posts";
+import { apiRequest } from "@/lib/api";
 import { Container } from "@/components/ui/primitives";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+export const dynamic = "force-dynamic";
+
+type BlogPost = {
+  slug: string;
+  headline: string;
+  creator: string;
+  category: string;
+  summary: string;
+  readingTime: string;
+  thumbnailGradient: string;
+  featuredImage: string;
+  publishedDate: string;
+  sections: { heading: string; body: string }[];
+};
+
+async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const data = await apiRequest<{ post: BlogPost }>(`/blog/${slug}`);
+    return data.post;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({
@@ -15,7 +36,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
 
   if (!post) return {};
 
@@ -31,7 +52,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
 
   if (!post) notFound();
 
@@ -74,10 +95,20 @@ export default async function BlogPostPage({
           </div>
 
           <div
-            className="min-h-[260px] rounded-lg border border-navy-100 shadow-soft"
+            className="relative min-h-[260px] overflow-hidden rounded-lg border border-navy-100 shadow-soft"
             style={{ background: post.thumbnailGradient }}
             aria-hidden="true"
-          />
+          >
+            {post.featuredImage && (
+              <Image
+                src={post.featuredImage}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 35vw, 92vw"
+                className="object-cover"
+              />
+            )}
+          </div>
         </header>
 
         <div className="mx-auto mt-14 max-w-3xl space-y-10">

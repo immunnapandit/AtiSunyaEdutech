@@ -8,13 +8,11 @@ import {
   GraduationCap,
   Target,
   Users,
-  Check,
 } from "lucide-react";
 import { Container, SectionHeading, Eyebrow } from "@/components/ui/primitives";
 import { Stats } from "@/components/sections/stats";
 import { SITE } from "@/constants/site";
-import { testimonials } from "@/data/testimonials";
-import { AboutTestimonialsSlider } from "@/components/sections/about-testimonials-slider";
+import { instructors } from "@/data/testimonials";
 
 export const metadata: Metadata = {
   title: "About",
@@ -48,36 +46,6 @@ const featureCards = [
   },
 ];
 
-const instructors = [
-  {
-    name: "MD. Monaym Billah",
-    role: "English Lecturer",
-    courses: "54 Courses",
-    students: "125 Students",
-    image: "https://edplus-react.vercel.app/assets/img/teachers/ins/2.png",
-  },
-  {
-    name: "MD. Monaym Billah",
-    role: "English Lecturer",
-    courses: "35 Courses",
-    students: "125 Students",
-    image: "https://edplus-react.vercel.app/assets/img/teachers/ins/3.png",
-  },
-  {
-    name: "MD. Monaym Billah",
-    role: "Web Developer",
-    courses: "23 Courses",
-    students: "125 Students",
-    image: "https://edplus-react.vercel.app/assets/img/teachers/ins/4.png",
-  },
-  {
-    name: "MD. Monaym Billah",
-    role: "Web Developer",
-    courses: "60 Courses",
-    students: "125 Students",
-    image: "https://edplus-react.vercel.app/assets/img/teachers/ins/1.png",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -89,7 +57,7 @@ export default function AboutPage() {
 
         <Container className="relative flex min-h-[24rem] items-center justify-center py-14 text-center text-white">
           <div>
-            <h1 className="text-display-md font-extrabold text-balance sm:text-display-lg lg:text-display-xl">
+            <h1 className="text-display-md font-semibold text-balance sm:text-display-lg lg:text-display-xl">
               About
             </h1>
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft">
@@ -114,7 +82,7 @@ export default function AboutPage() {
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-50">
                   <card.icon className="h-9 w-9 text-brand" />
                 </div>
-                <h2 className="mt-6 text-2xl font-extrabold text-navy">
+                <h2 className="mt-6 text-2xl font-semibold text-navy">
                   {index === 0 || index === 3
                     ? `Why Study at ${SITE.name}`
                     : card.title}
@@ -139,19 +107,41 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute left-0 top-20 h-28 w-28 rounded-full border border-brand/15" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-           <div className="relative mx-auto w-full max-w-[600px] overflow-hidden rounded-[2rem] shadow-2xl">
-  <Image
-    src="/images/about/about-us.jpg"
-    alt="Atisunya Edutech"
-    width={900}
-    height={1100}
-    className="h-full w-full object-cover"
-  />
-</div>
+            <div className="relative mx-auto w-full max-w-[560px]">
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-8 h-[300px] overflow-hidden rounded-[2rem] bg-white shadow-soft sm:h-[360px]">
+                  <Image
+                    src="/images/contactbanner.png"
+                    alt="Students learning together"
+                    width={1200}
+                    height={800}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div className="col-span-4 flex items-center justify-center rounded-[1.5rem] bg-white p-4 shadow-soft">
+                  <div className="text-center">
+                    <GraduationCap className="mx-auto h-10 w-10 text-brand" />
+                    <p className="mt-3 text-lg font-bold text-navy">
+                      Experience Advisor
+                    </p> 
+                  </div>
+                </div>
+                <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
+                  <Image
+                    src="/images/Edutech-img.jpg"
+                    alt="Atisunya Edutech learning session"
+                    width={1400}
+                    height={900}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </div>
+              <div className="absolute -bottom-5 left-0 text-3xl font-semibold leading-none text-brand/70 sm:text-4xl"></div>
+            </div>
 
             <div className="relative">
               <Eyebrow>About  {SITE.name}</Eyebrow>
-              <h2 className="mt-4 max-w-2xl text-display-md font-extrabold text-navy text-balance sm:text-display-lg">
+              <h2 className="mt-4 max-w-2xl text-display-md font-semibold text-navy text-balance sm:text-display-lg">
                 We create industry-focused learning experiences.
               </h2>
               <div className="mt-4 h-1 w-40 rounded-full bg-brand/30" />
@@ -163,32 +153,55 @@ export default function AboutPage() {
                 and building a community where skills turn into real career
                 progress.
               </p>
-             <div className="mt-10 grid gap-5 sm:grid-cols-2">
-  {[
-    "Microsoft Certified Training",
-    "Hands-on Live Projects",
-    "Industry Expert Mentors",
-    "Career & Placement Assistance",
-  ].map((item) => (
-    <div
-      key={item}
-      className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-soft"
-    >
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
-        <Check className="h-5 w-5 text-brand" />
-      </div>
+              
+              <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+                    <BookOpenText className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-2xl font-semibold text-navy">
+                    Our Mission
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-navy-400">
+                    To help learners build practical skills, complete real
+                    projects, and leave with confidence that holds up in
+                    interviews, on the job, and in future growth.
+                  </p>
+                  <Link
+                    href="/courses"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
+                  >
+                    Learn More..
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
 
-      <span className="font-semibold text-navy">
-        {item}
-      </span>
-    </div>
-  ))}
-</div>
+                <div className="rounded-[1.5rem] bg-white p-6 shadow-soft">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-100/70 text-cyan-600">
+                    <Target className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-2xl font-semibold text-navy">
+                    Our Vision
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-navy-400">
+                    To be the learning platform people trust when they want more
+                    than completion - they want measurable growth, stronger
+                    portfolios, and a better career path.
+                  </p>
+                  <Link
+                    href="/about"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
+                  >
+                    Learn More..
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
 
               <div className="mt-10">
                 <Link
                   href="/courses"
-                  className="inline-flex h-14 items-center justify-center rounded-md bg-brand px-7 text-base font-extrabold text-white transition-transform hover:-translate-y-0.5 hover:bg-brand-600"
+                  className="inline-flex h-14 items-center justify-center rounded-md bg-brand px-7 text-base font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-brand-600"
                 >
                   View All Programs
                 </Link>
@@ -200,9 +213,26 @@ export default function AboutPage() {
 
       <Stats />
 
-      <AboutTestimonialsSlider testimonials={testimonials} />
+      <section className="bg-mist-50 py-20 sm:py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Training standards"
+            title="Built around practical Microsoft adoption"
+            description="Atisunya Edutech focuses on verified course content, structured checkout, payment-confirmed access, and follow-up from the training team after enrollment."
+            align="center"
+            className="mx-auto"
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {["Microsoft-focused curriculum", "Payment-confirmed dashboard access", "Corporate and individual training support"].map((item) => (
+              <div key={item} className="rounded-lg border border-navy-100 bg-white p-6 text-center shadow-soft">
+                <h3 className="text-lg font-bold text-navy">{item}</h3>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-       {/* //<section className="bg-white py-20 sm:py-24">
+      <section className="bg-white py-20 sm:py-24">
         <Container>
           <SectionHeading
             eyebrow="Instructors"
@@ -217,16 +247,11 @@ export default function AboutPage() {
                 key={instructor.name}
                 className="group overflow-hidden rounded-[1.5rem] bg-white shadow-soft"
               >
-                <div className="relative h-[300px] bg-mist-100">
-                  <Image
-                    src={instructor.image}
-                    alt={instructor.name}
-                    fill
-                    className="object-cover object-top"
-                  />
+                <div className="flex h-[180px] items-center justify-center bg-brand-50">
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-xl font-bold text-brand shadow-soft">{instructor.avatar}</span>
                 </div>
                 <div className="border-t border-navy-100 p-5 text-center">
-                  <h3 className="text-xl font-extrabold text-navy">
+                  <h3 className="text-xl font-semibold text-navy">
                     {instructor.name}
                   </h3>
                   <p className="mt-1 text-base text-navy-400">
@@ -235,11 +260,11 @@ export default function AboutPage() {
                   <div className="mt-4 flex items-center justify-center gap-4 text-sm font-medium text-navy-400">
                     <span className="inline-flex items-center gap-1">
                       <Award className="h-4 w-4 text-brand" />
-                      {instructor.courses}
+                      {instructor.coursesCount} Courses
                     </span>
                     <span className="inline-flex items-center gap-1">
                       <Users className="h-4 w-4 text-brand" />
-                      {instructor.students}
+                      Microsoft Training
                     </span>
                   </div>
                 </div>
@@ -247,7 +272,7 @@ export default function AboutPage() {
             ))}
           </div>
         </Container>
-      </section> */}
+      </section>
 
       <section className="bg-white pb-24 sm:pb-32">
         <Container>
@@ -256,14 +281,14 @@ export default function AboutPage() {
               href="/courses"
               className="group relative overflow-hidden rounded-[1.75rem] bg-brand px-8 py-10 text-white shadow-[0_24px_60px_rgba(76,60,255,0.28)] transition-transform hover:-translate-y-1"
             >
-              <span className="relative z-10 block max-w-sm text-[2rem] font-extrabold leading-tight sm:text-[2.5rem]">
+              <span className="relative z-10 block max-w-sm text-2xl font-semibold leading-tight sm:text-3xl">
                 Explore Courses
               </span>
               <p className="relative z-10 mt-4 max-w-md text-base leading-7 text-white/90">
                 Discover practical learning paths built for learners who want
                 skills they can use right away.
               </p>
-              <span className="relative z-10 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-extrabold text-navy transition-colors group-hover:bg-white/90">
+              <span className="relative z-10 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-navy transition-colors group-hover:bg-white/90">
                 Browse Programs
               </span>
             </Link>
@@ -272,14 +297,14 @@ export default function AboutPage() {
               href="/signup"
               className="group relative overflow-hidden rounded-[1.75rem] bg-brand px-8 py-10 text-white shadow-[0_24px_60px_rgba(76,60,255,0.28)] transition-transform hover:-translate-y-1"
             >
-              <span className="relative z-10 block max-w-sm text-[2rem] font-extrabold leading-tight sm:text-[2.5rem]">
+              <span className="relative z-10 block max-w-sm text-2xl font-semibold leading-tight sm:text-3xl">
                 Become an Instructor
               </span>
               <p className="relative z-10 mt-4 max-w-md text-base leading-7 text-white/90">
                 Join Atisunya Edutech and help learners build real-world
                 confidence through practical teaching.
               </p>
-              <span className="relative z-10 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-extrabold text-navy transition-colors group-hover:bg-white/90">
+              <span className="relative z-10 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-navy transition-colors group-hover:bg-white/90">
                 Register Now
               </span>
             </Link>

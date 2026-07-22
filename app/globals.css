@@ -53,15 +53,23 @@
   }
 
   .heading-hero {
-    @apply font-display text-display-md font-bold leading-tight text-balance sm:text-display-lg lg:text-display-xl;
+    @apply font-display text-display-md font-semibold leading-tight text-balance sm:text-display-lg lg:text-display-xl;
   }
 
   .heading-section {
-    @apply font-display text-display-sm font-bold leading-tight text-balance sm:text-display-md md:text-display-lg;
+    @apply font-display text-display-sm font-semibold leading-snug text-balance sm:text-display-md md:text-display-lg;
   }
 
   .heading-card {
-    @apply font-display text-xl font-bold leading-snug text-navy;
+    @apply font-display text-lg font-semibold leading-snug text-navy;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lifted;
+  }
+
+  .eyebrow-text {
+    @apply inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600;
   }
 
   .surface-card {

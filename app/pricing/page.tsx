@@ -2,58 +2,14 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { PricingPlan } from "@/types";
+import { courses } from "@/data/courses";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Simple, transparent pricing for individual learners and teams.",
+  description: "Course pricing for Atisunya Edutech Microsoft training programs.",
 };
 
-const plans: PricingPlan[] = [
-  {
-    name: "Self-Paced",
-    price: 39,
-    billingCycle: "month",
-    description: "For learners who want full flexibility.",
-    features: [
-      "Access to 60+ self-paced courses",
-      "Certificate on completion",
-      "Community forum access",
-      "Course update access",
-    ],
-    cta: "Start learning",
-  },
-  {
-    name: "Live Cohort",
-    price: 89,
-    billingCycle: "month",
-    description: "For learners who want structure and accountability.",
-    features: [
-      "Everything in Self-Paced",
-      "Weekly live instructor sessions",
-      "Capstone project review",
-      "Private cohort community",
-      "Priority instructor feedback",
-    ],
-    highlighted: true,
-    cta: "Join a cohort",
-  },
-  {
-    name: "Corporate",
-    price: 0,
-    billingCycle: "month",
-    description: "For teams of 5 or more. Custom pricing.",
-    features: [
-      "Everything in Live Cohort",
-      "Team progress dashboard",
-      "Custom learning paths",
-      "Dedicated account manager",
-      "Centralized billing",
-    ],
-    cta: "Talk to sales",
-  },
-];
+const featuredCourses = courses.filter((course) => course.featured).slice(0, 3);
 
 export default function PricingPage() {
   return (
@@ -61,68 +17,52 @@ export default function PricingPage() {
       <Container>
         <SectionHeading
           eyebrow="Pricing"
-          title="Pick the pace that fits your life"
-          description="Every plan includes real projects, verifiable certificates, and a 14-day money-back guarantee."
+          title="Transparent course pricing"
+          description="Individual course prices are shown before checkout. Corporate training is quoted based on team size, topics, and delivery format."
           align="center"
           className="mx-auto"
         />
 
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={cn(
-                "flex flex-col rounded-2xl border p-8",
-                plan.highlighted
-                  ? "border-royal bg-navy-gradient text-white shadow-lifted lg:-translate-y-4"
-                  : "border-navy-100 bg-white"
-              )}
-            >
-              <h3 className={cn("text-base font-bold", plan.highlighted ? "text-white" : "text-navy")}>
-                {plan.name}
-              </h3>
-              <p className={cn("mt-1 text-sm", plan.highlighted ? "text-white/60" : "text-navy-400")}>
-                {plan.description}
-              </p>
-              <div className="mt-6 flex items-baseline gap-1">
-                {plan.price > 0 ? (
-                  <>
-                    <span className="text-4xl font-extrabold">${plan.price}</span>
-                    <span className={cn("text-sm", plan.highlighted ? "text-white/50" : "text-navy-400")}>
-                      /{plan.billingCycle}
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-4xl font-extrabold">Custom</span>
-                )}
+          {featuredCourses.map((course) => (
+            <div key={course.slug} className="flex flex-col rounded-lg border border-navy-100 bg-white p-8 shadow-soft">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">{course.category}</p>
+              <h3 className="mt-3 text-xl font-bold text-navy">{course.title}</h3>
+              <p className="mt-3 flex-1 text-sm leading-6 text-navy-400">{course.description}</p>
+
+              <div className="mt-6 flex items-end gap-2">
+                <span className="text-3xl font-semibold text-navy">Rs. {course.price.toLocaleString("en-IN")}</span>
+                {course.originalPrice ? (
+                  <span className="pb-1 text-sm font-semibold text-navy-400 line-through">Rs. {course.originalPrice.toLocaleString("en-IN")}</span>
+                ) : null}
               </div>
 
-              <ul className="mt-6 flex-1 space-y-3">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm">
-                    <Check
-                      className={cn(
-                        "mt-0.5 h-4 w-4 shrink-0",
-                        plan.highlighted ? "text-cyan-400" : "text-cyan-600"
-                      )}
-                    />
-                    <span className={plan.highlighted ? "text-white/80" : "text-navy-600"}>{f}</span>
+              <ul className="mt-6 space-y-3 text-sm text-navy-600">
+                {[course.duration, course.difficulty, "Secure Razorpay checkout"].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
 
-              <LinkButton
-                href={plan.name === "Corporate" ? "/contact" : "/signup"}
-                variant={plan.highlighted ? "secondary" : "outline"}
-                className="mt-8 w-full justify-center"
-              >
-                {plan.cta}
+              <LinkButton href={`/courses/${course.slug}`} variant="outline" className="mt-8 w-full justify-center">
+                View course
               </LinkButton>
             </div>
           ))}
         </div>
-      </Container>
 
+        <div className="mt-8 rounded-lg border border-navy-100 bg-mist-50 p-8 text-center">
+          <h2 className="text-2xl font-bold text-navy">Corporate Microsoft training</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-navy-400">
+            For team training, Atisunya Edutech prepares pricing after reviewing audience size, Microsoft topics, session format, and delivery timeline.
+          </p>
+          <LinkButton href="/contact" className="mt-6 justify-center">
+            Request a training plan
+          </LinkButton>
+        </div>
+      </Container>
     </div>
   );
 }

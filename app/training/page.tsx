@@ -98,7 +98,7 @@ export default function CorporateTrainingPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand-700">
               Corporate Training
             </p>
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight text-navy sm:text-5xl">
+            <h1 className="mt-6 text-3xl font-semibold leading-tight text-navy sm:text-4xl">
               Microsoft training designed for teams that need to move faster.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-navy-500 sm:text-lg">
@@ -127,7 +127,7 @@ export default function CorporateTrainingPage() {
                 { value: "On demand", label: "Custom scheduling" },
               ].map((item) => (
                 <div key={item.label} className="rounded-3xl border border-navy-100 bg-white p-5">
-                  <p className="text-3xl font-extrabold text-navy">{item.value}</p>
+                  <p className="text-3xl font-semibold text-navy">{item.value}</p>
                   <p className="mt-2 text-sm font-semibold text-navy-400">{item.label}</p>
                 </div>
               ))}
@@ -249,11 +249,11 @@ export default function CorporateTrainingPage() {
                 </span>
                 <div className="mt-4 space-y-4 text-white">
                   <div>
-                    <p className="text-4xl font-extrabold">92%</p>
+                    <p className="text-3xl font-semibold">92%</p>
                     <p className="text-sm text-white/80">of teams report faster project delivery.</p>
                   </div>
                   <div>
-                    <p className="text-4xl font-extrabold">87%</p>
+                    <p className="text-3xl font-semibold">87%</p>
                     <p className="text-sm text-white/80">improved cloud adoption confidence.</p>
                   </div>
                 </div>
@@ -261,7 +261,7 @@ export default function CorporateTrainingPage() {
 
               <div>
                 <p className="text-sm uppercase tracking-[0.24em] text-brand-100">Ready for your team</p>
-                <h3 className="mt-3 text-3xl font-extrabold text-white">
+                <h3 className="mt-3 text-3xl font-semibold text-white">
                   Build a measurable corporate learning program.
                 </h3>
                 <p className="mt-4 text-sm leading-7 text-white/80">

@@ -1,27 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
-  Facebook,
   Headphones,
-  Linkedin,
   Mail,
   Menu,
   Search,
-  ShoppingCart,
+  LayoutDashboard,
   UserRound,
   X,
-  Youtube,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Home", href: "/", hasDropdown:  false},
+  { label: "Home", href: "/", hasDropdown: false},
   { label: "About", href: "/about" },
   {
     label: "Training and Courses",
@@ -40,16 +37,11 @@ const navLinks = [
       },
     ],
   },
-  //{ label: "Pages", href: "/faq", hasDropdown: true },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
-const socialLinks = [
-  { label: "Facebook", href: "https://www.facebook.com", icon: Facebook },
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-  { label: "YouTube", href: "https://www.youtube.com", icon: Youtube },
-];
+const socialLinks: { label: string; href: string; icon: ComponentType<{ className?: string }> }[] = [];
 
 const headerContainer =
   "mx-auto w-full max-w-[1400px] px-5 md:px-8 lg:px-10";
@@ -189,7 +181,7 @@ export function Navbar() {
             aria-label="Open dashboard"
             className="relative flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
           >
-            <ShoppingCart className="h-6 w-6" />
+            <LayoutDashboard className="h-6 w-6" />
           </Link>
           <LinkButton
             href="/signup"
@@ -260,7 +252,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
-                  <ShoppingCart className="h-5 w-5" />
+                  <LayoutDashboard className="h-5 w-5" />
                 </Link>
                 <LinkButton
                   href="/signup"

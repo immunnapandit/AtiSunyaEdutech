@@ -69,7 +69,7 @@ export default function ContactPage() {
 
         <Container className="relative z-10 flex min-h-[300px] items-center justify-center text-center md:min-h-[360px]">
           <div className="max-w-3xl">
-            <h1 className="text-display-sm font-extrabold text-white md:text-display-md">
+            <h1 className="text-display-sm font-semibold text-white md:text-display-md">
               Contact Us
             </h1>
             <div className="mx-auto mt-5 inline-flex items-center gap-2.5 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-glow">
@@ -92,7 +92,7 @@ export default function ContactPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
                 Start the conversation
               </p>
-              <h2 className="mt-3 max-w-xl text-3xl font-extrabold text-navy md:text-display-sm">
+              <h2 className="mt-3 max-w-xl text-3xl font-semibold text-navy md:text-display-sm">
                 We&apos;re always excited to hear from you!
               </h2>
               <div className="mt-4 h-1.5 w-36 rounded-full bg-brand" />
@@ -121,7 +121,7 @@ export default function ContactPage() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-lg font-extrabold text-navy">
+                        <h3 className="text-lg font-semibold text-navy">
                           {item.title}
                         </h3>
                         <div className="mt-2 space-y-1 text-sm leading-6 text-navy-400 md:text-base">
@@ -164,7 +164,7 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-100">
                   Map location
                 </p>
-                <h2 className="mt-3 text-2xl font-extrabold text-white md:text-display-sm">
+                <h2 className="mt-3 text-2xl font-semibold text-white md:text-display-sm">
                   Find AtiSunya on the map
                 </h2>
                 <p className="mt-4 text-base leading-7 text-white/72">
@@ -175,7 +175,7 @@ export default function ContactPage() {
                   href="https://www.google.com/maps/search/?api=1&query=AtiSunya%20Edutech%20India"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-extrabold text-brand transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-brand-50"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-brand-50"
                 >
                   Open in Maps
                   <ExternalLink className="h-4 w-4" />

@@ -9,6 +9,7 @@ export async function apiRequest<T>(
   { token, headers, ...options }: ApiOptions = {}
 ): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
+    cache: options.cache ?? "no-store",
     ...options,
     headers: {
       "Content-Type": "application/json",

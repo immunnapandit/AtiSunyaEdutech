@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   BookOpenText,
@@ -7,7 +8,7 @@ import {
   ChevronRight,
   User,
 } from "lucide-react";
-import { blogPosts } from "@/data/blog-posts";
+import { apiRequest } from "@/lib/api";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +17,20 @@ export const metadata: Metadata = {
   description: "Insights, learning tips, and Microsoft training guidance from Atisunya Edutech.",
 };
 
+export const dynamic = "force-dynamic";
+
 const BLOGS_PER_PAGE = 6;
+
+type BlogPost = {
+  slug: string;
+  headline: string;
+  creator: string;
+  category: string;
+  summary: string;
+  thumbnailGradient: string;
+  featuredImage: string;
+  publishedDate: string;
+};
 
 type BlogPageProps = {
   searchParams?: Promise<{
@@ -32,13 +46,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams;
   const pageParam = Array.isArray(params?.page) ? params?.page[0] : params?.page;
   const requestedPage = Number(pageParam ?? "1");
-  const totalPages = Math.ceil(blogPosts.length / BLOGS_PER_PAGE);
-  const currentPage = Math.min(
-    Math.max(Number.isFinite(requestedPage) ? requestedPage : 1, 1),
-    totalPages
-  );
-  const startIndex = (currentPage - 1) * BLOGS_PER_PAGE;
-  const visiblePosts = blogPosts.slice(startIndex, startIndex + BLOGS_PER_PAGE);
+  const currentPage = Math.max(Number.isFinite(requestedPage) ? requestedPage : 1, 1);
+
+  const data = await apiRequest<{ posts: BlogPost[]; totalPages: number }>(
+    `/blog?page=${currentPage}&limit=${BLOGS_PER_PAGE}`
+  ).catch(() => ({ posts: [] as BlogPost[], totalPages: 1 }));
+
+  const totalPages = Math.max(1, data.totalPages);
+  const visiblePosts = data.posts;
 
   return (
     <div className="pt-site-header-loose pb-24">
@@ -65,19 +80,31 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 className="relative flex h-56 overflow-hidden p-6"
                 style={{ background: post.thumbnailGradient }}
               >
-                <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-white/50" />
-                <div className="absolute -bottom-10 left-8 h-28 w-28 rounded-full bg-white/40" />
+                {post.featuredImage ? (
+                  <Image
+                    src={post.featuredImage}
+                    alt={post.headline}
+                    fill
+                    sizes="(min-width: 1280px) 25vw, (min-width: 768px) 40vw, 92vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-white/50" />
+                    <div className="absolute -bottom-10 left-8 h-28 w-28 rounded-full bg-white/40" />
+                    <div className="relative mt-auto flex items-end gap-4">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-royal-700 shadow-soft">
+                        <BookOpenText className="h-7 w-7" />
+                      </span>
+                      <span className="max-w-[13rem] text-lg font-semibold leading-snug text-navy">
+                        {post.category} insight
+                      </span>
+                    </div>
+                  </>
+                )}
                 <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand">
                   {post.category}
                 </span>
-                <div className="relative mt-auto flex items-end gap-4">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-royal-700 shadow-soft">
-                    <BookOpenText className="h-7 w-7" />
-                  </span>
-                  <span className="max-w-[13rem] text-lg font-bold leading-snug text-navy">
-                    {post.category} insight
-                  </span>
-                </div>
               </Link>
 
               <div className="p-6">
@@ -91,7 +118,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     {post.creator}
                   </span>
                 </div>
-                <h2 className="mt-4 text-xl font-bold leading-snug text-navy">
+                <h2 className="mt-4 text-xl font-semibold leading-snug text-navy">
                   <Link
                     href={`/blog/${post.slug}`}
                     className="transition-colors hover:text-brand"

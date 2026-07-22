@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
     <div className="pt-32 pb-24">
       <Container className="max-w-3xl">
         <Eyebrow>Legal</Eyebrow>
-        <h1 className="mt-3 text-display-md font-extrabold text-navy">Privacy Policy</h1>
+        <h1 className="mt-3 text-display-md font-semibold text-navy">Privacy Policy</h1>
         <p className="mt-3 text-sm text-navy-400">Last updated: June 1, 2026</p>
 
         <div className="mt-10 space-y-8">

@@ -1,37 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Folder, User } from "lucide-react";
-import { Container } from "@/components/ui/primitives";
+import { apiRequest } from "@/lib/api";
+import { Container, Eyebrow } from "@/components/ui/primitives";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
-const sidePosts = [
-  { month: "JAN", day: "20", title: "Choosing the right Microsoft training path for your team" },
-  { month: "FEB", day: "26", title: "How hands-on labs improve Microsoft service adoption" },
-  { month: "JAN", day: "28", title: "What teams need before a Dynamics 365 rollout" },
-];
+type BlogPost = {
+  slug: string;
+  headline: string;
+  creator: string;
+  category: string;
+  summary: string;
+  thumbnailGradient: string;
+  featuredImage: string;
+  publishedAt: string;
+};
 
-const articleCards = [
-  {
-    title: "Building enterprise-ready skills with Azure and Power Platform",
-    date: "28 JANUARY, 2026",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85",
-  },
-  {
-    title: "Why corporate Microsoft training works best with real use cases",
-    date: "28 JANUARY, 2026",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85",
-  },
-];
-
-function Meta() {
+function Meta({ creator, category }: { creator: string; category: string }) {
   return (
     <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase text-navy-400">
-      <span className="flex items-center gap-1.5"><User className="h-3.5 w-3.5" /> By Admin</span>
-      <span className="flex items-center gap-1.5"><Folder className="h-3.5 w-3.5" /> Microsoft Training</span>
+      <span className="flex items-center gap-1.5"><User className="h-3.5 w-3.5" /> By {creator}</span>
+      <span className="flex items-center gap-1.5"><Folder className="h-3.5 w-3.5" /> {category}</span>
     </div>
   );
 }
 
-function DateBadge({ month, day }: { month: string; day: string }) {
+function DateBadge({ date }: { date: string }) {
+  const parsed = date ? new Date(date) : null;
+  const month = parsed ? parsed.toLocaleDateString("en-US", { month: "short" }).toUpperCase() : "";
+  const day = parsed ? parsed.getDate().toString().padStart(2, "0") : "";
+
   return (
     <span className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-signal text-navy">
       <span className="text-sm font-bold leading-none">{month}</span>
@@ -40,55 +38,76 @@ function DateBadge({ month, day }: { month: string; day: string }) {
   );
 }
 
-export function LatestNews() {
+export async function LatestNews() {
+  const data = await apiRequest<{ posts: BlogPost[] }>("/blog?limit=5").catch(() => ({ posts: [] as BlogPost[] }));
+  const posts = data.posts;
+
+  if (posts.length === 0) {
+    return null;
+  }
+
+  const sidePosts = posts.slice(0, 3);
+  const articleCards = posts.slice(3, 5);
+
   return (
     <section className="bg-white py-16 md:py-20">
       <Container>
-        <div className="text-center">
-          <div className="inline-flex items-center gap-3 text-base font-bold text-royal-700">
-            <span className="h-px w-12 bg-royal-700" />
-            Microsoft Insights
-            <span className="h-px w-12 bg-royal-700" />
-          </div>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <Eyebrow align="center">Microsoft Insights</Eyebrow>
           <h2 className="mt-4 heading-section text-navy">
             Corporate Training Insights
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="rounded-lg bg-white p-6 shadow-lifted">
+        <Stagger className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3" delay={0.1}>
+          <StaggerItem className="card-hover rounded-lg bg-white p-6 shadow-lifted">
             {sidePosts.map((post, index) => (
-              <article key={post.title} className={index === 0 ? "pb-6" : "border-t border-navy-100 py-6 last:pb-0"}>
-                <div className="flex gap-4">
-                  <DateBadge month={post.month} day={post.day} />
+              <article key={post.slug} className={index === 0 ? "pb-6" : "border-t border-navy-100 py-6 last:pb-0"}>
+                <Link href={`/blog/${post.slug}`} className="flex gap-4">
+                  <DateBadge date={post.publishedAt} />
                   <div>
-                    <Meta />
-                    <h3 className="mt-3 text-xl font-bold leading-snug text-navy">{post.title}</h3>
+                    <Meta creator={post.creator} category={post.category} />
+                    <h3 className="mt-3 text-xl font-semibold leading-snug text-navy transition-colors hover:text-brand">
+                      {post.headline}
+                    </h3>
                   </div>
-                </div>
+                </Link>
               </article>
             ))}
-          </div>
+          </StaggerItem>
 
-          {articleCards.map((article) => (
-            <article key={article.title} className="overflow-hidden rounded-lg bg-white shadow-lifted">
-              <div className="relative h-56">
-                <Image src={article.image} alt={article.title} fill sizes="(min-width: 1024px) 30vw, 92vw" className="object-cover" />
-                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-bold text-navy">{article.date}</span>
-              </div>
+          {articleCards.map((post) => (
+            <StaggerItem key={post.slug} className="card-hover group overflow-hidden rounded-lg bg-white shadow-lifted">
+              <Link href={`/blog/${post.slug}`} className="relative block h-56 overflow-hidden" style={{ background: post.thumbnailGradient }}>
+                {post.featuredImage && (
+                  <Image
+                    src={post.featuredImage}
+                    alt={post.headline}
+                    fill
+                    sizes="(min-width: 1024px) 30vw, 92vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
+                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-bold text-navy">
+                  {new Date(post.publishedAt).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }).toUpperCase()}
+                </span>
+              </Link>
               <div className="p-6 pt-10">
-                <Meta />
-                <h3 className="mt-5 text-xl font-bold leading-snug text-navy">{article.title}</h3>
-                <Link href="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase text-navy transition-colors hover:text-royal-700">
+                <Meta creator={post.creator} category={post.category} />
+                <h3 className="mt-5 text-xl font-semibold leading-snug text-navy">
+                  <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-brand">
+                    {post.headline}
+                  </Link>
+                </h3>
+                <Link href={`/blog/${post.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase text-navy transition-colors hover:text-royal-700">
                   Read Insight
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
-            </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </Container>
     </section>
   );
 }
-

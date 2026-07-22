@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Chrome, Building2 } from "lucide-react";
 import { apiRequest, formToObject } from "@/lib/api";
+import { signInWithGoogle, signInWithMicrosoft } from "@/lib/social-auth";
 import Image from "next/image";
 
 import Link from "next/link";
@@ -19,6 +19,13 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<"google" | "microsoft" | null>(null);
+
+  function completeAuth(token: string) {
+    localStorage.setItem("atisunya_token", token);
+    const redirectTo = new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+    router.push(redirectTo);
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,9 +42,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           method: "POST",
           body: JSON.stringify(payload),
         });
-        localStorage.setItem("atisunya_token", data.token);
-        const redirectTo = new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
-        router.push(redirectTo);
+        completeAuth(data.token);
         return;
       }
 
@@ -46,9 +51,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           method: "POST",
           body: JSON.stringify(payload),
         });
-        localStorage.setItem("atisunya_token", data.token);
-        const redirectTo = new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
-        router.push(redirectTo);
+        completeAuth(data.token);
         return;
       }
 
@@ -65,21 +68,46 @@ export function AuthForm({ mode }: { mode: Mode }) {
     }
   }
 
+  async function handleGoogleSignIn() {
+    setError("");
+    setMessage("");
+    setSocialLoading("google");
+
+    try {
+      const credential = await signInWithGoogle();
+      const data = await apiRequest<{ token: string }>("/auth/google", {
+        method: "POST",
+        body: JSON.stringify({ credential }),
+      });
+      completeAuth(data.token);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google sign-in failed.");
+    } finally {
+      setSocialLoading(null);
+    }
+  }
+
+  async function handleMicrosoftSignIn() {
+    setError("");
+    setMessage("");
+    setSocialLoading("microsoft");
+
+    try {
+      const idToken = await signInWithMicrosoft();
+      const data = await apiRequest<{ token: string }>("/auth/microsoft", {
+        method: "POST",
+        body: JSON.stringify({ idToken }),
+      });
+      completeAuth(data.token);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Microsoft sign-in failed.");
+    } finally {
+      setSocialLoading(null);
+    }
+  }
+
   return (
     <form className="space-y-5" onSubmit={onSubmit}>
-   
-
-<div className="relative py-2">
-  <div className="absolute inset-0 flex items-center">
-    <div className="w-full border-t border-slate-200"></div>
-  </div>
-
-  <div className="relative flex justify-center">
-    <span className="bg-white px-4 text-sm text-slate-400">
-      OR
-    </span>
-  </div>
-</div>
       {mode === "signup" && (
         <div>
           <label className="text-sm font-medium text-slate-700" htmlFor="name">
@@ -155,47 +183,54 @@ export function AuthForm({ mode }: { mode: Mode }) {
               ? "Create account"
               : "Send reset link"}
       </Button>
-      <div className="relative my-6">
-  <div className="absolute inset-0 flex items-center">
-    <div className="w-full border-t border-slate-200"></div>
-  </div>
 
-  <div className="relative flex justify-center">
-    <span className="bg-white px-4 text-sm text-slate-400">
-      OR
-    </span>
-  </div>
-</div>
+      {mode !== "forgot-password" && (
+        <>
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200"></div>
+            </div>
 
-<div className="space-y-3">
+            <div className="relative flex justify-center">
+              <span className="bg-white px-4 text-sm text-slate-400">
+                OR
+              </span>
+            </div>
+          </div>
 
- <button
-  type="button"
-  className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md"
->
-  <Image
-    src="/images/logos/google.svg"
-    alt="Google"
-    width={20}
-    height={20}
-  />
-  <span>Sign in with Google</span>
-</button>
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              disabled={loading || socialLoading !== null}
+              className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <Image
+                src="/images/logos/google.svg"
+                alt="Google"
+                width={20}
+                height={20}
+              />
+              <span>{socialLoading === "google" ? "Please wait..." : "Sign in with Google"}</span>
+            </button>
 
-<button
-  type="button"
-  className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md"
->
-  <Image
-    src="/images/logos/microsoft.svg"
-    alt="Microsoft"
-    width={20}
-    height={20}
-  />
-  <span>Sign in with Microsoft</span>
-</button>
-
-</div>
+            <button
+              type="button"
+              onClick={handleMicrosoftSignIn}
+              disabled={loading || socialLoading !== null}
+              className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <Image
+                src="/images/logos/microsoft.svg"
+                alt="Microsoft"
+                width={20}
+                height={20}
+              />
+              <span>{socialLoading === "microsoft" ? "Please wait..." : "Sign in with Microsoft"}</span>
+            </button>
+          </div>
+        </>
+      )}
     </form>
   );
 }

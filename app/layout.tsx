@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
@@ -49,11 +55,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

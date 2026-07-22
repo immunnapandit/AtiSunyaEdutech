@@ -1,29 +1,26 @@
 "use client";
 
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { Container } from "@/components/ui/primitives";
+import { BookOpenCheck, Building2, ShieldCheck, Star } from "lucide-react";
+import { Container, Eyebrow } from "@/components/ui/primitives";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
-const testimonials = [
+const outcomes = [
   {
-    name: "Alex Feroundo",
-    role: "IT Operations Lead",
-    quote: "Atisunya helped our team understand Dynamics 365 workflows clearly. The hands-on demos made configuration and adoption much easier.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=180&q=80",
+    title: "Dynamics 365 implementation readiness",
+    body: "Training focuses on business workflows, configuration confidence, and practical adoption steps for teams using Dynamics 365.",
+    icon: Building2,
     tone: "bg-royal-50",
   },
   {
-    name: "Kallu Mastan",
-    role: "Dynamics 365 Practice",
-    quote: "The Azure and Power Platform sessions were practical, focused, and directly useful for our internal projects.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80",
+    title: "Azure and Power Platform enablement",
+    body: "Learners work through Microsoft cloud, automation, app maker, analytics, and deployment topics with practical exercises.",
+    icon: BookOpenCheck,
     tone: "bg-cyan-100/50",
   },
   {
-    name: "Devid Max",
-    role: "Enterprise Learning Team",
-    quote: "The Copilot and AI workshops gave our team confidence to evaluate use cases, governance, and implementation steps.",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=180&q=80",
+    title: "Secure AI and compliance awareness",
+    body: "Copilot, Azure AI, Microsoft Entra ID, and security topics are framed around governance, access, and responsible adoption.",
+    icon: ShieldCheck,
     tone: "bg-signal-100/60",
   },
 ];
@@ -41,57 +38,40 @@ function RatingStars() {
 export function TestimonialsSection() {
   return (
     <section className="relative overflow-hidden bg-white py-16 md:py-20">
-      <div className="pointer-events-none absolute -left-28 top-16 h-[520px] w-[520px] rounded-full bg-royal-50/50" />
-      <div className="pointer-events-none absolute -right-16 top-36 h-[320px] w-[320px] rounded-full bg-mist-100" />
-
       <Container className="relative">
-        <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Client Feedback</p>
-          <h2 className="mt-3 text-[2rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            What <span className="text-royal-700 underline decoration-signal underline-offset-8">Teams Say</span>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <Eyebrow align="center">Training Outcomes</Eyebrow>
+          <h2 className="heading-section mt-4 text-navy">
+            Microsoft learning built for practical adoption
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="mt-2 hidden justify-end gap-4 pr-8 lg:flex">
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Previous client feedback">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Next client feedback">
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-
-        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch">
-          {testimonials.map((item, index) => (
-            <article key={item.name} className="overflow-hidden rounded-lg bg-white shadow-lifted">
-              {index !== 1 && (
+        <Stagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch" delay={0.1}>
+          {outcomes.map((item) => {
+            const Icon = item.icon;
+            return (
+              <StaggerItem
+                key={item.title}
+                className="card-hover overflow-hidden rounded-lg bg-white shadow-lifted"
+              >
                 <div className={`flex items-center gap-4 ${item.tone} p-5`}>
-                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-lg border-4 border-white bg-white text-brand">
+                    <Icon className="h-8 w-8" />
+                  </span>
                   <div>
-                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
-                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
+                    <h3 className="text-xl font-bold text-navy">{item.title}</h3>
+                    <p className="mt-1 text-sm font-semibold text-navy-400">Atisunya Edutech</p>
                   </div>
                 </div>
-              )}
-              <div className="p-6">
-                <RatingStars />
-                <p className="mt-5 text-base font-medium leading-7 text-navy-400">{item.quote}</p>
-              </div>
-              {index === 1 && (
-                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
-                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
-                  <div>
-                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
-                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
-                  </div>
+                <div className="p-6">
+                  <RatingStars />
+                  <p className="mt-5 text-base font-medium leading-7 text-navy-400">{item.body}</p>
                 </div>
-              )}
-            </article>
-          ))}
-        </div>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
       </Container>
     </section>
   );
 }
-
-

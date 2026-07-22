@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
-import { courses } from "@/data/courses";
+import { apiRequest } from "@/lib/api";
 import Image from "next/image";
 import {
   Star,
@@ -16,9 +16,22 @@ import {
   Globe,
   CalendarDays,
 } from "lucide-react";
+import type { Course } from "@/types";
 
-export function generateStaticParams() {
-  return courses.map((c) => ({ slug: c.slug }));
+export const dynamic = "force-dynamic";
+
+type CourseDetail = Course & {
+  curriculum?: { title: string; lessons: string[] }[];
+  faqs?: { question: string; answer: string }[];
+};
+
+async function getCourse(slug: string): Promise<CourseDetail | null> {
+  try {
+    const data = await apiRequest<{ course: CourseDetail }>(`/courses/${slug}`);
+    return data.course;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({
@@ -27,15 +40,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const course = courses.find((c) => c.slug === slug);
+  const course = await getCourse(slug);
+
   if (!course) return {};
+
   return {
     title: course.title,
     description: course.description,
   };
 }
 
-const curriculum = [
+const fallbackCurriculum = [
   "Foundations & environment setup",
   "Core concepts through applied exercises",
   "Building your first production-grade project",
@@ -50,8 +65,11 @@ export default async function CourseDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const course = courses.find((c) => c.slug === slug);
+  const course = await getCourse(slug);
   if (!course) notFound();
+
+  const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
+  const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
 
   return (
     <div className="pt-48 pb-24 md:pt-56">
@@ -82,17 +100,19 @@ export default async function CourseDetailsPage({
             </span>
           </div>
 
-          <div className="relative mt-8 h-[380px] overflow-hidden rounded-2xl shadow-lg">
-            <Image
-              src={course.image}
-              alt={course.title}
-              fill
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover object-right"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-          </div>
+          {course.image && (
+            <div className="relative mt-8 h-[380px] overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src={course.image}
+                alt={course.title}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover object-right"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+            </div>
+          )}
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div className="flex items-center gap-4 rounded-xl border border-navy-100 p-4 transition hover:shadow-md">
@@ -154,8 +174,8 @@ export default async function CourseDetailsPage({
                 <CalendarDays className="h-6 w-6 text-royal-600" />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wider text-navy-400">Updated</p>
-                <p className="font-semibold text-navy">July 2026</p>
+                <p className="text-xs uppercase tracking-wider text-navy-400">Duration</p>
+                <p className="font-semibold text-navy">{course.duration}</p>
               </div>
             </div>
           </div>
@@ -164,19 +184,57 @@ export default async function CourseDetailsPage({
             <h2 className="text-xl font-bold text-navy">What you&apos;ll cover</h2>
 
             <div className="mt-5 space-y-3">
-              {curriculum.map((item, i) => (
-                <div
-                  key={item}
-                  className="flex min-h-[80px] w-full items-center gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
-                >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
-                    {i + 1}
-                  </span>
-                  <span className="text-sm font-medium text-navy-600">{item}</span>
-                </div>
-              ))}
+              {curriculumModules.length > 0
+                ? curriculumModules.map((module, i) => (
+                    <div
+                      key={module.title}
+                      className="flex w-full items-start gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
+                        {i + 1}
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-navy">{module.title}</p>
+                        {module.lessons.length > 0 && (
+                          <ul className="mt-2 space-y-1 text-sm text-navy-500">
+                            {module.lessons.map((lesson) => (
+                              <li key={lesson}>{lesson}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                : fallbackCurriculum.map((item, i) => (
+                    <div
+                      key={item}
+                      className="flex min-h-[80px] w-full items-center gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm font-medium text-navy-600">{item}</span>
+                    </div>
+                  ))}
             </div>
           </section>
+
+          {faqs.length > 0 && (
+            <section className="mt-12 w-full text-left">
+              <h2 className="text-xl font-bold text-navy">Frequently asked questions</h2>
+              <div className="mt-5 space-y-3">
+                {faqs.map((faq) => (
+                  <div
+                    key={faq.question}
+                    className="rounded-xl border border-navy-100 bg-white px-6 py-5"
+                  >
+                    <p className="text-sm font-semibold text-navy">{faq.question}</p>
+                    <p className="mt-2 text-sm leading-6 text-navy-500">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         <aside className="h-fit rounded-lg border border-navy-100 p-6 shadow-lifted lg:sticky lg:top-28">
@@ -229,4 +287,3 @@ export default async function CourseDetailsPage({
     </div>
   );
 }
-

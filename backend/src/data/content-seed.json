@@ -1,0 +1,557 @@
+{
+  "courses": [
+    {
+      "slug": "microsoft-dynamics-365-functional-training",
+      "title": "Microsoft Dynamics 365 Functional Training",
+      "category": "Dynamics 365",
+      "difficulty": "Intermediate",
+      "duration": "6 weeks",
+      "studentsCount": 3420,
+      "instructor": "Microsoft Training Team",
+      "instructorAvatar": "MS",
+      "rating": 4.9,
+      "reviewCount": 612,
+      "price": 23714,
+      "originalPrice": 33238,
+      "thumbnail": "design-systems",
+      "image": "/images/courses/dynamics365.png",
+      "thumbnailGradient": "from-royal-100 via-royal/20 to-cyan-100",
+      "description": "Learn Dynamics 365 Sales, Customer Service, Finance, and business workflows through practical enterprise scenarios.",
+      "featured": true
+    },
+    {
+      "slug": "azure-cloud-administration-architecture",
+      "title": "Azure Cloud Administration & Architecture",
+      "category": "Azure Cloud",
+      "difficulty": "Intermediate",
+      "duration": "10 weeks",
+      "studentsCount": 8210,
+      "instructor": "Azure Enablement Team",
+      "instructorAvatar": "AZ",
+      "rating": 4.8,
+      "reviewCount": 1904,
+      "price": 31332,
+      "originalPrice": 42760,
+      "thumbnail": "fullstack",
+      "image": "/images/courses/azure.png",
+      "thumbnailGradient": "from-navy-100 via-royal-50 to-cyan-100",
+      "description": "Build confidence in Azure compute, networking, identity, storage, monitoring, and enterprise cloud architecture.",
+      "featured": true
+    },
+    {
+      "slug": "microsoft-copilot-ai-services-training",
+      "title": "Microsoft Copilot & AI Services Training",
+      "category": "Microsoft AI",
+      "difficulty": "Advanced",
+      "duration": "8 weeks",
+      "studentsCount": 5130,
+      "instructor": "AI Solutions Team",
+      "instructorAvatar": "AI",
+      "rating": 4.9,
+      "reviewCount": 887,
+      "price": 37999,
+      "thumbnail": "ml",
+      "image": "/images/courses/copilot.png",
+      "thumbnailGradient": "from-cyan-100 via-royal-50 to-navy-100",
+      "description": "Train teams on Copilot Studio, Azure AI services, prompt workflows, and secure AI adoption for business users.",
+      "featured": true
+    },
+    {
+      "slug": "power-platform-app-maker-program",
+      "title": "Power Platform App Maker Program",
+      "category": "Power Platform",
+      "difficulty": "Beginner",
+      "duration": "5 weeks",
+      "studentsCount": 6720,
+      "instructor": "Power Platform Team",
+      "instructorAvatar": "PP",
+      "rating": 4.7,
+      "reviewCount": 1120,
+      "price": 18951,
+      "thumbnail": "pm",
+      "image": "/images/courses/powerplatform.png",
+      "thumbnailGradient": "from-royal-50 via-mist-100 to-royal-100",
+      "description": "Create business apps and automated workflows with Power Apps, Power Automate, Dataverse, and Power BI."
+    },
+    {
+      "slug": "azure-devops-cloud-deployment",
+      "title": "Azure DevOps & Cloud Deployment",
+      "category": "Azure Cloud",
+      "difficulty": "Advanced",
+      "duration": "9 weeks",
+      "studentsCount": 4310,
+      "instructor": "Cloud Delivery Team",
+      "instructorAvatar": "CD",
+      "rating": 4.8,
+      "reviewCount": 703,
+      "price": 36094,
+      "thumbnail": "cloud",
+      "image": "/images/courses/devops.png",
+      "thumbnailGradient": "from-navy-100 via-cyan-100 to-royal-50",
+      "description": "Upskill teams on CI/CD, Azure DevOps, GitHub workflows, IaC basics, monitoring, and release governance."
+    },
+    {
+      "slug": "dynamics-365-crm-customization",
+      "title": "Dynamics 365 CRM Customization",
+      "category": "Dynamics 365",
+      "difficulty": "Beginner",
+      "duration": "4 weeks",
+      "studentsCount": 2980,
+      "instructor": "Microsoft Training Team",
+      "instructorAvatar": "MS",
+      "rating": 4.9,
+      "reviewCount": 540,
+      "price": 17048,
+      "thumbnail": "brand",
+      "image": "/images/courses/crm.png",
+      "thumbnailGradient": "from-cyan-100 via-mist-100 to-royal-100",
+      "description": "Configure model-driven apps, forms, views, business rules, security roles, and CRM process automation."
+    },
+    {
+      "slug": "microsoft-security-compliance-essentials",
+      "title": "Microsoft Security & Compliance Essentials",
+      "category": "Security",
+      "difficulty": "Beginner",
+      "duration": "6 weeks",
+      "studentsCount": 3860,
+      "instructor": "Security Training Team",
+      "instructorAvatar": "SC",
+      "rating": 4.7,
+      "reviewCount": 511,
+      "price": 21809,
+      "thumbnail": "security",
+      "image": "/images/courses/security.png",
+      "thumbnailGradient": "from-navy-100 via-royal-50 to-mist-100",
+      "description": "Understand Microsoft Entra ID, access control, compliance basics, security posture, and governance practices."
+    },
+    {
+      "slug": "power-bi-microsoft-fabric-analytics",
+      "title": "Power BI & Microsoft Fabric Analytics",
+      "category": "Power Platform",
+      "difficulty": "Intermediate",
+      "duration": "7 weeks",
+      "studentsCount": 7040,
+      "instructor": "AI Solutions Team",
+      "instructorAvatar": "AI",
+      "rating": 4.8,
+      "reviewCount": 1330,
+      "price": 24666,
+      "originalPrice": 29999,
+      "thumbnail": "data",
+      "image": "/images/courses/powerbi.png",
+      "thumbnailGradient": "from-royal-100 via-cyan-100 to-mist-100",
+      "description": "Build dashboards, semantic models, reporting workflows, and analytics skills across Power BI and Fabric."
+    }
+  ],
+  "categories": [
+    {
+      "name": "Dynamics 365",
+      "count": 18,
+      "icon": "target"
+    },
+    {
+      "name": "Azure Cloud",
+      "count": 34,
+      "icon": "cloud"
+    },
+    {
+      "name": "Microsoft AI",
+      "count": 22,
+      "icon": "brain"
+    },
+    {
+      "name": "Power Platform",
+      "count": 12,
+      "icon": "code"
+    },
+    {
+      "name": "Corporate Training",
+      "count": 16,
+      "icon": "briefcase"
+    },
+    {
+      "name": "Security",
+      "count": 9,
+      "icon": "shield"
+    }
+  ],
+  "blogPosts": [
+    {
+      "slug": "guided-projects-job-ready",
+      "creator": "Atisunya Team",
+      "publishedDate": "28 January, 2026",
+      "headline": "How guided projects help learners become job-ready faster",
+      "category": "Learning",
+      "summary": "Guided projects help learners turn Microsoft concepts into practical workplace confidence by combining instruction, feedback, and applied delivery.",
+      "readingTime": "5 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef6ff 0%, #dceeff 100%)",
+      "sections": [
+        {
+          "heading": "Practice closes the confidence gap",
+          "body": "Most teams do not struggle because they lack videos. They struggle because they need a realistic path from concept to execution. Guided projects create that path by asking learners to configure services, solve scenarios, and explain decisions as they work."
+        },
+        {
+          "heading": "Feedback makes the learning stick",
+          "body": "Instructor review turns a finished assignment into a repeatable skill. Learners understand what they did well, where risk remains, and how to improve before the same pattern appears in production work."
+        },
+        {
+          "heading": "The result is work-ready evidence",
+          "body": "A well-scoped Microsoft project gives learners something concrete to discuss with managers, clients, or hiring teams: the business problem, the selected service, the configuration choices, and the outcome."
+        }
+      ]
+    },
+    {
+      "slug": "live-classes-mentor-feedback",
+      "creator": "Priya Sharma",
+      "publishedDate": "12 February, 2026",
+      "headline": "Building consistency with live classes and mentor feedback",
+      "category": "Mentorship",
+      "summary": "Live cohorts help learners keep momentum through scheduled practice, peer discussion, and timely mentor guidance.",
+      "readingTime": "4 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #f7fafd 0%, #eef3fa 100%)",
+      "sections": [
+        {
+          "heading": "Structure reduces drop-off",
+          "body": "A scheduled cohort gives learners a clear rhythm. Weekly sessions, labs, and review checkpoints make progress visible and reduce the chance that training becomes another unfinished tab."
+        },
+        {
+          "heading": "Mentors turn questions into decisions",
+          "body": "Good mentor feedback does more than answer questions. It helps learners choose the right service, understand tradeoffs, and connect features to business outcomes."
+        },
+        {
+          "heading": "Teams learn faster together",
+          "body": "When learners compare approaches, they see patterns that do not appear in isolated study. That shared context is especially valuable for Microsoft cloud, security, CRM, and automation work."
+        }
+      ]
+    },
+    {
+      "slug": "right-certification-path",
+      "creator": "Rahul Mehta",
+      "publishedDate": "04 March, 2026",
+      "headline": "Choosing the right certification path for your next career move",
+      "category": "Careers",
+      "summary": "The best certification path starts with the role you want, then maps Microsoft skills, labs, and exam readiness around that goal.",
+      "readingTime": "6 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef6ff 0%, #f7fafd 100%)",
+      "sections": [
+        {
+          "heading": "Start with the role, not the exam",
+          "body": "A certification is most useful when it supports a clear role target. Administrators, app makers, analysts, developers, and security specialists need different proof of capability."
+        },
+        {
+          "heading": "Balance fundamentals with application",
+          "body": "Foundational learning gives vocabulary and confidence. Applied labs prove that learners can configure services, diagnose issues, and communicate decisions under realistic constraints."
+        },
+        {
+          "heading": "Build a path that can be measured",
+          "body": "A strong learning path should include milestones: readiness checks, lab outcomes, mock assessments, and a final project that validates the target skill set."
+        }
+      ]
+    },
+    {
+      "slug": "portfolio-that-gets-reviewed",
+      "creator": "Neha Kapoor",
+      "publishedDate": "18 March, 2026",
+      "headline": "What makes a course portfolio worth showing to employers",
+      "category": "Portfolio",
+      "summary": "A useful portfolio shows the problem, the Microsoft service choices, implementation evidence, and the learner's reasoning.",
+      "readingTime": "5 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef3fa 0%, #dceeff 100%)",
+      "sections": [
+        {
+          "heading": "Show the business context",
+          "body": "Employers want to know why a solution exists. A good portfolio explains the workflow, users, constraints, and success criteria before showing screens or configurations."
+        },
+        {
+          "heading": "Document decisions clearly",
+          "body": "The strongest project writeups explain why a Microsoft service was selected, what alternatives were considered, and how security, maintainability, and usability were handled."
+        },
+        {
+          "heading": "Keep evidence practical",
+          "body": "Screenshots, diagrams, configuration notes, and short demos help reviewers understand what the learner can actually do without reading a long report."
+        }
+      ]
+    },
+    {
+      "slug": "learning-schedule-that-sticks",
+      "creator": "Amit Verma",
+      "publishedDate": "02 April, 2026",
+      "headline": "Creating a weekly learning schedule that actually sticks",
+      "category": "Productivity",
+      "summary": "A realistic schedule protects time for concepts, guided labs, review, and recovery instead of relying on motivation alone.",
+      "readingTime": "4 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #f7fafd 0%, #e2e8f0 100%)",
+      "sections": [
+        {
+          "heading": "Make the week predictable",
+          "body": "Learners progress faster when study blocks have a purpose. Separate concept review, lab work, Q&A, and recap time so each session has a clear outcome."
+        },
+        {
+          "heading": "Use small deliverables",
+          "body": "A small weekly deliverable keeps momentum visible. It could be a configured workflow, a dashboard, a security policy, or a short explanation of a tradeoff."
+        },
+        {
+          "heading": "Plan for review",
+          "body": "Review is where knowledge becomes dependable. Teams should revisit errors, update notes, and repeat important configurations until they can perform them confidently."
+        }
+      ]
+    },
+    {
+      "slug": "corporate-training-outcomes",
+      "creator": "Atisunya Team",
+      "publishedDate": "16 April, 2026",
+      "headline": "How corporate training improves when teams build together",
+      "category": "Teams",
+      "summary": "Team training works best when learners solve shared scenarios and leave with reusable patterns for their own Microsoft environment.",
+      "readingTime": "5 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef6ff 0%, #eef3fa 100%)",
+      "sections": [
+        {
+          "heading": "Shared scenarios create alignment",
+          "body": "Corporate learners need more than generic examples. When training uses the team's workflows, learners can discuss real constraints and agree on practical standards."
+        },
+        {
+          "heading": "Labs reveal process gaps",
+          "body": "Hands-on work quickly shows where permissions, data quality, naming conventions, or environment setup need attention before broader rollout."
+        },
+        {
+          "heading": "The output should be reusable",
+          "body": "A strong cohort leaves behind templates, checklists, and examples that the team can reuse after the training engagement ends."
+        }
+      ]
+    },
+    {
+      "slug": "feedback-loop-for-beginners",
+      "creator": "Kavya Nair",
+      "publishedDate": "30 April, 2026",
+      "headline": "Why beginners need a real feedback loop, not only videos",
+      "category": "Feedback",
+      "summary": "Beginners need correction, encouragement, and examples of better decisions so they can build durable habits early.",
+      "readingTime": "4 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #f7fafd 0%, #dceeff 100%)",
+      "sections": [
+        {
+          "heading": "Videos cannot see confusion",
+          "body": "Self-paced content is useful, but it cannot notice when a learner misunderstands a concept. Feedback catches those gaps before they become habits."
+        },
+        {
+          "heading": "Correction builds confidence",
+          "body": "Beginners often need confirmation that their approach is reasonable. Specific feedback gives them the confidence to keep building and the clarity to improve."
+        },
+        {
+          "heading": "Good feedback is actionable",
+          "body": "The best feedback tells learners what to change, why it matters, and how to verify that the next attempt is better."
+        }
+      ]
+    },
+    {
+      "slug": "career-switch-learning-plan",
+      "creator": "Samar Singh",
+      "publishedDate": "14 May, 2026",
+      "headline": "A practical learning plan for switching into tech careers",
+      "category": "Careers",
+      "summary": "Career switchers need a focused sequence of fundamentals, Microsoft platform skills, projects, and interview preparation.",
+      "readingTime": "6 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef3fa 0%, #f7fafd 100%)",
+      "sections": [
+        {
+          "heading": "Choose a narrow target",
+          "body": "Switchers make faster progress when they choose one role direction first, such as Power Platform maker, Azure administrator, BI analyst, or Dynamics consultant."
+        },
+        {
+          "heading": "Build proof while learning",
+          "body": "Each module should produce evidence: a workflow, a dashboard, a deployment note, or a short case study that demonstrates applied understanding."
+        },
+        {
+          "heading": "Prepare the story",
+          "body": "Interview readiness is not only technical. Learners need to explain why they chose the path, what they built, what they learned, and where they can contribute first."
+        }
+      ]
+    },
+    {
+      "slug": "capstone-project-ideas",
+      "creator": "Isha Malhotra",
+      "publishedDate": "28 May, 2026",
+      "headline": "Capstone project ideas that prove real workplace ability",
+      "category": "Projects",
+      "summary": "A strong capstone connects Microsoft services to a business workflow, measurable outcome, and clear implementation choices.",
+      "readingTime": "5 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #dceeff 0%, #f7fafd 100%)",
+      "sections": [
+        {
+          "heading": "Automate a repeatable workflow",
+          "body": "Power Platform projects are strongest when they reduce manual work. Choose approvals, notifications, reporting, or data collection workflows with clear before-and-after value."
+        },
+        {
+          "heading": "Model a secure cloud pattern",
+          "body": "Azure projects can show maturity by including identity, monitoring, cost awareness, and deployment notes rather than only a running resource."
+        },
+        {
+          "heading": "Tell the implementation story",
+          "body": "A capstone should explain the problem, architecture, configuration, validation, and lessons learned in a way a reviewer can quickly trust."
+        }
+      ]
+    },
+    {
+      "slug": "interview-prep-through-practice",
+      "creator": "Atisunya Team",
+      "publishedDate": "11 June, 2026",
+      "headline": "Preparing for interviews through practical course work",
+      "category": "Interviews",
+      "summary": "Practice-based preparation helps learners answer with examples instead of memorized definitions.",
+      "readingTime": "4 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #eef6ff 0%, #e2e8f0 100%)",
+      "sections": [
+        {
+          "heading": "Examples beat definitions",
+          "body": "Interviewers want evidence. Learners who can describe a lab, explain a configuration, and discuss tradeoffs sound more credible than learners who only repeat terms."
+        },
+        {
+          "heading": "Practice common decision points",
+          "body": "Good preparation includes service selection, troubleshooting steps, security considerations, and communication with non-technical stakeholders."
+        },
+        {
+          "heading": "Use projects as anchors",
+          "body": "A finished project gives the learner a reliable anchor for behavioral and technical answers, especially when switching careers or moving into a new Microsoft role."
+        }
+      ]
+    },
+    {
+      "slug": "choosing-live-training",
+      "creator": "Meera Joshi",
+      "publishedDate": "25 June, 2026",
+      "headline": "When live training is better than self-paced learning",
+      "category": "Live Training",
+      "summary": "Live training is most valuable when learners need accountability, discussion, guided troubleshooting, and role-specific practice.",
+      "readingTime": "5 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #f7fafd 0%, #eef6ff 100%)",
+      "sections": [
+        {
+          "heading": "Use live training for complex change",
+          "body": "When teams are adopting new tools or changing workflows, live sessions help people ask contextual questions and align on practical decisions."
+        },
+        {
+          "heading": "Keep self-paced content for reinforcement",
+          "body": "Self-paced modules are excellent for review and reference. Live training should focus on application, discussion, and feedback."
+        },
+        {
+          "heading": "Blend both for better outcomes",
+          "body": "The strongest programs combine short preparation material, live labs, mentor review, and post-session practice tasks."
+        }
+      ]
+    },
+    {
+      "slug": "mentor-comments-that-matter",
+      "creator": "Dev Arora",
+      "publishedDate": "06 July, 2026",
+      "headline": "How mentor comments turn assignments into stronger skills",
+      "category": "Mentorship",
+      "summary": "Useful mentor comments help learners understand quality, risk, and next steps instead of simply marking work complete.",
+      "readingTime": "4 min read",
+      "thumbnailGradient": "linear-gradient(135deg, #dceeff 0%, #eef3fa 100%)",
+      "sections": [
+        {
+          "heading": "Good comments name the issue",
+          "body": "A helpful review points to the specific part of the assignment that needs attention and explains why it affects reliability, usability, security, or maintainability."
+        },
+        {
+          "heading": "They show a better pattern",
+          "body": "Learners improve faster when feedback includes a better approach, not only a correction. Patterns become reusable across future labs and projects."
+        },
+        {
+          "heading": "They encourage ownership",
+          "body": "Mentor comments should lead learners to make the next decision themselves: revise, validate, document, and explain the improvement."
+        }
+      ]
+    }
+  ],
+  "testimonials": [],
+  "instructors": [
+    {
+      "slug": "dynamics-365-training-team",
+      "name": "Dynamics 365 Training Team",
+      "role": "Functional Training",
+      "company": "Atisunya Edutech",
+      "bio": "Delivers Dynamics 365 Sales, Customer Service, Finance, CRM customization, forms, views, security roles, workflows, and practical business process training.",
+      "avatar": "D365",
+      "studentsCount": 0,
+      "coursesCount": 2,
+      "rating": 0,
+      "expertise": [
+        "Dynamics 365",
+        "CRM",
+        "Business Workflows"
+      ]
+    },
+    {
+      "slug": "azure-cloud-training-team",
+      "name": "Azure Cloud Training Team",
+      "role": "Cloud Training",
+      "company": "Atisunya Edutech",
+      "bio": "Supports learners and teams with Azure administration, architecture, DevOps, deployment workflows, identity, monitoring, and governance topics.",
+      "avatar": "AZ",
+      "studentsCount": 0,
+      "coursesCount": 2,
+      "rating": 0,
+      "expertise": [
+        "Azure",
+        "Azure DevOps",
+        "Cloud Architecture"
+      ]
+    },
+    {
+      "slug": "power-platform-training-team",
+      "name": "Power Platform Training Team",
+      "role": "Low-Code and Analytics Training",
+      "company": "Atisunya Edutech",
+      "bio": "Guides practical learning across Power Apps, Power Automate, Dataverse, Power BI, Microsoft Fabric, and reporting workflows.",
+      "avatar": "PP",
+      "studentsCount": 0,
+      "coursesCount": 2,
+      "rating": 0,
+      "expertise": [
+        "Power Platform",
+        "Power BI",
+        "Dataverse"
+      ]
+    },
+    {
+      "slug": "microsoft-ai-security-team",
+      "name": "Microsoft AI and Security Training Team",
+      "role": "AI, Copilot, and Security Training",
+      "company": "Atisunya Edutech",
+      "bio": "Covers Microsoft Copilot, Azure AI services, secure AI adoption, Microsoft Entra ID, security posture, compliance basics, and governance practices.",
+      "avatar": "AI",
+      "studentsCount": 0,
+      "coursesCount": 2,
+      "rating": 0,
+      "expertise": [
+        "Microsoft Copilot",
+        "Azure AI",
+        "Security"
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How do I enroll in a course?",
+      "answer": "Create an account or log in, open the course page, select Enroll Now, complete checkout through Razorpay, and the purchased course will appear in your dashboard after successful payment verification."
+    },
+    {
+      "question": "Which payment methods are supported?",
+      "answer": "Payments are processed through Razorpay. Available options can include card, UPI, and wallet depending on Razorpay availability and your selected payment method."
+    },
+    {
+      "question": "When will the course appear on my dashboard?",
+      "answer": "Only successfully paid courses appear on the dashboard. Pending or failed payments are not shown as active enrollments."
+    },
+    {
+      "question": "Do you provide corporate Microsoft training?",
+      "answer": "Yes. Atisunya Edutech provides Microsoft-focused corporate training for Azure, Dynamics 365, Power Platform, Copilot, AI services, and security workflows."
+    },
+    {
+      "question": "How can I contact the team after enrollment?",
+      "answer": "After successful payment, Atisunya receives the enrollment and payment details. The team can then contact the learner using the billing details provided during checkout."
+    }
+  ]
+}
