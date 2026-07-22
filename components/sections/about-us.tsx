@@ -95,3 +95,6 @@ export function AboutSection() {
     </section>
   );
 }
+
+
+//Commeny
