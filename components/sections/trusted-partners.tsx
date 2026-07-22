@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import type { IconType } from "react-icons";
-import { SiCisco, SiSap } from "react-icons/si";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 import { Eyebrow } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
@@ -10,22 +8,19 @@ import { cn } from "@/lib/utils";
 type Partner = {
   name: string;
   tagline: string;
-  icon?: IconType;
-  logo?: string;
+  logo: string;
 };
 
 const partners: Partner[] = [
   { name: "Microsoft", tagline: "Cloud Training Services", logo: "/images/logos/microsoft.svg" },
   { name: "Oracle", tagline: "Certified Training Partner", logo: "/images/logos/oracle.svg" },
-  { name: "SAP", tagline: "Authorized Partner", icon: SiSap },
-  { name: "Cisco", tagline: "Platinum Learning Partner", icon: SiCisco },
+  { name: "SAP", tagline: "Authorized Partner", logo: "/images/logos/sap.svg" },
+  { name: "Cisco", tagline: "Platinum Learning Partner", logo: "/images/logos/cisco.svg" },
   { name: "AWS", tagline: "Cloud Training Partner", logo: "/images/logos/aws.svg" },
   { name: "Azure", tagline: "Solutions Partner", logo: "/images/logos/azure.svg" },
 ];
 
 function PartnerCard({ partner }: { partner: Partner }) {
-  const Icon = partner.icon;
-
   return (
     <div
       className={cn(
@@ -35,20 +30,13 @@ function PartnerCard({ partner }: { partner: Partner }) {
       )}
     >
       <div className="flex flex-1 flex-col items-center justify-center gap-3 px-4 py-7 text-center">
-        {Icon ? (
-          <Icon
-            className="h-9 w-9 text-navy-600 transition-colors duration-300 group-hover:text-brand-600"
-            aria-hidden="true"
-          />
-        ) : partner.logo ? (
-          <Image
-            src={partner.logo}
-            alt={`${partner.name} logo`}
-            width={120}
-            height={36}
-            className="h-8 w-auto max-w-[120px] object-contain"
-          />
-        ) : null}
+        <Image
+          src={partner.logo}
+          alt={`${partner.name} logo`}
+          width={120}
+          height={36}
+          className="h-8 w-auto max-w-[120px] object-contain"
+        />
         <p className="text-[11px] font-medium leading-snug text-navy-400">
           {partner.tagline}
         </p>
