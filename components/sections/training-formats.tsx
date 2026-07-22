@@ -1,30 +1,30 @@
 "use client";
 
-import { ListChecks, MapPin, Settings2, Users } from "lucide-react";
+import Image from "next/image";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const trainingFormats = [
   {
-    icon: Users,
+    image: "/images/OneToOneTraining.png",
     title: "1-to-1 Training",
     description:
       "Dedicated one-on-one sessions paced to your schedule, role, and learning goals with a personal Microsoft trainer.",
   },
   {
-    icon: Settings2,
+    image: "/images/CustomizeTraining.png",
     title: "Customized Training",
     description:
       "Curriculum tailored to your team's tools, workflows, and business use cases for training that fits how you actually work.",
   },
   {
-    icon: MapPin,
+    image: "/images/DestinationTraining.png",
     title: "Destination Training",
     description:
       "Immersive, on-site training delivered at a location of your choice for focused, distraction-free learning.",
   },
   {
-    icon: ListChecks,
+    image: "/images/Prerequisite.png",
     title: "Pre-Requisite Session",
     description:
       "A foundational readiness session that builds the core concepts learners need before advanced training begins.",
@@ -48,23 +48,29 @@ export function TrainingFormats() {
         </Reveal>
 
         <Stagger
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
           delay={0.1}
         >
           {trainingFormats.map((item) => (
             <StaggerItem
               key={item.title}
-              className="card-hover group rounded-lg border border-navy-100 bg-white p-7 text-center shadow-soft"
+              className="card-hover group overflow-hidden rounded-lg border border-navy-100 bg-white shadow-soft"
             >
-              <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-signal text-white transition-transform duration-300 group-hover:scale-105">
-                <item.icon className="h-8 w-8" strokeWidth={1.8} />
-              </span>
-              <h3 className="mt-6 text-xl font-bold text-navy">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-navy-400">
-                {item.description}
-              </p>
+              <div className="relative h-56 overflow-hidden sm:h-64">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold text-navy">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-navy-400">
+                  {item.description}
+                </p>
+              </div>
             </StaggerItem>
           ))}
         </Stagger>
