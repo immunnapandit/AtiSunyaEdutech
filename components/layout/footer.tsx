@@ -72,7 +72,7 @@ export function Footer() {
 
           <div>
             <FooterHeading>Training Provided</FooterHeading>
-            <ul className="mt-7 space-y-4 text-base font-medium text-white/90">
+            <ul className="mt-7 space-y-4 pl-[1.125rem] text-base font-medium text-white/90">
               {courseLinks.map((item) => (
                 <li key={item}>
                   <Link href="/courses" className="transition-colors hover:text-brand">
@@ -85,7 +85,7 @@ export function Footer() {
 
           <div>
             <FooterHeading>Quick Links</FooterHeading>
-            <ul className="mt-7 space-y-4 text-base font-medium text-white/90">
+            <ul className="mt-7 space-y-4 pl-[1.125rem] text-base font-medium text-white/90">
               {quickLinks.map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="transition-colors hover:text-brand">
@@ -98,7 +98,7 @@ export function Footer() {
 
           <div>
             <FooterHeading>Information</FooterHeading>
-            <ul className="mt-7 space-y-4 text-base font-medium text-white/90">
+            <ul className="mt-7 space-y-4 pl-[1.125rem] text-base font-medium text-white/90">
               {informationLinks.map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="transition-colors hover:text-brand">
