@@ -27,7 +27,7 @@ export type BlogFormValues = {
 const emptyPost: BlogFormValues = {
   slug: "",
   headline: "",
-  creator: "Atisunya Team",
+  creator: "AtiSunya Team",
   category: "General",
   tags: [],
   summary: "",

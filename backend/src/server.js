@@ -63,7 +63,7 @@ app.use((error, _req, res, _next) => {
 });
 
 const httpServer = app.listen(env.port, () => {
-  console.log(`Atisunya backend running on http://localhost:${env.port}`);
+  console.log(`AtiSunya backend running on http://localhost:${env.port}`);
 });
 
 let shuttingDown = false;

@@ -62,9 +62,8 @@ export function Hero() {
               transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
               className="mt-5 max-w-[560px] text-base font-medium leading-7 text-navy-400 sm:text-lg"
             >
-              We provide hands-on corporate training for Microsoft Dynamics 365,
-              Azure, Power Platform, Copilot, AI, data, and enterprise cloud
-              services.
+              We offer hands-on training for Microsoft Dynamics 365, Azure,
+              Power Platform, Copilot, and AI.
             </motion.p>
 
             <motion.div

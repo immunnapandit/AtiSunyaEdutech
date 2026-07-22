@@ -46,7 +46,7 @@ export function FeaturedCourses() {
             Microsoft Training Programs Built for Business Teams
           </h2>
           <p className="mt-4 text-base leading-7 text-navy-400 text-balance">
-            Role-based tracks across the Microsoft ecosystem, delivered by practitioners who train teams for real deployments.
+            Training tracks for different roles, taught by real Microsoft experts.
           </p>
         </Reveal>
 

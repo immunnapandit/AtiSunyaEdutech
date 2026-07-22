@@ -16,7 +16,7 @@ import { instructors } from "@/data/testimonials";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "The story, mission, and people behind Atisunya Edutech.",
+  description: "The story, mission, and people behind AtiSunya Edutech.",
 };
 
 const featureCards = [
@@ -129,7 +129,7 @@ export default function AboutPage() {
                 <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
                   <Image
                     src="/images/Edutech-img.jpg"
-                    alt="Atisunya Edutech learning session"
+                    alt="AtiSunya Edutech learning session"
                     width={1400}
                     height={900}
                     className="h-full w-full object-cover object-center"
@@ -146,12 +146,10 @@ export default function AboutPage() {
               </h2>
               <div className="mt-4 h-1 w-40 rounded-full bg-brand/30" />
               <p className="mt-8 max-w-2xl text-lg leading-8 text-navy-400 text-balance">
-                {SITE.name} is driven by the transformative power of practical
-                education and the limitless potential within each learner.
-                Founded to bridge the gap between learning and doing, we stay
-                committed to nurturing curiosity, promoting academic excellence,
-                and building a community where skills turn into real career
-                progress.
+                {SITE.name} believes anyone can learn practical skills through
+                hands-on training. We help you turn what you learn into real
+                work you can do on the job, and support you as you grow in
+                your career.
               </p>
               
               <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -163,9 +161,8 @@ export default function AboutPage() {
                     Our Mission
                   </h3>
                   <p className="mt-3 text-base leading-7 text-navy-400">
-                    To help learners build practical skills, complete real
-                    projects, and leave with confidence that holds up in
-                    interviews, on the job, and in future growth.
+                    We help learners build real skills, finish real projects,
+                    and gain the confidence to do well in interviews and at work.
                   </p>
                   <Link
                     href="/courses"
@@ -184,9 +181,9 @@ export default function AboutPage() {
                     Our Vision
                   </h3>
                   <p className="mt-3 text-base leading-7 text-navy-400">
-                    To be the learning platform people trust when they want more
-                    than completion - they want measurable growth, stronger
-                    portfolios, and a better career path.
+                    We want to be the platform people trust for real growth,
+                    not just finishing a course - stronger skills, a better
+                    portfolio, and a better career.
                   </p>
                   <Link
                     href="/about"
@@ -218,7 +215,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Training standards"
             title="Built around practical Microsoft adoption"
-            description="Atisunya Edutech focuses on verified course content, structured checkout, payment-confirmed access, and follow-up from the training team after enrollment."
+            description="AtiSunya Edutech checks every course before it goes live, keeps checkout secure, and follows up with you after you enroll."
             align="center"
             className="mx-auto"
           />
@@ -301,7 +298,7 @@ export default function AboutPage() {
                 Become an Instructor
               </span>
               <p className="relative z-10 mt-4 max-w-md text-base leading-7 text-white/90">
-                Join Atisunya Edutech and help learners build real-world
+                Join AtiSunya Edutech and help learners build real-world
                 confidence through practical teaching.
               </p>
               <span className="relative z-10 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-navy transition-colors group-hover:bg-white/90">

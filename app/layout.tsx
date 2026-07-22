@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://atisunyaedutech.com"),
   title: {
-    default: "Atisunya Edutech - Learn. Build. Transform.",
-    template: "%s | Atisunya Edutech",
+    default: "AtiSunya Edutech - Learn. Build. Transform.",
+    template: "%s | AtiSunya Edutech",
   },
   description:
-    "Atisunya Edutech is a premium learning platform offering industry-focused courses, live training, certifications, corporate learning, and mentorship for the careers of tomorrow.",
+    "AtiSunya Edutech offers Microsoft courses, live training, and certifications to help you build real skills for your career.",
   keywords: [
     "online courses",
     "live training",
@@ -34,18 +34,18 @@ export const metadata: Metadata = {
     "career mentorship",
   ],
   openGraph: {
-    title: "Atisunya Edutech - Learn. Build. Transform.",
+    title: "AtiSunya Edutech - Learn. Build. Transform.",
     description:
-      "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
+      "Microsoft courses, live training, and mentorship from real experts.",
     url: "https://atisunyaedutech.com",
-    siteName: "Atisunya Edutech",
+    siteName: "AtiSunya Edutech",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atisunya Edutech - Learn. Build. Transform.",
+    title: "AtiSunya Edutech - Learn. Build. Transform.",
     description:
-      "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
+      "Microsoft courses, live training, and mentorship from real experts.",
   },
 };
 

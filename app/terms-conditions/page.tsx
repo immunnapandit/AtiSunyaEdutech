@@ -18,7 +18,7 @@ const sections = [
   },
   {
     heading: "4. Certifications",
-    body: "Certificates are issued upon meeting a course's completion requirements and represent successful completion of Atisunya coursework, not a guarantee of employment outcomes.",
+    body: "Certificates are issued upon meeting a course's completion requirements and represent successful completion of AtiSunya coursework, not a guarantee of employment outcomes.",
   },
   {
     heading: "5. Code of conduct",

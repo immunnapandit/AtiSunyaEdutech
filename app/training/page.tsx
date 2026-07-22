@@ -18,23 +18,23 @@ import {
 export const metadata: Metadata = {
   title: "Corporate Training",
   description:
-    "Atisunya Edutech corporate training for Microsoft Azure, Power Platform, Dynamics 365, AI, security, and enterprise cloud adoption.",
+    "AtiSunya Edutech corporate training for Microsoft Azure, Power Platform, Dynamics 365, AI, and security.",
 };
 
 const highlights = [
   {
     title: "Teams that deliver",
-    body: "Design training around the roles, tools, and goals that matter for your business.",
+    body: "We build training around your team's roles, tools, and goals.",
     icon: Users,
   },
   {
     title: "Hands-on labs",
-    body: "Practical exercises and real business scenarios to build confidence on day one.",
+    body: "Hands-on exercises with real examples, so you feel confident from day one.",
     icon: Cloud,
   },
   {
     title: "Business outcomes",
-    body: "Focus on adoption, automation, governance, and the skills your project sponsors care about.",
+    body: "We focus on the skills that matter most to your project and your team.",
     icon: ShieldCheck,
   },
 ];
@@ -42,49 +42,49 @@ const highlights = [
 const tracks = [
   {
     title: "Azure Cloud Adoption",
-    body: "From fundamentals to secure architecture, governance, and landing zone best practices.",
+    body: "Learn the basics, then move to secure, well-planned cloud setups.",
     icon: Cloud,
   },
   {
     title: "Copilot + AI Readiness",
-    body: "Enable business teams to apply Copilot, Azure AI, and responsible AI patterns.",
+    body: "Learn to use Copilot and Azure AI safely and effectively at work.",
     icon: Cpu,
   },
   {
     title: "Power Platform Enablement",
-    body: "Power BI, Power Apps, Power Automate and Dataverse training for digital transformation.",
+    body: "Learn Power BI, Power Apps, Power Automate, and Dataverse to build better business tools.",
     icon: Briefcase,
   },
   {
     title: "Security & Compliance",
-    body: "Identity, access control, threat protection and compliance for modern cloud operations.",
+    body: "Learn identity, access control, and threat protection to keep your systems safe.",
     icon: ShieldCheck,
   },
 ];
 
 const benefits = [
-  "Custom learning paths for administrators, analysts, developers and business users",
-  "Instructor-led delivery with live sessions, labs, recordings and post-training support",
-  "Assessments, certificates, adoption guidance and executive reporting",
-  "Flexible on-site or virtual delivery to fit your program timeline",
+  "Custom learning paths for every role on your team",
+  "Live sessions, hands-on labs, recordings, and support after training",
+  "Assessments, certificates, and progress reports for your leadership",
+  "Choose on-site or online training to fit your schedule",
 ];
 
 const processSteps = [
   {
     title: "Plan",
-    body: "Define the right learning journey for your teams, projects, and Microsoft stack.",
+    body: "We plan the right training path for your team and your Microsoft tools.",
   },
   {
     title: "Deliver",
-    body: "Teach with live sessions, labs, demos, and role-specific reinforcement.",
+    body: "We teach with live sessions, labs, and demos suited to each role.",
   },
   {
     title: "Assess",
-    body: "Validate knowledge with projects, quizzes, and real business outcomes.",
+    body: "We check learning with projects and quizzes tied to real work.",
   },
   {
     title: "Enable",
-    body: "Support adoption with guides, follow-up coaching, and operational handoffs.",
+    body: "We support your team with guides and follow-up coaching.",
   },
 ];
 
@@ -102,9 +102,8 @@ export default function CorporateTrainingPage() {
               Microsoft training designed for teams that need to move faster.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-navy-500 sm:text-lg">
-              Accelerate cloud adoption, AI readiness, and business outcomes with
-              corporate learning programs built around your Microsoft stack,
-              team structure, and enterprise goals.
+              We build training around your team and your Microsoft tools, so
+              you can move faster on the cloud and AI skills you need.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -155,7 +154,7 @@ export default function CorporateTrainingPage() {
           <SectionHeading
             eyebrow="Why choose corporate training"
             title="Turn Microsoft skills into measurable team performance"
-            description="Our corporate training programs are built to be actionable, relevant, and aligned with your organization’s strategy — not just course completion."
+            description="Our training is practical and built around your organization's goals, not just finishing a course."
           />
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -185,7 +184,7 @@ export default function CorporateTrainingPage() {
               <SectionHeading
                 eyebrow="Training tracks"
                 title="Choose the Microsoft learning path that matches your team"
-                description="From Azure adoption to Copilot enablement, our programs are designed for modern business teams and enterprise use cases."
+                description="From Azure to Copilot, our programs are built for real business teams."
               />
             </div>
 
@@ -226,7 +225,7 @@ export default function CorporateTrainingPage() {
               <SectionHeading
                 eyebrow="How it works"
                 title="A practical process for team enablement"
-                description="We work with your stakeholders to plan, deliver, assess, and support adoption across your Microsoft investments."
+                description="We work with your team to plan, teach, check learning, and support you as you use Microsoft tools."
               />
 
               <div className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -265,7 +264,8 @@ export default function CorporateTrainingPage() {
                   Build a measurable corporate learning program.
                 </h3>
                 <p className="mt-4 text-sm leading-7 text-white/80">
-                  We help you move beyond generic learning to training that actively supports your initiatives, governance, and business outcomes.
+                  We go beyond generic learning, with training that supports
+                  your team&apos;s real goals.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <LinkButton href="/contact" className="bg-white text-brand hover:bg-brand-50">

@@ -182,7 +182,7 @@ const blogSchema = z.object({
     .min(2)
     .regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens."),
   headline: z.string().trim().min(2),
-  creator: z.string().trim().optional().default("Atisunya Team"),
+  creator: z.string().trim().optional().default("AtiSunya Team"),
   category: z.string().trim().optional().default("General"),
   tags: z.array(z.string().trim()).optional().default([]),
   summary: z.string().trim().optional().default(""),

@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Insights, learning tips, and Microsoft training guidance from Atisunya Edutech.",
+  description: "Insights, learning tips, and Microsoft training guidance from AtiSunya Edutech.",
 };
 
 export const dynamic = "force-dynamic";
@@ -61,11 +61,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow>Blog</Eyebrow>
           <h1 className="heading-hero mt-3 text-navy">
-            Latest insights from Atisunya Edutech
+            Latest insights from AtiSunya Edutech
           </h1>
           <p className="mt-4 text-base leading-7 text-navy-400 md:text-lg">
-            Practical ideas for Microsoft learning, corporate enablement,
-            certification planning, and applied project work.
+            Practical tips for learning Microsoft tools, planning
+            certifications, and working on real projects.
           </p>
         </div>
 

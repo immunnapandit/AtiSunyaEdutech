@@ -98,7 +98,7 @@ const blogPostSchema = new Schema(
   {
     slug: { type: String, required: true, unique: true, trim: true },
     headline: { type: String, required: true, trim: true },
-    creator: { type: String, default: "Atisunya Team" },
+    creator: { type: String, default: "AtiSunya Team" },
     category: { type: String, default: "General", index: true },
     tags: { type: [String], default: [] },
     summary: { type: String, default: "" },

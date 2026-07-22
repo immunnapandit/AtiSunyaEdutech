@@ -12,7 +12,7 @@ export default function LoginPage() {
       subtitle="Log in to keep going where you left off."
       footer={
         <>
-          New to Atisunya?{" "}
+          New to AtiSunya?{" "}
           <Link href="/signup" className="font-semibold text-royal">
             Create an account
           </Link>

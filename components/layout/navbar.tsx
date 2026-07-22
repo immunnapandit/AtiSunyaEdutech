@@ -128,7 +128,7 @@ export function Navbar() {
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/images/atisunyaedutechlogo.png"
-            alt="Atisunya Edutech"
+            alt="AtiSunya Edutech"
             width={220}
             height={80}
             priority

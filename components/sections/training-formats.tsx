@@ -9,25 +9,25 @@ const trainingFormats = [
     image: "/images/OneToOneTraining.png",
     title: "1-to-1 Training",
     description:
-      "Dedicated one-on-one sessions paced to your schedule, role, and learning goals with a personal Microsoft trainer.",
+      "One-on-one sessions with a personal Microsoft trainer, planned around your schedule and goals.",
   },
   {
     image: "/images/CustomizeTraining.png",
     title: "Customized Training",
     description:
-      "Curriculum tailored to your team's tools, workflows, and business use cases for training that fits how you actually work.",
+      "Training built around your team's tools and daily work, so it fits how you actually do your job.",
   },
   {
     image: "/images/DestinationTraining.png",
     title: "Destination Training",
     description:
-      "Immersive, on-site training delivered at a location of your choice for focused, distraction-free learning.",
+      "On-site training at a place of your choice, away from daily distractions.",
   },
   {
     image: "/images/Prerequisite.png",
     title: "Pre-Requisite Session",
     description:
-      "A foundational readiness session that builds the core concepts learners need before advanced training begins.",
+      "A short session that teaches the basics you need before the main training begins.",
   },
 ];
 
@@ -41,9 +41,9 @@ export function TrainingFormats() {
             Flexible Training Built Around Your Team
           </h2>
           <p className="mt-4 text-base leading-7 text-navy-400 text-balance">
-            Atisunya Edutech delivers Microsoft training in the format that
-            fits your team best, from focused one-on-one coaching to fully
-            customized, on-site programs.
+            AtiSunya Edutech offers Microsoft training in the format that
+            works best for you, from one-on-one coaching to fully
+            customized, on-site sessions.
           </p>
         </Reveal>
 

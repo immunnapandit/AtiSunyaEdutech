@@ -1,10 +1,10 @@
 import { NavLink } from "@/types";
 
 export const SITE = {
-  name: "Atisunya Edutech",
+  name: "AtiSunya Edutech",
   tagline: "Learn. Build. Transform.",
   description:
-    "Industry-focused Microsoft courses, live training, certifications, corporate learning, and mentorship for the careers of tomorrow.",
+    "Microsoft courses, live training, certifications, and corporate training to help you build real skills.",
 };
 
 export const MAIN_NAV: NavLink[] = [

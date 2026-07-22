@@ -6,7 +6,7 @@ import { courses } from "@/data/courses";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Course pricing for Atisunya Edutech Microsoft training programs.",
+  description: "Course pricing for AtiSunya Edutech Microsoft training programs.",
 };
 
 const featuredCourses = courses.filter((course) => course.featured).slice(0, 3);
@@ -19,7 +19,7 @@ export default function PricingPage() {
           as="h1"
           eyebrow="Pricing"
           title="Transparent course pricing"
-          description="Individual course prices are shown before checkout. Corporate training is quoted based on team size, topics, and delivery format."
+          description="You'll see the course price before checkout. For team training, we give you a quote based on team size, topics, and schedule."
           align="center"
           className="mx-auto"
         />
@@ -57,7 +57,7 @@ export default function PricingPage() {
         <div className="mt-8 rounded-lg border border-navy-100 bg-mist-50 p-8 text-center">
           <h2 className="text-2xl font-bold text-navy">Corporate Microsoft training</h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-navy-400">
-            For team training, Atisunya Edutech prepares pricing after reviewing audience size, Microsoft topics, session format, and delivery timeline.
+            For team training, AtiSunya Edutech gives you a price after we know your team size, the Microsoft topics you need, and your schedule.
           </p>
           <LinkButton href="/contact" className="mt-6 justify-center">
             Request a training plan

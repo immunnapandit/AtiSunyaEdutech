@@ -38,7 +38,7 @@ export function Footer() {
             <div className="mt-7">
               <Image
                 src="/images/AtiSunyaLogo.png"
-                alt="Atisunya"
+                alt="AtiSunya"
                 width={240}
                 height={80}
                 className="h-auto w-56 object-contain"
@@ -53,9 +53,9 @@ export function Footer() {
               />
 
               <p className="mt-6 text-base leading-7 text-white/90">
-                AtiSunya Edutech is a Microsoft-focused learning platform delivering
-                hands-on training in Dynamics 365, Azure, Power Platform, AI, and modern
-                cloud technologies through expert-led programs and real-world projects.
+                AtiSunya Edutech teaches Microsoft skills like Dynamics 365,
+                Azure, Power Platform, and AI. Our training is hands-on and
+                led by real experts.
               </p>
 
               <div className="mt-7 flex items-center gap-3">

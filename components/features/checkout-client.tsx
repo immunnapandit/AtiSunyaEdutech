@@ -102,7 +102,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
     }
 
     if (!payment.key) {
-      throw new Error("Payment gateway is not configured. Please contact Atisunya support.");
+      throw new Error("Payment gateway is not configured. Please contact AtiSunya support.");
     }
 
     await loadRazorpayScript();
@@ -116,7 +116,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
       key: payment.key,
       amount: payment.amount ?? 0,
       currency: payment.currency ?? "INR",
-      name: "Atisunya Edutech",
+      name: "AtiSunya Edutech",
       description: `Enrollment for ${title}`,
       order_id: payment.orderId,
       method: getRazorpayMethodOptions(values.paymentMethod),

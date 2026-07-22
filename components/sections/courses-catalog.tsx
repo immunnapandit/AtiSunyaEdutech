@@ -165,9 +165,8 @@ export function CoursesCatalog() {
               Browse all training
             </h1>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-navy-400">
-              Learn new skills and discover the power of Microsoft products with
-              step-by-step guidance. Start your journey today by exploring our
-              learning paths and modules.
+              Learn Microsoft skills step by step. Explore our courses and
+              start today.
             </p>
           </div>
 

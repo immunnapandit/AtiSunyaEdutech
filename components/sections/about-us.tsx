@@ -18,7 +18,7 @@ export function AboutSection() {
               <div className="relative aspect-[4/5]">
                 <Image
                   src={aboutImage}
-                  alt="Professionals working during an Atisunya Edutech training session"
+                  alt="Professionals working during an AtiSunya Edutech training session"
                   fill
                   sizes="(min-width: 1024px) 45vw, 92vw"
                   className="object-cover object-center"
@@ -28,15 +28,15 @@ export function AboutSection() {
           </Reveal>
 
           <Reveal className="pt-2" delay={0.08}>
-            <Eyebrow>About Atisunya Edutech</Eyebrow>
+            <Eyebrow>About AtiSunya Edutech</Eyebrow>
             <h2 className="heading-section mt-4 text-navy">
               Microsoft training built for real business teams.
             </h2>
             <p className="mt-6 text-base leading-7 text-navy-400">
-              Atisunya Edutech helps professionals and organizations adopt the
-              Microsoft ecosystem with confidence. Our programs cover Dynamics
-              365, Azure, Power Platform, Copilot, AI services, data platforms,
-              integrations, and role-based corporate enablement.
+              AtiSunya Edutech helps professionals and teams learn to use
+              Microsoft tools with confidence. Our programs cover Dynamics
+              365, Azure, Power Platform, Copilot, and AI, taught in a way
+              that is easy to follow and apply at work.
             </p>
 
             <Stagger className="mt-8 grid gap-4 sm:grid-cols-2" delay={0.12}>
@@ -95,6 +95,3 @@ export function AboutSection() {
     </section>
   );
 }
-
-
-//Commeny

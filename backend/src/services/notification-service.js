@@ -22,10 +22,10 @@ export async function sendContactNotification(contact) {
 export async function sendContactConfirmation(contact) {
   return safeSend({
     to: contact.email,
-    subject: "We received your Atisunya Edutech enquiry",
+    subject: "We received your AtiSunya Edutech enquiry",
     html: layoutHtml({
       title: "Thanks For Contacting Us",
-      preview: "Your enquiry has reached the Atisunya Edutech team.",
+      preview: "Your enquiry has reached the AtiSunya Edutech team.",
       rows: [
         ["Name", contact.name],
         ["Subject", contact.subject],
@@ -62,7 +62,7 @@ export async function sendQuoteConfirmation(quote) {
     subject: "We received your corporate training inquiry",
     html: layoutHtml({
       title: "Training Inquiry Received",
-      preview: "Your corporate training request has reached Atisunya Edutech.",
+      preview: "Your corporate training request has reached AtiSunya Edutech.",
       rows: [
         ["Name", quote.name],
         ["Requirement", quote.subject],
@@ -78,7 +78,7 @@ export async function sendPasswordResetEmail({ email, resetToken }) {
 
   return safeSend({
     to: email,
-    subject: "Reset your Atisunya Edutech password",
+    subject: "Reset your AtiSunya Edutech password",
     html: layoutHtml({
       title: "Reset Your Password",
       preview: "Use the link below to continue your password reset.",
@@ -93,10 +93,10 @@ export async function sendPasswordResetEmail({ email, resetToken }) {
 export async function sendNewsletterConfirmation(subscriber) {
   return safeSend({
     to: subscriber.email,
-    subject: "You're subscribed to Atisunya Edutech",
+    subject: "You're subscribed to AtiSunya Edutech",
     html: layoutHtml({
       title: "Subscription Confirmed",
-      preview: "You will receive Atisunya Edutech learning updates.",
+      preview: "You will receive AtiSunya Edutech learning updates.",
       rows: [
         ["Email", subscriber.email],
         ["Name", subscriber.name || "Not provided"]
@@ -192,7 +192,7 @@ function layoutHtml({ title, preview, rows }) {
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
             <tr>
               <td style="background:#0f172a;color:#ffffff;padding:24px 28px;">
-                <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#38bdf8;">Atisunya Edutech</div>
+                <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#38bdf8;">AtiSunya Edutech</div>
                 <h1 style="margin:8px 0 0;font-size:24px;line-height:1.25;">${escapeHtml(title)}</h1>
               </td>
             </tr>

@@ -17,7 +17,7 @@ import { Container } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with the Atisunya Edutech team.",
+  description: "Get in touch with the AtiSunya Edutech team.",
 };
 
 const contactItems = [

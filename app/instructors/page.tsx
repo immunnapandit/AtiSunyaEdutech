@@ -5,7 +5,7 @@ import { instructors } from "@/data/testimonials";
 
 export const metadata: Metadata = {
   title: "Training Teams",
-  description: "Microsoft training focus areas at Atisunya Edutech.",
+  description: "Microsoft training teams at AtiSunya Edutech.",
 };
 
 export default function InstructorsPage() {
@@ -16,7 +16,7 @@ export default function InstructorsPage() {
           as="h1"
           eyebrow="Training teams"
           title="Microsoft-focused learning support"
-          description="Atisunya Edutech organizes learning around practical Microsoft cloud, business application, AI, analytics, and security topics."
+          description="AtiSunya Edutech organizes learning around Microsoft cloud, business apps, AI, analytics, and security topics."
         />
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

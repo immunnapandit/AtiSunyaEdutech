@@ -98,7 +98,8 @@ export function StrengthNumbers() {
             Microsoft Training Outcomes
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-7 text-navy-400">
-            Atisunya Edutech helps teams adopt Microsoft services with structured corporate training, hands-on labs, and role-based enablement.
+            AtiSunya Edutech helps teams learn Microsoft tools through clear
+            training, hands-on labs, and practice built around each learner&apos;s role.
           </p>
 
           <div className="mt-9 inline-flex items-center gap-4 rounded-md bg-signal px-6 py-4 text-white shadow-soft">

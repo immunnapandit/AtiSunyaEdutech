@@ -16,7 +16,7 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     slug: "guided-projects-job-ready",
-    creator: "Atisunya Team",
+    creator: "AtiSunya Team",
     publishedDate: "28 January, 2026",
     headline: "How guided projects help learners become job-ready faster",
     category: "Learning",
@@ -156,7 +156,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "corporate-training-outcomes",
-    creator: "Atisunya Team",
+    creator: "AtiSunya Team",
     publishedDate: "16 April, 2026",
     headline: "How corporate training improves when teams build together",
     category: "Teams",
@@ -268,7 +268,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "interview-prep-through-practice",
-    creator: "Atisunya Team",
+    creator: "AtiSunya Team",
     publishedDate: "11 June, 2026",
     headline: "Preparing for interviews through practical course work",
     category: "Interviews",
