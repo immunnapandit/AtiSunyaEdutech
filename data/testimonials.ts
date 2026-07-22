@@ -1,6 +1,25 @@
 import { Testimonial, Instructor, FAQItem } from "@/types";
 
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    name: "Rizwan Ul Haq",
+    role: "MCT Certified Trainer",
+    company: "Dubai",
+    avatar: "RH",
+    quote:
+      "AtiSunya training program played a key role in my journey to becoming a Microsoft Certified Trainer. The mentorship and practical approach truly made a difference.",
+    rating: 5,
+  },
+  {
+    name: "Nishit Parikh",
+    role: "MCT Certified Trainer",
+    company: "Australia",
+    avatar: "NP",
+    quote:
+      "I had an excellent experience with AtiSunya. With their clear guidance and professional support, I successfully received my Microsoft Certified Trainer (MCT) certificate.",
+    rating: 5,
+  },
+];
 
 export const instructors: Instructor[] = [
   {

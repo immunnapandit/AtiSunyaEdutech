@@ -1,75 +1,54 @@
 "use client";
 
-import { BookOpenCheck, Building2, ShieldCheck, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
-
-const outcomes = [
-  {
-    title: "Dynamics 365 implementation readiness",
-    body: "Training focuses on business workflows, configuration confidence, and practical adoption steps for teams using Dynamics 365.",
-    icon: Building2,
-    tone: "bg-royal-50",
-  },
-  {
-    title: "Azure and Power Platform enablement",
-    body: "Learners work through Microsoft cloud, automation, app maker, analytics, and deployment topics with practical exercises.",
-    icon: BookOpenCheck,
-    tone: "bg-cyan-100/50",
-  },
-  {
-    title: "Secure AI and compliance awareness",
-    body: "Copilot, Azure AI, Microsoft Entra ID, and security topics are framed around governance, access, and responsible adoption.",
-    icon: ShieldCheck,
-    tone: "bg-signal-100/60",
-  },
-];
-
-function RatingStars() {
-  return (
-    <div className="flex items-center gap-1 text-signal">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star key={index} className="h-5 w-5 fill-current" />
-      ))}
-    </div>
-  );
-}
+import { testimonials } from "@/data/testimonials";
 
 export function TestimonialsSection() {
+  if (testimonials.length === 0) {
+    return null;
+  }
+
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-20">
-      <Container className="relative">
+    <section className="bg-mist-50 py-16 md:py-20">
+      <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
-          <Eyebrow align="center">Training Outcomes</Eyebrow>
+          <Eyebrow align="center">Success Stories</Eyebrow>
           <h2 className="heading-section mt-4 text-navy">
-            Microsoft learning built for practical adoption
+            Trainers Who Earned Their Microsoft Certification With Us
           </h2>
         </Reveal>
 
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch" delay={0.1}>
-          {outcomes.map((item) => {
-            const Icon = item.icon;
-            return (
-              <StaggerItem
-                key={item.title}
-                className="card-hover overflow-hidden rounded-lg bg-white shadow-lifted"
-              >
-                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
-                  <span className="flex h-16 w-16 items-center justify-center rounded-lg border-4 border-white bg-white text-brand">
-                    <Icon className="h-8 w-8" />
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy">{item.title}</h3>
-                    <p className="mt-1 text-sm font-semibold text-navy-400">Atisunya Edutech</p>
-                  </div>
+        <Stagger className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2" delay={0.1}>
+          {testimonials.map((testimonial) => (
+            <StaggerItem
+              key={testimonial.name}
+              className="card-hover flex h-full flex-col rounded-lg border border-navy-100 bg-white p-8 shadow-soft"
+            >
+              <Quote className="h-10 w-10 shrink-0 text-brand/15" aria-hidden="true" />
+              <p className="mt-4 flex-1 text-lg font-medium leading-8 text-navy-600">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
+
+              <div className="mt-7 flex items-center gap-4 border-t border-navy-100 pt-6">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-sm font-bold text-brand">
+                  {testimonial.avatar}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-base font-bold text-navy">{testimonial.name}</p>
+                  <p className="truncate text-sm font-medium text-navy-400">
+                    {testimonial.role} &middot; {testimonial.company}
+                  </p>
                 </div>
-                <div className="p-6">
-                  <RatingStars />
-                  <p className="mt-5 text-base font-medium leading-7 text-navy-400">{item.body}</p>
+                <div className="ml-auto flex shrink-0 items-center gap-1 text-brand">
+                  {Array.from({ length: testimonial.rating }).map((_, index) => (
+                    <Star key={index} className="h-4 w-4 fill-current" />
+                  ))}
                 </div>
-              </StaggerItem>
-            );
-          })}
+              </div>
+            </StaggerItem>
+          ))}
         </Stagger>
       </Container>
     </section>
