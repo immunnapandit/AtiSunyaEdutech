@@ -20,7 +20,6 @@ export default function AdminCoursesPage() {
   const [error, setError] = useState("");
 
   function load() {
-    setLoading(true);
     adminApiRequest<{ courses: AdminCourse[] }>("/courses")
       .then((data) => setCourses(data.courses))
       .catch((err) => setError(err instanceof Error ? err.message : "Could not load courses."))
@@ -112,6 +111,7 @@ export default function AdminCoursesPage() {
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       href={`/admin/courses/${course.slug}`}
+                      aria-label={`Edit ${course.title}`}
                       className="rounded-lg p-2 text-navy-500 hover:bg-brand-50 hover:text-brand"
                     >
                       <Pencil className="h-4 w-4" />
@@ -119,6 +119,7 @@ export default function AdminCoursesPage() {
                     <button
                       type="button"
                       onClick={() => handleDelete(course.slug)}
+                      aria-label={`Delete ${course.title}`}
                       className="rounded-lg p-2 text-navy-500 hover:bg-red-50 hover:text-red-600"
                     >
                       <Trash2 className="h-4 w-4" />

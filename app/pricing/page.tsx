@@ -16,6 +16,7 @@ export default function PricingPage() {
     <div className="pt-32 pb-24">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Pricing"
           title="Transparent course pricing"
           description="Individual course prices are shown before checkout. Corporate training is quoted based on team size, topics, and delivery format."

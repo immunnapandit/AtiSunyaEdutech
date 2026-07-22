@@ -302,7 +302,7 @@ export function CourseForm({
             />
           </div>
           <div>
-            <label className={labelClass} htmlFor="price">Price (INR) *</label>
+            <label className={labelClass} htmlFor="price">Selling Price - what students pay (INR) *</label>
             <input
               id="price"
               type="number"
@@ -314,7 +314,7 @@ export function CourseForm({
             />
           </div>
           <div>
-            <label className={labelClass} htmlFor="originalPrice">Original price (INR)</label>
+            <label className={labelClass} htmlFor="originalPrice">Original Price / MRP - shown crossed out (INR)</label>
             <input
               id="originalPrice"
               type="number"
@@ -325,6 +325,7 @@ export function CourseForm({
               }
               className={inputClass}
             />
+            <p className="mt-1 text-xs text-navy-400">Optional. Leave blank if there&apos;s no discount to show.</p>
           </div>
         </div>
       </section>
@@ -395,6 +396,7 @@ export function CourseForm({
                 <button
                   type="button"
                   onClick={() => removeModule(index)}
+                  aria-label="Remove module"
                   className="shrink-0 rounded-lg p-2 text-red-500 hover:bg-red-50"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -440,6 +442,7 @@ export function CourseForm({
                 <button
                   type="button"
                   onClick={() => removeFaq(index)}
+                  aria-label="Remove FAQ"
                   className="shrink-0 rounded-lg p-2 text-red-500 hover:bg-red-50"
                 >
                   <Trash2 className="h-4 w-4" />

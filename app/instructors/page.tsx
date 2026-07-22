@@ -13,6 +13,7 @@ export default function InstructorsPage() {
     <div className="pt-32 pb-24">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Training teams"
           title="Microsoft-focused learning support"
           description="Atisunya Edutech organizes learning around practical Microsoft cloud, business application, AI, analytics, and security topics."

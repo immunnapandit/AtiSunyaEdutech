@@ -63,6 +63,7 @@ export function SectionHeading({
   align = "left",
   tone = "light",
   className,
+  as: HeadingTag = "h2",
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -70,6 +71,7 @@ export function SectionHeading({
   align?: "left" | "center";
   tone?: "light" | "dark";
   className?: string;
+  as?: "h1" | "h2";
 }) {
   return (
     <div
@@ -84,14 +86,14 @@ export function SectionHeading({
           {eyebrow}
         </Eyebrow>
       )}
-      <h2
+      <HeadingTag
         className={cn(
           "text-2xl font-semibold leading-snug text-balance md:text-3xl",
           tone === "light" ? "text-navy" : "text-white"
         )}
       >
         {title}
-      </h2>
+      </HeadingTag>
       {description && (
         <p
           className={cn(

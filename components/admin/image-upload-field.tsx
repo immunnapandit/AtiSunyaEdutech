@@ -103,6 +103,7 @@ export function ImageUploadField({
             <button
               type="button"
               onClick={() => onChange("")}
+              aria-label="Remove image"
               className="absolute right-1 top-1 rounded-full bg-white/90 p-1 text-red-600 shadow-sm hover:bg-white"
             >
               <X className="h-3 w-3" />

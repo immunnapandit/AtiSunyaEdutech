@@ -234,6 +234,7 @@ export function BlogForm({
                 <button
                   type="button"
                   onClick={() => removeSection(index)}
+                  aria-label="Remove section"
                   className="shrink-0 rounded-lg p-2 text-red-500 hover:bg-red-50"
                 >
                   <Trash2 className="h-4 w-4" />

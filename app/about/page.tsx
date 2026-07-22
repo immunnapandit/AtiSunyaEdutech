@@ -94,7 +94,7 @@ export default function AboutPage() {
                   href={card.href}
                   className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
                 >
-                  Learn More..
+                  Learn More
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>
@@ -140,7 +140,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <Eyebrow>About  {SITE.name}</Eyebrow>
+              <Eyebrow>About {SITE.name}</Eyebrow>
               <h2 className="mt-4 max-w-2xl text-display-md font-semibold text-navy text-balance sm:text-display-lg">
                 We create industry-focused learning experiences.
               </h2>
@@ -171,7 +171,7 @@ export default function AboutPage() {
                     href="/courses"
                     className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
                   >
-                    Learn More..
+                    Learn More
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -192,7 +192,7 @@ export default function AboutPage() {
                     href="/about"
                     className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand transition-colors hover:text-brand-600"
                   >
-                    Learn More..
+                    Learn More
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
