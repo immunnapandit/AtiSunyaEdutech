@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Cardo, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/layout/site-chrome";
 
-const poppins = Poppins({
+const josefinSans = Josefin_Sans({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-josefin",
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
+const cardo = Cardo({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-cardo",
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${josefinSans.variable} ${cardo.variable}`} data-scroll-behavior="smooth">
       <body>
         <SiteChrome>{children}</SiteChrome>
       </body>
