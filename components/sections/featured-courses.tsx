@@ -59,7 +59,7 @@ export function FeaturedCourses() {
               className={cn(
                 "h-12 rounded-full px-6 text-sm font-semibold transition-colors sm:px-8 sm:text-base",
                 activeTab === tab
-                  ? "bg-signal text-navy shadow-soft"
+                  ? "bg-signal text-white shadow-soft"
                   : "bg-transparent text-navy hover:bg-mist-100 hover:text-royal-700"
               )}
             >

@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { useInView, useReducedMotion } from "framer-motion";
-import { BookOpenCheck, ChevronRight, GraduationCap, MonitorPlay, ShieldCheck, Trophy, UserPlus } from "lucide-react";
+import { GraduationCap, ShieldCheck, Trophy } from "lucide-react";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
@@ -19,13 +18,6 @@ const highlightStat = {
   label: "Corporate batches",
   compact: true,
 };
-
-const workSteps = [
-  { icon: UserPlus, title: "Sign up", description: "Share your team role, Microsoft stack, and training goals." },
-  { icon: ShieldCheck, title: "Choose service track", description: "Select Dynamics 365, Azure, Power Platform, Copilot, or security tracks." },
-  { icon: BookOpenCheck, title: "Attend workshops", description: "Learn through instructor-led sessions, labs, demos, and business use cases." },
-  { icon: MonitorPlay, title: "Enable your team", description: "Close the program with practical readiness, assessments, and adoption guidance." },
-];
 
 function formatCount(value: number, options: { suffix?: string; compact?: boolean }) {
   if (options.compact) {
@@ -109,7 +101,7 @@ export function StrengthNumbers() {
             Atisunya Edutech helps teams adopt Microsoft services with structured corporate training, hands-on labs, and role-based enablement.
           </p>
 
-          <div className="mt-9 inline-flex items-center gap-4 rounded-md bg-signal px-6 py-4 text-navy shadow-soft">
+          <div className="mt-9 inline-flex items-center gap-4 rounded-md bg-signal px-6 py-4 text-white shadow-soft">
             <strong className="text-3xl font-semibold sm:text-4xl">
               <CountUpNumber
                 value={highlightStat.value}
@@ -127,7 +119,7 @@ export function StrengthNumbers() {
               key={item.label}
               className="card-hover flex items-center gap-4 rounded-lg bg-white p-4 shadow-soft"
             >
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-signal text-navy">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-signal text-white">
                 <item.icon className="h-8 w-8" strokeWidth={1.8} />
               </span>
               <span>
@@ -143,46 +135,3 @@ export function StrengthNumbers() {
     </section>
   );
 }
-
-export function HowItWorks() {
-  return (
-    <section className="bg-white py-16 md:py-20">
-      <Container>
-        <Reveal className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1fr] lg:items-start">
-          <div>
-            <Eyebrow>Training Flow</Eyebrow>
-            <h2 className="heading-section mt-4 text-navy">
-              How corporate training works
-            </h2>
-          </div>
-          <p className="max-w-2xl text-base leading-7 text-navy-400 lg:pt-2">
-            We align training with your business roles, deliver practical Microsoft workshops, and support teams with real adoption use cases.
-          </p>
-        </Reveal>
-
-        <Stagger className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4" delay={0.1}>
-          {workSteps.map((step, index) => (
-            <StaggerItem
-              key={step.title}
-              className="card-hover group relative rounded-lg bg-mist-100 px-5 py-8 text-center shadow-soft hover:bg-white"
-            >
-              <span className="absolute left-1/2 top-7 flex h-9 w-9 translate-x-7 items-center justify-center rounded-full bg-navy text-sm font-semibold text-white">
-                {index + 1}
-              </span>
-              <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-lg bg-signal text-navy transition-transform duration-300 group-hover:scale-105">
-                <step.icon className="h-10 w-10" strokeWidth={1.8} />
-              </span>
-              <h3 className="mt-6 text-xl font-bold text-navy">{step.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-navy-400">{step.description}</p>
-              <Link href="/courses" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-royal-700">
-                View Track
-                <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </Container>
-    </section>
-  );
-}
-

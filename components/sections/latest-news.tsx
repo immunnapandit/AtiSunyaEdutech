@@ -31,7 +31,7 @@ function DateBadge({ date }: { date: string }) {
   const day = parsed ? parsed.getDate().toString().padStart(2, "0") : "";
 
   return (
-    <span className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-signal text-navy">
+    <span className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-signal text-white">
       <span className="text-sm font-bold leading-none">{month}</span>
       <span className="text-2xl font-bold leading-none">{day}</span>
     </span>
@@ -88,7 +88,7 @@ export async function LatestNews() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
-                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-bold text-navy">
+                <span className="absolute -bottom-4 left-6 rounded-full bg-signal px-6 py-2 text-sm font-bold text-white">
                   {new Date(post.publishedAt).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }).toUpperCase()}
                 </span>
               </Link>
