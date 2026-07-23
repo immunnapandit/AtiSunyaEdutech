@@ -106,7 +106,12 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
     }
 
     await loadRazorpayScript();
-    const RazorpayCtor = (window as Window & { Razorpay?: new (options: Record<string, unknown>) => { open: () => void } }).Razorpay;
+    const RazorpayCtor = (window as Window & {
+      Razorpay?: new (options: Record<string, unknown>) => {
+        open: () => void;
+        on: (event: string, handler: (response: unknown) => void) => void;
+      };
+    }).Razorpay;
 
     if (!RazorpayCtor) {
       throw new Error("Razorpay checkout could not be loaded.");
@@ -138,6 +143,13 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
           setError(verifyErr instanceof Error ? verifyErr.message : "Payment verification failed.");
         }
       },
+      modal: {
+        ondismiss: function () {
+          setLoading(false);
+          setMessage("");
+          setError("Payment was cancelled before completion. No amount was charged.");
+        },
+      },
       prefill: {
         name: values.firstName ? `${values.firstName} ${values.lastName}`.trim() : "Student",
         email: values.emailAddress,
@@ -145,6 +157,15 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
       theme: {
         color: "#3b82f6",
       },
+    });
+
+    instance.on("payment.failed", function (response: unknown) {
+      const description = (response as { error?: { description?: string; reason?: string } })?.error?.description
+        ?? (response as { error?: { description?: string; reason?: string } })?.error?.reason
+        ?? "Payment failed. Please try again or use a different payment method.";
+      setLoading(false);
+      setMessage("");
+      setError(description);
     });
 
     instance.open();
