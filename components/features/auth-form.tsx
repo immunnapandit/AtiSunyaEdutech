@@ -4,22 +4,22 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { apiRequest, formToObject } from "@/lib/api";
-import { signInWithGoogle, signInWithMicrosoft } from "@/lib/social-auth";
+import { signInWithGoogle } from "@/lib/social-auth";
 import Image from "next/image";
 
 import Link from "next/link";
 
-type Mode = "login" | "signup" | "forgot-password";
+type Mode = "login" | "signup" | "forgot-password" | "reset-password";
 
 const inputClass =
  "mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 transition-all duration-200 focus:border-royal-500 focus:ring-4 focus:ring-blue-100 focus:outline-none";
 
-export function AuthForm({ mode }: { mode: Mode }) {
+export function AuthForm({ mode, resetToken }: { mode: Mode; resetToken?: string }) {
   const router = useRouter();
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [socialLoading, setSocialLoading] = useState<"google" | "microsoft" | null>(null);
+  const [socialLoading, setSocialLoading] = useState<"google" | null>(null);
 
   function completeAuth(token: string) {
     localStorage.setItem("atisunya_token", token);
@@ -55,6 +55,17 @@ export function AuthForm({ mode }: { mode: Mode }) {
         return;
       }
 
+      if (mode === "reset-password") {
+        const data = await apiRequest<{ message: string }>("/auth/reset-password", {
+          method: "POST",
+          body: JSON.stringify({ token: resetToken, password: payload.password }),
+        });
+        setMessage(data.message);
+        form.reset();
+        window.setTimeout(() => router.push("/login"), 1500);
+        return;
+      }
+
       const data = await apiRequest<{ message: string }>("/auth/forgot-password", {
         method: "POST",
         body: JSON.stringify(payload),
@@ -87,25 +98,6 @@ export function AuthForm({ mode }: { mode: Mode }) {
     }
   }
 
-  async function handleMicrosoftSignIn() {
-    setError("");
-    setMessage("");
-    setSocialLoading("microsoft");
-
-    try {
-      const idToken = await signInWithMicrosoft();
-      const data = await apiRequest<{ token: string }>("/auth/microsoft", {
-        method: "POST",
-        body: JSON.stringify({ idToken }),
-      });
-      completeAuth(data.token);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Microsoft sign-in failed.");
-    } finally {
-      setSocialLoading(null);
-    }
-  }
-
   return (
     <form className="space-y-5" onSubmit={onSubmit}>
       {mode === "signup" && (
@@ -117,24 +109,26 @@ export function AuthForm({ mode }: { mode: Mode }) {
         </div>
       )}
 
-      <div>
-        <label className="text-sm font-medium text-slate-700" htmlFor="email">
-          Email or mobile number
-        </label>
-      <input
-  id="identifier"
-  name="identifier"
-  type="text"
-  required
-  placeholder="Enter your email or mobile number"
-  className={inputClass}
-/>
-      </div>
+      {mode !== "reset-password" && (
+        <div>
+          <label className="text-sm font-medium text-slate-700" htmlFor="email">
+            Email or mobile number
+          </label>
+        <input
+    id="identifier"
+    name="identifier"
+    type="text"
+    required
+    placeholder="Enter your email or mobile number"
+    className={inputClass}
+  />
+        </div>
+      )}
 
       {mode !== "forgot-password" && (
         <div>
           <label className="text-sm font-medium text-slate-700" htmlFor="password">
-            Password
+            {mode === "reset-password" ? "New password" : "Password"}
           </label>
           <input
             id="password"
@@ -181,10 +175,12 @@ export function AuthForm({ mode }: { mode: Mode }) {
             ? "Log in"
             : mode === "signup"
               ? "Create account"
-              : "Send reset link"}
+              : mode === "reset-password"
+                ? "Set new password"
+                : "Send reset link"}
       </Button>
 
-      {mode !== "forgot-password" && (
+      {mode !== "forgot-password" && mode !== "reset-password" && (
         <>
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -212,21 +208,6 @@ export function AuthForm({ mode }: { mode: Mode }) {
                 height={20}
               />
               <span>{socialLoading === "google" ? "Please wait..." : "Sign in with Google"}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleMicrosoftSignIn}
-              disabled={loading || socialLoading !== null}
-              className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <Image
-                src="/images/logos/microsoft.svg"
-                alt="Microsoft"
-                width={20}
-                height={20}
-              />
-              <span>{socialLoading === "microsoft" ? "Please wait..." : "Sign in with Microsoft"}</span>
             </button>
           </div>
         </>

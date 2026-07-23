@@ -195,7 +195,8 @@ const resetRequestSchema = new Schema(
   {
     email: String,
     phone: String,
-    token: { type: String, required: true, index: true }
+    token: { type: String, required: true, index: true },
+    usedAt: Date
   },
   timestamps
 );

@@ -40,10 +40,6 @@ export const env = {
   googleAuth: {
     clientId: getEnv("GOOGLE_CLIENT_ID")
   },
-  microsoftAuth: {
-    clientId: getEnv("MICROSOFT_CLIENT_ID", "MS_CLIENT_ID"),
-    tenantId: getEnv("MICROSOFT_TENANT_ID", "MS_TENANT_ID") || "common"
-  },
   mongodbUri: getEnv("MONGODB_URI", "MONGO_URI", "DATABASE_URL"),
   admin: {
     email: getEnv("ADMIN_PANEL_EMAIL"),
@@ -78,10 +74,6 @@ export function validateEnv() {
     console.warn("[config] Google sign-in is disabled. Missing: GOOGLE_CLIENT_ID");
   }
 
-  if (!env.microsoftAuth.clientId) {
-    console.warn("[config] Microsoft sign-in is disabled. Missing: MICROSOFT_CLIENT_ID");
-  }
-
   if (!env.admin.email || !env.admin.password) {
     console.warn("[config] Admin panel login is disabled. Missing: ADMIN_PANEL_EMAIL / ADMIN_PANEL_PASSWORD");
   }
@@ -111,10 +103,6 @@ export function isGraphEmailConfigured() {
 
 export function isGoogleSignInConfigured() {
   return Boolean(env.googleAuth.clientId);
-}
-
-export function isMicrosoftSignInConfigured() {
-  return Boolean(env.microsoftAuth.clientId);
 }
 
 function getEnv(...keys) {

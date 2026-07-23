@@ -1,5 +1,3 @@
-import { PublicClientApplication, type Configuration } from "@azure/msal-browser";
-
 declare global {
   interface Window {
     google?: {
@@ -106,46 +104,4 @@ export async function signInWithGoogle(): Promise<string> {
       }
     }, 60000);
   });
-}
-
-let msalInstancePromise: Promise<PublicClientApplication> | null = null;
-
-function getMsalInstance(): Promise<PublicClientApplication> {
-  if (!msalInstancePromise) {
-    const clientId = process.env.NEXT_PUBLIC_MICROSOFT_CLIENT_ID;
-
-    if (!clientId) {
-      return Promise.reject(new Error("Microsoft sign-in is not configured."));
-    }
-
-    const config: Configuration = {
-      auth: {
-        clientId,
-        authority: `https://login.microsoftonline.com/${process.env.NEXT_PUBLIC_MICROSOFT_TENANT_ID || "common"}`,
-        redirectUri: window.location.origin
-      },
-      cache: {
-        cacheLocation: "sessionStorage"
-      }
-    };
-
-    const instance = new PublicClientApplication(config);
-    msalInstancePromise = instance.initialize().then(() => instance);
-  }
-
-  return msalInstancePromise;
-}
-
-export async function signInWithMicrosoft(): Promise<string> {
-  const instance = await getMsalInstance();
-  const result = await instance.loginPopup({
-    scopes: ["openid", "profile", "email"],
-    prompt: "select_account"
-  });
-
-  if (!result.idToken) {
-    throw new Error("Microsoft sign-in did not return an ID token.");
-  }
-
-  return result.idToken;
 }

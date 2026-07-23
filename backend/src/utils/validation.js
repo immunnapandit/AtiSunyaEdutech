@@ -22,6 +22,11 @@ export const forgotPasswordSchema = z.object({
   ...authIdentifierFields
 }).transform(normalizeAuthPayload);
 
+export const resetPasswordSchema = z.object({
+  token: z.string().trim().min(1, "Reset token is missing."),
+  password: z.string().min(6)
+});
+
 export const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required."),
   email: emailSchema,

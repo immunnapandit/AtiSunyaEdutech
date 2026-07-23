@@ -2,22 +2,18 @@ import bcrypt from "bcryptjs";
 import express from "express";
 import { OAuth2Client } from "google-auth-library";
 import jwt from "jsonwebtoken";
-import jwksClient from "jwks-rsa";
 import { nanoid } from "nanoid";
 import { env } from "../config/env.js";
 import { ResetRequest, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
 import { sendPasswordResetEmail } from "../services/notification-service.js";
-import { forgotPasswordSchema, loginSchema, signupSchema, validate } from "../utils/validation.js";
+import { forgotPasswordSchema, loginSchema, resetPasswordSchema, signupSchema, validate } from "../utils/validation.js";
+
+const RESET_TOKEN_TTL_MS = 60 * 60 * 1000;
 
 export const authRouter = express.Router();
 
 const googleClient = new OAuth2Client(env.googleAuth.clientId);
-const microsoftJwks = jwksClient({
-  jwksUri: `https://login.microsoftonline.com/${env.microsoftAuth.tenantId}/discovery/v2.0/keys`,
-  cache: true,
-  rateLimit: true
-});
 
 authRouter.post("/signup", validate.bind(null, signupSchema), async (req, res) => {
   const existingUser = await findUserByIdentifier(req.body);
@@ -88,51 +84,6 @@ authRouter.post("/google", async (req, res) => {
   }
 });
 
-authRouter.post("/microsoft", async (req, res) => {
-  const { idToken } = req.body || {};
-
-  if (!env.microsoftAuth.clientId) {
-    return res.status(500).json({ message: "Microsoft sign-in is not configured on the server." });
-  }
-
-  if (!idToken) {
-    return res.status(400).json({ message: "Missing Microsoft ID token." });
-  }
-
-  jwt.verify(
-    idToken,
-    getMicrosoftSigningKey,
-    { audience: env.microsoftAuth.clientId, algorithms: ["RS256"] },
-    async (error, payload) => {
-      if (error) {
-        console.error("Microsoft sign-in failed:", error);
-        return res.status(401).json({ message: "Microsoft sign-in failed. Please try again." });
-      }
-
-      const email = payload.email || payload.preferred_username;
-
-      if (!email) {
-        return res.status(400).json({ message: "Your Microsoft account has no email available." });
-      }
-
-      try {
-        const user = await findOrCreateSocialUser({
-          provider: "microsoft",
-          providerId: payload.oid || payload.sub,
-          email: email.toLowerCase(),
-          name: payload.name || email
-        });
-
-        const token = signToken(user);
-        return res.json({ token, user: publicUser(user) });
-      } catch (dbError) {
-        console.error("Microsoft sign-in failed:", dbError);
-        return res.status(500).json({ message: "Something went wrong on the server." });
-      }
-    }
-  );
-});
-
 authRouter.post("/forgot-password", validate.bind(null, forgotPasswordSchema), async (req, res) => {
   const resetRequest = await ResetRequest.create({
     email: req.body.email || undefined,
@@ -154,6 +105,29 @@ authRouter.post("/forgot-password", validate.bind(null, forgotPasswordSchema), a
   });
 });
 
+authRouter.post("/reset-password", validate.bind(null, resetPasswordSchema), async (req, res) => {
+  const resetRequest = await ResetRequest.findOne({ token: req.body.token });
+  const isExpired = resetRequest && Date.now() - resetRequest.createdAt.getTime() > RESET_TOKEN_TTL_MS;
+
+  if (!resetRequest || resetRequest.usedAt || isExpired) {
+    return res.status(400).json({ message: "This reset link is invalid or has expired. Please request a new one." });
+  }
+
+  const user = await findUserByIdentifier({ email: resetRequest.email, phone: resetRequest.phone });
+
+  if (!user) {
+    return res.status(400).json({ message: "This reset link is invalid or has expired. Please request a new one." });
+  }
+
+  user.passwordHash = await bcrypt.hash(req.body.password, 10);
+  await user.save();
+
+  resetRequest.usedAt = new Date();
+  await resetRequest.save();
+
+  return res.json({ message: "Your password has been reset. You can now log in." });
+});
+
 authRouter.get("/me", requireAuth, async (req, res) => {
   const user = await User.findById(req.user.sub);
 
@@ -163,16 +137,6 @@ authRouter.get("/me", requireAuth, async (req, res) => {
 
   return res.json({ user: publicUser(user) });
 });
-
-function getMicrosoftSigningKey(header, callback) {
-  microsoftJwks.getSigningKey(header.kid, (error, key) => {
-    if (error) {
-      return callback(error);
-    }
-
-    return callback(null, key.getPublicKey());
-  });
-}
 
 async function findOrCreateSocialUser({ provider, providerId, email, name }) {
   const existingUser = await User.findOne({ email });
