@@ -103,10 +103,19 @@ export function Navbar() {
           </div>
 
           <div className="hidden items-center gap-5 lg:flex">
-            <Link href="tel:+918081810673" className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Headphones className="h-4 w-4" />
-              <span>Call Us: +91 80-8181-0673</span>
-            </Link>
+              <span>
+                Call Us:{" "}
+                <Link href="tel:+918081810673" className="hover:underline">
+                  +91 80-8181-0673
+                </Link>
+                {", "}
+                <Link href="tel:+918299156511" className="hover:underline">
+                  +91 82991-56511
+                </Link>
+              </span>
+            </div>
             <span className="h-6 w-px bg-white/25" />
             <Link
               href="mailto:info@atisunya.co"

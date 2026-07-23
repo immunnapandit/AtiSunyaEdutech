@@ -13,11 +13,11 @@ type Partner = {
 
 const partners: Partner[] = [
   { name: "Microsoft", tagline: "Cloud Training Services", logo: "/images/logos/microsoft.svg" },
+  { name: "Azure", tagline: "Solutions Partner", logo: "/images/logos/azure.svg" },
   { name: "Oracle", tagline: "Certified Training Partner", logo: "/images/logos/oracle.svg" },
+  { name: "AWS", tagline: "Cloud Training Partner", logo: "/images/logos/aws.svg" },
   { name: "SAP", tagline: "Authorized Partner", logo: "/images/logos/sap.svg" },
   { name: "Cisco", tagline: "Platinum Learning Partner", logo: "/images/logos/cisco.svg" },
-  { name: "AWS", tagline: "Cloud Training Partner", logo: "/images/logos/aws.svg" },
-  { name: "Azure", tagline: "Solutions Partner", logo: "/images/logos/azure.svg" },
 ];
 
 function PartnerCard({ partner }: { partner: Partner }) {
