@@ -11,6 +11,9 @@ const enrollmentSchema = new Schema(
     paymentStatus: { type: String, enum: ["pending", "paid"], default: "pending" },
     orderId: String,
     paymentId: String,
+    amount: Number,
+    currency: { type: String, default: "INR" },
+    paidAt: Date,
     billingDetails: Schema.Types.Mixed,
     enrolledAt: { type: Date, default: Date.now },
     updatedAt: Date

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, BookOpenCheck, CheckCircle2, GraduationCap, UserRound } from "lucide-react";
+import { ArrowRight, BookOpenCheck, CheckCircle2, GraduationCap, LogOut, UserRound } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { apiRequest } from "@/lib/api";
 import type { Course } from "@/types";
@@ -24,13 +25,28 @@ type DashboardData = {
     status: string;
     nextMilestone: string;
     enrolledAt?: string | null;
+    payment: {
+      amount: number;
+      currency: string;
+      orderId: string | null;
+      paymentId: string | null;
+      paidAt: string | null;
+    };
   }[];
   certificates: Course[];
 };
 
 const pageShell = "min-h-screen bg-[#f6f9fc] pt-[156px] pb-16 sm:pt-[170px] lg:pt-[178px]";
 
+function formatDate(value?: string | null) {
+  if (!value) return "Not available";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Not available";
+  return date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+}
+
 export function DashboardClient() {
+  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -45,6 +61,11 @@ export function DashboardClient() {
       .catch((err) => setError(err instanceof Error ? err.message : "Dashboard could not load."))
       .finally(() => setLoading(false));
   }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("atisunya_token");
+    router.push("/login");
+  }
 
   if (loading) {
     return (
@@ -95,14 +116,24 @@ export function DashboardClient() {
               Your purchased courses will appear here. Keep learning from one clean place.
             </p>
           </div>
-          <div className="flex items-center gap-3 rounded-lg border border-navy-100 bg-white px-4 py-3 shadow-soft">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">
-              {initials || "U"}
-            </span>
-            <div>
-              <p className="text-sm font-bold text-navy">{data.user.name}</p>
-              <p className="text-xs font-medium text-navy-400">{data.user.email}</p>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 rounded-lg border border-navy-100 bg-white px-4 py-3 shadow-soft">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">
+                {initials || "U"}
+              </span>
+              <div>
+                <p className="text-sm font-bold text-navy">{data.user.name}</p>
+                <p className="text-xs font-medium text-navy-400">{data.user.email}</p>
+              </div>
             </div>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex items-center gap-2 rounded-lg border border-navy-100 bg-white px-4 py-3 text-sm font-bold text-navy-500 shadow-soft transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </button>
           </div>
         </section>
 
@@ -175,6 +206,34 @@ export function DashboardClient() {
                     <Link href={`/courses/${course.slug}`} className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand-600">
                       Open course <ArrowRight className="h-4 w-4" />
                     </Link>
+                  </div>
+
+                  <div className="mt-5 rounded-lg border border-navy-100 bg-mist-50 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-navy-400">Payment details</p>
+                    <dl className="mt-3 grid grid-cols-1 gap-x-4 gap-y-2 text-xs sm:grid-cols-2">
+                      <div className="flex items-center justify-between gap-2 sm:block">
+                        <dt className="font-medium text-navy-400">Amount paid</dt>
+                        <dd className="font-semibold text-navy">
+                          {course.payment.currency} {course.payment.amount.toLocaleString("en-IN")}
+                        </dd>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 sm:block">
+                        <dt className="font-medium text-navy-400">Purchased on</dt>
+                        <dd className="font-semibold text-navy">{formatDate(course.payment.paidAt)}</dd>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 sm:block">
+                        <dt className="font-medium text-navy-400">Payment ID</dt>
+                        <dd className="truncate font-semibold text-navy" title={course.payment.paymentId ?? undefined}>
+                          {course.payment.paymentId || "Not available"}
+                        </dd>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 sm:block">
+                        <dt className="font-medium text-navy-400">Order ID</dt>
+                        <dd className="truncate font-semibold text-navy" title={course.payment.orderId ?? undefined}>
+                          {course.payment.orderId || "Not available"}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
                 </article>
               ))}

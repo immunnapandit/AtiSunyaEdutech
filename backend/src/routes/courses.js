@@ -43,6 +43,8 @@ async function buildEnrollmentResponse({ course, user, slug, billingDetails = {}
   enrollment.progress = Number(enrollment.progress || 0);
   enrollment.paymentStatus = "pending";
   enrollment.orderId = order.id;
+  enrollment.amount = Number(course.price || 0);
+  enrollment.currency = "INR";
   enrollment.billingDetails = billingDetails;
   enrollment.updatedAt = new Date();
 
@@ -146,6 +148,7 @@ coursesRouter.post("/:slug/verify-payment", requireAuth, async (req, res) => {
   enrollment.paymentStatus = "paid";
   enrollment.paymentId = paymentId;
   enrollment.orderId = orderId;
+  enrollment.paidAt = new Date();
   enrollment.progress = 5;
   await user.save();
 

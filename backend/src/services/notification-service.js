@@ -123,10 +123,11 @@ export async function sendPurchaseNotification({ user, course, enrollment, payme
         ["Phone", user.phone || billing.phoneNumber || "Not provided"],
         ["Course", course.title],
         ["Category", course.category],
-        ["Amount", formatInr(course.price)],
+        ["Amount", formatInr(enrollment.amount ?? course.price)],
         ["Payment ID", payment.paymentId || "Not provided"],
         ["Order ID", payment.orderId || enrollment.orderId || "Not provided"],
         ["Payment method", billing.paymentMethod || "Razorpay"],
+        ["Purchased on", formatDate(enrollment.paidAt) || "Just now"],
         ["Billing name", [billing.firstName, billing.lastName].filter(Boolean).join(" ") || "Not provided"],
         ["Billing address", formatAddress(billing)],
         ["Note", billing.note || "None"]
@@ -144,17 +145,23 @@ export async function sendPurchaseConfirmation({ user, course, enrollment, payme
 
   return safeSend({
     to,
-    subject: `Enrollment confirmed: ${course.title}`,
+    from: env.graph.welcomeFromEmail,
+    subject: `Welcome to AtiSunya Edutech — ${course.title}`,
     html: layoutHtml({
-      title: "Enrollment Confirmed",
-      preview: `Your payment for ${course.title} was successful.`,
+      title: `Welcome, ${user.name.split(" ")[0]}!`,
+      preview: `Your enrollment in ${course.title} is confirmed.`,
+      intro: `Thank you for enrolling with AtiSunya Edutech. Your payment has been received and your seat in <strong>${escapeHtml(course.title)}</strong> is now confirmed. We're excited to have you on this learning journey.`,
       rows: [
-        ["Name", user.name],
+        ["Student", user.name],
         ["Course", course.title],
-        ["Amount", formatInr(course.price)],
+        ["Amount paid", formatInr(enrollment.amount ?? course.price)],
         ["Payment ID", payment.paymentId || "Not provided"],
-        ["Next step", "Our team will contact you with course access and onboarding details."]
-      ]
+        ["Order ID", payment.orderId || enrollment.orderId || "Not provided"],
+        ["Purchased on", formatDate(enrollment.paidAt) || formatDate(new Date())]
+      ],
+      outro:
+        "Our team will reach out shortly with your course access and onboarding details. If you have any questions in the meantime, simply reply to this email — we're here to help.",
+      signature: "Warm regards,<br />Sangeeta<br />AtiSunya Edutech Team"
     })
   });
 }
@@ -167,7 +174,7 @@ async function safeSend(payload) {
   }
 }
 
-function layoutHtml({ title, preview, rows }) {
+function layoutHtml({ title, preview, rows, intro, outro, signature }) {
   const contentRows = rows
     .map(([label, value]) => {
       const safeValue = String(value).startsWith("<a ")
@@ -181,6 +188,16 @@ function layoutHtml({ title, preview, rows }) {
         </tr>`;
     })
     .join("");
+
+  const introHtml = intro
+    ? `<p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">${intro}</p>`
+    : "";
+  const outroHtml = outro
+    ? `<p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:#334155;">${escapeHtml(outro)}</p>`
+    : "";
+  const signatureHtml = signature
+    ? `<p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:#0f172a;">${signature}</p>`
+    : "";
 
   return `<!doctype html>
 <html>
@@ -197,8 +214,19 @@ function layoutHtml({ title, preview, rows }) {
               </td>
             </tr>
             <tr>
-              <td>
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">${contentRows}</table>
+              <td style="padding:28px 28px 4px;">
+                ${introHtml}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 8px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">${contentRows}</table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:4px 28px 28px;">
+                ${outroHtml}
+                ${signatureHtml}
               </td>
             </tr>
           </table>
@@ -216,6 +244,24 @@ function uniqueRecipients(recipients) {
 
 function formatInr(amount) {
   return `INR ${Number(amount || 0).toLocaleString("en-IN")}`;
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = value instanceof Date ? value : new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Kolkata"
+  });
 }
 
 function formatAddress(billing) {

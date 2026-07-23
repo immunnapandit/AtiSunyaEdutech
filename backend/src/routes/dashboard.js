@@ -38,7 +38,13 @@ dashboardRouter.get("/", requireAuth, async (req, res) => {
         status: "Active",
         nextMilestone: enrollment.progress > 0 ? "Continue learning" : "Start your first lesson",
         enrolledAt: enrollment.enrolledAt || null,
-        paymentId: enrollment.paymentId || null
+        payment: {
+          amount: enrollment.amount ?? course.price,
+          currency: enrollment.currency || "INR",
+          orderId: enrollment.orderId || null,
+          paymentId: enrollment.paymentId || null,
+          paidAt: enrollment.paidAt || null
+        }
       };
     })
     .filter(Boolean);
