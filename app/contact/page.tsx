@@ -24,7 +24,12 @@ const contactItems = [
   {
     icon: MapPin,
     title: "Address",
-    lines: ["AtiSunya Edutech", "India based online learning studio"],
+    lines: [
+      "AtiSunya Pvt Ltd",
+      "A-522, Tower-A, Logix Technova,",
+      "Plot No. 04, Block A, Sec-132",
+      "Noida, 201309",
+    ],
   },
   {
     icon: Mail,
@@ -168,11 +173,12 @@ export default function ContactPage() {
                   Find AtiSunya on the map
                 </h2>
                 <p className="mt-4 text-base leading-7 text-white/72">
-                  Our learning support works online across India. Use the map
-                  below to open directions and connect with the AtiSunya team.
+                  Visit us at A-522, Tower-A, Logix Technova, Sec-132, Noida.
+                  Use the map below to open directions and connect with the
+                  AtiSunya team.
                 </p>
                 <Link
-                  href="https://www.google.com/maps/search/?api=1&query=AtiSunya%20Edutech%20India"
+                  href="https://www.google.com/maps/search/?api=1&query=Logix%20Technova%20Sector%20132%20Noida"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand transition duration-300 hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-brand-50"
@@ -186,7 +192,7 @@ export default function ContactPage() {
             <div className="group relative min-h-[300px] overflow-hidden bg-brand-50 md:min-h-[360px]">
               <iframe
                 title="AtiSunya Edutech map location"
-                src="https://www.google.com/maps?q=AtiSunya%20Edutech%20India&output=embed"
+                src="https://www.google.com/maps?q=Logix%20Technova%20Sector%20132%20Noida&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="h-full min-h-[300px] w-full border-0 grayscale-[18%] transition duration-500 group-hover:scale-[1.015] group-hover:grayscale-0 md:min-h-[360px]"
