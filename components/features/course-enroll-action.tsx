@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-export function CourseEnrollAction({ slug }: { slug: string; title: string }) {
-  const router = useRouter();
+const PAY_NOW_URL = "https://www.atisunya.co/pay-now";
+
+export function CourseEnrollAction(_props: { slug: string; title: string }) {
   const [loading, setLoading] = useState(false);
 
   function handleClick() {
     setLoading(true);
-    router.push(`/checkout/${slug}`);
+    window.location.href = PAY_NOW_URL;
   }
 
   return (
@@ -22,11 +22,11 @@ export function CourseEnrollAction({ slug }: { slug: string; title: string }) {
         onClick={handleClick}
         disabled={loading}
       >
-        {loading ? "Preparing checkout..." : "Enroll now"}
+        {loading ? "Redirecting..." : "Enroll now"}
       </Button>
 
       <p className="text-center text-xs font-medium text-navy-400">
-        Secure checkout with Razorpay
+        Secure checkout powered by AtiSunya
       </p>
     </div>
   );

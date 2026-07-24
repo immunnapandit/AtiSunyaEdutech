@@ -55,3 +55,18 @@ export function verifyRazorpaySignature({ orderId, paymentId, signature }) {
 
   return received.length === expected.length && crypto.timingSafeEqual(received, expected);
 }
+
+export function verifyRazorpayWebhookSignature({ rawBody, signature }) {
+  if (!rawBody || !signature || !env.razorpay.webhookSecret) {
+    return false;
+  }
+
+  const expectedSignature = crypto
+    .createHmac("sha256", env.razorpay.webhookSecret)
+    .update(rawBody)
+    .digest("hex");
+  const received = Buffer.from(signature);
+  const expected = Buffer.from(expectedSignature);
+
+  return received.length === expected.length && crypto.timingSafeEqual(received, expected);
+}

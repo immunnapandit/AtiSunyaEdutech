@@ -165,6 +165,31 @@ export async function sendPurchaseConfirmation({ user, course, enrollment, payme
     })
   });
 }
+export async function sendPaymentWebhookNotification({ event, payment }) {
+  const recipients = uniqueRecipients([env.graph.accountsEmail, env.graph.adminEmail]);
+  const amount = payment.amount ? payment.amount / 100 : 0;
+
+  return safeSend({
+    to: recipients,
+    subject: `Payment received: ${formatInr(amount)}`,
+    html: layoutHtml({
+      title: "New Razorpay Payment Received",
+      preview: `A payment of ${formatInr(amount)} was captured.`,
+      rows: [
+        ["Event", event || "payment.captured"],
+        ["Payment ID", payment.id || "Not provided"],
+        ["Order ID", payment.order_id || "Not provided"],
+        ["Amount", formatInr(amount)],
+        ["Currency", payment.currency || "INR"],
+        ["Method", payment.method || "Not provided"],
+        ["Payer email", payment.email || "Not provided"],
+        ["Payer contact", payment.contact || "Not provided"],
+        ["Notes", payment.notes && Object.keys(payment.notes).length ? JSON.stringify(payment.notes) : "None"]
+      ]
+    })
+  });
+}
+
 async function safeSend(payload) {
   try {
     return await sendGraphMail(payload);
