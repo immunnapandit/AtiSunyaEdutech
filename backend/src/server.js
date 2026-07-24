@@ -12,6 +12,7 @@ import { contentRouter } from "./routes/content.js";
 import { coursesRouter } from "./routes/courses.js";
 import { dashboardRouter } from "./routes/dashboard.js";
 import { formsRouter } from "./routes/forms.js";
+import { paymentsRouter } from "./routes/payments.js";
 
 validateEnv();
 await connectMongo();
@@ -30,7 +31,12 @@ app.use(cors({
   },
   credentials: true
 }));
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json({
+  limit: "1mb",
+  verify: (req, _res, buf) => {
+    req.rawBody = buf;
+  }
+}));
 app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
 app.use(
   "/api",
@@ -50,6 +56,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/courses", coursesRouter);
 app.use("/api/dashboard", dashboardRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/payments", paymentsRouter);
 app.use("/api", contentRouter);
 app.use("/api", formsRouter);
 
