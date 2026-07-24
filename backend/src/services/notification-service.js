@@ -22,10 +22,10 @@ export async function sendContactNotification(contact) {
 export async function sendContactConfirmation(contact) {
   return safeSend({
     to: contact.email,
-    subject: "We received your Atisunya Edutech enquiry",
+    subject: "We received your AtiSunya Edutech enquiry",
     html: layoutHtml({
       title: "Thanks For Contacting Us",
-      preview: "Your enquiry has reached the Atisunya Edutech team.",
+      preview: "Your enquiry has reached the AtiSunya Edutech team.",
       rows: [
         ["Name", contact.name],
         ["Subject", contact.subject],
@@ -62,7 +62,7 @@ export async function sendQuoteConfirmation(quote) {
     subject: "We received your corporate training inquiry",
     html: layoutHtml({
       title: "Training Inquiry Received",
-      preview: "Your corporate training request has reached Atisunya Edutech.",
+      preview: "Your corporate training request has reached AtiSunya Edutech.",
       rows: [
         ["Name", quote.name],
         ["Requirement", quote.subject],
@@ -78,7 +78,7 @@ export async function sendPasswordResetEmail({ email, resetToken }) {
 
   return safeSend({
     to: email,
-    subject: "Reset your Atisunya Edutech password",
+    subject: "Reset your AtiSunya Edutech password",
     html: layoutHtml({
       title: "Reset Your Password",
       preview: "Use the link below to continue your password reset.",
@@ -93,10 +93,10 @@ export async function sendPasswordResetEmail({ email, resetToken }) {
 export async function sendNewsletterConfirmation(subscriber) {
   return safeSend({
     to: subscriber.email,
-    subject: "You're subscribed to Atisunya Edutech",
+    subject: "You're subscribed to AtiSunya Edutech",
     html: layoutHtml({
       title: "Subscription Confirmed",
-      preview: "You will receive Atisunya Edutech learning updates.",
+      preview: "You will receive AtiSunya Edutech learning updates.",
       rows: [
         ["Email", subscriber.email],
         ["Name", subscriber.name || "Not provided"]
@@ -105,6 +105,66 @@ export async function sendNewsletterConfirmation(subscriber) {
   });
 }
 
+
+export async function sendPurchaseNotification({ user, course, enrollment, payment }) {
+  const billing = enrollment.billingDetails || {};
+  const recipients = uniqueRecipients([env.graph.accountsEmail, env.graph.adminEmail]);
+
+  return safeSend({
+    to: recipients,
+    subject: `New course enrollment: ${course.title}`,
+    replyTo: user.email ? [user.email] : [],
+    html: layoutHtml({
+      title: "New Course Enrollment",
+      preview: `${user.name} completed payment for ${course.title}.`,
+      rows: [
+        ["Student", user.name],
+        ["Email", user.email || billing.emailAddress || "Not provided"],
+        ["Phone", user.phone || billing.phoneNumber || "Not provided"],
+        ["Course", course.title],
+        ["Category", course.category],
+        ["Amount", formatInr(enrollment.amount ?? course.price)],
+        ["Payment ID", payment.paymentId || "Not provided"],
+        ["Order ID", payment.orderId || enrollment.orderId || "Not provided"],
+        ["Payment method", billing.paymentMethod || "Razorpay"],
+        ["Purchased on", formatDate(enrollment.paidAt) || "Just now"],
+        ["Billing name", [billing.firstName, billing.lastName].filter(Boolean).join(" ") || "Not provided"],
+        ["Billing address", formatAddress(billing)],
+        ["Note", billing.note || "None"]
+      ]
+    })
+  });
+}
+
+export async function sendPurchaseConfirmation({ user, course, enrollment, payment }) {
+  const to = user.email || enrollment.billingDetails?.emailAddress;
+
+  if (!to) {
+    return { sent: false, skipped: true, reason: "Student email is not available." };
+  }
+
+  return safeSend({
+    to,
+    from: env.graph.welcomeFromEmail,
+    subject: `Welcome to AtiSunya Edutech — ${course.title}`,
+    html: layoutHtml({
+      title: `Welcome, ${user.name.split(" ")[0]}!`,
+      preview: `Your enrollment in ${course.title} is confirmed.`,
+      intro: `Thank you for enrolling with AtiSunya Edutech. Your payment has been received and your seat in <strong>${escapeHtml(course.title)}</strong> is now confirmed. We're excited to have you on this learning journey.`,
+      rows: [
+        ["Student", user.name],
+        ["Course", course.title],
+        ["Amount paid", formatInr(enrollment.amount ?? course.price)],
+        ["Payment ID", payment.paymentId || "Not provided"],
+        ["Order ID", payment.orderId || enrollment.orderId || "Not provided"],
+        ["Purchased on", formatDate(enrollment.paidAt) || formatDate(new Date())]
+      ],
+      outro:
+        "Our team will reach out shortly with your course access and onboarding details. If you have any questions in the meantime, simply reply to this email — we're here to help.",
+      signature: "Warm regards,<br />Sangeeta<br />AtiSunya Edutech Team"
+    })
+  });
+}
 async function safeSend(payload) {
   try {
     return await sendGraphMail(payload);
@@ -114,7 +174,7 @@ async function safeSend(payload) {
   }
 }
 
-function layoutHtml({ title, preview, rows }) {
+function layoutHtml({ title, preview, rows, intro, outro, signature }) {
   const contentRows = rows
     .map(([label, value]) => {
       const safeValue = String(value).startsWith("<a ")
@@ -129,6 +189,16 @@ function layoutHtml({ title, preview, rows }) {
     })
     .join("");
 
+  const introHtml = intro
+    ? `<p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">${intro}</p>`
+    : "";
+  const outroHtml = outro
+    ? `<p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:#334155;">${escapeHtml(outro)}</p>`
+    : "";
+  const signatureHtml = signature
+    ? `<p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:#0f172a;">${signature}</p>`
+    : "";
+
   return `<!doctype html>
 <html>
   <body style="margin:0;background:#f8fafc;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">
@@ -139,13 +209,24 @@ function layoutHtml({ title, preview, rows }) {
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
             <tr>
               <td style="background:#0f172a;color:#ffffff;padding:24px 28px;">
-                <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#38bdf8;">Atisunya Edutech</div>
+                <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#38bdf8;">AtiSunya Edutech</div>
                 <h1 style="margin:8px 0 0;font-size:24px;line-height:1.25;">${escapeHtml(title)}</h1>
               </td>
             </tr>
             <tr>
-              <td>
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">${contentRows}</table>
+              <td style="padding:28px 28px 4px;">
+                ${introHtml}
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 8px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">${contentRows}</table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:4px 28px 28px;">
+                ${outroHtml}
+                ${signatureHtml}
               </td>
             </tr>
           </table>
@@ -156,6 +237,44 @@ function layoutHtml({ title, preview, rows }) {
 </html>`;
 }
 
+
+function uniqueRecipients(recipients) {
+  return [...new Set(recipients.filter(Boolean))];
+}
+
+function formatInr(amount) {
+  return `INR ${Number(amount || 0).toLocaleString("en-IN")}`;
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = value instanceof Date ? value : new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Kolkata"
+  });
+}
+
+function formatAddress(billing) {
+  const lines = [
+    billing.addressLine1,
+    billing.addressLine2,
+    billing.state,
+    billing.country,
+    billing.postalCode
+  ].filter(Boolean);
+
+  return lines.length > 0 ? lines.join(", ") : "Not provided";
+}
 function escapeHtml(value) {
   return value
     .replaceAll("&", "&amp;")

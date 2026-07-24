@@ -1,21 +1,28 @@
 import express from "express";
-import { readDb } from "../db.js";
+import { Course, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
+import { serializeCourse } from "./courses.js";
 
 export const dashboardRouter = express.Router();
 
 dashboardRouter.get("/", requireAuth, async (req, res) => {
-  const db = await readDb();
-  const user = db.users.find((item) => item.id === req.user.sub);
+  const user = await User.findById(req.user.sub).lean();
 
   if (!user) {
     return res.status(404).json({ message: "User not found." });
   }
 
-  const enrollments = Array.isArray(user.enrollments) ? user.enrollments : [];
-  const enrolledCourses = enrollments
+  const paidEnrollments = (user.enrollments || []).filter(
+    (enrollment) => enrollment.paymentStatus === "paid"
+  );
+  const slugs = paidEnrollments.map((enrollment) => enrollment.courseSlug);
+  const courses = await Course.find({ slug: { $in: slugs } }).lean();
+  const courseBySlug = new Map(courses.map((course) => [course.slug, course]));
+
+  const purchasedCourseSlugs = new Set(slugs);
+  const enrolledCourses = paidEnrollments
     .map((enrollment) => {
-      const course = db.courses.find((item) => item.slug === enrollment.courseSlug);
+      const course = courseBySlug.get(enrollment.courseSlug);
       if (!course) {
         return null;
       }
@@ -28,38 +35,35 @@ dashboardRouter.get("/", requireAuth, async (req, res) => {
         duration: course.duration,
         price: course.price,
         progress: Number(enrollment.progress || 0),
-        status: enrollment.paymentStatus === "paid" ? "Active" : "Payment pending",
-        nextMilestone: enrollment.paymentStatus === "paid"
-          ? "Continue your first lesson"
-          : "Complete payment to unlock the course"
+        status: "Active",
+        nextMilestone: enrollment.progress > 0 ? "Continue learning" : "Start your first lesson",
+        enrolledAt: enrollment.enrolledAt || null,
+        payment: {
+          amount: enrollment.amount ?? course.price,
+          currency: enrollment.currency || "INR",
+          orderId: enrollment.orderId || null,
+          paymentId: enrollment.paymentId || null,
+          paidAt: enrollment.paidAt || null
+        }
       };
     })
     .filter(Boolean);
 
-  const certificates = Array.isArray(user.certificates)
-    ? user.certificates
-        .map((slug) => db.courses.find((course) => course.slug === slug))
-        .filter(Boolean)
-    : [];
+  const certificates = (user.certificates || [])
+    .filter((slug) => purchasedCourseSlugs.has(slug))
+    .map((slug) => courseBySlug.get(slug))
+    .filter(Boolean)
+    .map(serializeCourse);
 
   return res.json({
-    user: { id: user.id, name: user.name, email: user.email },
+    user: { id: String(user._id), name: user.name, email: user.email || user.phone || "" },
     stats: {
-      coursesInProgress: enrolledCourses.length,
-      certificatesEarned: certificates.length,
-      assignmentsDue: 3,
-      studyStreak: "14 days"
+      purchasedCourses: enrolledCourses.length,
+      certificatesEarned: certificates.length
     },
     enrolledCourses,
     certificates,
-    upcoming: [
-      { title: "Live session: Azure architecture review", time: "Today, 6:00 PM" },
-      { title: "Capstone review with mentor", time: "Fri, 4:30 PM" }
-    ],
-    activity: [
-      "Submitted assignment: CRM workflow review",
-      "Completed lesson: Azure identity basics",
-      "Joined live session: Copilot adoption Q&A"
-    ]
+    upcoming: [],
+    activity: []
   });
 });

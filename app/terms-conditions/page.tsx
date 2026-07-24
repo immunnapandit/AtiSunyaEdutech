@@ -18,7 +18,7 @@ const sections = [
   },
   {
     heading: "4. Certifications",
-    body: "Certificates are issued upon meeting a course's completion requirements and represent successful completion of Atisunya coursework, not a guarantee of employment outcomes.",
+    body: "Certificates are issued upon meeting a course's completion requirements and represent successful completion of AtiSunya coursework, not a guarantee of employment outcomes.",
   },
   {
     heading: "5. Code of conduct",
@@ -35,7 +35,7 @@ export default function TermsPage() {
     <div className="pt-32 pb-24">
       <Container className="max-w-3xl">
         <Eyebrow>Legal</Eyebrow>
-        <h1 className="mt-3 text-display-md font-extrabold text-navy">Terms & Conditions</h1>
+        <h1 className="mt-3 text-display-md font-semibold text-navy">Terms & Conditions</h1>
         <p className="mt-3 text-sm text-navy-400">Last updated: June 1, 2026</p>
 
         <div className="mt-10 space-y-8">

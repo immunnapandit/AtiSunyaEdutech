@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RotateCcw, Search } from "lucide-react";
 import { CourseCard } from "@/components/features/course-card";
-import { courses } from "@/data/courses";
+import { apiRequest } from "@/lib/api";
 import { filterCourses } from "@/lib/course-filters";
 import type { Course, Difficulty } from "@/types";
 
@@ -85,6 +85,8 @@ function FilterGroup({
 }
 
 export function CoursesCatalog() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
@@ -92,10 +94,17 @@ export function CoursesCatalog() {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>("popular");
 
+  useEffect(() => {
+    apiRequest<{ courses: Course[] }>("/courses")
+      .then((data) => setCourses(data.courses))
+      .catch(() => setCourses([]))
+      .finally(() => setLoading(false));
+  }, []);
+
   const productOptions = useMemo(() => {
     const values = courses.map((course) => course.category);
     return Array.from(new Set(values));
-  }, []);
+  }, [courses]);
 
   const roleOptions = [
     "Administrator",
@@ -156,9 +165,8 @@ export function CoursesCatalog() {
               Browse all training
             </h1>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-navy-400">
-              Learn new skills and discover the power of Microsoft products with
-              step-by-step guidance. Start your journey today by exploring our
-              learning paths and modules.
+              Learn Microsoft skills step by step. Explore our courses and
+              start today.
             </p>
           </div>
 
@@ -300,7 +308,11 @@ export function CoursesCatalog() {
             </div>
           </div>
 
-          {filteredCourses.length === 0 ? (
+          {loading ? (
+            <div className="mt-10 rounded-lg border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
+              Loading courses...
+            </div>
+          ) : filteredCourses.length === 0 ? (
             <div className="mt-10 rounded-lg border border-dashed border-navy-200 bg-navy-50/70 p-8 text-center text-navy-400 sm:p-10">
               No courses match the current filters. Try broadening your search or clearing the selections.
             </div>

@@ -29,13 +29,7 @@ function AnimatedStat({ stat, index }: { stat: Stat; index: number }) {
   const [currentValue, setCurrentValue] = useState(0);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setCurrentValue(stat.value);
-      return;
-    }
-
-    if (!isInView) {
-      setCurrentValue(0);
+    if (prefersReducedMotion || !isInView) {
       return;
     }
 
@@ -68,8 +62,8 @@ function AnimatedStat({ stat, index }: { stat: Stat; index: number }) {
       transition={{ duration: 0.5, delay: index * 0.08 }}
       className="rounded-2xl border border-navy-100 bg-white px-5 py-7 text-center shadow-soft"
     >
-      <p className="text-display-sm font-extrabold leading-none text-navy md:text-display-md">
-        {formatStatValue(currentValue, stat)}
+      <p className="text-display-sm font-semibold leading-none text-navy md:text-display-md">
+        {formatStatValue(prefersReducedMotion ? stat.value : currentValue, stat)}
       </p>
       <p className="mt-3 text-sm font-medium text-navy-400">{stat.label}</p>
     </motion.div>

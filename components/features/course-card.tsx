@@ -36,14 +36,18 @@ export function CourseCard({ course, index = 0 }: { course: Course; index?: numb
         <Link href={`/courses/${course.slug}`} className="block">
   <div className="relative h-56 overflow-hidden rounded-t-lg">
 
-  <Image
-  src={course.image}
-  alt={course.title}
-  fill
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-  priority={index < 3}
-  className="object-cover transition-transform duration-500 group-hover:scale-105"
-/>
+  {course.image ? (
+    <Image
+      src={course.image}
+      alt={course.title}
+      fill
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      priority={index < 3}
+      className="object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  ) : (
+    <div className="h-full w-full bg-gradient-to-br from-royal-100 via-royal/20 to-cyan-100" />
+  )}
     {/* Dark Overlay */}
     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

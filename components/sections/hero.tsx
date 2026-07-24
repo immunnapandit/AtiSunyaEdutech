@@ -24,12 +24,12 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, -10, 0], rotate: [-28, -18, -28] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute left-7 top-[35%] h-12 w-8 rounded-full bg-brand/80"
+          className="pointer-events-none absolute left-7 top-[35%] hidden h-12 w-8 rounded-full bg-brand/80 lg:block"
         />
         <motion.div
           animate={{ x: [0, 12, 0], scale: [1, 1.12, 1] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute bottom-[28%] right-10 h-5 w-8 rounded-full bg-royal-400/80"
+          className="pointer-events-none absolute bottom-[28%] right-10 hidden h-5 w-8 rounded-full bg-royal-400/80 lg:block"
         />
 
         <div className="relative mx-auto grid max-w-content grid-cols-1 items-center gap-8 lg:grid-cols-[0.78fr_1.22fr]">
@@ -62,9 +62,8 @@ export function Hero() {
               transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
               className="mt-5 max-w-[560px] text-base font-medium leading-7 text-navy-400 sm:text-lg"
             >
-              We provide hands-on corporate training for Microsoft Dynamics 365,
-              Azure, Power Platform, Copilot, AI, data, and enterprise cloud
-              services.
+              We offer hands-on training for Microsoft Dynamics 365, Azure,
+              Power Platform, Copilot, and AI.
             </motion.p>
 
             <motion.div

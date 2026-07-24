@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CheckoutClient } from "@/components/features/checkout-client";
-import { courses } from "@/data/courses";
+import { apiRequest } from "@/lib/api";
+import type { Course } from "@/types";
 
-export function generateStaticParams() {
-  return courses.map((course) => ({ slug: course.slug }));
+export const dynamic = "force-dynamic";
+
+async function getCourse(slug: string): Promise<Course | null> {
+  try {
+    const data = await apiRequest<{ course: Course }>(`/courses/${slug}`);
+    return data.course;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({
@@ -13,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const course = courses.find((item) => item.slug === slug);
+  const course = await getCourse(slug);
 
   if (!course) return {};
 
@@ -29,7 +37,7 @@ export default async function CheckoutPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const course = courses.find((item) => item.slug === slug);
+  const course = await getCourse(slug);
 
   if (!course) notFound();
 

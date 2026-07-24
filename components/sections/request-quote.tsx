@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
-import { Container } from "@/components/ui/primitives";
+import { Container, Eyebrow } from "@/components/ui/primitives";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 import { apiRequest, formToObject } from "@/lib/api";
  
 const contactItems = [
@@ -50,8 +51,10 @@ export function RequestQuote() {
       <div className="absolute inset-x-0 bottom-0 top-[190px] bg-navy/90" aria-hidden="true" />
  
       <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">
+        <Reveal>
         <form className="border-t-[5px] border-brand bg-white p-6 shadow-lifted sm:p-8 lg:p-10" onSubmit={onSubmit}>
-          <h2 className="text-[2rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
+          <Eyebrow>Get In Touch</Eyebrow>
+          <h2 className="heading-section mt-4 text-navy">
             Request Corporate Training
           </h2>
           <p className="mt-3 text-base font-medium text-navy-400">
@@ -83,30 +86,31 @@ export function RequestQuote() {
               <input type="checkbox" name="subscribe" className="h-5 w-5 rounded border-navy-400 text-brand focus:ring-brand" />
               Send me Microsoft training updates
             </label>
-            <button type="submit" disabled={status === "loading"} className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-brand px-7 text-sm font-extrabold text-white transition-colors hover:bg-brand-600 disabled:opacity-70 sm:min-w-[180px]">
+            <button type="submit" disabled={status === "loading"} className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-brand px-7 text-sm font-semibold text-white transition-colors hover:bg-brand-600 disabled:opacity-70 sm:min-w-[180px]">
               {status === "loading" ? "Sending..." : "Send Inquiry"}
               <Send className="h-4 w-4" />
             </button>
           </div>
         </form>
- 
-        <div className="space-y-6 py-8 text-white lg:pb-10">
+        </Reveal>
+
+        <Stagger className="space-y-6 py-8 text-white lg:pb-10" delay={0.2}>
           {contactItems.map((item) => (
-            <div key={item.title} className="flex items-center gap-4">
+            <StaggerItem key={item.title} className="flex items-center gap-4">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
                 <item.icon className="h-8 w-8" strokeWidth={1.8} />
               </span>
               <span>
-                <strong className="block text-xl font-extrabold">{item.title}</strong>
+                <strong className="block text-xl font-semibold">{item.title}</strong>
                 {item.lines.map((line) => (
                   <span key={line} className="mt-1 block text-sm font-bold leading-snug text-white/85">
                     {line}
                   </span>
                 ))}
               </span>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </Container>
  
       <Link href="#top" aria-label="Back to top" className="absolute bottom-6 right-6 hidden h-11 w-11 items-center justify-center bg-brand text-white transition-colors hover:bg-brand-600 md:flex xl:right-10">

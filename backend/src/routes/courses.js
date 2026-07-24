@@ -1,44 +1,23 @@
 import express from "express";
-import { readDb, writeDb } from "../db.js";
+import { Category, Course, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
 import { createRazorpayOrder, verifyRazorpaySignature } from "../services/razorpay.js";
-import { sendGraphMail } from "../services/graph-mail.js";
+import { sendPurchaseConfirmation, sendPurchaseNotification } from "../services/notification-service.js";
 import { env } from "../config/env.js";
 
 export const coursesRouter = express.Router();
 
-async function buildEnrollmentResponse({ db, course, user, slug, billingDetails = {} }) {
-  const enrollments = Array.isArray(user.enrollments) ? user.enrollments : [];
-  const existingEnrollment = enrollments.find((enrollment) => enrollment.courseSlug === slug);
+async function buildEnrollmentResponse({ course, user, slug, billingDetails = {} }) {
+  const existingEnrollment = user.enrollments.find((enrollment) => enrollment.courseSlug === slug);
 
-  if (existingEnrollment) {
-    if (existingEnrollment.paymentStatus === "paid") {
-      return {
-        alreadyEnrolled: true,
-        payload: {
-          message: `You are already enrolled in ${course.title}.`,
-          enrolled: true,
-          course: { slug: course.slug, title: course.title },
-          payment: { status: "paid" }
-        }
-      };
-    }
-
-    const amount = Number(course.price || 0) * 100;
+  if (existingEnrollment?.paymentStatus === "paid") {
     return {
-      alreadyEnrolled: false,
+      alreadyEnrolled: true,
       payload: {
-        message: `You have a pending payment for ${course.title}. Complete checkout to finish enrollment.`,
-        enrolled: false,
-        course: { slug: course.slug, title: course.title, price: course.price },
-        payment: {
-          orderId: existingEnrollment.orderId,
-          amount,
-          currency: "INR",
-          key: env.razorpay.keyId,
-          mode: env.razorpay.keyId && env.razorpay.keySecret ? "live" : "demo",
-          callbackUrl: `${env.appBaseUrl.replace(/\/$/, "")}/courses/${course.slug}`
-        }
+        message: `You are already enrolled in ${course.title}.`,
+        enrolled: true,
+        course: { slug: course.slug, title: course.title },
+        payment: { status: "paid" }
       }
     };
   }
@@ -46,7 +25,7 @@ async function buildEnrollmentResponse({ db, course, user, slug, billingDetails 
   const amount = Number(course.price || 0) * 100;
   const order = await createRazorpayOrder({
     amount,
-    receipt: `${course.slug}-${Date.now()}`,
+    receipt: `${course.slug.slice(0, 20)}-${Date.now()}`.slice(0, 40),
     notes: {
       courseSlug: course.slug,
       userId: user.id,
@@ -55,16 +34,25 @@ async function buildEnrollmentResponse({ db, course, user, slug, billingDetails 
     }
   });
 
-  enrollments.push({
+  const enrollment = existingEnrollment || {
     courseSlug: slug,
-    progress: 5,
-    paymentStatus: "pending",
-    orderId: order.id,
-    enrolledAt: new Date().toISOString(),
-    billingDetails
-  });
-  user.enrollments = enrollments;
-  await writeDb(db);
+    progress: 0,
+    enrolledAt: new Date()
+  };
+
+  enrollment.progress = Number(enrollment.progress || 0);
+  enrollment.paymentStatus = "pending";
+  enrollment.orderId = order.id;
+  enrollment.amount = Number(course.price || 0);
+  enrollment.currency = "INR";
+  enrollment.billingDetails = billingDetails;
+  enrollment.updatedAt = new Date();
+
+  if (!existingEnrollment) {
+    user.enrollments.push(enrollment);
+  }
+
+  await user.save();
 
   return {
     alreadyEnrolled: false,
@@ -85,111 +73,67 @@ async function buildEnrollmentResponse({ db, course, user, slug, billingDetails 
 }
 
 coursesRouter.get("/", async (req, res) => {
-  const db = await readDb();
   const { category, difficulty, featured, search } = req.query;
+  const query = { published: true };
 
-  let results = db.courses;
   if (category) {
-    results = results.filter((course) => course.category.toLowerCase() === String(category).toLowerCase());
+    query.category = new RegExp(`^${escapeRegex(String(category))}$`, "i");
   }
   if (difficulty) {
-    results = results.filter((course) => course.difficulty.toLowerCase() === String(difficulty).toLowerCase());
+    query.difficulty = new RegExp(`^${escapeRegex(String(difficulty))}$`, "i");
   }
   if (featured === "true") {
-    results = results.filter((course) => course.featured);
+    query.featured = true;
   }
   if (search) {
-    const term = String(search).toLowerCase();
-    results = results.filter((course) =>
-      [course.title, course.category, course.description, course.instructor].some((value) =>
-        value.toLowerCase().includes(term)
-      )
-    );
+    const term = new RegExp(escapeRegex(String(search)), "i");
+    query.$or = [{ title: term }, { category: term }, { description: term }, { instructor: term }];
   }
 
-  return res.json({ courses: results, categories: db.categories });
+  const [courses, categories] = await Promise.all([
+    Course.find(query).sort({ createdAt: 1 }).lean({ virtuals: false }),
+    Category.find().sort({ name: 1 }).lean()
+  ]);
+
+  return res.json({ courses: courses.map(serializeCourse), categories: categories.map(serializeCategory) });
 });
 
 coursesRouter.get("/:slug", async (req, res) => {
-  const db = await readDb();
-  const course = db.courses.find((item) => item.slug === req.params.slug);
+  const course = await Course.findOne({ slug: req.params.slug, published: true }).lean();
 
   if (!course) {
     return res.status(404).json({ message: "Course not found." });
   }
 
-  return res.json({ course });
+  return res.json({ course: serializeCourse(course) });
 });
 
 coursesRouter.post("/:slug/enroll", requireAuth, async (req, res) => {
-  const db = await readDb();
-  const course = db.courses.find((item) => item.slug === req.params.slug);
+  const { course, user, errorResponse } = await loadCourseAndUser(req, res);
+  if (errorResponse) return errorResponse;
 
-  if (!course) {
-    return res.status(404).json({ message: "Course not found." });
-  }
-
-  const user = db.users.find((item) => item.id === req.user.sub);
-  if (!user) {
-    return res.status(404).json({ message: "User not found." });
-  }
-
-  const { alreadyEnrolled, payload } = await buildEnrollmentResponse({
-    db,
-    course,
-    user,
-    slug: req.params.slug
-  });
-
-  if (alreadyEnrolled) {
-    return res.json(payload);
-  }
-
+  const { payload } = await buildEnrollmentResponse({ course, user, slug: req.params.slug });
   return res.json(payload);
 });
 
 coursesRouter.post("/:slug/checkout", requireAuth, async (req, res) => {
-  const db = await readDb();
-  const course = db.courses.find((item) => item.slug === req.params.slug);
+  const { course, user, errorResponse } = await loadCourseAndUser(req, res);
+  if (errorResponse) return errorResponse;
 
-  if (!course) {
-    return res.status(404).json({ message: "Course not found." });
-  }
-
-  const user = db.users.find((item) => item.id === req.user.sub);
-  if (!user) {
-    return res.status(404).json({ message: "User not found." });
-  }
-
-  const { alreadyEnrolled, payload } = await buildEnrollmentResponse({
-    db,
+  const { payload } = await buildEnrollmentResponse({
     course,
     user,
     slug: req.params.slug,
     billingDetails: req.body || {}
   });
-
-  if (alreadyEnrolled) {
-    return res.json(payload);
-  }
-
   return res.json(payload);
 });
 
 coursesRouter.post("/:slug/verify-payment", requireAuth, async (req, res) => {
-  const db = await readDb();
-  const course = db.courses.find((item) => item.slug === req.params.slug);
+  const { course, user, errorResponse } = await loadCourseAndUser(req, res);
+  if (errorResponse) return errorResponse;
 
-  if (!course) {
-    return res.status(404).json({ message: "Course not found." });
-  }
-
-  const user = db.users.find((item) => item.id === req.user.sub);
-  if (!user) {
-    return res.status(404).json({ message: "User not found." });
-  }
-
-  const enrollment = (user.enrollments || []).find((item) => item.courseSlug === req.params.slug);
+  const enrollment = user.enrollments.find((item) => item.courseSlug === req.params.slug);
   if (!enrollment) {
     return res.status(404).json({ message: "Enrollment not found." });
   }
@@ -204,20 +148,73 @@ coursesRouter.post("/:slug/verify-payment", requireAuth, async (req, res) => {
   enrollment.paymentStatus = "paid";
   enrollment.paymentId = paymentId;
   enrollment.orderId = orderId;
+  enrollment.paidAt = new Date();
   enrollment.progress = 5;
-  await writeDb(db);
+  await user.save();
 
-  await sendGraphMail({
-    to: [user.email, env.graph.adminEmail || "info@atisunya.co"],
-    subject: `New course purchase: ${course.title}`,
-    replyTo: [user.email],
-    html: `<div><h2>New Course Purchase</h2><p><strong>Student:</strong> ${user.name} (${user.email})</p><p><strong>Course:</strong> ${course.title}</p><p><strong>Amount:</strong> ${course.price} INR</p><p><strong>Payment ID:</strong> ${paymentId}</p></div>`
-  });
+  const payment = { status: "paid", orderId, paymentId };
+  const [adminNotification, studentNotification] = await Promise.all([
+    sendPurchaseNotification({ user, course, enrollment, payment }),
+    sendPurchaseConfirmation({ user, course, enrollment, payment })
+  ]);
 
   return res.json({
     message: `Payment successful. You are now enrolled in ${course.title}.`,
     enrolled: true,
     course: { slug: course.slug, title: course.title },
-    payment: { status: "paid", paymentId }
+    payment,
+    notification: {
+      admin: adminNotification,
+      student: studentNotification
+    }
   });
 });
+
+async function loadCourseAndUser(req, res) {
+  const course = await Course.findOne({ slug: req.params.slug, published: true });
+
+  if (!course) {
+    return { errorResponse: res.status(404).json({ message: "Course not found." }) };
+  }
+
+  const user = await User.findById(req.user.sub);
+  if (!user) {
+    return { errorResponse: res.status(404).json({ message: "User not found." }) };
+  }
+
+  return { course, user };
+}
+
+export function serializeCourse(course) {
+  return {
+    slug: course.slug,
+    title: course.title,
+    category: course.category,
+    difficulty: course.difficulty,
+    duration: course.duration,
+    studentsCount: course.studentsCount,
+    instructor: course.instructor,
+    instructorAvatar: course.instructorAvatar,
+    rating: course.rating,
+    reviewCount: course.reviewCount,
+    price: course.price,
+    originalPrice: course.originalPrice,
+    thumbnail: course.thumbnail,
+    image: course.image,
+    banner: course.banner,
+    thumbnailGradient: course.thumbnailGradient,
+    description: course.description,
+    curriculum: course.curriculum || [],
+    faqs: course.faqs || [],
+    seo: course.seo || {},
+    featured: Boolean(course.featured)
+  };
+}
+
+export function serializeCategory(category) {
+  return { name: category.name, count: category.count, icon: category.icon };
+}
+
+export function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}

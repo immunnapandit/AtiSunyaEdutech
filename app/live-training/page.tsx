@@ -5,7 +5,7 @@ import { Users, Video, Award } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Live Training",
-  description: "Cohort-based, instructor-led live training at Atisunya Edutech.",
+  description: "Live, instructor-led training at AtiSunya Edutech.",
 };
 
 const format = [
@@ -19,9 +19,10 @@ export default function LiveTrainingPage() {
     <div className="pt-32">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Live Training"
           title="Learn on a schedule, with people around you"
-          description="Cohort-based courses combine the structure of a bootcamp with the flexibility of recorded fallback sessions."
+          description="Join a live class with other learners, and catch up anytime with the recordings."
         />
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">

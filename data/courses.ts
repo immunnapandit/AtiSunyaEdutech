@@ -2,7 +2,7 @@ import { Course } from "@/types";
 
 export const courses: Course[] = [
   {
-    slug: "product-design-systems",
+    slug: "microsoft-dynamics-365-functional-training",
     title: "Microsoft Dynamics 365 Functional Training",
     category: "Dynamics 365",
     difficulty: "Intermediate",
@@ -22,7 +22,7 @@ export const courses: Course[] = [
     featured: true,
   },
   {
-    slug: "full-stack-react-nextjs",
+    slug: "azure-cloud-administration-architecture",
     title: "Azure Cloud Administration & Architecture",
     category: "Azure Cloud",
     difficulty: "Intermediate",
@@ -42,7 +42,7 @@ export const courses: Course[] = [
     featured: true,
   },
   {
-    slug: "applied-machine-learning",
+    slug: "microsoft-copilot-ai-services-training",
     title: "Microsoft Copilot & AI Services Training",
     category: "Microsoft AI",
     difficulty: "Advanced",
@@ -61,7 +61,7 @@ export const courses: Course[] = [
     featured: true,
   },
   {
-    slug: "product-management-foundations",
+    slug: "power-platform-app-maker-program",
     title: "Power Platform App Maker Program",
     category: "Power Platform",
     difficulty: "Beginner",
@@ -79,7 +79,7 @@ export const courses: Course[] = [
       "Create business apps and automated workflows with Power Apps, Power Automate, Dataverse, and Power BI.",
   },
   {
-    slug: "cloud-architecture-aws",
+    slug: "azure-devops-cloud-deployment",
     title: "Azure DevOps & Cloud Deployment",
     category: "Azure Cloud",
     difficulty: "Advanced",
@@ -97,7 +97,7 @@ export const courses: Course[] = [
       "Upskill teams on CI/CD, Azure DevOps, GitHub workflows, IaC basics, monitoring, and release governance.",
   },
   {
-    slug: "brand-and-visual-identity",
+    slug: "dynamics-365-crm-customization",
     title: "Dynamics 365 CRM Customization",
     category: "Dynamics 365",
     difficulty: "Beginner",
@@ -115,7 +115,7 @@ export const courses: Course[] = [
       "Configure model-driven apps, forms, views, business rules, security roles, and CRM process automation.",
   },
   {
-    slug: "cybersecurity-fundamentals",
+    slug: "microsoft-security-compliance-essentials",
     title: "Microsoft Security & Compliance Essentials",
     category: "Security",
     difficulty: "Beginner",
@@ -133,7 +133,7 @@ export const courses: Course[] = [
       "Understand Microsoft Entra ID, access control, compliance basics, security posture, and governance practices.",
   },
   {
-    slug: "data-analytics-with-python",
+    slug: "power-bi-microsoft-fabric-analytics",
     title: "Power BI & Microsoft Fabric Analytics",
     category: "Power Platform",
     difficulty: "Intermediate",

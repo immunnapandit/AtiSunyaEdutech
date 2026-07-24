@@ -1,27 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
-  Facebook,
   Headphones,
-  Linkedin,
   Mail,
   Menu,
   Search,
-  ShoppingCart,
+  LayoutDashboard,
   UserRound,
   X,
-  Youtube,
 } from "lucide-react";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Home", href: "/", hasDropdown:  false},
+  { label: "Home", href: "/", hasDropdown: false},
   { label: "About", href: "/about" },
   {
     label: "Training and Courses",
@@ -40,16 +37,11 @@ const navLinks = [
       },
     ],
   },
-  //{ label: "Pages", href: "/faq", hasDropdown: true },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
-const socialLinks = [
-  { label: "Facebook", href: "https://www.facebook.com", icon: Facebook },
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-  { label: "YouTube", href: "https://www.youtube.com", icon: Youtube },
-];
+const socialLinks: { label: string; href: string; icon: ComponentType<{ className?: string }> }[] = [];
 
 const headerContainer =
   "mx-auto w-full max-w-[1400px] px-5 md:px-8 lg:px-10";
@@ -111,10 +103,19 @@ export function Navbar() {
           </div>
 
           <div className="hidden items-center gap-5 lg:flex">
-            <Link href="tel:+918081810673" className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Headphones className="h-4 w-4" />
-              <span>Call Us: +91 80-8181-0673</span>
-            </Link>
+              <span>
+                Call Us:{" "}
+                <Link href="tel:+918081810673" className="hover:underline">
+                  +91 80-8181-0673
+                </Link>
+                {", "}
+                <Link href="tel:+918299156511" className="hover:underline">
+                  +91 82991-56511
+                </Link>
+              </span>
+            </div>
             <span className="h-6 w-px bg-white/25" />
             <Link
               href="mailto:info@atisunya.co"
@@ -136,7 +137,7 @@ export function Navbar() {
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/images/atisunyaedutechlogo.png"
-            alt="Atisunya Edutech"
+            alt="AtiSunya Edutech"
             width={220}
             height={80}
             priority
@@ -189,7 +190,7 @@ export function Navbar() {
             aria-label="Open dashboard"
             className="relative flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
           >
-            <ShoppingCart className="h-6 w-6" />
+            <LayoutDashboard className="h-6 w-6" />
           </Link>
           <LinkButton
             href="/signup"
@@ -260,7 +261,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
-                  <ShoppingCart className="h-5 w-5" />
+                  <LayoutDashboard className="h-5 w-5" />
                 </Link>
                 <LinkButton
                   href="/signup"

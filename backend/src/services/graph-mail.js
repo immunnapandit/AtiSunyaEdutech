@@ -3,13 +3,13 @@ import { env, isGraphEmailConfigured } from "../config/env.js";
 let cachedToken = null;
 let tokenExpiresAt = 0;
 
-export async function sendGraphMail({ to, subject, html, text, replyTo = [] }) {
+export async function sendGraphMail({ to, subject, html, text, replyTo = [], from }) {
   if (!isGraphEmailConfigured()) {
     return { sent: false, skipped: true, reason: "Microsoft Graph email is not configured." };
   }
 
   const token = await getGraphAccessToken();
-  const url = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(env.graph.fromEmail)}/sendMail`;
+  const url = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(from || env.graph.fromEmail)}/sendMail`;
   const response = await fetch(url, {
     method: "POST",
     headers: {

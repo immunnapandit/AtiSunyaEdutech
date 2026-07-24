@@ -10,8 +10,8 @@ export const courses = [
     instructorAvatar: "MS",
     rating: 4.9,
     reviewCount: 612,
-    price: 249,
-    originalPrice: 349,
+    price: 23714,
+    originalPrice: 33238,
     thumbnail: "design-systems",
     thumbnailGradient: "from-royal-100 via-royal/20 to-cyan-100",
     description:
@@ -29,8 +29,8 @@ export const courses = [
     instructorAvatar: "AZ",
     rating: 4.8,
     reviewCount: 1904,
-    price: 329,
-    originalPrice: 449,
+    price: 31332,
+    originalPrice: 42760,
     thumbnail: "fullstack",
     thumbnailGradient: "from-navy-100 via-royal-50 to-cyan-100",
     description:
@@ -48,7 +48,7 @@ export const courses = [
     instructorAvatar: "AI",
     rating: 4.9,
     reviewCount: 887,
-    price: 399,
+    price: 37999,
     thumbnail: "ml",
     thumbnailGradient: "from-cyan-100 via-royal-50 to-navy-100",
     description:
@@ -66,7 +66,7 @@ export const courses = [
     instructorAvatar: "PP",
     rating: 4.7,
     reviewCount: 1120,
-    price: 199,
+    price: 18951,
     thumbnail: "pm",
     thumbnailGradient: "from-royal-50 via-mist-100 to-royal-100",
     description:
@@ -83,7 +83,7 @@ export const courses = [
     instructorAvatar: "CD",
     rating: 4.8,
     reviewCount: 703,
-    price: 379,
+    price: 36094,
     thumbnail: "cloud",
     thumbnailGradient: "from-navy-100 via-cyan-100 to-royal-50",
     description:
@@ -100,7 +100,7 @@ export const courses = [
     instructorAvatar: "MS",
     rating: 4.9,
     reviewCount: 540,
-    price: 179,
+    price: 17048,
     thumbnail: "brand",
     thumbnailGradient: "from-cyan-100 via-mist-100 to-royal-100",
     description:
@@ -117,7 +117,7 @@ export const courses = [
     instructorAvatar: "SC",
     rating: 4.7,
     reviewCount: 511,
-    price: 229,
+    price: 21809,
     thumbnail: "security",
     thumbnailGradient: "from-navy-100 via-royal-50 to-mist-100",
     description:
@@ -134,8 +134,8 @@ export const courses = [
     instructorAvatar: "AI",
     rating: 4.8,
     reviewCount: 1330,
-    price: 259,
-    originalPrice: 319,
+    price: 24666,
+    originalPrice: 29999,
     thumbnail: "data",
     thumbnailGradient: "from-royal-100 via-cyan-100 to-mist-100",
     description:

@@ -1,97 +1,56 @@
 "use client";
 
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { Container } from "@/components/ui/primitives";
-
-const testimonials = [
-  {
-    name: "Alex Feroundo",
-    role: "IT Operations Lead",
-    quote: "Atisunya helped our team understand Dynamics 365 workflows clearly. The hands-on demos made configuration and adoption much easier.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=180&q=80",
-    tone: "bg-royal-50",
-  },
-  {
-    name: "Kallu Mastan",
-    role: "Dynamics 365 Practice",
-    quote: "The Azure and Power Platform sessions were practical, focused, and directly useful for our internal projects.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=80",
-    tone: "bg-cyan-100/50",
-  },
-  {
-    name: "Devid Max",
-    role: "Enterprise Learning Team",
-    quote: "The Copilot and AI workshops gave our team confidence to evaluate use cases, governance, and implementation steps.",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=180&q=80",
-    tone: "bg-signal-100/60",
-  },
-];
-
-function RatingStars() {
-  return (
-    <div className="flex items-center gap-1 text-signal">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star key={index} className="h-5 w-5 fill-current" />
-      ))}
-    </div>
-  );
-}
+import { Quote, Star } from "lucide-react";
+import { Container, Eyebrow } from "@/components/ui/primitives";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
+import { testimonials } from "@/data/testimonials";
 
 export function TestimonialsSection() {
+  if (testimonials.length === 0) {
+    return null;
+  }
+
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-20">
-      <div className="pointer-events-none absolute -left-28 top-16 h-[520px] w-[520px] rounded-full bg-royal-50/50" />
-      <div className="pointer-events-none absolute -right-16 top-36 h-[320px] w-[320px] rounded-full bg-mist-100" />
-
-      <Container className="relative">
-        <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-royal-700">Client Feedback</p>
-          <h2 className="mt-3 text-[2rem] font-bold leading-tight text-navy sm:text-[2.65rem] md:text-[3rem]">
-            What <span className="text-royal-700 underline decoration-signal underline-offset-8">Teams Say</span>
+    <section className="bg-mist-50 py-16 md:py-20">
+      <Container>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <Eyebrow align="center">Success Stories</Eyebrow>
+          <h2 className="heading-section mt-4 text-navy">
+            Trainers Who Earned Their Microsoft Certification With Us
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="mt-2 hidden justify-end gap-4 pr-8 lg:flex">
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Previous client feedback">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button className="flex h-11 w-11 items-center justify-center rounded border border-navy-100 bg-white text-navy shadow-soft transition-colors hover:bg-mist-100" aria-label="Next client feedback">
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
+        <Stagger className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2" delay={0.1}>
+          {testimonials.map((testimonial) => (
+            <StaggerItem
+              key={testimonial.name}
+              className="card-hover flex h-full flex-col rounded-lg border border-navy-100 bg-white p-8 shadow-soft"
+            >
+              <Quote className="h-10 w-10 shrink-0 text-brand/15" aria-hidden="true" />
+              <p className="mt-4 flex-1 text-lg font-medium leading-8 text-navy-600">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch">
-          {testimonials.map((item, index) => (
-            <article key={item.name} className="overflow-hidden rounded-lg bg-white shadow-lifted">
-              {index !== 1 && (
-                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
-                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
-                  <div>
-                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
-                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
-                  </div>
+              <div className="mt-7 flex items-center gap-4 border-t border-navy-100 pt-6">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-50 text-sm font-bold text-brand">
+                  {testimonial.avatar}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-bold text-navy">{testimonial.name}</p>
+                  <p className="text-sm font-medium text-navy-400">
+                    {testimonial.role} &middot; {testimonial.company}
+                  </p>
                 </div>
-              )}
-              <div className="p-6">
-                <RatingStars />
-                <p className="mt-5 text-base font-medium leading-7 text-navy-400">{item.quote}</p>
+                <div className="flex shrink-0 items-center gap-1 text-brand">
+                  {Array.from({ length: testimonial.rating }).map((_, index) => (
+                    <Star key={index} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
               </div>
-              {index === 1 && (
-                <div className={`flex items-center gap-4 ${item.tone} p-5`}>
-                  <Image src={item.avatar} alt={item.name} width={68} height={68} className="h-16 w-16 rounded-full border-4 border-white object-cover" />
-                  <div>
-                    <h3 className="text-xl font-bold text-navy">{item.name}</h3>
-                    <p className="mt-1 text-sm font-semibold text-navy-400">- {item.role}</p>
-                  </div>
-                </div>
-              )}
-            </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </Container>
     </section>
   );
 }
-
-

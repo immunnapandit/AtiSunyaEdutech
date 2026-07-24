@@ -1,4 +1,4 @@
-# Atisunya Edutech Backend
+# AtiSunya Edutech Backend
 
 Express API for auth, courses, dashboard data, contact enquiries, corporate training quotes, and newsletter subscriptions.
 

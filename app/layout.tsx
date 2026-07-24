@@ -1,24 +1,30 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Cardo, Josefin_Sans } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { SiteChrome } from "@/components/layout/site-chrome";
 
-const poppins = Poppins({
+const josefinSans = Josefin_Sans({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-josefin",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const cardo = Cardo({
+  subsets: ["latin"],
+  variable: "--font-cardo",
+  weight: ["400", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atisunyaedutech.com"),
   title: {
-    default: "Atisunya Edutech - Learn. Build. Transform.",
-    template: "%s | Atisunya Edutech",
+    default: "AtiSunya Edutech - Learn. Build. Transform.",
+    template: "%s | AtiSunya Edutech",
   },
   description:
-    "Atisunya Edutech is a premium learning platform offering industry-focused courses, live training, certifications, corporate learning, and mentorship for the careers of tomorrow.",
+    "AtiSunya Edutech offers Microsoft courses, live training, and certifications to help you build real skills for your career.",
   keywords: [
     "online courses",
     "live training",
@@ -28,18 +34,18 @@ export const metadata: Metadata = {
     "career mentorship",
   ],
   openGraph: {
-    title: "Atisunya Edutech - Learn. Build. Transform.",
+    title: "AtiSunya Edutech - Learn. Build. Transform.",
     description:
-      "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
+      "Microsoft courses, live training, and mentorship from real experts.",
     url: "https://atisunyaedutech.com",
-    siteName: "Atisunya Edutech",
+    siteName: "AtiSunya Edutech",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atisunya Edutech - Learn. Build. Transform.",
+    title: "AtiSunya Edutech - Learn. Build. Transform.",
     description:
-      "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
+      "Microsoft courses, live training, and mentorship from real experts.",
   },
 };
 
@@ -49,11 +55,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${josefinSans.variable} ${cardo.variable}`} data-scroll-behavior="smooth">
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

@@ -1,51 +1,38 @@
 import { NavLink } from "@/types";
 
 export const SITE = {
-  name: "Atisunya Edutech",
+  name: "AtiSunya Edutech",
   tagline: "Learn. Build. Transform.",
   description:
-    "Industry-focused courses, live training, and mentorship from practitioners who've shipped the real thing.",
+    "Microsoft courses, live training, certifications, and corporate training to help you build real skills.",
 };
 
 export const MAIN_NAV: NavLink[] = [
-  { label: "Courses", href: "/courses", description: "Browse the full catalog" },
-  { label: "Live Training", href: "/live-training", description: "Cohort-based, instructor-led" },
-  { label: "Certifications", href: "/certifications", description: "Get industry-recognized" },
-  { label: "Corporate", href: "/corporate-training", description: "Upskill your team" },
-  { label: "Instructors", href: "/instructors", description: "Meet the practitioners" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Courses", href: "/courses", description: "Browse Microsoft learning paths" },
+  { label: "Live Training", href: "/live-training", description: "Instructor-led sessions" },
+  { label: "Corporate Training", href: "/training", description: "Upskill your team" },
+  { label: "Instructors", href: "/instructors", description: "Meet our training team" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const FOOTER_LINKS = {
   Platform: [
     { label: "Courses", href: "/courses" },
     { label: "Live Training", href: "/live-training" },
-    { label: "Certifications", href: "/certifications" },
-    { label: "Corporate Training", href: "/corporate-training" },
+    { label: "Corporate Training", href: "/training" },
     { label: "Dashboard", href: "/dashboard" },
   ],
   Company: [
     { label: "About", href: "/about" },
     { label: "Instructors", href: "/instructors" },
-    { label: "Student Success", href: "/student-success" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
   Resources: [
-    { label: "Pricing", href: "/pricing" },
     { label: "FAQ", href: "/faq" },
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms & Conditions", href: "/terms-conditions" },
   ],
 };
 
-export const COMPANY_LOGOS = [
-  "Verixon",
-  "Northwind Labs",
-  "Cobalt Systems",
-  "Fennel Health",
-  "Marlowe Bank",
-  "Trellis Cloud",
-  "Hearth Analytics",
-  "Ossoro",
-];
+export const COMPANY_LOGOS: string[] = [];
