@@ -34,7 +34,7 @@ const contactItems = [
   {
     icon: Mail,
     title: "Email Address",
-    lines: ["info@atisunya.co", "support@atisunyaedutech.com"],
+    lines: ["info@atisunya.co"],
   },
   {
     icon: PhoneCall,
@@ -52,7 +52,7 @@ const quickSignals = [
 export default function ContactPage() {
   return (
     <main className="overflow-hidden bg-white pt-[152px] md:pt-[152px]">
-      <section className="relative isolate min-h-[300px] overflow-hidden bg-navy-900 md:min-h-[360px]">
+   {/*    <section className="relative isolate min-h-[300px] overflow-hidden bg-navy-900 md:min-h-[360px]">
         <Image
           src="/images/contactbanner.png"
           alt="Students collaborating on a laptop"
@@ -86,7 +86,7 @@ export default function ContactPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
 
       <section className="relative py-12 md:py-14">
         <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-mist-50 to-white" />
