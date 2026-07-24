@@ -50,7 +50,7 @@ const featureCards = [
 export default function AboutPage() {
   return (
     <div className="overflow-hidden pt-28 sm:pt-32">
-      <section className="relative isolate">
+   {/*    <section className="relative isolate">
         <div className="absolute inset-0 -z-20 bg-[#f8faff]" />
         <div className="absolute inset-x-0 top-0 -z-10 h-[24rem] bg-[linear-gradient(180deg,rgba(76,60,255,0.72),rgba(76,60,255,0.72)),url('/images/contactbanner.png')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(31,41,55,0.35),rgba(31,41,55,0.45))]" />
@@ -69,7 +69,7 @@ export default function AboutPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
 
       <section className="bg-white py-16 sm:py-20">
         <Container>
@@ -104,40 +104,20 @@ export default function AboutPage() {
       </section>
 
       <section className="relative overflow-hidden bg-[#f5f7fb] py-20 sm:py-24">
-        <div className="pointer-events-none absolute left-0 top-20 h-28 w-28 rounded-full border border-brand/15" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div className="relative mx-auto w-full max-w-[560px]">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-8 h-[300px] overflow-hidden rounded-[2rem] bg-white shadow-soft sm:h-[360px]">
-                  <Image
-                    src="/images/contactbanner.png"
-                    alt="Students learning together"
-                    width={1200}
-                    height={800}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <div className="col-span-4 flex items-center justify-center rounded-[1.5rem] bg-white p-4 shadow-soft">
-                  <div className="text-center">
-                    <GraduationCap className="mx-auto h-10 w-10 text-brand" />
-                    <p className="mt-3 text-lg font-bold text-navy">
-                      Experience Advisor
-                    </p> 
-                  </div>
-                </div>
-                <div className="col-span-12 -mt-6 ml-10 h-[260px] overflow-hidden rounded-[2rem] border-[10px] border-[#f5f7fb] shadow-soft sm:ml-16 sm:h-[320px]">
-                  <Image
-                    src="/images/Edutech-img.jpg"
-                    alt="AtiSunya Edutech learning session"
-                    width={1400}
-                    height={900}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              </div>
-              <div className="absolute -bottom-5 left-0 text-3xl font-semibold leading-none text-brand/70 sm:text-4xl"></div>
-            </div>
+  <div className="overflow-hidden rounded-[2rem] shadow-soft">
+    <Image
+      src="/images/Edutech-img.jpg"   // use whichever image looks best
+      alt="AtiSunya Edutech Training"
+      width={1200}
+      height={800}
+      className="h-[700px] w-full object-cover object-center"
+    />
+  </div>
+
+</div>
 
             <div className="relative">
               <Eyebrow>About {SITE.name}</Eyebrow>
@@ -228,7 +208,7 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-
+{/* 
       <section className="bg-white py-20 sm:py-24">
         <Container>
           <SectionHeading
@@ -270,7 +250,7 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-
+ */}
       <section className="bg-white pb-24 sm:pb-32">
         <Container>
           <div className="grid gap-6 lg:grid-cols-2">
