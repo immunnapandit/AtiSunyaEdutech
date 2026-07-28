@@ -55,8 +55,8 @@ const config: Config = {
         slateink: "#1C2333",
       },
       fontFamily: {
-        display: ["var(--font-josefin)", "system-ui", "sans-serif"],
-        body: ["var(--font-cardo)", "Georgia", "serif"],
+        display: ["var(--font-heading)", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
         "display-xl": ["3rem", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
