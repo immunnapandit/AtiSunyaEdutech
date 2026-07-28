@@ -43,14 +43,16 @@ export function Eyebrow({
   children,
   className,
   align = "left",
+  lineClassName,
 }: {
   children: ReactNode;
   className?: string;
   align?: "left" | "center";
+  lineClassName?: string;
 }) {
   return (
     <div className={cn("eyebrow-text", align === "center" && "justify-center", className)}>
-      <span className="h-px w-8 bg-brand-600/50" aria-hidden="true" />
+      <span className={cn("h-px w-8 bg-brand-600/50", lineClassName)} aria-hidden="true" />
       {children}
     </div>
   );
