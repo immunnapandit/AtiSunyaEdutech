@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteChrome } from "@/components/layout/site-chrome";
 
@@ -58,6 +59,7 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body>
         <SiteChrome>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   );
