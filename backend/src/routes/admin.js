@@ -15,6 +15,7 @@ import {
   Media,
   Newsletter,
   Quote,
+  Tag,
   Testimonial,
   User
 } from "../models/index.js";
@@ -123,6 +124,8 @@ const courseSchema = z.object({
     .optional()
     .default([]),
   seo: seoSchema,
+  roles: z.array(z.string().trim()).optional().default([]),
+  subjects: z.array(z.string().trim()).optional().default([]),
   featured: z.coerce.boolean().optional().default(false),
   published: z.coerce.boolean().optional().default(true)
 });
@@ -272,6 +275,35 @@ adminRouter.delete("/categories/:id", async (req, res) => {
     return res.status(404).json({ message: "Category not found." });
   }
   return res.json({ message: "Category deleted." });
+});
+
+const tagSchema = z.object({
+  type: z.enum(["role", "subject"]),
+  name: z.string().trim().min(1)
+});
+
+adminRouter.get("/tags", async (req, res) => {
+  const { type } = req.query;
+  const query = type ? { type } : {};
+  const tags = await Tag.find(query).sort({ name: 1 }).lean();
+  return res.json({ tags });
+});
+
+adminRouter.post("/tags", validate.bind(null, tagSchema), async (req, res) => {
+  const tag = await Tag.findOneAndUpdate(
+    { type: req.body.type, name: req.body.name },
+    req.body,
+    { new: true, upsert: true }
+  );
+  return res.status(201).json({ tag });
+});
+
+adminRouter.delete("/tags/:id", async (req, res) => {
+  const tag = await Tag.findByIdAndDelete(req.params.id);
+  if (!tag) {
+    return res.status(404).json({ message: "Tag not found." });
+  }
+  return res.json({ message: "Tag deleted." });
 });
 
 const testimonialSchema = z.object({

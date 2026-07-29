@@ -83,6 +83,8 @@ const courseSchema = new Schema(
     curriculum: { type: [curriculumModuleSchema], default: [] },
     faqs: { type: [faqEntrySchema], default: [] },
     seo: { type: seoSchema, default: () => ({}) },
+    roles: { type: [String], default: [], index: true },
+    subjects: { type: [String], default: [], index: true },
     featured: { type: Boolean, default: false },
     published: { type: Boolean, default: true, index: true }
   },
@@ -124,6 +126,15 @@ const categorySchema = new Schema(
   },
   timestamps
 );
+
+const tagSchema = new Schema(
+  {
+    type: { type: String, enum: ["role", "subject"], required: true, index: true },
+    name: { type: String, required: true, trim: true }
+  },
+  timestamps
+);
+tagSchema.index({ type: 1, name: 1 }, { unique: true });
 
 const instructorSchema = new Schema(
   {
@@ -222,6 +233,7 @@ export const User = mongoose.model("User", userSchema);
 export const Course = mongoose.model("Course", courseSchema);
 export const BlogPost = mongoose.model("BlogPost", blogPostSchema);
 export const Category = mongoose.model("Category", categorySchema);
+export const Tag = mongoose.model("Tag", tagSchema);
 export const Instructor = mongoose.model("Instructor", instructorSchema);
 export const Faq = mongoose.model("Faq", faqSchema);
 export const Testimonial = mongoose.model("Testimonial", testimonialSchema);
