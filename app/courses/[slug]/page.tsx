@@ -256,7 +256,7 @@ export default async function CourseDetailsPage({
             <CourseEnrollAction slug={course.slug} title={course.title} />
           </div>
           <p className="mt-3 text-center text-xs text-navy-400">
-            14-day money-back guarantee
+            Payment page is redirected to atisunya.co/pay
           </p>
 
           <ul className="mt-6 space-y-3 border-t border-navy-100 pt-6 text-sm text-navy-400">
