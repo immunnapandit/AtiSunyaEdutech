@@ -15,7 +15,7 @@ export const courses: Course[] = [
     price: 23714,
     originalPrice: 33238,
     thumbnail: "design-systems",
-    image: "/images/courses/dynamics365.png",
+    image: "/images/courses/dynamics365.jpg",
     thumbnailGradient: "from-royal-100 via-royal/20 to-cyan-100",
     description:
       "Learn Dynamics 365 Sales, Customer Service, Finance, and business workflows through practical enterprise scenarios.",
@@ -35,7 +35,7 @@ export const courses: Course[] = [
     price: 31332,
     originalPrice: 42760,
     thumbnail: "fullstack",
-    image: "/images/courses/azure.png",
+    image: "/images/courses/azure.jpg",
     thumbnailGradient: "from-navy-100 via-royal-50 to-cyan-100",
     description:
       "Build confidence in Azure compute, networking, identity, storage, monitoring, and enterprise cloud architecture.",
@@ -54,7 +54,7 @@ export const courses: Course[] = [
     reviewCount: 887,
     price: 37999,
     thumbnail: "ml",
-    image: "/images/courses/copilot.png",
+    image: "/images/courses/copilot.jpg",
     thumbnailGradient: "from-cyan-100 via-royal-50 to-navy-100",
     description:
       "Train teams on Copilot Studio, Azure AI services, prompt workflows, and secure AI adoption for business users.",
@@ -73,7 +73,7 @@ export const courses: Course[] = [
     reviewCount: 1120,
     price: 18951,
     thumbnail: "pm",
-    image: "/images/courses/powerplatform.png",
+    image: "/images/courses/powerplatform.jpg",
     thumbnailGradient: "from-royal-50 via-mist-100 to-royal-100",
     description:
       "Create business apps and automated workflows with Power Apps, Power Automate, Dataverse, and Power BI.",
@@ -91,7 +91,7 @@ export const courses: Course[] = [
     reviewCount: 703,
     price: 36094,
     thumbnail: "cloud",
-    image: "/images/courses/devops.png",
+    image: "/images/courses/devops.jpg",
     thumbnailGradient: "from-navy-100 via-cyan-100 to-royal-50",
     description:
       "Upskill teams on CI/CD, Azure DevOps, GitHub workflows, IaC basics, monitoring, and release governance.",
@@ -109,7 +109,7 @@ export const courses: Course[] = [
     reviewCount: 540,
     price: 17048,
     thumbnail: "brand",
-    image: "/images/courses/crm.png",
+    image: "/images/courses/crm.jpg",
     thumbnailGradient: "from-cyan-100 via-mist-100 to-royal-100",
     description:
       "Configure model-driven apps, forms, views, business rules, security roles, and CRM process automation.",
@@ -127,7 +127,7 @@ export const courses: Course[] = [
     reviewCount: 511,
     price: 21809,
     thumbnail: "security",
-    image: "/images/courses/security.png",
+    image: "/images/courses/security.jpg",
     thumbnailGradient: "from-navy-100 via-royal-50 to-mist-100",
     description:
       "Understand Microsoft Entra ID, access control, compliance basics, security posture, and governance practices.",
@@ -146,7 +146,7 @@ export const courses: Course[] = [
     price: 24666,
     originalPrice: 29999,
     thumbnail: "data",
-    image: "/images/courses/powerbi.png",
+    image: "/images/courses/powerbi.jpg",
     thumbnailGradient: "from-royal-100 via-cyan-100 to-mist-100",
     description:
       "Build dashboards, semantic models, reporting workflows, and analytics skills across Power BI and Fabric.",

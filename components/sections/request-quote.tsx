@@ -1,5 +1,6 @@
 "use client";
  
+import Image from "next/image";
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 import { ArrowUp, Mail, MapPin, Phone, Send } from "lucide-react";
@@ -47,7 +48,15 @@ export function RequestQuote() {
  
   return (
     <section className="relative bg-white py-16 md:py-20">
-      <div className="absolute inset-x-0 bottom-0 top-[190px] bg-cover bg-center" style={{ backgroundImage: "url('/images/contactbanner.png')" }} aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 top-[190px] overflow-hidden" aria-hidden="true">
+        <Image
+          src="/images/contactbanner.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
       <div className="absolute inset-x-0 bottom-0 top-[190px] bg-navy/90" aria-hidden="true" />
  
       <Container className="relative grid grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]">

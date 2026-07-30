@@ -54,7 +54,7 @@ export default function ContactPage() {
     <main className="overflow-hidden bg-white pt-[152px] md:pt-[152px]">
    {/*    <section className="relative isolate min-h-[300px] overflow-hidden bg-navy-900 md:min-h-[360px]">
         <Image
-          src="/images/contactbanner.png"
+          src="/images/contactbanner.jpg"
           alt="Students collaborating on a laptop"
           fill
           priority
