@@ -31,6 +31,11 @@ const trainingFormats = [
   },
 ];
 
+const eagerTrainingImages = new Set([
+  "/images/DestinationTraining.png",
+  "/images/Prerequisite.png",
+]);
+
 export function TrainingFormats() {
   return (
     <section className="relative overflow-hidden bg-mist-50 py-16 md:py-20">
@@ -61,6 +66,7 @@ export function TrainingFormats() {
                   src={item.image}
                   alt={item.title}
                   fill
+                  loading={eagerTrainingImages.has(item.image) ? "eager" : "lazy"}
                   sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />

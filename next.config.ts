@@ -6,6 +6,15 @@ const repoRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: "/what-we-do/web-development",
+        destination: "/courses",
+        permanent: true,
+      },
+    ];
+  },
   turbopack: {
     root: repoRoot,
   },
