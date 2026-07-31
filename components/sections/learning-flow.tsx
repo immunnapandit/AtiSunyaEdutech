@@ -49,7 +49,7 @@ function CountUpNumber({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { amount: 0.7 });
   const prefersReducedMotion = useReducedMotion();
-  const [currentValue, setCurrentValue] = useState(0);
+const [currentValue, setCurrentValue] = useState(value);
 
   useEffect(() => {
     if (prefersReducedMotion || !isInView) {

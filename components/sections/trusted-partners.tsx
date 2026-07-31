@@ -31,12 +31,17 @@ function PartnerCard({ partner }: { partner: Partner }) {
     >
       <div className="flex flex-1 flex-col items-center justify-center gap-3 px-4 py-7 text-center">
         <Image
-          src={partner.logo}
-          alt={`${partner.name} logo`}
-          width={120}
-          height={36}
-          className="h-8 w-auto max-w-[120px] object-contain"
-        />
+           src={partner.logo}
+           alt={`${partner.name} logo`}
+           width={120}
+           height={36}
+           className="object-contain"
+           style={{
+           width: "auto",
+           height: "32px",
+  }}
+    />
+      
         <p className="text-[11px] font-medium leading-snug text-navy-400">
           {partner.tagline}
         </p>
