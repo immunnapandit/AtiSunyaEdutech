@@ -5,7 +5,7 @@ import { RotateCcw, Search } from "lucide-react";
 import { CourseCard } from "@/components/features/course-card";
 import { apiRequest } from "@/lib/api";
 import { filterCourses } from "@/lib/course-filters";
-import type { Course, Difficulty } from "@/types";
+import type { Course, CourseCategory, Difficulty } from "@/types";
 
 type SortOption = "popular" | "rating" | "duration" | "price";
 
@@ -13,16 +13,13 @@ function CheckboxRow({
   label,
   checked,
   onChange,
-  nested = false,
 }: {
   label: string;
   checked: boolean;
   onChange: () => void;
-  nested?: boolean;
 }) {
   return (
     <label className="flex min-h-8 items-center gap-3 text-sm font-medium text-navy">
-      <span className={nested ? "ml-6" : ""} />
       <input
         type="checkbox"
         checked={checked}
@@ -36,45 +33,23 @@ function CheckboxRow({
 
 function FilterGroup({
   title,
-  searchLabel,
   items,
-  nested = false,
   selectedItems,
   onToggle,
 }: {
   title: string;
-  searchLabel?: string;
   items: string[];
-  nested?: boolean;
   selectedItems: string[];
   onToggle: (item: string) => void;
 }) {
-  const [query, setQuery] = useState("");
-
-  const filteredItems = useMemo(() => {
-    const value = query.trim().toLowerCase();
-    if (!value) return items;
-    return items.filter((item) => item.toLowerCase().includes(value));
-  }, [items, query]);
-
   return (
     <section className="border-b border-navy-100 pb-6">
       <h2 className="text-xl font-bold text-navy">{title}</h2>
-      {searchLabel && (
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder={searchLabel}
-          className="mt-4 h-11 w-full rounded border border-navy-100 px-3 text-sm outline-none transition focus:border-brand"
-        />
-      )}
-      <div className="mt-4 max-h-80 space-y-1 overflow-y-auto pr-2">
-        {filteredItems.map((item) => (
+      <div className="mt-4 space-y-1">
+        {items.map((item) => (
           <CheckboxRow
             key={item}
             label={item}
-            nested={nested}
             checked={selectedItems.includes(item)}
             onChange={() => onToggle(item)}
           />
@@ -86,6 +61,9 @@ function FilterGroup({
 
 export function CoursesCatalog() {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [categories, setCategories] = useState<CourseCategory[]>([]);
+  const [roleOptions, setRoleOptions] = useState<string[]>([]);
+  const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -95,26 +73,33 @@ export function CoursesCatalog() {
   const [sortBy, setSortBy] = useState<SortOption>("popular");
 
   useEffect(() => {
-    apiRequest<{ courses: Course[] }>("/courses")
-      .then((data) => setCourses(data.courses))
-      .catch(() => setCourses([]))
+    apiRequest<{
+      courses: Course[];
+      categories: CourseCategory[];
+      roles: string[];
+      subjects: string[];
+    }>("/courses")
+      .then((data) => {
+        setCourses(data.courses);
+        setCategories(data.categories || []);
+        setRoleOptions(data.roles || []);
+        setSubjectOptions(data.subjects || []);
+      })
+      .catch(() => {
+        setCourses([]);
+        setCategories([]);
+        setRoleOptions([]);
+        setSubjectOptions([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 
   const productOptions = useMemo(() => {
-    const values = courses.map((course) => course.category);
-    return Array.from(new Set(values));
-  }, [courses]);
-
-  const roleOptions = [
-    "Administrator",
-    "AI Engineer",
-    "Business Analyst",
-    "Developer",
-    "Security Specialist",
-  ];
-
-  const subjectOptions = ["Cloud", "AI", "Data", "Security", "Business", "Development"];
+    if (categories.length > 0) {
+      return categories.map((category) => category.name);
+    }
+    return Array.from(new Set(courses.map((course) => course.category)));
+  }, [categories, courses]);
 
   const levelOptions: Difficulty[] = ["Beginner", "Intermediate", "Advanced"];
 
@@ -191,7 +176,7 @@ export function CoursesCatalog() {
       </section>
 
    <section className="mt-10 grid w-full max-w-full gap-8 px-4 py-4 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8 xl:px-10">
-        <aside className="space-y-6 rounded-lg border border-navy-100 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:self-start">
+        <aside className="space-y-6 overflow-y-auto rounded-lg border border-navy-100 bg-white p-6 shadow-soft lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:self-start">
           <div className="flex flex-col gap-3 border-b border-navy-100 pb-5">
       <div>
   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">
@@ -207,7 +192,7 @@ export function CoursesCatalog() {
   </p>
 
   <div className="mt-5 flex w-full">
-  
+
     <button
       type="button"
       onClick={clearFilters}
@@ -223,7 +208,6 @@ export function CoursesCatalog() {
           <div className="space-y-6">
             <FilterGroup
               title="Products"
-              searchLabel="Find a product"
               items={productOptions}
               selectedItems={selectedProducts}
               onToggle={(item) => toggleValue(item, selectedProducts, setSelectedProducts)}
@@ -231,7 +215,6 @@ export function CoursesCatalog() {
 
             <FilterGroup
               title="Roles"
-              searchLabel="Find a role"
               items={roleOptions}
               selectedItems={selectedRoles}
               onToggle={(item) => toggleValue(item, selectedRoles, setSelectedRoles)}
@@ -259,9 +242,7 @@ export function CoursesCatalog() {
 
             <FilterGroup
               title="Subjects"
-              searchLabel="Find a subject"
               items={subjectOptions}
-              nested
               selectedItems={selectedSubjects}
               onToggle={(item) => toggleValue(item, selectedSubjects, setSelectedSubjects)}
             />

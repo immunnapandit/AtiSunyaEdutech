@@ -6,25 +6,25 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 
 const trainingFormats = [
   {
-    image: "/images/OneToOneTraining.png",
+    image: "/images/OneToOneTraining.jpg",
     title: "1-to-1 Training",
     description:
       "One-on-one sessions with a personal Microsoft trainer, planned around your schedule and goals.",
   },
   {
-    image: "/images/CustomizeTraining.png",
+    image: "/images/CustomizeTraining.jpg",
     title: "Customized Training",
     description:
       "Training built around your team's tools and daily work, so it fits how you actually do your job.",
   },
   {
-    image: "/images/DestinationTraining.png",
+    image: "/images/DestinationTraining.jpg",
     title: "Destination Training",
     description:
       "On-site training at a place of your choice, away from daily distractions.",
   },
   {
-    image: "/images/Prerequisite.png",
+    image: "/images/Prerequisite.jpg",
     title: "Pre-Requisite Session",
     description:
       "A short session that teaches the basics you need before the main training begins.",

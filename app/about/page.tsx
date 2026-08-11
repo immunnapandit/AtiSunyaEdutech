@@ -52,7 +52,7 @@ export default function AboutPage() {
     <div className="overflow-hidden pt-28 sm:pt-32">
    {/*    <section className="relative isolate">
         <div className="absolute inset-0 -z-20 bg-[#f8faff]" />
-        <div className="absolute inset-x-0 top-0 -z-10 h-[24rem] bg-[linear-gradient(180deg,rgba(76,60,255,0.72),rgba(76,60,255,0.72)),url('/images/contactbanner.png')] bg-cover bg-center bg-no-repeat" />
+        <div className="absolute inset-x-0 top-0 -z-10 h-[24rem] bg-[linear-gradient(180deg,rgba(76,60,255,0.72),rgba(76,60,255,0.72)),url('/images/contactbanner.jpg')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(31,41,55,0.35),rgba(31,41,55,0.45))]" />
 
         <Container className="relative flex min-h-[24rem] items-center justify-center py-14 text-center text-white">

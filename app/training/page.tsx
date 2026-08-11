@@ -135,7 +135,7 @@ export default function CorporateTrainingPage() {
 
           <div className="relative overflow-hidden rounded-[2rem] border border-brand/10 bg-white shadow-soft">
             <Image
-              src="/images/contactbanner.png"
+              src="/images/contactbanner.jpg"
               alt="Team working together during corporate training"
               width={920}
               height={640}

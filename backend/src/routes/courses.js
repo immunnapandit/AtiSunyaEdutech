@@ -1,5 +1,5 @@
 import express from "express";
-import { Category, Course, User } from "../models/index.js";
+import { Category, Course, Tag, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
 import { createRazorpayOrder, verifyRazorpaySignature } from "../services/razorpay.js";
 import { sendPurchaseConfirmation, sendPurchaseNotification } from "../services/notification-service.js";
@@ -90,12 +90,18 @@ coursesRouter.get("/", async (req, res) => {
     query.$or = [{ title: term }, { category: term }, { description: term }, { instructor: term }];
   }
 
-  const [courses, categories] = await Promise.all([
+  const [courses, categories, tags] = await Promise.all([
     Course.find(query).sort({ createdAt: 1 }).lean({ virtuals: false }),
-    Category.find().sort({ name: 1 }).lean()
+    Category.find().sort({ name: 1 }).lean(),
+    Tag.find().sort({ name: 1 }).lean()
   ]);
 
-  return res.json({ courses: courses.map(serializeCourse), categories: categories.map(serializeCategory) });
+  return res.json({
+    courses: courses.map(serializeCourse),
+    categories: categories.map(serializeCategory),
+    roles: tags.filter((tag) => tag.type === "role").map((tag) => tag.name),
+    subjects: tags.filter((tag) => tag.type === "subject").map((tag) => tag.name)
+  });
 });
 
 coursesRouter.get("/:slug", async (req, res) => {
@@ -207,6 +213,8 @@ export function serializeCourse(course) {
     curriculum: course.curriculum || [],
     faqs: course.faqs || [],
     seo: course.seo || {},
+    roles: course.roles || [],
+    subjects: course.subjects || [],
     featured: Boolean(course.featured)
   };
 }

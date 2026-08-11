@@ -1,5 +1,11 @@
 export type Difficulty = "Beginner" | "Intermediate" | "Advanced";
 
+export interface CourseCategory {
+  name: string;
+  count: number;
+  icon: string;
+}
+
 export interface Course {
   slug: string;
   title: string;
@@ -17,6 +23,8 @@ export interface Course {
   thumbnail: string;
   thumbnailGradient: string;
   description: string;
+  roles?: string[];
+  subjects?: string[];
   featured?: boolean;
 }
 

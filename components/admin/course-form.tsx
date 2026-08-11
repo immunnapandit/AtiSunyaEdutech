@@ -38,6 +38,8 @@ export type CourseFormValues = {
   curriculum: CurriculumModule[];
   faqs: FaqEntry[];
   seo: Seo;
+  roles: string[];
+  subjects: string[];
   featured: boolean;
   published: boolean;
 };
@@ -62,6 +64,8 @@ const emptyCourse: CourseFormValues = {
   curriculum: [],
   faqs: [],
   seo: { title: "", description: "", keywords: [] },
+  roles: [],
+  subjects: [],
   featured: false,
   published: true,
 };
@@ -82,16 +86,32 @@ export function CourseForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [categories, setCategories] = useState<{ name: string }[]>([]);
+  const [roleOptions, setRoleOptions] = useState<{ _id: string; name: string }[]>([]);
+  const [subjectOptions, setSubjectOptions] = useState<{ _id: string; name: string }[]>([]);
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
 
   useEffect(() => {
     adminApiRequest<{ categories: { name: string }[] }>("/categories")
       .then((data) => setCategories(data.categories))
       .catch(() => {});
+    adminApiRequest<{ tags: { _id: string; name: string }[] }>("/tags?type=role")
+      .then((data) => setRoleOptions(data.tags))
+      .catch(() => {});
+    adminApiRequest<{ tags: { _id: string; name: string }[] }>("/tags?type=subject")
+      .then((data) => setSubjectOptions(data.tags))
+      .catch(() => {});
   }, []);
 
   function update<K extends keyof CourseFormValues>(key: K, value: CourseFormValues[K]) {
     setValues((current) => ({ ...current, [key]: value }));
+  }
+
+  function toggleListValue(key: "roles" | "subjects", value: string) {
+    setValues((current) => {
+      const list = current[key];
+      const next = list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
+      return { ...current, [key]: next };
+    });
   }
 
   function updateModule(index: number, patch: Partial<CurriculumModule>) {
@@ -326,6 +346,54 @@ export function CourseForm({
               className={inputClass}
             />
             <p className="mt-1 text-xs text-navy-400">Optional. Leave blank if there&apos;s no discount to show.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-navy-100 bg-white p-6 shadow-soft">
+        <h2 className="text-lg font-bold text-navy">Filters</h2>
+        <p className="mt-1 text-sm text-navy-400">
+          Pick which Role and Subject filters this course should appear under on the courses page.
+          Manage the available options on the <a href="/admin/tags" className="font-semibold text-brand underline">Tags</a> page.
+        </p>
+        <div className="mt-5 grid gap-6 md:grid-cols-2">
+          <div>
+            <p className={labelClass}>Roles</p>
+            <div className="mt-2 space-y-2">
+              {roleOptions.length === 0 && (
+                <p className="text-xs text-navy-400">No roles yet. Add some on the Tags page.</p>
+              )}
+              {roleOptions.map((role) => (
+                <label key={role._id} className="flex items-center gap-2 text-sm text-navy">
+                  <input
+                    type="checkbox"
+                    checked={values.roles.includes(role.name)}
+                    onChange={() => toggleListValue("roles", role.name)}
+                    className="h-4 w-4 rounded border-navy-100 text-brand focus:ring-brand"
+                  />
+                  {role.name}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className={labelClass}>Subjects</p>
+            <div className="mt-2 space-y-2">
+              {subjectOptions.length === 0 && (
+                <p className="text-xs text-navy-400">No subjects yet. Add some on the Tags page.</p>
+              )}
+              {subjectOptions.map((subject) => (
+                <label key={subject._id} className="flex items-center gap-2 text-sm text-navy">
+                  <input
+                    type="checkbox"
+                    checked={values.subjects.includes(subject.name)}
+                    onChange={() => toggleListValue("subjects", subject.name)}
+                    className="h-4 w-4 rounded border-navy-100 text-brand focus:ring-brand"
+                  />
+                  {subject.name}
+                </label>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Cardo, Josefin_Sans } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteChrome } from "@/components/layout/site-chrome";
 
-const josefinSans = Josefin_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-josefin",
+  variable: "--font-heading",
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const cardo = Cardo({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-cardo",
-  weight: ["400", "700"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -55,9 +56,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${josefinSans.variable} ${cardo.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth">
       <body>
         <SiteChrome>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   );

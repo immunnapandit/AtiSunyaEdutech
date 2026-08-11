@@ -20,6 +20,9 @@
 
   body {
     @apply bg-white text-navy-600 font-body antialiased;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
   }
 
   h1,
@@ -29,7 +32,17 @@
   h5,
   h6 {
     @apply font-display text-navy tracking-normal;
+    font-weight: 600;
+    line-height: 1.22;
+    transition: all 0.3s ease-out 0s;
   }
+
+  h1 { font-size: 40px; }
+  h2 { font-size: 32px; }
+  h3 { font-size: 28px; }
+  h4 { font-size: 24px; }
+  h5 { font-size: 20px; }
+  h6 { font-size: 16px; }
 
   ::selection {
     @apply bg-brand/20 text-navy;
