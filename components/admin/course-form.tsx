@@ -33,6 +33,7 @@ export type CourseFormValues = {
   originalPrice: number | "";
   image: string;
   banner: string;
+  coursePlan: string;
   thumbnailGradient: string;
   description: string;
   curriculum: CurriculumModule[];
@@ -59,6 +60,7 @@ const emptyCourse: CourseFormValues = {
   originalPrice: "",
   image: "",
   banner: "",
+  coursePlan: "",
   thumbnailGradient: "",
   description: "",
   curriculum: [],
@@ -400,6 +402,7 @@ export function CourseForm({
 
       <section className="rounded-2xl border border-navy-100 bg-white p-6 shadow-soft">
         <h2 className="text-lg font-bold text-navy">Media & description</h2>
+
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <ImageUploadField
             label="Course image"
@@ -413,6 +416,18 @@ export function CourseForm({
             onChange={(url) => update("banner", url)}
             folder="atisunya/courses"
           />
+          <div className="md:col-span-2">
+            <ImageUploadField
+              label="Course Plan (PDF)"
+              value={values.coursePlan}
+              onChange={(url) => update("coursePlan", url)}
+              folder="atisunya/course-plans"
+              accept="application/pdf,.pdf"
+              mediaType="pdf"
+              pastePlaceholder="Or paste a PDF URL"
+            />
+          </div>
+
           <div className="md:col-span-2">
             <label className={labelClass} htmlFor="thumbnailGradient">Thumbnail gradient classes</label>
             <input
