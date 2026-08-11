@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
@@ -59,12 +59,34 @@ export function LinkButton({
   withArrow,
   children,
   className,
-}: BaseProps & { href: string }) {
+  target,
+  download,
+  rel,
+  ...props
+}: BaseProps & { href: string } & AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const anchorClassName = cn(baseStyles, variantStyles[variant], sizeStyles[size], className);
+  const isExternal = /^(https?:\/\/|mailto:|tel:)/.test(href);
+  const useAnchor = isExternal || target === "_blank" || download !== undefined;
+  const anchorRel = rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
+
+  if (useAnchor) {
+    return (
+      <a
+        href={href}
+        className={anchorClassName}
+        target={target}
+        rel={anchorRel}
+        download={download}
+        {...props}
+      >
+        {children}
+        {withArrow && <ArrowUpRight className="h-4 w-4" />}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-    >
+    <Link href={href} className={anchorClassName} {...props}>
       {children}
       {withArrow && <ArrowUpRight className="h-4 w-4" />}
     </Link>

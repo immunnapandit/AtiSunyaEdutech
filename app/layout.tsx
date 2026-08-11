@@ -56,8 +56,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`} data-scroll-behavior="smooth">
-      <body>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${inter.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
         <SiteChrome>{children}</SiteChrome>
         <Analytics />
       </body>

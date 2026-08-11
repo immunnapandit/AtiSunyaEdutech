@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, BookOpenText, Newspaper, Tag, Tags, LogOut, ShieldCheck } from "lucide-react";
@@ -18,29 +18,26 @@ const navItems = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [checked, setChecked] = useState(false);
 
   const isLoginPage = pathname === "/admin/login";
+  const adminToken = useSyncExternalStore(
+    () => () => {},
+    getAdminToken,
+    () => null
+  );
+  const hasAdminToken = isLoginPage || Boolean(adminToken);
 
   useEffect(() => {
-    if (isLoginPage) {
-      setChecked(true);
-      return;
-    }
-
-    if (!getAdminToken()) {
+    if (!hasAdminToken) {
       router.replace("/admin/login");
-      return;
     }
-
-    setChecked(true);
-  }, [isLoginPage, router]);
+  }, [hasAdminToken, router]);
 
   if (isLoginPage) {
     return <>{children}</>;
   }
 
-  if (!checked) {
+  if (!hasAdminToken) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#f6f9fc] text-sm font-semibold text-navy-400">
         Loading admin console...

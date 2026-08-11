@@ -54,7 +54,14 @@ export const env = {
 };
 
 export function isCloudinaryConfigured() {
-  return Boolean(env.cloudinary.cloudName && env.cloudinary.apiKey && env.cloudinary.apiSecret);
+  return Boolean(
+    env.cloudinary.cloudName &&
+      env.cloudinary.apiKey &&
+      env.cloudinary.apiSecret &&
+      env.cloudinary.cloudName !== "your-cloud-name" &&
+      env.cloudinary.apiKey !== "your-api-key" &&
+      env.cloudinary.apiSecret !== "your-api-secret"
+  );
 }
 
 export function validateEnv() {
@@ -77,6 +84,12 @@ export function validateEnv() {
 
   if (!env.admin.email || !env.admin.password) {
     console.warn("[config] Admin panel login is disabled. Missing: ADMIN_PANEL_EMAIL / ADMIN_PANEL_PASSWORD");
+  }
+
+  if (!isCloudinaryConfigured()) {
+    console.warn(
+      "[config] Cloudinary uploads are disabled. Set real CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET values."
+    );
   }
 
   if (env.nodeEnv === "production") {

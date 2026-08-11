@@ -208,6 +208,7 @@ export function serializeCourse(course) {
     thumbnail: course.thumbnail,
     image: course.image,
     banner: course.banner,
+    coursePlan: course.coursePlan,
     thumbnailGradient: course.thumbnailGradient,
     description: course.description,
     curriculum: course.curriculum || [],

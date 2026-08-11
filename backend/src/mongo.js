@@ -1,16 +1,20 @@
 import mongoose from "mongoose";
-import path from "node:path";
-import { promises as fs } from "node:fs";
-import { fileURLToPath } from "node:url";
 import { env } from "./config/env.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const localDbPath = path.resolve(__dirname, "../data/mongo");
 
 let memoryServer = null;
 
 export async function connectMongo() {
   let uri = env.mongodbUri;
+
+  if (isPlaceholderMongoUri(uri)) {
+    if (uri) {
+      console.warn(
+        "[mongo] Ignoring placeholder MONGODB_URI from .env. " +
+          "Replace it with your real Atlas URI when you want to use MongoDB Atlas."
+      );
+    }
+    uri = undefined;
+  }
 
   if (!uri) {
     if (env.nodeEnv === "production") {
@@ -18,19 +22,25 @@ export async function connectMongo() {
     }
 
     console.warn(
-      "[mongo] MONGODB_URI not set - starting a local dev MongoDB (data persists in backend/data/mongo). " +
-        "Add your Atlas connection string to backend/.env for real deployments."
+      "[mongo] MONGODB_URI not set - starting a temporary local dev MongoDB. " +
+        "Add your Atlas connection string to backend/.env when you want persistent data."
     );
-    const { MongoMemoryServer } = await import("mongodb-memory-server");
-    await fs.mkdir(localDbPath, { recursive: true });
-    memoryServer = await MongoMemoryServer.create({
-      instance: { dbPath: localDbPath, storageEngine: "wiredTiger" }
-    });
+    memoryServer = await startLocalMongo();
     uri = `${memoryServer.getUri()}atisunya`;
   }
 
   mongoose.set("strictQuery", true);
-  await mongoose.connect(uri);
+  try {
+    await mongoose.connect(uri);
+  } catch (error) {
+    if (error?.code === "ENOTFOUND" && uri.includes("mongodb.net")) {
+      throw new Error(
+        `Could not resolve MongoDB host for MONGODB_URI. Check backend/.env and replace the placeholder Atlas URI with your real connection string. Original error: ${error.message}`
+      );
+    }
+
+    throw error;
+  }
   console.log(`[mongo] Connected (${memoryServer ? "local dev instance" : "external cluster"})`);
 }
 
@@ -39,4 +49,13 @@ export async function disconnectMongo() {
   if (memoryServer) {
     await memoryServer.stop();
   }
+}
+
+function isPlaceholderMongoUri(uri) {
+  return !uri || uri.includes("user:password@cluster.mongodb.net");
+}
+
+async function startLocalMongo() {
+  const { MongoMemoryServer } = await import("mongodb-memory-server");
+  return MongoMemoryServer.create();
 }

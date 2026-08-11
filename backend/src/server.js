@@ -3,6 +3,7 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import morgan from "morgan";
+import { uploadsRoot } from "./services/local-upload.js";
 import { env, validateEnv } from "./config/env.js";
 import { connectMongo, disconnectMongo } from "./mongo.js";
 import { seedIfEmpty } from "./data/seed-mongo.js";
@@ -38,6 +39,14 @@ app.use(express.json({
   }
 }));
 app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
+app.use(
+  "/uploads",
+  express.static(uploadsRoot, {
+    setHeaders(res) {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    }
+  })
+);
 app.use(
   "/api",
   rateLimit({
