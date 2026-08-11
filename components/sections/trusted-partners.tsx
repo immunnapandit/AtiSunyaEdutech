@@ -10,6 +10,7 @@ type Partner = {
   tagline: string;
   logo: string;
 };
+/* aeseses */
 const partners: Partner[] = [
   { name: "Microsoft", tagline: "Cloud Training Services", logo: "/images/logos/microsoft.svg" },
   { name: "Azure", tagline: "Solutions Partner", logo: "/images/logos/azure.svg" },
