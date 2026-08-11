@@ -29,16 +29,33 @@ export default function AdminTagsPage() {
   const [saving, setSaving] = useState(false);
   const [name, setName] = useState("");
 
-  function load(type: TagType) {
-    setLoading(true);
-    adminApiRequest<{ tags: AdminTag[] }>(`/tags?type=${type}`)
-      .then((data) => setTags(data.tags))
-      .catch((err) => setError(err instanceof Error ? err.message : "Could not load tags."))
-      .finally(() => setLoading(false));
+  function fetchTags(type: TagType) {
+    return adminApiRequest<{ tags: AdminTag[] }>(`/tags?type=${type}`);
   }
 
   useEffect(() => {
-    load(activeType);
+    let ignore = false;
+
+    fetchTags(activeType)
+      .then((data) => {
+        if (!ignore) {
+          setTags(data.tags);
+        }
+      })
+      .catch((err) => {
+        if (!ignore) {
+          setError(err instanceof Error ? err.message : "Could not load tags.");
+        }
+      })
+      .finally(() => {
+        if (!ignore) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, [activeType]);
 
   async function handleCreate(event: FormEvent<HTMLFormElement>) {
@@ -54,7 +71,13 @@ export default function AdminTagsPage() {
         body: JSON.stringify({ type: activeType, name: name.trim() }),
       });
       setName("");
-      load(activeType);
+      setLoading(true);
+      try {
+        const data = await fetchTags(activeType);
+        setTags(data.tags);
+      } finally {
+        setLoading(false);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not create tag.");
     } finally {
@@ -92,7 +115,12 @@ export default function AdminTagsPage() {
           <button
             key={tab.type}
             type="button"
-            onClick={() => setActiveType(tab.type)}
+            onClick={() => {
+              if (tab.type === activeType) return;
+              setLoading(true);
+              setError("");
+              setActiveType(tab.type);
+            }}
             className={cn(
               "rounded-lg px-5 py-2 text-sm font-bold transition",
               activeType === tab.type ? "bg-brand text-white" : "text-navy-500 hover:bg-brand-50 hover:text-brand"

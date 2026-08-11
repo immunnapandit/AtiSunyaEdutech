@@ -21,7 +21,7 @@ function ensureConfigured() {
   }
 }
 
-export function createUploadSignature({ folder = "atisunya" } = {}) {
+export function createUploadSignature({ folder = "atisunya", resourceType = "auto" } = {}) {
   ensureConfigured();
 
   const timestamp = Math.round(Date.now() / 1000);
@@ -33,12 +33,13 @@ export function createUploadSignature({ folder = "atisunya" } = {}) {
     apiKey: env.cloudinary.apiKey,
     timestamp,
     folder,
+    resourceType,
     signature,
-    uploadUrl: `https://api.cloudinary.com/v1_1/${env.cloudinary.cloudName}/auto/upload`
+    uploadUrl: `https://api.cloudinary.com/v1_1/${env.cloudinary.cloudName}/${resourceType}/upload`
   };
 }
 
-export async function deleteAsset(publicId) {
+export async function deleteAsset(publicId, { resourceType = "image" } = {}) {
   ensureConfigured();
-  return cloudinary.uploader.destroy(publicId, { invalidate: true });
+  return cloudinary.uploader.destroy(publicId, { invalidate: true, resource_type: resourceType });
 }

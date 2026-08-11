@@ -254,6 +254,19 @@ export default async function CourseDetailsPage({
               Enquiry now
             </LinkButton>
             <CourseEnrollAction slug={course.slug} title={course.title} />
+            {course.coursePlan && (
+              <LinkButton
+                href={course.coursePlan}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                variant="secondary"
+                size="lg"
+                className="w-full justify-center"
+              >
+                Download Course Plan
+              </LinkButton>
+            )}
           </div>
           <p className="mt-3 text-center text-xs text-navy-400">
             Payment page is redirected to atisunya.co/pay

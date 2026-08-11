@@ -78,6 +78,7 @@ const courseSchema = new Schema(
     thumbnail: { type: String, default: "" },
     image: { type: String, default: "" },
     banner: { type: String, default: "" },
+    coursePlan: { type: String, default: "" },
     thumbnailGradient: { type: String, default: "" },
     description: { type: String, default: "" },
     curriculum: { type: [curriculumModuleSchema], default: [] },
@@ -224,6 +225,7 @@ const mediaSchema = new Schema(
     width: Number,
     height: Number,
     folder: String,
+    resourceType: { type: String, enum: ["image", "raw", "video", "auto"], default: "image" },
     originalFilename: String
   },
   timestamps

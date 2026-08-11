@@ -20,6 +20,8 @@ export interface Course {
   price: number;
   originalPrice?: number;
   image: string;
+  banner?: string;
+  coursePlan?: string;
   thumbnail: string;
   thumbnailGradient: string;
   description: string;

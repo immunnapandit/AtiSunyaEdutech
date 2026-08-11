@@ -20,6 +20,7 @@ import {
   User
 } from "../models/index.js";
 import { createUploadSignature, deleteAsset } from "../services/cloudinary.js";
+import { saveLocalUpload } from "../services/local-upload.js";
 import { serializeBlogPost } from "./content.js";
 import { serializeCourse } from "./courses.js";
 import { validate } from "../utils/validation.js";
@@ -113,6 +114,7 @@ const courseSchema = z.object({
   originalPrice: z.coerce.number().min(0).optional().nullable(),
   image: z.string().trim().optional().default(""),
   banner: z.string().trim().optional().default(""),
+  coursePlan: z.string().trim().optional().default(""),
   thumbnailGradient: z.string().trim().optional().default(""),
   description: z.string().trim().optional().default(""),
   curriculum: z
@@ -433,8 +435,30 @@ adminRouter.get("/leads", async (_req, res) => {
 
 adminRouter.post("/media/sign", (req, res) => {
   try {
-    const signature = createUploadSignature({ folder: sanitizeFolder(req.body?.folder) });
+    const signature = createUploadSignature({
+      folder: sanitizeFolder(req.body?.folder),
+      resourceType: sanitizeResourceType(req.body?.resourceType)
+    });
     return res.json(signature);
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({ message: error.message });
+  }
+});
+
+adminRouter.post("/media/upload", async (req, res) => {
+  try {
+    const upload = await saveLocalUpload(req, {
+      folder: sanitizeFolder(req.query?.folder || req.headers["x-upload-folder"])
+    });
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    return res.status(201).json({
+      publicId: upload.publicId,
+      url: `${baseUrl}/uploads/${upload.relativePath}`,
+      format: upload.format,
+      bytes: upload.bytes,
+      resourceType: upload.format === "pdf" ? "raw" : "image",
+      originalFilename: upload.originalFilename
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({ message: error.message });
   }
@@ -448,6 +472,7 @@ const mediaRecordSchema = z.object({
   width: z.coerce.number().optional(),
   height: z.coerce.number().optional(),
   folder: z.string().trim().optional(),
+  resourceType: z.enum(["image", "raw", "video", "auto"]).optional(),
   originalFilename: z.string().trim().optional()
 });
 
@@ -472,7 +497,7 @@ adminRouter.delete("/media/:id", async (req, res) => {
   }
 
   try {
-    await deleteAsset(media.publicId);
+    await deleteAsset(media.publicId, { resourceType: media.resourceType || "image" });
   } catch (error) {
     return res.status(error.statusCode || 500).json({ message: error.message });
   }
@@ -484,6 +509,10 @@ adminRouter.delete("/media/:id", async (req, res) => {
 function sanitizeFolder(folder) {
   const cleaned = String(folder || "atisunya").replace(/[^a-zA-Z0-9/_-]/g, "");
   return cleaned || "atisunya";
+}
+
+function sanitizeResourceType(resourceType) {
+  return ["image", "raw", "video", "auto"].includes(resourceType) ? resourceType : "auto";
 }
 
 function safeEquals(a, b) {
