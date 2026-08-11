@@ -74,7 +74,7 @@ export function ImageUploadField({
     try {
       const signature = await adminApiRequest<SignatureResponse>("/media/sign", {
         method: "POST",
-        body: JSON.stringify({ folder, resourceType: isPdf ? "raw" : "auto" }),
+        body: JSON.stringify({ folder, resourceType: isPdf ? "image" : "auto" }),
       });
 
       const formData = new FormData();
@@ -158,7 +158,7 @@ export function ImageUploadField({
         format: uploadData.format,
         bytes: uploadData.bytes,
         folder,
-        resourceType: uploadData.resourceType || (isPdf ? "raw" : "image"),
+        resourceType: uploadData.resourceType || "image",
         originalFilename: uploadData.originalFilename,
       }),
     }).catch(() => {});
