@@ -71,7 +71,9 @@ export default async function CourseDetailsPage({
 
   const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
   const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
-  const coursePlanUrl = getCloudinaryPdfDownloadUrl(course.coursePlan || "");
+  const coursePlanUrl = course.coursePlan ? `/api/media/download?url=${encodeURIComponent(
+    course.coursePlan
+  )}` : "";
 
   return (
     <div className="pt-48 pb-24 md:pt-56">

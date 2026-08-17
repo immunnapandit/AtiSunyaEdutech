@@ -74,7 +74,7 @@ export function ImageUploadField({
     try {
       const signature = await adminApiRequest<SignatureResponse>("/media/sign", {
         method: "POST",
-        body: JSON.stringify({ folder, resourceType: isPdf ? "image" : "auto" }),
+        body: JSON.stringify({ folder, resourceType: isPdf ? "raw" : "auto" }),
       });
 
       const formData = new FormData();
