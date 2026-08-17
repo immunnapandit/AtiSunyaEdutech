@@ -4,6 +4,7 @@ import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
 import { apiRequest } from "@/lib/api";
+import { getCloudinaryPdfDownloadUrl } from "@/lib/cloudinary-url";
 import Image from "next/image";
 import {
   Star,
@@ -70,6 +71,9 @@ export default async function CourseDetailsPage({
 
   const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
   const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
+  const coursePlanUrl = course.coursePlan ? `/api/media/download?url=${encodeURIComponent(
+    course.coursePlan
+  )}` : "";
 
   return (
     <div className="pt-48 pb-24 md:pt-56">
@@ -254,9 +258,9 @@ export default async function CourseDetailsPage({
               Enquiry now
             </LinkButton>
             <CourseEnrollAction slug={course.slug} title={course.title} />
-            {course.coursePlan && (
+            {coursePlanUrl && (
               <LinkButton
-                href={course.coursePlan}
+                href={coursePlanUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 download

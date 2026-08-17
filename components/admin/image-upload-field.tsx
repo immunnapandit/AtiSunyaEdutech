@@ -158,7 +158,7 @@ export function ImageUploadField({
         format: uploadData.format,
         bytes: uploadData.bytes,
         folder,
-        resourceType: uploadData.resourceType || (isPdf ? "raw" : "image"),
+        resourceType: uploadData.resourceType || "image",
         originalFilename: uploadData.originalFilename,
       }),
     }).catch(() => {});

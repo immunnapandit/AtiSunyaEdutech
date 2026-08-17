@@ -1,5 +1,16 @@
 import express from "express";
 import { BlogPost, Faq, Instructor, Testimonial } from "../models/index.js";
+import { isCloudinaryConfigured } from "../config/env.js";
+import { createSignedDownloadUrlFromCloudinaryUrl } from "../services/cloudinary.js";
+
+function isCloudinaryPdfUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname === "res.cloudinary.com" && /\.pdf(?:$|[?#])/i.test(parsed.pathname);
+  } catch {
+    return /res\.cloudinary\.com\/.+\.pdf(?:$|[?#])/i.test(url);
+  }
+}
 
 export const contentRouter = express.Router();
 
@@ -73,6 +84,31 @@ contentRouter.get("/testimonials", async (_req, res) => {
       rating: item.rating
     }))
   });
+});
+
+contentRouter.get("/media/download", async (req, res) => {
+  const url = String(req.query.url || "");
+  if (!url) return res.status(400).json({ message: "Missing url parameter." });
+
+  // If this looks like a Cloudinary PDF and Cloudinary is configured, generate a signed download URL and redirect.
+  try {
+    if (isCloudinaryConfigured() && isCloudinaryPdfUrl(url)) {
+      const signed = createSignedDownloadUrlFromCloudinaryUrl(url, { attachment: true, expiresInSeconds: 300 });
+      return res.redirect(signed);
+    }
+  } catch (err) {
+    // fall through to redirecting to a download-forcing URL
+    console.error("Failed to create signed Cloudinary URL", err);
+  }
+
+  // Fallback: force download by adding fl_attachment if it's a Cloudinary URL, otherwise redirect to original URL.
+  try {
+    const parsed = new URL(url);
+    parsed.pathname = parsed.pathname.replace(/\/(image|raw)\/upload\/(?!fl_attachment(?:[:/,]))/, "/$1/upload/fl_attachment/");
+    return res.redirect(parsed.toString());
+  } catch {
+    return res.redirect(url);
+  }
 });
 
 export function serializeBlogPost(post) {
