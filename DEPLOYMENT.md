@@ -37,6 +37,14 @@ CLOUDINARY_API_SECRET=...
 
 Cloudinary is required for production uploads. The local upload fallback is only suitable for local development because most hosted Node services do not keep uploaded files permanently unless you add persistent disk storage.
 
+For course plan PDFs, also enable public PDF delivery in Cloudinary:
+
+```text
+Cloudinary Console > Settings > Security > PDF and ZIP files delivery > Allow delivery
+```
+
+New/free Cloudinary accounts can upload PDFs but block public PDF delivery until this setting is enabled and confirmed.
+
 After deploying, confirm:
 
 ```text
