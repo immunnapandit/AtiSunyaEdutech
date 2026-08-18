@@ -4,7 +4,6 @@ import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
 import { apiRequest } from "@/lib/api";
-import { getCloudinaryPdfDownloadUrl } from "@/lib/cloudinary-url";
 import Image from "next/image";
 import {
   Star,
@@ -71,7 +70,8 @@ export default async function CourseDetailsPage({
 
   const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
   const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
-  const coursePlanUrl = course.coursePlan ? getCloudinaryPdfDownloadUrl(course.coursePlan) : "";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+  const coursePlanUrl = curriculumModules.length > 0 ? `${API_URL}/courses/${course.slug}/course-plan` : "";
 
   return (
     <div className="pt-48 pb-24 md:pt-56">
@@ -188,24 +188,27 @@ export default async function CourseDetailsPage({
             <div className="mt-5 space-y-3">
               {curriculumModules.length > 0
                 ? curriculumModules.map((module, i) => (
-                    <div
+                    <details
                       key={module.title}
-                      className="flex w-full items-start gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
+                      className="group w-full rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md [&_summary::-webkit-details-marker]:hidden"
                     >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <p className="text-sm font-semibold text-navy">{module.title}</p>
-                        {module.lessons.length > 0 && (
-                          <ul className="mt-2 space-y-1 text-sm text-navy-500">
-                            {module.lessons.map((lesson) => (
-                              <li key={lesson}>{lesson}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
+                      <summary className="flex cursor-pointer list-none items-center gap-4">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
+                          {i + 1}
+                        </span>
+                        <span className="flex-1 text-sm font-semibold text-navy">{module.title}</span>
+                        <span className="shrink-0 text-xl text-brand transition-transform duration-200 group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      {module.lessons.length > 0 && (
+                        <ul className="mt-3 space-y-1 pl-11 text-sm text-navy-500">
+                          {module.lessons.map((lesson) => (
+                            <li key={lesson}>{lesson}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </details>
                   ))
                 : fallbackCurriculum.map((item, i) => (
                     <div
