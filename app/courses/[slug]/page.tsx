@@ -10,7 +10,6 @@ import {
   Clock,
   Users,
   BarChart3,
-  CheckCircle2,
   GraduationCap,
   FolderOpen,
   Globe,
@@ -273,19 +272,6 @@ export default async function CourseDetailsPage({
               </LinkButton>
             )}
           </div>
-          <ul className="mt-6 space-y-3 border-t border-navy-100 pt-6 text-sm text-navy-400">
-            {[
-              "Lifetime access to course updates",
-              "Verifiable certificate on completion",
-              "Direct instructor feedback",
-              "Private cohort community",
-            ].map((perk) => (
-              <li key={perk} className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-cyan-600 shrink-0" />
-                {perk}
-              </li>
-            ))}
-          </ul>
 
           <div className="mt-6 flex items-center gap-3 border-t border-navy-100 pt-6">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
