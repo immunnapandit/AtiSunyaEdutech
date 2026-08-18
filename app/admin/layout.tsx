@@ -3,13 +3,15 @@
 import { useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, BookOpenText, Newspaper, Tag, Tags, LogOut, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, BookOpenText, Newspaper, Tag, Tags, Users, Award, LogOut, ShieldCheck } from "lucide-react";
 import { getAdminToken, clearAdminToken } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Courses", href: "/admin/courses", icon: BookOpenText },
+  { label: "Students", href: "/admin/students", icon: Users },
+  { label: "Certificate Settings", href: "/admin/certificate-settings", icon: Award },
   { label: "Categories", href: "/admin/categories", icon: Tag },
   { label: "Filter tags", href: "/admin/tags", icon: Tags },
   { label: "Blog", href: "/admin/blog", icon: Newspaper },

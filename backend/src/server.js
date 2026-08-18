@@ -9,6 +9,7 @@ import { connectMongo, disconnectMongo } from "./mongo.js";
 import { seedIfEmpty } from "./data/seed-mongo.js";
 import { adminRouter } from "./routes/admin.js";
 import { authRouter } from "./routes/auth.js";
+import { certificatesRouter } from "./routes/certificates.js";
 import { contentRouter } from "./routes/content.js";
 import { coursesRouter } from "./routes/courses.js";
 import { dashboardRouter } from "./routes/dashboard.js";
@@ -64,6 +65,7 @@ app.get("/api/health", (_req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/courses", coursesRouter);
 app.use("/api/dashboard", dashboardRouter);
+app.use("/api/certificates", certificatesRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/payments", paymentsRouter);
 app.use("/api", contentRouter);

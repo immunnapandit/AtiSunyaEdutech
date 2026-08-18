@@ -211,6 +211,40 @@ export async function sendCoursePlanLeadNotification({ name, email, country, cou
   });
 }
 
+export async function sendCertificateIssuedEmail({ user, course, certificate, pdfBuffer }) {
+  const to = user.email || user.phone;
+
+  if (!user.email) {
+    return { sent: false, skipped: true, reason: "Student email is not available." };
+  }
+
+  return safeSend({
+    to,
+    from: env.graph.welcomeFromEmail,
+    subject: `Your certificate for ${course.title} is ready!`,
+    html: layoutHtml({
+      title: `Congratulations, ${user.name.split(" ")[0]}!`,
+      preview: `Your certificate of completion for ${course.title} is attached.`,
+      intro: `You've successfully completed <strong>${escapeHtml(course.title)}</strong>. We're proud to award you this certificate of completion — attached to this email as a PDF.`,
+      rows: [
+        ["Student", user.name],
+        ["Course", course.title],
+        ["Certificate ID", certificate.certificateId],
+        ["Issued on", formatDate(certificate.issuedAt)]
+      ],
+      outro: "You can also download this certificate anytime from your AtiSunya Edutech dashboard.",
+      signature: "Warm regards,<br />Sangeeta<br />AtiSunya Edutech Team"
+    }),
+    attachments: [
+      {
+        name: `${course.slug}-certificate.pdf`,
+        contentType: "application/pdf",
+        contentBytes: pdfBuffer.toString("base64")
+      }
+    ]
+  });
+}
+
 export async function sendPaymentWebhookNotification({ event, payment }) {
   const recipients = uniqueRecipients([env.graph.accountsEmail, env.graph.adminEmail]);
   const amount = payment.amount ? payment.amount / 100 : 0;
