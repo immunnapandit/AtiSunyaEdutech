@@ -11,8 +11,26 @@ const TEXT_COLOR = "#1f2937";
 const MUTED_COLOR = "#6b7280";
 
 export function generateCoursePlanPdf(course, res) {
-  const doc = new PDFDocument({ size: "A4", margin: 50, bufferPages: true });
+  const doc = buildCoursePlanDoc(course);
   doc.pipe(res);
+  doc.end();
+}
+
+export function generateCoursePlanPdfBuffer(course) {
+  return new Promise((resolve, reject) => {
+    const doc = buildCoursePlanDoc(course);
+    const chunks = [];
+
+    doc.on("data", (chunk) => chunks.push(chunk));
+    doc.on("end", () => resolve(Buffer.concat(chunks)));
+    doc.on("error", reject);
+
+    doc.end();
+  });
+}
+
+function buildCoursePlanDoc(course) {
+  const doc = new PDFDocument({ size: "A4", margin: 50, bufferPages: true });
 
   try {
     doc.image(LOGO_PATH, 50, 34, { width: 130 });
@@ -106,7 +124,7 @@ export function generateCoursePlanPdf(course, res) {
 
   addFooterToAllPages(doc);
 
-  doc.end();
+  return doc;
 }
 
 function ensureSpace(doc, minHeight) {

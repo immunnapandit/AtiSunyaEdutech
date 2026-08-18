@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
+import { CoursePlanRequestForm } from "@/components/features/course-plan-request-form";
 import { apiRequest } from "@/lib/api";
 import Image from "next/image";
 import {
@@ -70,8 +71,7 @@ export default async function CourseDetailsPage({
 
   const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
   const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
-  const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
-  const coursePlanUrl = curriculumModules.length > 0 ? `${API_URL}/courses/${course.slug}/course-plan` : "";
+  const hasCoursePlan = curriculumModules.length > 0;
 
   return (
     <div className="pt-48 pb-24 md:pt-56">
@@ -259,19 +259,7 @@ export default async function CourseDetailsPage({
               Enquiry now
             </LinkButton>
             <CourseEnrollAction slug={course.slug} title={course.title} />
-            {coursePlanUrl && (
-              <LinkButton
-                href={coursePlanUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                variant="secondary"
-                size="lg"
-                className="w-full justify-center"
-              >
-                Download Course Plan
-              </LinkButton>
-            )}
+            {hasCoursePlan && <CoursePlanRequestForm slug={course.slug} />}
           </div>
 
           <div className="mt-6 flex items-center gap-3 border-t border-navy-100 pt-6">

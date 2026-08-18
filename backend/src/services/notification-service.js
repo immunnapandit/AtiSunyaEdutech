@@ -165,6 +165,52 @@ export async function sendPurchaseConfirmation({ user, course, enrollment, payme
     })
   });
 }
+export async function sendCoursePlanToRequester({ name, email, course, pdfBuffer }) {
+  return safeSend({
+    to: email,
+    from: env.graph.welcomeFromEmail,
+    subject: `Your course plan: ${course.title}`,
+    html: layoutHtml({
+      title: `Here's your course plan, ${name.split(" ")[0]}!`,
+      preview: `The course plan for ${course.title} is attached.`,
+      intro: `Thank you for your interest in <strong>${escapeHtml(course.title)}</strong>. We've attached the full course plan as a PDF to this email.`,
+      rows: [
+        ["Course", course.title],
+        ["Category", course.category],
+        ["Duration", course.duration]
+      ],
+      outro: "Have questions? Just reply to this email — our team is happy to help.",
+      signature: "Warm regards,<br />Sangeeta<br />AtiSunya Edutech Team"
+    }),
+    attachments: [
+      {
+        name: `${course.slug}-course-plan.pdf`,
+        contentType: "application/pdf",
+        contentBytes: pdfBuffer.toString("base64")
+      }
+    ]
+  });
+}
+
+export async function sendCoursePlanLeadNotification({ name, email, country, course }) {
+  return safeSend({
+    to: env.graph.accountsEmail,
+    subject: `Course plan requested: ${course.title}`,
+    replyTo: [email],
+    html: layoutHtml({
+      title: "Course Plan Download Request",
+      preview: `${name} requested the course plan for ${course.title}.`,
+      rows: [
+        ["Name", name],
+        ["Email", email],
+        ["Country", country],
+        ["Course", course.title],
+        ["Requested on", formatDate(new Date())]
+      ]
+    })
+  });
+}
+
 export async function sendPaymentWebhookNotification({ event, payment }) {
   const recipients = uniqueRecipients([env.graph.accountsEmail, env.graph.adminEmail]);
   const amount = payment.amount ? payment.amount / 100 : 0;
