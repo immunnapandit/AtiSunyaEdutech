@@ -28,6 +28,11 @@ export interface Course {
   roles?: string[];
   subjects?: string[];
   featured?: boolean;
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
 }
 
 export interface Instructor {

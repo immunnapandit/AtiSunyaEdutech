@@ -44,8 +44,9 @@ export async function generateMetadata({
   if (!course) return {};
 
   return {
-    title: course.title,
-    description: course.description,
+    title: course.seo?.title || course.title,
+    description: course.seo?.description || course.description,
+    keywords: course.seo?.keywords?.length ? course.seo.keywords : undefined,
   };
 }
 
