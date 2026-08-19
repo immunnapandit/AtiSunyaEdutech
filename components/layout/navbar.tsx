@@ -7,12 +7,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
+  CircleUserRound,
   Headphones,
   LogOut,
   Mail,
   Menu,
   Search,
-  LayoutDashboard,
   UserRound,
   X,
 } from "lucide-react";
@@ -217,7 +217,7 @@ export function Navbar() {
             aria-label="Open dashboard"
             className="relative flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
           >
-            <LayoutDashboard className="h-6 w-6" />
+            <CircleUserRound className="h-6 w-6" />
           </Link>
           {!isLoggedIn && (
             <LinkButton
@@ -290,7 +290,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
-                  <LayoutDashboard className="h-5 w-5" />
+                  <CircleUserRound className="h-5 w-5" />
                 </Link>
                 {isLoggedIn ? (
                   <button
