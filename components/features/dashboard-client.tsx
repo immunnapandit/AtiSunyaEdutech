@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, Award, BookOpenCheck, CircleUserRound, Download, GraduationCap, LogOut, UserRound } from "lucide-react";
+import { ArrowRight, Award, BookOpenCheck, CircleUserRound, Download, GraduationCap, Linkedin, LogOut, UserRound } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { apiRequest } from "@/lib/api";
 import type { Course } from "@/types";
@@ -43,6 +43,12 @@ type DashboardData = {
 
 const pageShell = "min-h-screen bg-[#f6f9fc] pt-[156px] pb-16 sm:pt-[170px] lg:pt-[178px]";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
+const SITE_URL = "https://atisunyaedutech.com";
+
+function linkedInShareUrl(certificateId: string) {
+  const verifyUrl = `${SITE_URL}/verify-certificate/${encodeURIComponent(certificateId)}`;
+  return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(verifyUrl)}`;
+}
 
 function formatDate(value?: string | null) {
   if (!value) return "Not available";
@@ -286,13 +292,23 @@ export function DashboardClient() {
                       </p>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => downloadCertificate(certificate.courseSlug)}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-lg border border-navy-100 px-4 py-2 text-sm font-bold text-brand hover:bg-brand-50"
-                  >
-                    <Download className="h-4 w-4" /> Download
-                  </button>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <a
+                      href={linkedInShareUrl(certificate.certificateId)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-navy-100 px-4 py-2 text-sm font-bold text-brand hover:bg-brand-50"
+                    >
+                      <Linkedin className="h-4 w-4" /> Share
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => downloadCertificate(certificate.courseSlug)}
+                      className="inline-flex items-center gap-2 rounded-lg border border-navy-100 px-4 py-2 text-sm font-bold text-brand hover:bg-brand-50"
+                    >
+                      <Download className="h-4 w-4" /> Download
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
