@@ -14,7 +14,6 @@ export function AdminLoginForm() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
- /*  aSDJYBGFNCSYVEFGISGVEUI NSZNGVE\GFVSUYVLZN */
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
