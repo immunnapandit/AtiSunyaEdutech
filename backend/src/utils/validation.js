@@ -48,12 +48,6 @@ export const newsletterSchema = z.object({
   email: emailSchema
 });
 
-export const coursePlanRequestSchema = z.object({
-  name: z.string().trim().min(1, "Full name is required."),
-  email: emailSchema,
-  country: z.string().trim().min(1, "Country is required.")
-});
-
 export function validate(schema, req, res, next) {
   const parsed = schema.safeParse(req.body);
   if (!parsed.success) {

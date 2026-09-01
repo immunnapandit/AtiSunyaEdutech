@@ -41,25 +41,6 @@ export async function createRazorpayOrder({ amount, currency = "INR", receipt, n
   };
 }
 
-export async function fetchRazorpayOrder(orderId) {
-  if (!isRazorpayConfigured()) {
-    throw new Error("Razorpay is not configured. Add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET before accepting payments.");
-  }
-
-  const response = await fetch(`https://api.razorpay.com/v1/orders/${orderId}`, {
-    headers: {
-      Authorization: `Basic ${Buffer.from(`${env.razorpay.keyId}:${env.razorpay.keySecret}`).toString("base64")}`
-    }
-  });
-
-  if (!response.ok) {
-    const details = await response.text();
-    throw new Error(`Razorpay order lookup failed with ${response.status}: ${details}`);
-  }
-
-  return response.json();
-}
-
 export function verifyRazorpaySignature({ orderId, paymentId, signature }) {
   if (!orderId || !paymentId || !signature || !isRazorpayConfigured()) {
     return false;

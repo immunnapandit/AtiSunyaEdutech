@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { instructors } from "@/data/testimonials";
@@ -23,18 +22,8 @@ export default function InstructorsPage() {
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {instructors.map((instructor) => (
             <div key={instructor.slug} className="rounded-lg border border-navy-100 bg-white p-6 shadow-soft">
-              <div className="relative h-20 w-20 overflow-hidden rounded-xl bg-brand-50 text-sm font-bold text-brand">
-                {instructor.image ? (
-                  <Image
-                    src={instructor.image}
-                    alt={instructor.name}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
-                ) : (
-                  <span className="flex h-full w-full items-center justify-center">{instructor.avatar}</span>
-                )}
+              <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-50 text-sm font-bold text-brand">
+                {instructor.avatar}
               </div>
               <h3 className="mt-5 text-lg font-bold text-navy">{instructor.name}</h3>
               <p className="mt-1 text-sm font-semibold text-brand">{instructor.role}</p>

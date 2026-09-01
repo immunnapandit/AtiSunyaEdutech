@@ -5,7 +5,6 @@ import { TrainingFormats } from "@/components/sections/training-formats";
 import { OnPremisesInstallation } from "@/components/sections/onpremises-installation";
 import { StrengthNumbers } from "@/components/sections/learning-flow";
 import { TrustedPartners } from "@/components/sections/trusted-partners";
-import { InstructorsCarousel } from "@/components/sections/instructors-carousel";
 import { RequestQuote } from "@/components/sections/request-quote";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { LatestNews } from "@/components/sections/latest-news";
@@ -20,7 +19,6 @@ export default function HomePage() {
       <OnPremisesInstallation />
       <StrengthNumbers />
       <TrustedPartners />
-      <InstructorsCarousel />
       <TestimonialsSection />
       <LatestNews />
       <RequestQuote />

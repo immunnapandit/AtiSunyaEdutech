@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowRight, Award, BookOpenCheck, CircleUserRound, Download, GraduationCap, Linkedin, LogOut, UserRound } from "lucide-react";
+import { ArrowRight, BookOpenCheck, CheckCircle2, GraduationCap, LogOut, UserRound } from "lucide-react";
 import { Container } from "@/components/ui/primitives";
 import { apiRequest } from "@/lib/api";
 import type { Course } from "@/types";
@@ -33,22 +33,10 @@ type DashboardData = {
       paidAt: string | null;
     };
   }[];
-  certificates: {
-    courseSlug: string;
-    certificateId: string;
-    issuedAt: string;
-    course: Course;
-  }[];
+  certificates: Course[];
 };
 
 const pageShell = "min-h-screen bg-[#f6f9fc] pt-[156px] pb-16 sm:pt-[170px] lg:pt-[178px]";
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api";
-const SITE_URL = "https://atisunyaedutech.com";
-
-function linkedInShareUrl(certificateId: string) {
-  const verifyUrl = `${SITE_URL}/verify-certificate/${encodeURIComponent(certificateId)}`;
-  return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(verifyUrl)}`;
-}
 
 function formatDate(value?: string | null) {
   if (!value) return "Not available";
@@ -77,26 +65,6 @@ export function DashboardClient() {
   function handleLogout() {
     localStorage.removeItem("atisunya_token");
     router.push("/login");
-  }
-
-  async function downloadCertificate(slug: string) {
-    const token = localStorage.getItem("atisunya_token");
-    if (!token) return;
-
-    const response = await fetch(`${API_URL}/dashboard/certificates/${slug}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!response.ok) return;
-
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${slug}-certificate.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(url);
   }
 
   if (loading) {
@@ -130,6 +98,12 @@ export function DashboardClient() {
 
   const purchasedCourses = data.enrolledCourses.length;
   const hasCourses = purchasedCourses > 0;
+  const initials = data.user.name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className={pageShell}>
@@ -144,8 +118,8 @@ export function DashboardClient() {
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3 rounded-lg border border-navy-100 bg-white px-4 py-3 shadow-soft">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand text-white">
-                <CircleUserRound className="h-7 w-7" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">
+                {initials || "U"}
               </span>
               <div>
                 <p className="text-sm font-bold text-navy">{data.user.name}</p>
@@ -218,9 +192,17 @@ export function DashboardClient() {
                   <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-navy-500">
                     <span className="rounded-full border border-navy-100 px-3 py-1">{course.duration}</span>
                     <span className="rounded-full border border-navy-100 px-3 py-1">INR {course.price.toLocaleString("en-IN")}</span>
+                    <span className="rounded-full border border-navy-100 px-3 py-1">{course.progress}% complete</span>
                   </div>
 
-                  <div className="mt-5 flex justify-end">
+                  <div className="mt-5 h-2 overflow-hidden rounded-full bg-mist-100">
+                    <div className="h-full rounded-full bg-brand" style={{ width: `${course.progress}%` }} />
+                  </div>
+
+                  <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="flex items-center gap-2 text-sm font-medium text-navy-500">
+                      <CheckCircle2 className="h-4 w-4 text-brand" /> {course.nextMilestone}
+                    </p>
                     <Link href={`/courses/${course.slug}`} className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-brand-600">
                       Open course <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -269,51 +251,6 @@ export function DashboardClient() {
             </div>
           )}
         </section>
-
-        {data.certificates.length > 0 && (
-          <section className="mt-8 rounded-lg border border-navy-100 bg-white p-6 shadow-soft sm:p-8">
-            <h2 className="text-xl font-bold text-navy">My certificates</h2>
-            <p className="mt-1 text-sm text-navy-400">Certificates issued to you by AtiSunya Edutech.</p>
-
-            <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {data.certificates.map((certificate) => (
-                <div
-                  key={certificate.courseSlug}
-                  className="flex items-center justify-between gap-4 rounded-lg border border-navy-100 p-5"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand">
-                      <Award className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-navy">{certificate.course.title}</p>
-                      <p className="text-xs text-navy-400">
-                        Issued {formatDate(certificate.issuedAt)} · {certificate.certificateId}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-2">
-                    <a
-                      href={linkedInShareUrl(certificate.certificateId)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-lg border border-navy-100 px-4 py-2 text-sm font-bold text-brand hover:bg-brand-50"
-                    >
-                      <Linkedin className="h-4 w-4" /> Share
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => downloadCertificate(certificate.courseSlug)}
-                      className="inline-flex items-center gap-2 rounded-lg border border-navy-100 px-4 py-2 text-sm font-bold text-brand hover:bg-brand-50"
-                    >
-                      <Download className="h-4 w-4" /> Download
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
       </Container>
     </div>
   );

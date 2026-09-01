@@ -6,4 +6,3 @@ out
 *.tsbuildinfo
 *.log
 backend/uploads
-backend/data

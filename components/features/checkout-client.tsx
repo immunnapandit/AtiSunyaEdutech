@@ -138,7 +138,7 @@ export function CheckoutClient({ slug, title, price }: { slug: string; title: st
           });
 
           setMessage(verifyData.message || "Payment successful. Your course is now active.");
-          window.location.href = "/dashboard";
+          router.push("/dashboard");
         } catch (verifyErr) {
           setError(verifyErr instanceof Error ? verifyErr.message : "Payment verification failed.");
         }

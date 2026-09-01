@@ -28,11 +28,6 @@ export interface Course {
   roles?: string[];
   subjects?: string[];
   featured?: boolean;
-  seo?: {
-    title?: string;
-    description?: string;
-    keywords?: string[];
-  };
 }
 
 export interface Instructor {
@@ -42,8 +37,6 @@ export interface Instructor {
   company: string;
   bio: string;
   avatar: string;
-  image?: string;
-  linkedin?: string;
   studentsCount: number;
   coursesCount: number;
   rating: number;

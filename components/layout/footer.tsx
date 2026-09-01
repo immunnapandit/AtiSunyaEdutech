@@ -21,9 +21,7 @@ const quickLinks = [
 
 const informationLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms-conditions" },
-  { label: "Cancellation & Refund Policy", href: "/refund-policy" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
   { label: "FAQs", href: "/faq" },
 ];
 
