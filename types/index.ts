@@ -42,6 +42,8 @@ export interface Instructor {
   company: string;
   bio: string;
   avatar: string;
+  image?: string;
+  linkedin?: string;
   studentsCount: number;
   coursesCount: number;
   rating: number;
