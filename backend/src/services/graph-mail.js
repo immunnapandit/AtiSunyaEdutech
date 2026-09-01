@@ -3,7 +3,7 @@ import { env, isGraphEmailConfigured } from "../config/env.js";
 let cachedToken = null;
 let tokenExpiresAt = 0;
 
-export async function sendGraphMail({ to, subject, html, text, replyTo = [], from }) {
+export async function sendGraphMail({ to, subject, html, text, replyTo = [], from, attachments = [] }) {
   if (!isGraphEmailConfigured()) {
     return { sent: false, skipped: true, reason: "Microsoft Graph email is not configured." };
   }
@@ -26,6 +26,9 @@ export async function sendGraphMail({ to, subject, html, text, replyTo = [], fro
         toRecipients: normalizeRecipients(to),
         ...(normalizeRecipients(replyTo).length > 0
           ? { replyTo: normalizeRecipients(replyTo) }
+          : {}),
+        ...(attachments.length > 0
+          ? { attachments: attachments.map(normalizeAttachment) }
           : {})
       },
       saveToSentItems: true
@@ -71,6 +74,15 @@ async function getGraphAccessToken() {
   tokenExpiresAt = now + Number(data.expires_in || 3599) * 1000;
 
   return cachedToken;
+}
+
+function normalizeAttachment({ name, contentType, contentBytes }) {
+  return {
+    "@odata.type": "#microsoft.graph.fileAttachment",
+    name,
+    contentType,
+    contentBytes
+  };
 }
 
 function normalizeRecipients(value) {

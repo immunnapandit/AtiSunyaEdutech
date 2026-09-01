@@ -1,7 +1,9 @@
 import express from "express";
-import { Course, User } from "../models/index.js";
+import { CertificateSettings, Course, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
 import { serializeCourse } from "./courses.js";
+import { generateCertificatePdf } from "../services/certificate-pdf.js";
+import { env } from "../config/env.js";
 
 export const dashboardRouter = express.Router();
 
@@ -50,10 +52,19 @@ dashboardRouter.get("/", requireAuth, async (req, res) => {
     .filter(Boolean);
 
   const certificates = (user.certificates || [])
-    .filter((slug) => purchasedCourseSlugs.has(slug))
-    .map((slug) => courseBySlug.get(slug))
-    .filter(Boolean)
-    .map(serializeCourse);
+    .filter((certificate) => purchasedCourseSlugs.has(certificate.courseSlug))
+    .map((certificate) => {
+      const course = courseBySlug.get(certificate.courseSlug);
+      if (!course) return null;
+
+      return {
+        courseSlug: certificate.courseSlug,
+        certificateId: certificate.certificateId,
+        issuedAt: certificate.issuedAt,
+        course: serializeCourse(course)
+      };
+    })
+    .filter(Boolean);
 
   return res.json({
     user: { id: String(user._id), name: user.name, email: user.email || user.phone || "" },
@@ -66,4 +77,44 @@ dashboardRouter.get("/", requireAuth, async (req, res) => {
     upcoming: [],
     activity: []
   });
+});
+
+dashboardRouter.get("/certificates/:slug", requireAuth, async (req, res) => {
+  const user = await User.findById(req.user.sub).lean();
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found." });
+  }
+
+  const certificate = (user.certificates || []).find((c) => c.courseSlug === req.params.slug);
+
+  if (!certificate) {
+    return res.status(404).json({ message: "Certificate not found." });
+  }
+
+  const course = await Course.findOne({ slug: req.params.slug }).lean();
+
+  if (!course) {
+    return res.status(404).json({ message: "Course not found." });
+  }
+
+  const settings = (await CertificateSettings.findOne().lean()) || {};
+
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename="${course.slug}-certificate.pdf"`);
+
+  await generateCertificatePdf(
+    {
+      studentName: user.name,
+      courseTitle: course.title,
+      certificateId: certificate.certificateId,
+      issuedAt: certificate.issuedAt,
+      signatureName: settings.signatureName,
+      signatureTitle: settings.signatureTitle,
+      signatureImage: settings.signatureImage,
+      organizationName: settings.organizationName,
+      verifyUrl: `${env.appBaseUrl.replace(/\/$/, "")}/verify-certificate/${certificate.certificateId}`
+    },
+    res
+  );
 });

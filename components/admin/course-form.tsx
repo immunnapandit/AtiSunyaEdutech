@@ -429,16 +429,6 @@ export function CourseForm({
           </div>
 
           <div className="md:col-span-2">
-            <label className={labelClass} htmlFor="thumbnailGradient">Thumbnail gradient classes</label>
-            <input
-              id="thumbnailGradient"
-              value={values.thumbnailGradient}
-              onChange={(event) => update("thumbnailGradient", event.target.value)}
-              placeholder="from-royal-100 via-royal/20 to-cyan-100"
-              className={inputClass}
-            />
-          </div>
-          <div className="md:col-span-2">
             <label className={labelClass} htmlFor="description">Description</label>
             <textarea
               id="description"

@@ -3,15 +3,14 @@ import { notFound } from "next/navigation";
 import { Container, Badge } from "@/components/ui/primitives";
 import { LinkButton } from "@/components/ui/button";
 import { CourseEnrollAction } from "@/components/features/course-enroll-action";
+import { CoursePlanRequestForm } from "@/components/features/course-plan-request-form";
 import { apiRequest } from "@/lib/api";
-import { getCloudinaryPdfDownloadUrl } from "@/lib/cloudinary-url";
 import Image from "next/image";
 import {
   Star,
   Clock,
   Users,
   BarChart3,
-  CheckCircle2,
   GraduationCap,
   FolderOpen,
   Globe,
@@ -46,8 +45,9 @@ export async function generateMetadata({
   if (!course) return {};
 
   return {
-    title: course.title,
-    description: course.description,
+    title: course.seo?.title || course.title,
+    description: course.seo?.description || course.description,
+    keywords: course.seo?.keywords?.length ? course.seo.keywords : undefined,
   };
 }
 
@@ -71,9 +71,7 @@ export default async function CourseDetailsPage({
 
   const curriculumModules = course.curriculum?.filter((module) => module.title) ?? [];
   const faqs = course.faqs?.filter((faq) => faq.question && faq.answer) ?? [];
-  const coursePlanUrl = course.coursePlan ? `/api/media/download?url=${encodeURIComponent(
-    course.coursePlan
-  )}` : "";
+  const hasCoursePlan = curriculumModules.length > 0;
 
   return (
     <div className="pt-48 pb-24 md:pt-56">
@@ -190,24 +188,27 @@ export default async function CourseDetailsPage({
             <div className="mt-5 space-y-3">
               {curriculumModules.length > 0
                 ? curriculumModules.map((module, i) => (
-                    <div
+                    <details
                       key={module.title}
-                      className="flex w-full items-start gap-4 rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md"
+                      className="group w-full rounded-xl border border-navy-100 bg-white px-6 py-5 transition hover:shadow-md [&_summary::-webkit-details-marker]:hidden"
                     >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <p className="text-sm font-semibold text-navy">{module.title}</p>
-                        {module.lessons.length > 0 && (
-                          <ul className="mt-2 space-y-1 text-sm text-navy-500">
-                            {module.lessons.map((lesson) => (
-                              <li key={lesson}>{lesson}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
+                      <summary className="flex cursor-pointer list-none items-center gap-4">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">
+                          {i + 1}
+                        </span>
+                        <span className="flex-1 text-sm font-semibold text-navy">{module.title}</span>
+                        <span className="shrink-0 text-xl text-brand transition-transform duration-200 group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      {module.lessons.length > 0 && (
+                        <ul className="mt-3 space-y-1 pl-11 text-sm text-navy-500">
+                          {module.lessons.map((lesson) => (
+                            <li key={lesson}>{lesson}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </details>
                   ))
                 : fallbackCurriculum.map((item, i) => (
                     <div
@@ -258,37 +259,8 @@ export default async function CourseDetailsPage({
               Enquiry now
             </LinkButton>
             <CourseEnrollAction slug={course.slug} title={course.title} />
-            {coursePlanUrl && (
-              <LinkButton
-                href={coursePlanUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                variant="secondary"
-                size="lg"
-                className="w-full justify-center"
-              >
-                Download Course Plan
-              </LinkButton>
-            )}
+            {hasCoursePlan && <CoursePlanRequestForm slug={course.slug} />}
           </div>
-          <p className="mt-3 text-center text-xs text-navy-400">
-            Payment page is redirected to atisunya.co/pay
-          </p>
-
-          <ul className="mt-6 space-y-3 border-t border-navy-100 pt-6 text-sm text-navy-400">
-            {[
-              "Lifetime access to course updates",
-              "Verifiable certificate on completion",
-              "Direct instructor feedback",
-              "Private cohort community",
-            ].map((perk) => (
-              <li key={perk} className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-cyan-600 shrink-0" />
-                {perk}
-              </li>
-            ))}
-          </ul>
 
           <div className="mt-6 flex items-center gap-3 border-t border-navy-100 pt-6">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-royal-50 text-xs font-bold text-royal-700">

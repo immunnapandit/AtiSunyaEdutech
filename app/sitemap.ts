@@ -16,6 +16,8 @@ const staticRoutes = [
   "/faq",
   "/privacy-policy",
   "/terms-conditions",
+  "/refund-policy",
+  "/verify-certificate",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

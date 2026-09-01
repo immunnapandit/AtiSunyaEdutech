@@ -21,6 +21,15 @@ const enrollmentSchema = new Schema(
   { _id: false }
 );
 
+const certificateSchema = new Schema(
+  {
+    courseSlug: { type: String, required: true },
+    certificateId: { type: String, required: true, index: true },
+    issuedAt: { type: Date, default: Date.now }
+  },
+  { _id: false }
+);
+
 const userSchema = new Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -31,7 +40,7 @@ const userSchema = new Schema(
     providerId: String,
     role: { type: String, enum: ["student", "admin"], default: "student" },
     enrollments: { type: [enrollmentSchema], default: [] },
-    certificates: { type: [String], default: [] }
+    certificates: { type: [certificateSchema], default: [] }
   },
   timestamps
 );
@@ -216,6 +225,16 @@ const resetRequestSchema = new Schema(
   timestamps
 );
 
+const certificateSettingsSchema = new Schema(
+  {
+    signatureName: { type: String, default: "Sangeeta" },
+    signatureTitle: { type: String, default: "Founder & Director" },
+    signatureImage: { type: String, default: "" },
+    organizationName: { type: String, default: "AtiSunya Edutech" }
+  },
+  timestamps
+);
+
 const mediaSchema = new Schema(
   {
     publicId: { type: String, required: true, unique: true },
@@ -244,3 +263,4 @@ export const Quote = mongoose.model("Quote", quoteSchema);
 export const Newsletter = mongoose.model("Newsletter", newsletterSchema);
 export const ResetRequest = mongoose.model("ResetRequest", resetRequestSchema);
 export const Media = mongoose.model("Media", mediaSchema);
+export const CertificateSettings = mongoose.model("CertificateSettings", certificateSettingsSchema);

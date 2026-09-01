@@ -2,7 +2,14 @@ import express from "express";
 import { Category, Course, Tag, User } from "../models/index.js";
 import { requireAuth } from "../middleware/auth.js";
 import { createRazorpayOrder, verifyRazorpaySignature } from "../services/razorpay.js";
-import { sendPurchaseConfirmation, sendPurchaseNotification } from "../services/notification-service.js";
+import {
+  sendPurchaseConfirmation,
+  sendPurchaseNotification,
+  sendCoursePlanToRequester,
+  sendCoursePlanLeadNotification
+} from "../services/notification-service.js";
+import { generateCoursePlanPdf, generateCoursePlanPdfBuffer } from "../services/course-plan-pdf.js";
+import { coursePlanRequestSchema, validate } from "../utils/validation.js";
 import { env } from "../config/env.js";
 
 export const coursesRouter = express.Router();
@@ -112,6 +119,40 @@ coursesRouter.get("/:slug", async (req, res) => {
   }
 
   return res.json({ course: serializeCourse(course) });
+});
+
+coursesRouter.get("/:slug/course-plan", async (req, res) => {
+  const course = await Course.findOne({ slug: req.params.slug, published: true }).lean();
+
+  if (!course) {
+    return res.status(404).json({ message: "Course not found." });
+  }
+
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename="${course.slug}-course-plan.pdf"`);
+
+  generateCoursePlanPdf(course, res);
+});
+
+coursesRouter.post("/:slug/course-plan/request", validate.bind(null, coursePlanRequestSchema), async (req, res) => {
+  const course = await Course.findOne({ slug: req.params.slug, published: true }).lean();
+
+  if (!course) {
+    return res.status(404).json({ message: "Course not found." });
+  }
+
+  const { name, email, country } = req.body;
+  const pdfBuffer = await generateCoursePlanPdfBuffer(course);
+
+  const [studentEmail, leadNotification] = await Promise.all([
+    sendCoursePlanToRequester({ name, email, course, pdfBuffer }),
+    sendCoursePlanLeadNotification({ name, email, country, course })
+  ]);
+
+  return res.json({
+    message: "The course plan has been sent to your email.",
+    notification: { student: studentEmail, lead: leadNotification }
+  });
 });
 
 coursesRouter.post("/:slug/enroll", requireAuth, async (req, res) => {

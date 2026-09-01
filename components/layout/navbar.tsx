@@ -3,14 +3,16 @@
 import { useEffect, useState, type ComponentType } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
+  CircleUserRound,
   Headphones,
+  LogOut,
   Mail,
   Menu,
   Search,
-  LayoutDashboard,
   UserRound,
   X,
 } from "lucide-react";
@@ -47,8 +49,11 @@ const headerContainer =
   "mx-auto w-full max-w-[1400px] px-5 md:px-8 lg:px-10";
 
 export function Navbar() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -60,6 +65,17 @@ export function Navbar() {
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
   }, [mobileOpen]);
+
+  useEffect(() => {
+    setIsLoggedIn(Boolean(window.localStorage.getItem("atisunya_token")));
+  }, [pathname]);
+
+  function handleLogout() {
+    window.localStorage.removeItem("atisunya_token");
+    setIsLoggedIn(false);
+    setMobileOpen(false);
+    router.push("/login");
+  }
 
   return (
     <header
@@ -78,13 +94,24 @@ export function Navbar() {
           )}
         >
           <div className="flex items-center">
-            <Link
-              href="/login"
-              className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/5 sm:px-4"
-            >
-              <UserRound className="h-4 w-4" />
-              <span>Register / Login</span>
-            </Link>
+            {isLoggedIn ? (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/5 sm:px-4"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="flex h-11 items-center gap-2 border-x border-white/15 px-3 transition-colors hover:bg-white/5 sm:px-4"
+              >
+                <UserRound className="h-4 w-4" />
+                <span>Register / Login</span>
+              </Link>
+            )}
             <div className="hidden items-center sm:flex">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
@@ -190,15 +217,17 @@ export function Navbar() {
             aria-label="Open dashboard"
             className="relative flex h-12 w-12 items-center justify-center rounded-full bg-mist-100 text-navy transition-colors hover:bg-brand hover:text-white"
           >
-            <LayoutDashboard className="h-6 w-6" />
+            <CircleUserRound className="h-6 w-6" />
           </Link>
-          <LinkButton
-            href="/signup"
-            size="md"
-            className="rounded-lg bg-brand px-8 text-sm shadow-none hover:bg-brand-600 hover:shadow-none"
-          >
-            Enroll Now
-          </LinkButton>
+          {!isLoggedIn && (
+            <LinkButton
+              href="/signup"
+              size="md"
+              className="rounded-lg bg-brand px-8 text-sm shadow-none hover:bg-brand-600 hover:shadow-none"
+            >
+              Enroll Now
+            </LinkButton>
+          )}
         </div>
 
         <button
@@ -261,15 +290,25 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="flex h-11 items-center justify-center rounded-lg bg-mist-100 text-navy"
                 >
-                  <LayoutDashboard className="h-5 w-5" />
+                  <CircleUserRound className="h-5 w-5" />
                 </Link>
-                <LinkButton
-                  href="/signup"
-                  size="md"
-                  className="rounded-lg bg-brand shadow-none hover:bg-brand-600 hover:shadow-none"
-                >
-                  Enroll Now
-                </LinkButton>
+                {isLoggedIn ? (
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex h-11 items-center justify-center rounded-lg bg-brand text-sm font-semibold text-white"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <LinkButton
+                    href="/signup"
+                    size="md"
+                    className="rounded-lg bg-brand shadow-none hover:bg-brand-600 hover:shadow-none"
+                  >
+                    Enroll Now
+                  </LinkButton>
+                )}
               </div>
             </div>
           </motion.div>

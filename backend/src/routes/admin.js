@@ -2,12 +2,14 @@ import crypto from "node:crypto";
 import express from "express";
 import jwt from "jsonwebtoken";
 import rateLimit from "express-rate-limit";
+import { customAlphabet } from "nanoid";
 import { z } from "zod";
 import { env } from "../config/env.js";
 import { requireAdmin } from "../middleware/admin.js";
 import {
   BlogPost,
   Category,
+  CertificateSettings,
   Contact,
   Course,
   Faq,
@@ -21,11 +23,28 @@ import {
 } from "../models/index.js";
 import { createUploadSignature, deleteAsset } from "../services/cloudinary.js";
 import { saveLocalUpload } from "../services/local-upload.js";
+import { generateCertificatePdfBuffer } from "../services/certificate-pdf.js";
+import { sendCertificateIssuedEmail } from "../services/notification-service.js";
 import { serializeBlogPost } from "./content.js";
-import { serializeCourse } from "./courses.js";
+import { serializeCourse, escapeRegex } from "./courses.js";
 import { validate } from "../utils/validation.js";
 
 export const adminRouter = express.Router();
+
+// Excludes ambiguous characters (0/O, 1/I) so printed/typed certificate IDs stay unambiguous.
+const generateCertificateId = customAlphabet("ABCDEFGHJKLMNPQRSTUVWXYZ23456789", 10);
+
+async function getCertificateSettings() {
+  let settings = await CertificateSettings.findOne();
+  if (!settings) {
+    settings = await CertificateSettings.create({});
+  }
+  return settings;
+}
+
+function buildVerifyUrl(certificateId) {
+  return `${env.appBaseUrl.replace(/\/$/, "")}/verify-certificate/${certificateId}`;
+}
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -432,6 +451,206 @@ adminRouter.get("/leads", async (_req, res) => {
   ]);
   return res.json({ contacts, quotes, subscribers });
 });
+
+adminRouter.get("/students", async (req, res) => {
+  const search = String(req.query.search || "").trim();
+  const query = search
+    ? {
+        $or: [
+          { name: new RegExp(escapeRegex(search), "i") },
+          { email: new RegExp(escapeRegex(search), "i") },
+          { phone: new RegExp(escapeRegex(search), "i") }
+        ]
+      }
+    : {};
+
+  const users = await User.find(query).sort({ createdAt: -1 }).limit(200).lean();
+
+  const students = users.map((user) => {
+    const paidEnrollments = (user.enrollments || []).filter((e) => e.paymentStatus === "paid");
+    return {
+      id: String(user._id),
+      name: user.name,
+      email: user.email || "",
+      phone: user.phone || "",
+      purchasedCount: paidEnrollments.length,
+      certificatesCount: (user.certificates || []).length,
+      createdAt: user.createdAt
+    };
+  });
+
+  return res.json({ students });
+});
+
+adminRouter.get("/students/:id", async (req, res) => {
+  const user = await User.findById(req.params.id).lean();
+
+  if (!user) {
+    return res.status(404).json({ message: "Student not found." });
+  }
+
+  const paidEnrollments = (user.enrollments || []).filter((e) => e.paymentStatus === "paid");
+  const slugs = paidEnrollments.map((e) => e.courseSlug);
+  const courses = await Course.find({ slug: { $in: slugs } }).lean();
+  const courseBySlug = new Map(courses.map((course) => [course.slug, course]));
+  const certificateBySlug = new Map((user.certificates || []).map((c) => [c.courseSlug, c]));
+
+  const purchasedCourses = paidEnrollments
+    .map((enrollment) => {
+      const course = courseBySlug.get(enrollment.courseSlug);
+      if (!course) return null;
+
+      const certificate = certificateBySlug.get(enrollment.courseSlug);
+
+      return {
+        slug: course.slug,
+        title: course.title,
+        category: course.category,
+        price: course.price,
+        paidAt: enrollment.paidAt || null,
+        orderId: enrollment.orderId || null,
+        paymentId: enrollment.paymentId || null,
+        certificate: certificate
+          ? { certificateId: certificate.certificateId, issuedAt: certificate.issuedAt }
+          : null
+      };
+    })
+    .filter(Boolean);
+
+  return res.json({
+    student: {
+      id: String(user._id),
+      name: user.name,
+      email: user.email || "",
+      phone: user.phone || "",
+      createdAt: user.createdAt
+    },
+    purchasedCourses
+  });
+});
+
+adminRouter.post("/students/:id/certificates", async (req, res) => {
+  const courseSlug = String(req.body?.courseSlug || "").trim();
+
+  if (!courseSlug) {
+    return res.status(400).json({ message: "courseSlug is required." });
+  }
+
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({ message: "Student not found." });
+  }
+
+  const hasPaidEnrollment = user.enrollments.some(
+    (e) => e.courseSlug === courseSlug && e.paymentStatus === "paid"
+  );
+
+  if (!hasPaidEnrollment) {
+    return res.status(400).json({ message: "This student hasn't purchased that course." });
+  }
+
+  if (user.certificates.some((c) => c.courseSlug === courseSlug)) {
+    return res.status(409).json({ message: "A certificate has already been issued for this course." });
+  }
+
+  const course = await Course.findOne({ slug: courseSlug }).lean();
+
+  if (!course) {
+    return res.status(404).json({ message: "Course not found." });
+  }
+
+  const certificate = {
+    courseSlug,
+    certificateId: `AE-${generateCertificateId()}`,
+    issuedAt: new Date()
+  };
+
+  user.certificates.push(certificate);
+  await user.save();
+
+  const settings = await getCertificateSettings();
+  const pdfBuffer = await generateCertificatePdfBuffer({
+    studentName: user.name,
+    courseTitle: course.title,
+    certificateId: certificate.certificateId,
+    issuedAt: certificate.issuedAt,
+    signatureName: settings.signatureName,
+    signatureTitle: settings.signatureTitle,
+    signatureImage: settings.signatureImage,
+    organizationName: settings.organizationName,
+    verifyUrl: buildVerifyUrl(certificate.certificateId)
+  });
+
+  const emailResult = await sendCertificateIssuedEmail({ user, course, certificate, pdfBuffer });
+
+  return res.status(201).json({
+    message: "Certificate issued.",
+    certificate,
+    notification: emailResult
+  });
+});
+
+adminRouter.delete("/students/:id/certificates/:slug", async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({ message: "Student not found." });
+  }
+
+  const before = user.certificates.length;
+  user.certificates = user.certificates.filter((c) => c.courseSlug !== req.params.slug);
+
+  if (user.certificates.length === before) {
+    return res.status(404).json({ message: "Certificate not found." });
+  }
+
+  await user.save();
+  return res.json({ message: "Certificate revoked." });
+});
+
+const certificateSettingsSchema = z.object({
+  signatureName: z.string().trim().min(1),
+  signatureTitle: z.string().trim().optional().default(""),
+  signatureImage: z.string().trim().optional().default(""),
+  organizationName: z.string().trim().optional().default("AtiSunya Edutech")
+});
+
+adminRouter.get("/settings/certificate", async (_req, res) => {
+  const settings = await getCertificateSettings();
+  return res.json({ settings });
+});
+
+adminRouter.put("/settings/certificate", validate.bind(null, certificateSettingsSchema), async (req, res) => {
+  const settings = await CertificateSettings.findOneAndUpdate({}, req.body, {
+    new: true,
+    upsert: true
+  });
+  return res.json({ settings });
+});
+
+adminRouter.post(
+  "/settings/certificate/preview",
+  validate.bind(null, certificateSettingsSchema),
+  async (req, res) => {
+    const certificateId = `AE-${generateCertificateId()}`;
+    const pdfBuffer = await generateCertificatePdfBuffer({
+      studentName: "Jane Doe",
+      courseTitle: "Sample Course: Professional Certification",
+      certificateId,
+      issuedAt: new Date(),
+      signatureName: req.body.signatureName,
+      signatureTitle: req.body.signatureTitle,
+      signatureImage: req.body.signatureImage,
+      organizationName: req.body.organizationName,
+      verifyUrl: buildVerifyUrl(certificateId)
+    });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", 'inline; filename="certificate-preview.pdf"');
+    return res.send(pdfBuffer);
+  }
+);
 
 adminRouter.post("/media/sign", (req, res) => {
   try {
