@@ -9,6 +9,7 @@ const staticRoutes = [
   "/courses",
   "/live-training",
   "/training",
+  "/mct-trainer-registration",
   "/instructors",
   "/pricing",
   "/blog",

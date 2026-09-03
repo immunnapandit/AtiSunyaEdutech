@@ -41,6 +41,7 @@ const navLinks = [
   },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "MCT Trainer Registration", href: "/mct-trainer-registration" },
 ];
 
 const socialLinks: { label: string; href: string; icon: ComponentType<{ className?: string }> }[] = [];
